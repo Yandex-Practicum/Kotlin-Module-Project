@@ -12,4 +12,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "BillCalculator"
+rootProject.name = "Java-Module-Project"
