@@ -12,4 +12,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Java-Module-Project"
+rootProject.name = "Kotlin-Module-Project"
