@@ -7,34 +7,38 @@ fun main() {
     //newNote.content = "NoteNoteNote"
     //newArchive.archiveOfNotes.add(newNote)
     //listOfArchives.listOfArchives.add(newArchive)
-    var currentMenu = listOfArchives
-    val menu = MenuScreen(listOfArchives, null)
-    val backNumber = menu.titlesList.size + 1
+    var currentMenu: Notes = listOfArchives
+//    val menu = MenuScreen(listOfArchives, null)
     val newInput = Logic()
     val regexCheck = "[0-9]".toRegex()
 
-    fun printMenu() {
+    fun printMenu(returnNumber: Int) {
         println("0. Создать архив")
-        for (i in menu.titlesList.indices){
-            println("${i + 1}. ${menu.titlesList[i]}")
+        for (each in currentMenu.titlesList) {
+            println("${each.key}. $each")
         }
-        println("$backNumber. Выход")
+//        for (i in menu.titlesList.indices){
+//            println("${i + 1}. ${menu.titlesList[i]}")
+//        }
+        println("$returnNumber. Выход")
     }
-    printMenu()
     while(true) {
-        println("Please, choose an option and enter a corresponding number")
-        val userInput = newInput.askForInput()
-        if (!userInput.matches(regexCheck)) {
+        val returnNumber = currentMenu.titlesList.size + 1
+        printMenu(returnNumber)
+        val userInput = newInput.askForInput("Please, choose an option and enter a corresponding number")
+        if (currentMenu.titlesList.keys.contains(userInput.toInt())) {
             continue
         }
-        when (newInput.askForInput().toInt()) {
-            backNumber -> return
+        when (userInput.toInt()) {
+            returnNumber -> {
+                if (currentMenu is ListOfArchives) return else currentMenu = currentMenu.parent
+            }
             0 -> {
-                val newTitle = newInput.createInput("Please, input a title")
+                val newTitle = newInput.askForInput("Please, input a title")
                 currentMenu.addContent(newTitle, currentMenu)
                 continue
             }
-            else -> return
+            else -> currentMenu: Notes = currentMenu.titlesList[userInput]
         }
     }
 //in menu.keys //if menu will be a map of menu option number and a lambda

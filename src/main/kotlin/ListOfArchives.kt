@@ -1,15 +1,17 @@
 class ListOfArchives() : Notes {
-    private val listOfArchives: MutableList<ArchiveOfNotes> = mutableListOf()
+    override val parent = this
+    override val titlesList: MutableMap<Int, ArchiveOfNotes> = mutableMapOf()
 
-    override fun getListOfContent(): MutableList<String> {
-        val list: MutableList<String> = mutableListOf()
-        for(each in listOfArchives) {
-            list.add(each.title)
+    override fun getListOfContent(): MutableList<Int> {
+        val list: MutableList<Int> = mutableListOf()
+        for(each in titlesList) {
+            list.add(each.key)
         }
         return list
     }
 
     fun addContent(title: String, parent: Notes) {
-        listOfArchives.add(ArchiveOfNotes(title, parent))
+        val nextKey = titlesList.size + 1
+        titlesList[nextKey] = ArchiveOfNotes(title, parent)
     }
 }

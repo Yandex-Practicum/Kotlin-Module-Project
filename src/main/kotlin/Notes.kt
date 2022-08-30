@@ -1,4 +1,6 @@
 interface Notes {
-    abstract fun getListOfContent() : MutableList<String>
+    abstract val parent:Notes
+    abstract val titlesList: MutableMap<Int, Notes>
+    abstract fun getListOfContent() : MutableList<Int>
 }
 
