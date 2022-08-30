@@ -22,11 +22,18 @@ fun main() {
     }
     printMenu()
     while(true) {
+        println("Please, choose an option and enter a corresponding number")
         val userInput = newInput.askForInput()
-        if (userInput.matches(regexCheck))
+        if (!userInput.matches(regexCheck)) {
+            continue
+        }
         when (newInput.askForInput().toInt()) {
             backNumber -> return
-
+            0 -> {
+                val newTitle = newInput.createInput("Please, input a title")
+                currentMenu.addContent(newTitle, currentMenu)
+                continue
+            }
             else -> return
         }
     }

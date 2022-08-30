@@ -1,4 +1,4 @@
 interface Notes {
-    abstract fun getListOfTitles() : MutableList<String>
+    abstract fun getListOfContent() : MutableList<String>
 }
 
