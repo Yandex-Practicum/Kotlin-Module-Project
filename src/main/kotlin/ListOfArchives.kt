@@ -1,9 +1,8 @@
 class ListOfArchives() {
     val titlesList = mutableMapOf<Int, ArchiveOfNotes>()
-    val parent = this
 
-    fun addContent(title: String, parent: ListOfArchives ) {
+    fun addContent(title: String) {
         val nextKey = titlesList.size + 1
-        titlesList[nextKey] = ArchiveOfNotes(title, parent)
+        titlesList[nextKey] = ArchiveOfNotes(title)
     }
 }

@@ -1,4 +1,4 @@
-class ArchiveOfNotes (val title: String, val parent: ListOfArchives) {
+class ArchiveOfNotes(private val title: String) {
 
     val titlesList: MutableMap<Int, Note> = mutableMapOf()
 
@@ -7,10 +7,14 @@ class ArchiveOfNotes (val title: String, val parent: ListOfArchives) {
         titlesList[nextKey] = Note(title, parent)
     }
 
+    fun getName() : String {
+        return title
+    }
+
     fun printMenu(currentMenu: ArchiveOfNotes, returnNumber: Int) {
         println("0. Создать заметку")
-        for (each in currentMenu.titlesList) {
-            println("${each.key}. $each")
+        for (i in currentMenu.titlesList.keys) {
+            println("${i}. ${currentMenu.titlesList[i]?.title}")
         }
         println("$returnNumber. Назад")
     }
