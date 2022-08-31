@@ -1,18 +1,11 @@
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    //val listOfArchives = ListOfArchives()
-    //val newArchive = ArchiveOfNotes("newArchive", listOfArchives)
-    //val newNote = Note("newNote", newArchive)
-    //newNote.content = "NoteNoteNote"
-    //newArchive.archiveOfNotes.add(newNote)
-    //listOfArchives.listOfArchives.add(newArchive)
+
     var listOfArchivesMenu = ListOfArchives()
     var listOfNotesMenu: ArchiveOfNotes? = null
     var noteContent: Note? = null
-//    val menu = MenuScreen(listOfArchives, null)
+
     val newInput = Logic()
-//    val x = currentMenu.getTitleList()
+
     fun printMenu(currentMenu: ListOfArchives, returnNumber: Int) {
         println("0. Создать архив")
         for (each in currentMenu.titlesList) {
@@ -20,19 +13,38 @@ fun main() {
         }
         println("$returnNumber. Выход")
     }
+
+    fun checkedInputArchives(userInput: String, returnNumber: Int) : Int? {
+        val userInputInt = userInput.toIntOrNull() ?: return null
+        if (listOfArchivesMenu.titlesList.keys.contains(userInputInt) ||
+            userInputInt == 0 || userInputInt == returnNumber) {
+            return userInputInt
+        } else {
+            return null
+        }
+    }
+
+    fun checkedInputNotes(userInput: String, returnNumber: Int) : Int? {
+        val userInputInt = userInput.toIntOrNull() ?: return null
+        if (listOfNotesMenu != null) {
+            if (listOfNotesMenu.titlesList != null) {
+
+                }
+        } else if (listOfNotesMenu.titlesList.keys.contains(userInputInt) ||
+            userInputInt == 0 || userInputInt == returnNumber) {
+            return userInputInt
+        } else {
+            return null
+        }
+    }
     while (true) {
         if (listOfNotesMenu == null && noteContent == null) {
             val returnNumber = listOfArchivesMenu.titlesList.size + 1
             printMenu(listOfArchivesMenu, returnNumber)
             val userInput =
                 newInput.askForInput("Please, choose an option and enter a corresponding number")
-                    .toInt()
-            if (!listOfArchivesMenu.titlesList.keys.contains(userInput) &&
-                userInput != 0 && userInput != returnNumber
-            ) {
-                continue
-            }
-            when (userInput) {
+            val validInput = checkedInput(userInput, returnNumber) ?: continue
+            when (validInput) {
                 returnNumber -> return
                 0 -> {
                     val newTitle = newInput.askForInput("Please, input a title")
@@ -40,7 +52,7 @@ fun main() {
                     continue
                 }
                 else -> {
-                    listOfNotesMenu = listOfArchivesMenu.titlesList[userInput]
+                    listOfNotesMenu = listOfArchivesMenu.titlesList[validInput]
                     continue
                 }
             }
@@ -49,13 +61,9 @@ fun main() {
             listOfNotesMenu.printMenu(listOfNotesMenu, returnNumber)
             val userInput =
                 newInput.askForInput("Please, choose an option and enter a corresponding number")
-                    .toInt()
-            if (!listOfNotesMenu.titlesList.keys.contains(userInput) &&
-                userInput != 0 && userInput != returnNumber
-            ) {
-                continue
-            }
-            when (userInput) {
+
+            val validInput = checkedInput(userInput, returnNumber) ?: continue
+            when (validInput) {
                 returnNumber -> {
                     listOfNotesMenu = null
                     continue
@@ -66,35 +74,15 @@ fun main() {
                     continue
                 }
                 else -> {
-                    noteContent = listOfNotesMenu.titlesList[userInput]
+                    noteContent = listOfNotesMenu.titlesList[validInput]
                     println(noteContent?.title)
+                    println("0. Выход")
+                    val returnInput =
+                        newInput.askForInput("Please, enter 0 to return")
+                    val validInput = checkedInput(userInput, returnNumber) ?: continue
                     noteContent = null
-                    continue
                 }
             }
         }
     }
 }
-//in menu.keys //if menu will be a map of menu option number and a lambda
-
-//    val arrayUtil = ArrayUtil<Int>(arrayOf(1,2,3,4,5))
-//    arrayUtil.findElement(3) {index, element ->
-//        println("Index $index")
-//        println("Element $element")
-//    }
-//
-//
-//
-//}
-//
-//class ArrayUtil<T>(private val array:Array<Int>){
-//    fun findElement(element: Int, foundElement:(index:Int, element: Int?) -> Unit){
-//        for(i in array.indices){
-//            if(array[i] == element){
-//                foundElement(i, array[i])
-//                return
-//            }
-//        }
-//        foundElement(-1, null)
-//    }
-//}
