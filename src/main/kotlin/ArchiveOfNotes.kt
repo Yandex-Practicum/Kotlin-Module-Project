@@ -1,18 +1,26 @@
-class ArchiveOfNotes (val title: String, override val parent: Notes) : Notes {
+class ArchiveOfNotes (val title: String, val parent: ListOfArchives) {
 
-    override val titlesList: MutableMap<Int, Note> = mutableMapOf()
+    val titlesList: MutableMap<Int, Note> = mutableMapOf()
 
-    override fun getListOfContent(): MutableList<Int> {
-        val list: MutableList<Int> = mutableListOf()
-        for(each in titlesList) {
-            list.add(each.key)
-        }
-        return list
-    }
+//    fun getListOfContent(): MutableList<Int> {
+//        val list: MutableList<Int> = mutableListOf()
+//        for(each in titlesList) {
+//            list.add(each.key)
+//        }
+//        return list
+//    }
 
-    fun addContent(title: String, parent: Notes) {
+    fun addContent(title: String, parent: ArchiveOfNotes ) {
         val nextKey = titlesList.size + 1
         titlesList[nextKey] = Note(title, parent)
+    }
+
+    fun printMenu(currentMenu: ArchiveOfNotes, returnNumber: Int) {
+        println("0. Создать архив")
+        for (each in currentMenu.titlesList) {
+            println("${each.key}. $each")
+        }
+        println("$returnNumber. Выход")
     }
 
 }
