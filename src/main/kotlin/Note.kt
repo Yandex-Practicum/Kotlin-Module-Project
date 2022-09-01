@@ -1,6 +1,35 @@
-data class Note (override val title: String, override val parent: MenuInterface): MenuInterface {
-    override val contentList: MutableList<out MenuInterface> = mutableListOf()
+//data class Note (private val title: String, val parent: MenuInterface) {
+//
+//    private val noteContent: MutableList<String> = mutableListOf()
+//
+//    fun getPrevious(): MenuInterface {
+//        return parent
+//    }
+//
+//    fun getNote(): String {
+//        return title
+//    }
+//}
+
+//when Note : MenuInterface
+data class Note (override val title: String, override val parent: MenuInterface) : MenuInterface {
+
+    private val noteContent: MutableList<String> = mutableListOf()
+
+    override fun getContent(userChoice: Int): String {
+        return title
+    }
+
     override fun addContent(title: String) {
-        println("Can't edit Note after creation")
+        val nextKey = noteContent.size
+        noteContent[nextKey] = title
+    }
+
+    override fun getPrevious(): MenuInterface {
+        return parent
+    }
+
+    override fun getTitles(): MutableList<String> {
+        return noteContent
     }
 }

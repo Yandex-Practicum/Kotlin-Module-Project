@@ -1,15 +1,23 @@
 class ArchiveOfNotes(override val title: String, override val parent: MenuInterface) : MenuInterface {
 
-    override val contentList: MutableList<Note> = mutableListOf()
+    val contentList: MutableList<Note> = mutableListOf()
 
     override fun addContent(title: String ) {
         val nextKey = contentList.size
         contentList[nextKey] = Note(title, this)
     }
 
-//    fun getName() : String {
-//        return title
-//    }
+    override fun getTitles(): MutableList<String>  {
+        val titlesList: MutableList<String> = mutableListOf()
+        for (each in contentList) {
+            titlesList.add(each.getNote())
+        }
+        return titlesList
+    }
+
+    override fun getContent(userChoice: Int) : Note {
+        return contentList[userChoice - 1]
+    }
 
 //    fun printMenu(currentMenu: ArchiveOfNotes, returnNumber: Int) {
 //        println("0. Создать заметку")

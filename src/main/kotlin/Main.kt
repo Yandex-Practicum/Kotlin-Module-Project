@@ -3,11 +3,12 @@ fun main() {
     val listOfArchivesMenu = ListOfArchives()
     var listOfNotesMenu: ArchiveOfNotes? = null
     var noteContent: Note? = null
-    var currentMenu: List<MenuInterface?> = listOf(listOfArchivesMenu)
-    val menuSwitcher: List<MenuInterface?> =
-        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
-
-
+    val currentMenu: List<MenuInterface> = listOf(listOfArchivesMenu)
+//    val menuSwitcher: List<MenuInterface?> =
+//        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
+    listOfArchivesMenu.getPrevious()
+    val menuLogic = Logic()
+    println(menuLogic.makeMenu(currentMenu, 2, 1))
 /*
 //    fun printMenu(currentMenu: ListOfArchives, returnNumber: Int) {
 //
@@ -34,26 +35,26 @@ fun main() {
 //
 //    }*/
 
-    while (true) {
-        for (each in menuSwitcher) {
-            if (each != null) currentMenu = each
-        }
-        val returnNumber = currentMenu[0].titlesList.size + 1
-
-        var menuLogic: Logic<out MenuInterface>
-        if (listOfNotesMenu != null) {
-            menuLogic = Logic<ArchiveOfNotes>()
-        } else if (noteContent != null) {
-            menuLogic = Logic<Note>()
-        } else {
-            menuLogic = Logic<ListOfArchives>()
-        }
+/*//    while (true) {
+//        for (each in menuSwitcher) {
+//            if (each != null) currentMenu = each
+//        }
+//        val returnNumber = currentMenu[0].titlesList.size + 1
+//
+//        var menuLogic: Logic<out MenuInterface>
+//        if (listOfNotesMenu != null) {
+//            menuLogic = Logic<ArchiveOfNotes>()
+//        } else if (noteContent != null) {
+//           menuLogic = Logic<Note>()
+//        } else {
+//            menuLogic = Logic<ListOfArchives>()
+//        }
 //uncomment
 //        menuLogic.printMenu(currentMenu, returnNumber)
 //        val userInput = menuLogic.askForInput("Please, choose an option and enter a corresponding number")
 //        val validInput = menuLogic.getValidInput(currentMenu, userInput, returnNumber)?: continue
 //        menuLogic.getMenuUsage(currentMenu,returnNumber, validInput)
-
+*/
 /*//        if (listOfNotesMenu == null && noteContent == null) {
 //
 //            val returnNumber = listOfArchivesMenu.titlesList.size + 1
@@ -133,5 +134,4 @@ fun main() {
 //                continue
 //            }
 //        }*/
-    }
 }
