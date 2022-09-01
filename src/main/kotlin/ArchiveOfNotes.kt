@@ -1,10 +1,10 @@
-class ArchiveOfNotes(private val title: String) {
+class ArchiveOfNotes(override val title: String) : MenuListInterface {
 
-    val titlesList: MutableMap<Int, Note> = mutableMapOf()
+    override val titlesList: MutableMap<Int, Note> = mutableMapOf()
 
-    fun addContent(title: String, parent: ArchiveOfNotes ) {
+    override fun addContent(title: String ) {
         val nextKey = titlesList.size + 1
-        titlesList[nextKey] = Note(title, parent)
+        titlesList[nextKey] = Note(title)
     }
 
     fun getName() : String {
@@ -14,7 +14,7 @@ class ArchiveOfNotes(private val title: String) {
     fun printMenu(currentMenu: ArchiveOfNotes, returnNumber: Int) {
         println("0. Создать заметку")
         for (i in currentMenu.titlesList.keys) {
-            println("${i}. ${currentMenu.titlesList[i]?.title}")
+            println("${i}. ${currentMenu.titlesList[i]}")
         }
         println("$returnNumber. Назад")
     }
