@@ -3,10 +3,12 @@ fun main() {
     val listOfArchivesMenu = ListOfArchives()
     var listOfNotesMenu: ArchiveOfNotes? = null
     var noteContent: Note? = null
-    var currentMenu = listOfArchivesMenu
+    var currentMenu: List<MenuInterface?> = listOf(listOfArchivesMenu)
+    val menuSwitcher: List<MenuInterface?> =
+        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
 
 
-/*//
+/*
 //    fun printMenu(currentMenu: ListOfArchives, returnNumber: Int) {
 //
 //        println("0. Создать архив")
@@ -33,22 +35,24 @@ fun main() {
 //    }*/
 
     while (true) {
+        for (each in menuSwitcher) {
+            if (each != null) currentMenu = each
+        }
+        val returnNumber = currentMenu[0].titlesList.size + 1
 
-        val returnNumber = currentMenu.titlesList.size + 1
-
-        var menuLogic: Logic<out MenuListInterface>
-        if (listOfNotesMenu != null && noteContent == null) {
+        var menuLogic: Logic<out MenuInterface>
+        if (listOfNotesMenu != null) {
             menuLogic = Logic<ArchiveOfNotes>()
         } else if (noteContent != null) {
             menuLogic = Logic<Note>()
         } else {
             menuLogic = Logic<ListOfArchives>()
         }
-
-        menuLogic.printMenu(currentMenu, returnNumber)
-        val userInput = menuLogic.askForInput("Please, choose an option and enter a corresponding number")
-        val validInput = menuLogic.getValidInput(currentMenu, userInput, returnNumber)?: continue
-        menuLogic.getMenuUsage(currentMenu,returnNumber, validInput)
+//uncomment
+//        menuLogic.printMenu(currentMenu, returnNumber)
+//        val userInput = menuLogic.askForInput("Please, choose an option and enter a corresponding number")
+//        val validInput = menuLogic.getValidInput(currentMenu, userInput, returnNumber)?: continue
+//        menuLogic.getMenuUsage(currentMenu,returnNumber, validInput)
 
 /*//        if (listOfNotesMenu == null && noteContent == null) {
 //

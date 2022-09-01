@@ -1,9 +1,10 @@
-class ListOfArchives() : MenuListInterface {
+class ListOfArchives() : MenuInterface {
+    override val parent: MenuInterface? = null
     override val title = "Main Menu"
-    override val titlesList: MutableMap<Int, ArchiveOfNotes> = mutableMapOf()
+    override val contentList: MutableList<ArchiveOfNotes> = mutableListOf()
 
     override fun addContent(title: String) {
-        val nextKey = titlesList.size + 1
-        titlesList[nextKey] = ArchiveOfNotes(title)
+        val nextKey = contentList.size
+        contentList[nextKey] = ArchiveOfNotes(title, this)
     }
 }
