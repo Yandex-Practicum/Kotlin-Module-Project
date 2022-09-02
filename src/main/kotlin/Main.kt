@@ -4,11 +4,13 @@ fun main() {
     var listOfNotesMenu: ArchiveOfNotes? = null
     var noteContent: Note? = null
     val currentMenu: List<MenuInterface> = listOf(listOfArchivesMenu)
+    val menuLogic = Logic(listOfArchivesMenu)
+    println(menuLogic)
 //    val menuSwitcher: List<MenuInterface?> =
 //        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
-    listOfArchivesMenu.getPrevious()
-    val menuLogic = Logic()
-    println(menuLogic.makeMenu(currentMenu, 2, 1))
+//    listOfArchivesMenu.getPrevious()
+//    val menuLogic = Logic()
+//    println(menuLogic.makeMenu(currentMenu, 2, 1))
 /*
 //    fun printMenu(currentMenu: ListOfArchives, returnNumber: Int) {
 //

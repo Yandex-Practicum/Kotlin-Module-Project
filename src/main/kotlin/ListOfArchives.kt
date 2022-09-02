@@ -19,4 +19,7 @@ class ListOfArchives : MenuInterface {
         val nextKey = contentList.size
         contentList[nextKey] = ArchiveOfNotes(title, this)
     }
+
+    val menuList: MutableList<MutableMap<String, ()->Unit>> = mutableListOf()
+
 }

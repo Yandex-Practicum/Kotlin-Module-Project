@@ -1,9 +1,34 @@
 import java.util.Scanner
 
-class Logic {
+class Logic (val currentMenu: MenuInterface) {
 
+    val menuList: MutableList<Map<String, ()->Unit>> = mutableListOf()
 
-    private val menuList: MutableList<MutableMap<String, ()->Unit>> = mutableListOf()
+    init {
+        menuList[0] = mapOf("Create new" to {this.currentMenu.addContent(askForInput("Please, input a title"))})
+
+        for (each in currentMenu.getTitles()){
+            var i = 1
+            menuList[i] = mapOf(each to {this.currentMenu.getContent(i)})
+            i++
+        }
+        menuList[currentMenu.getTitles().size + 1] = mapOf("Exit" to {this.currentMenu.getPrevious()})
+    }
+
+    fun askForInput(message: String): String {
+        println(message)
+        return Scanner(System.`in`).nextLine()
+    }
+
+    fun getValidInput (currentMenu: MenuInterface, userInput: String, returnNumber: Int) : Int? {
+        val userInputInt = userInput.toIntOrNull() ?: return null
+        if (userInputInt in 0..currentMenu.getTitles().size + 1) {
+            return userInputInt
+        } else {
+            return null
+        }
+    }
+
 
 //    fun <X: MenuInterface> printMenu(currentMenu: X, returnNumber: Int) {
 //
@@ -25,44 +50,12 @@ class Logic {
 //        return titlesList
 //    }
 
-    fun makeMenu (
-        currentMenu: List<MenuInterface>,
-        returnNumber: Int,
-        validInput: Int
-//        menuSwitcher: List<MenuInterface?>
-    ) {
-        menuList[0] = mutableMapOf("Create new" to {currentMenu[0].addContent(askForInput("Please, input a title"))})
-
-        for (each in currentMenu[0].getTitles()){
-            var i = 1
-            menuList[i] = mutableMapOf(each to {currentMenu[0] = currentMenu[0].getContent(i)})
-            i++
-//            menuList[i] = {changeMenu(currentMenu, currentMenu.titlesList[validInput])}
-        }
-// #TODO fix changeMenu (can't work from inside Logic with var from Main)
-        println("$returnNumber. Выход")
-    }
 
 //    fun <P> changeMenu(currentMenu: P, menuSwitcher: List<MenuInterface?>) {
 //
 //    }
 
-    fun askForInput(message: String): String {
-        println(message)
-        return Scanner(System.`in`).nextLine()
-    }
 
-    fun getValidInput (currentMenu: MenuInterface, userInput: String, returnNumber: Int) : Int? {
-        val userInputInt = userInput.toIntOrNull() ?: return null
-        if (
-            currentMenu[0].contentList.indices.contains(userInputInt)
-            || userInputInt == currentMenu.contentList.size + 1 || userInputInt == returnNumber
-            ) {
-            return userInputInt
-        } else {
-            return null
-        }
-    }
 
 
 
