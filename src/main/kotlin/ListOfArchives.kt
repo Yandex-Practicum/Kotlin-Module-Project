@@ -16,8 +16,7 @@ class ListOfArchives : MenuInterface {
     }
 
     override fun addContent(title: String) {
-        val nextKey = contentList.size
-        contentList[nextKey] = ArchiveOfNotes(title, this)
+        contentList.add(ArchiveOfNotes(title, this))
     }
 
     val menuList: MutableList<MutableMap<String, ()->Unit>> = mutableListOf()

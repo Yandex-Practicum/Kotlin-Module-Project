@@ -1,10 +1,9 @@
-class ArchiveOfNotes(override val title: String, override val parent: MenuInterface) : MenuInterface {
+class ArchiveOfNotes : AbstractNotes(val title: String, val parent: MenuInterface),MenuInterface  {
 
-    val contentList: MutableList<Note> = mutableListOf()
+    private val contentList: MutableList<Note> = mutableListOf()
 
     override fun addContent(title: String) {
-        val nextKey = contentList.size
-        contentList[nextKey] = Note(title, this)
+        contentList.add(Note(title, this))
     }
 
     override fun getTitles(): MutableList<String> {

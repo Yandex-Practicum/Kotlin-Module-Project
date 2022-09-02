@@ -12,19 +12,5 @@ interface MenuInterface {
 
     fun getContent(userChoice: Int) : Any
 
-//    abstract val contentList: MutableList<Any>
-//    abstract fun addContent(title: String)
-//
-//    fun getTitles(): String  {
-//        return contentList[index].title
-//    }
-//
-//    fun getContent(userChoice: Int) : Any {
-//        return contentList[userChoice - 1]
-//    }
-//
-//    fun getPrevious(): MenuInterface? {
-//        return parent
-//    }
 
 }

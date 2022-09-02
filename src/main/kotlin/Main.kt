@@ -5,10 +5,12 @@ fun main() {
 //    var noteContent: Note? = null
 //    val currentMenu: MenuInterface = listOfArchivesMenu
     val menuLogic = Logic(listOfArchivesMenu)
-    while (!menuLogic.needExit) {
+    while (true) {
+        menuLogic.clearMenu()
         menuLogic.makeMenu()
         menuLogic.printMenu()
         val getValidUserInput = menuLogic.getValidUserInput(initialPromptPhrase) ?: continue
         menuLogic.doMenuOption(getValidUserInput)
+        if (menuLogic.needExit) break
     }
 }

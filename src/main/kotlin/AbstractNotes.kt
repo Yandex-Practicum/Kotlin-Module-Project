@@ -1,0 +1,1 @@
+abstract class AbstractNotes(val parent: AbstractNotes, val title: String)

@@ -2,27 +2,23 @@ import java.util.Scanner
 
 class Logic (var currentMenu: MenuInterface) {
 
-    val menuList: MutableList<String> = mutableListOf()
-    val menuFunctions: MutableList<(Any?)-> Unit> = mutableListOf()
+    private var menuList: MutableList<String> = mutableListOf()
+    private var menuFunctions: MutableList<()-> Unit> = mutableListOf()
     var needExit = false
 
     fun makeMenu() {
         menuList.add("Create new")
         menuFunctions.add { currentMenu.addContent(askForInput("Please, input a title")) }
-        val titles = currentMenu.getTitles()
         val previousMenu = currentMenu.getPrevious()
-        if (titles.isNotEmpty()) {
-            for (i in titles.indices) {
-                menuList.add(titles[i])
-                menuFunctions.add { currentMenu = currentMenu.getContent(i) as MenuInterface }
+        if(currentMenu is Note)
+            val titles = currentMenu.getTitles()
+            if (titles.isNotEmpty()) {
+                for (i in titles.indices) {
+                    menuList.add(titles[i])
+                    menuFunctions.add { currentMenu = currentMenu.getContent(i + 1) as MenuInterface }
+                }
+
             }
-//            menuList.add("Exit")
-//            menuFunctions.add {
-//                if (currentMenu != previousMenu){
-//                    currentMenu = previousMenu
-//                } else needExit = true
-//            }
-        }
         menuList.add("Exit")
         menuFunctions.add {
             if (currentMenu != previousMenu){
@@ -30,6 +26,12 @@ class Logic (var currentMenu: MenuInterface) {
             } else needExit = true
         }
     }
+
+    fun clearMenu() {
+        menuList.clear()
+        menuFunctions.clear()
+    }
+
 
 //    fun interface AddContent {
 //        fun create(currentMenu: MenuInterface)
@@ -43,10 +45,11 @@ class Logic (var currentMenu: MenuInterface) {
 //    val getContentFun = GetContent{ currentMenu, it -> currentMenu.getContent(it) }
 
     fun doMenuOption(userChoice: Int){
-        menuFunctions[userChoice]
+        menuFunctions[userChoice]()
     }
 
     fun printMenu() {
+        println(currentMenu.title)
         for (i in menuList.indices) {
             println("$i. ${menuList[i]}")
         }
@@ -63,6 +66,6 @@ class Logic (var currentMenu: MenuInterface) {
 
     private fun getValidInput (userInput: String) : Int? {
         val userInputInt = userInput.toIntOrNull() ?: return null
-        return if (userInputInt in 0..currentMenu.getTitles().size + 1) userInputInt else null
+        return if (userInputInt in menuList.indices) userInputInt else null
         }
 }
