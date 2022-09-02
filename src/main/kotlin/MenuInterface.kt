@@ -1,13 +1,8 @@
-interface MenuInterface <T: AbstractNotes> {
-//    abstract val parent: MenuInterface
-//    abstract val title: String
-    abstract val contentList: MutableList<T>
+interface MenuInterface<T : AbstractNotes> {
 
-    abstract fun addContent(title: String)
+    val contentList: MutableList<T>
 
-//    fun getPrevious(): MenuInterface {
-//        return parent
-//    }
+    fun addContent(title: String)
 
     fun getTitles(): MutableList<String> {
         val titlesList: MutableList<String> = mutableListOf()
@@ -17,7 +12,6 @@ interface MenuInterface <T: AbstractNotes> {
         return titlesList
     }
 
-    fun getContent(userChoice: Int) : AbstractNotes
-
+    fun getContent(userChoice: Int): AbstractNotes
 
 }

@@ -3,7 +3,7 @@ class ListOfArchives : AbstractNotes(), MenuInterface<ArchiveOfNotes> {
     override val title = "Main Menu"
     override val contentList: MutableList<ArchiveOfNotes> = mutableListOf()
 
-    override fun getTitles(): MutableList<String>  {
+    override fun getTitles(): MutableList<String> {
         val titlesList: MutableList<String> = mutableListOf()
         for (each in contentList) {
             titlesList.add(each.title)
@@ -11,7 +11,7 @@ class ListOfArchives : AbstractNotes(), MenuInterface<ArchiveOfNotes> {
         return titlesList
     }
 
-    override fun getContent(userChoice: Int) : ArchiveOfNotes {
+    override fun getContent(userChoice: Int): ArchiveOfNotes {
         return contentList[userChoice - 1]
     }
 
@@ -19,6 +19,6 @@ class ListOfArchives : AbstractNotes(), MenuInterface<ArchiveOfNotes> {
         contentList.add(ArchiveOfNotes(title, this))
     }
 
-    val menuList: MutableList<MutableMap<String, ()->Unit>> = mutableListOf()
+    val menuList: MutableList<MutableMap<String, () -> Unit>> = mutableListOf()
 
 }
