@@ -3,7 +3,7 @@ import java.util.Scanner
 class Logic (val currentMenu: MenuInterface) {
 
     val menuList: MutableList<Map<String, ()->Unit>> = mutableListOf()
-
+// put functions into lambda (prompt input ...)
     init {
         menuList.add(mapOf("Create new" to {this.currentMenu.addContent(askForInput("Please, input a title"))}))
 
@@ -22,7 +22,7 @@ class Logic (val currentMenu: MenuInterface) {
         return Scanner(System.`in`).nextLine()
     }
 
-    fun getValidInput (currentMenu: MenuInterface, userInput: String, returnNumber: Int) : Int? {
+    fun getValidInput (userInput: String) : Int? {
         val userInputInt = userInput.toIntOrNull() ?: return null
         if (userInputInt in 0..currentMenu.getTitles().size + 1) {
             return userInputInt
