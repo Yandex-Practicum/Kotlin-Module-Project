@@ -5,14 +5,16 @@ class Logic (val currentMenu: MenuInterface) {
     val menuList: MutableList<Map<String, ()->Unit>> = mutableListOf()
 
     init {
-        menuList[0] = mapOf("Create new" to {this.currentMenu.addContent(askForInput("Please, input a title"))})
+        menuList.add(mapOf("Create new" to {this.currentMenu.addContent(askForInput("Please, input a title"))}))
 
-        for (each in currentMenu.getTitles()){
-            var i = 1
-            menuList[i] = mapOf(each to {this.currentMenu.getContent(i)})
-            i++
+        if (currentMenu.getTitles().isNotEmpty()) {
+            for (i in currentMenu.getTitles().indices) {
+                menuList[i + 1] =
+                    mapOf(currentMenu.getTitles()[i] to { this.currentMenu.getContent(i) })
+            }
+            menuList[currentMenu.getTitles().size + 1] =
+                mapOf("Exit" to { this.currentMenu.getPrevious() })
         }
-        menuList[currentMenu.getTitles().size + 1] = mapOf("Exit" to {this.currentMenu.getPrevious()})
     }
 
     fun askForInput(message: String): String {

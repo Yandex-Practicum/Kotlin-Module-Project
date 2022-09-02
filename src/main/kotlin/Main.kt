@@ -5,7 +5,7 @@ fun main() {
     var noteContent: Note? = null
     val currentMenu: List<MenuInterface> = listOf(listOfArchivesMenu)
     val menuLogic = Logic(listOfArchivesMenu)
-    println(menuLogic)
+    println(menuLogic.menuList)
 //    val menuSwitcher: List<MenuInterface?> =
 //        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
 //    listOfArchivesMenu.getPrevious()
