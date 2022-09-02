@@ -14,7 +14,7 @@ class Logic (val currentMenu: MenuInterface) {
             }
             menuList[currentMenu.getTitles().size + 1] =
                 mapOf("Exit" to { this.currentMenu.getPrevious() })
-        }
+        } else menuList.add(mapOf("Exit" to { this.currentMenu.getPrevious() }))
     }
 
     fun askForInput(message: String): String {
