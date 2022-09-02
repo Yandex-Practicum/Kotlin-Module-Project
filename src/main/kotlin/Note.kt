@@ -1,17 +1,3 @@
-//data class Note (private val title: String, val parent: MenuInterface) {
-//
-//    private val noteContent: MutableList<String> = mutableListOf()
-//
-//    fun getPrevious(): MenuInterface {
-//        return parent
-//    }
-//
-//    fun getNote(): String {
-//        return title
-//    }
-//}
-
-//when Note : MenuInterface
 data class Note (override val title: String, override val parent: MenuInterface) : MenuInterface {
 
     private val noteContent: MutableList<String> = mutableListOf()
