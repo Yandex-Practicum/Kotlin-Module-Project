@@ -1,7 +1,7 @@
-class ListOfArchives : MenuInterface {
-    override val parent: MenuInterface = this
+class ListOfArchives : AbstractNotes(), MenuInterface<ArchiveOfNotes> {
+    override val parent: AbstractNotes = this
     override val title = "Main Menu"
-    private val contentList: MutableList<ArchiveOfNotes> = mutableListOf()
+    override val contentList: MutableList<ArchiveOfNotes> = mutableListOf()
 
     override fun getTitles(): MutableList<String>  {
         val titlesList: MutableList<String> = mutableListOf()

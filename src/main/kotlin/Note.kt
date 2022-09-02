@@ -1,4 +1,4 @@
-data class Note (override val title: String, override val parent: MenuInterface): AbstractNotes  {
+data class Note (override val title: String, override val parent: AbstractNotes): AbstractNotes()  {
 //
 //    private val noteContent: MutableList<String> = mutableListOf()
 //

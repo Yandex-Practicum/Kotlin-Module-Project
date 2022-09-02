@@ -1,1 +1,7 @@
-abstract class AbstractNotes(val parent: AbstractNotes, val title: String)
+abstract class AbstractNotes() {
+    abstract val parent: AbstractNotes
+    abstract val title: String
+    fun getPrevious(): AbstractNotes {
+        return parent
+    }
+}
