@@ -1,10 +1,10 @@
 interface MenuInterface {
-    abstract val parent: MenuInterface?
+    abstract val parent: MenuInterface
     abstract val title: String
 
     abstract fun addContent(title: String)
 
-    fun getPrevious(): MenuInterface? {
+    fun getPrevious(): MenuInterface {
         return parent
     }
 

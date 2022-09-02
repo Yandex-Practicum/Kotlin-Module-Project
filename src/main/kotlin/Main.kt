@@ -1,19 +1,14 @@
 fun main() {
-
+    val initialPromptPhrase = "Please choose an option and enter a corresponding number"
     val listOfArchivesMenu = ListOfArchives()
-    var listOfNotesMenu: ArchiveOfNotes? = null
-    var noteContent: Note? = null
-    var currentMenu: MenuInterface = listOfArchivesMenu
-
-    while (true) {
-        val menuLogic = Logic(listOfArchivesMenu)
+//    var listOfNotesMenu: ArchiveOfNotes? = null
+//    var noteContent: Note? = null
+//    val currentMenu: MenuInterface = listOfArchivesMenu
+    val menuLogic = Logic(listOfArchivesMenu)
+    while (!menuLogic.needExit) {
+        menuLogic.makeMenu()
         menuLogic.printMenu()
-        println(currentMenu.getTitles())
-        if (currentMenu is ListOfArchives) {
-            val userInput = menuLogic.getValidUserInput("Please, choose an option and enter a corresponding number")
-            val method : MethodMenu = {menuLogic.menuFunctions[validInput]}
-            println(currentMenu)
-            println(currentMenu.getTitles())
-        }
+        val getValidUserInput = menuLogic.getValidUserInput(initialPromptPhrase) ?: continue
+        menuLogic.doMenuOption(getValidUserInput)
     }
 }

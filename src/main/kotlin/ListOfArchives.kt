@@ -1,5 +1,5 @@
 class ListOfArchives : MenuInterface {
-    override val parent: MenuInterface? = null
+    override val parent: MenuInterface = this
     override val title = "Main Menu"
     private val contentList: MutableList<ArchiveOfNotes> = mutableListOf()
 
