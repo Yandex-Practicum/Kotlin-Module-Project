@@ -5,7 +5,7 @@ class Logic (val currentMenu: MenuInterface) {
     val menuList: MutableList<Map<String, ()->Unit>> = mutableListOf()
 // put functions into lambda (prompt input ...)
     init {
-        menuList.add(mapOf("Create new" to {this.currentMenu.addContent(askForInput("Please, input a title"))}))
+        menuList.add(mapOf("Create new" to {addContentFun}))
 
         if (currentMenu.getTitles().isNotEmpty()) {
             for (i in currentMenu.getTitles().indices) {
@@ -15,6 +15,18 @@ class Logic (val currentMenu: MenuInterface) {
             menuList[currentMenu.getTitles().size + 1] =
                 mapOf("Exit" to { this.currentMenu.getPrevious() })
         } else menuList.add(mapOf("Exit" to { this.currentMenu.getPrevious() }))
+    }
+
+    fun interface AddContent {
+        fun create(currentMenu: MenuInterface)
+    }
+
+    val addContentFun =  AddContent{ currentMenu -> currentMenu.addContent(askForInput("Please, input a title"))}
+
+    fun printMenu() {
+        for (i in menuList.indices) {
+            for ((key, value) in menuList[i]) println("$i. $key")
+        }
     }
 
     fun askForInput(message: String): String {

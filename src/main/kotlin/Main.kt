@@ -5,19 +5,22 @@ fun main() {
     var noteContent: Note? = null
     var currentMenu: MenuInterface = listOfArchivesMenu
 
-//    while (true) {
+    while (true) {
         val menuLogic = Logic(listOfArchivesMenu)
-        println(menuLogic.menuList)
+        for (i in menuLogic.menuList.indices) {
+            println(menuLogic.menuList[i])
+        }
+        menuLogic.printMenu()
         println(currentMenu.getTitles())
         if (currentMenu is ListOfArchives) {
             val userInput =
                 menuLogic.askForInput("Please, choose an option and enter a corresponding number")
-            val validInput = menuLogic.getValidInput(userInput) ?: return // continue // possible issue
+            val validInput = menuLogic.getValidInput(userInput) ?: continue // possible issue
             menuLogic.menuList[validInput]
             println(currentMenu)
             println(currentMenu.getTitles())
         }
-//    }
+    }
 }
 //    val menuSwitcher: List<MenuInterface?> =
 //        listOf(listOfArchivesMenu, listOfNotesMenu, noteContent)
