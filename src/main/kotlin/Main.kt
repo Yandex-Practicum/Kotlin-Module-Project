@@ -1,5 +1,6 @@
+import java.util.Scanner
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    val archiveList = mutableListOf<Archive>(Archive("test"))
+    PrintListUtils("Список архивов", "архив", archiveList)
 }
