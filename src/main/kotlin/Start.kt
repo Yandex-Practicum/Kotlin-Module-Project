@@ -1,7 +1,6 @@
 import kotlin.collections.ArrayList
 
 class Start: PrintData() {
-
     private var listArchives: ArrayList<Archive> = createDefaultData()
 
     private fun showArchivesList(){

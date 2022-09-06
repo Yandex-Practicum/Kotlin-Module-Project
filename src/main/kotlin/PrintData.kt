@@ -1,7 +1,6 @@
 import java.util.Scanner
 
 abstract class PrintData {
-
     fun printHeader(text: String, isMain: Boolean)
     {
         if(isMain)

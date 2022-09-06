@@ -1,3 +1,3 @@
 
-abstract class Common(val name:String): PrintData()  {
+abstract class Common(val name:String): PrintData(){
 }
