@@ -1,6 +1,6 @@
 import kotlin.collections.ArrayList
 
-class Start : PrintData() {
+class Start : PrintData(), ActWhile {
     private var listArchives: ArrayList<Archive> = createDefaultData()
 
     private fun showArchivesList() {
@@ -10,31 +10,32 @@ class Start : PrintData() {
 
     fun work() {
         showArchivesList()
-        while (true) {
-            val number = askAction()
-            val num = number.toIntOrNull()
-            if (num != null && num <= this.listArchives.size + 1) {
-                if (num == this.listArchives.size + 1) {
-                    printHeader("Работа с программой окончена.", true)
-                    break
-                }
-
-                if (num == 0) {
-                    if (this.createArchive())
-                        printHeader("Новый архив создан.", false)
-                    showArchivesList()
-                } else {
-                    this.listArchives[num - 1].showNotesList()
-                    this.listArchives[num - 1].waitingAction()
-                    printHeader("Работа с заметками окончена.", false)
-                    showArchivesList()
-                }
-            } else {
-                printHeader("Введено некорретное число: $number", false)
-            }
-        }
+        userResultAction(listArchives)
     }
 
+    //region override fun
+    override fun finishAction() {
+        printHeader("Работа с программой окончена.", true)
+    }
+
+    override fun createAction() {
+        if (createArchive())
+            printHeader("Новый архив создан.", false)
+        showArchivesList()
+    }
+
+    override fun showAction(num: Int) {
+        listArchives[num - 1].showNotesList()
+        listArchives[num - 1].waitingAction()
+        printHeader("Работа с заметками окончена.", false)
+        showArchivesList()
+    }
+
+    override fun wrongNumberAction(number: String) {
+        //printHeader("Введено некорретное число: $number", false)
+        printError(number)
+    }
+    //endregion
 
     private fun createArchive(): Boolean {
         printHeader("Создание архива.", true)

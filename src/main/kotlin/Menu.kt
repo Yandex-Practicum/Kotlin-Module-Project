@@ -1,5 +1,10 @@
-class Menu<T>(val header: String, val create: String, val dataList: ArrayList<T>) :
+class Menu<T>(
+    private val header: String,
+    private val create: String,
+    private val dataList: ArrayList<T>
+) :
     PrintData() where T : Common {
+
     fun showMenu() {
         printHeader(header, true)
         println("0. Создать $create")

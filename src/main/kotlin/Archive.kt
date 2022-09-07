@@ -1,5 +1,5 @@
 class Archive(private val nameArh: String, private val content: ArrayList<Note>) :
-    Common(name = nameArh) {
+    Common(name = nameArh), ActWhile {
 
     fun showNotesList() {
         val menu = Menu("Список заметок архива: '$nameArh'", "заметку", content) //0. Создать
@@ -7,32 +7,31 @@ class Archive(private val nameArh: String, private val content: ArrayList<Note>)
     }
 
     fun waitingAction() {
-        while (true) {
-            val number = askAction()
-            val num = number.toIntOrNull()
-
-            if (num != null && num <= content.size + 1) {
-                if (num == content.size + 1)
-                    break //printHeader("Завершение работы c заметками.",false)
-
-                if (num == 0) {
-                    printHeader("Создание новой заметки.", true)
-                    if (createNote())
-                        printHeader("Новая заметка создана.", false)
-                    showNotesList()
-                } else {
-                    printHeader("Просмотр содержимого заметки.", true)
-                    content[num - 1].showData()
-                    showNotesList()
-                }
-            } else {
-                printHeader("Введено некорретное число: $number", false)
-                showNotesList()
-            }
-        }
+        userResultAction(content)
     }
 
-    fun createNote(): Boolean {
+    //region override fun
+    override fun createAction() {
+        if (createNote())
+            printHeader("Новая заметка создана.", false)
+        showNotesList()
+    }
+
+    override fun showAction(num: Int) {
+        printHeader("Просмотр содержимого заметки.", true)
+        content[num - 1].showData()
+        showNotesList()
+    }
+
+    override fun wrongNumberAction(number: String) {
+        //printHeader("Введено некорретное число: $number", false)
+        printError(number)
+        showNotesList()
+    }
+    //endregion
+
+    private fun createNote(): Boolean {
+        printHeader("Создание новой заметки.", true)
         val nameNote = askActionWithExit("Введите наименование заметки")
         if (nameNote != "q") { //!nameNote.equals("q")
             val contentNote = askActionWithExit("Введите текст заметки")
