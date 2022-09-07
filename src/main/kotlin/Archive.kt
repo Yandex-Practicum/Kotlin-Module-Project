@@ -22,7 +22,7 @@ class Archive(private val nameArh: String, private val content: ArrayList<Note>)
                     showNotesList()
                 } else {
                     printHeader("Просмотр содержимого заметки.", true)
-                    content.get(num - 1).showData()
+                    content[num - 1].showData()
                     showNotesList()
                 }
             } else {
@@ -36,7 +36,7 @@ class Archive(private val nameArh: String, private val content: ArrayList<Note>)
         val nameNote = askActionWithExit("Введите наименование заметки")
         if (nameNote != "q") { //!nameNote.equals("q")
             val contentNote = askActionWithExit("Введите текст заметки")
-            if (!contentNote.equals("q"))
+            if (contentNote != "q")
                 return content.add(Note(nameNote, contentNote, this))
             else
                 cancelCreateNote()

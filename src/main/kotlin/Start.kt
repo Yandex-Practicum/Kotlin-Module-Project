@@ -24,8 +24,8 @@ class Start : PrintData() {
                         printHeader("Новый архив создан.", false)
                     showArchivesList()
                 } else {
-                    this.listArchives.get(num - 1).showNotesList()
-                    this.listArchives.get(num - 1).waitingAction()
+                    this.listArchives[num - 1].showNotesList()
+                    this.listArchives[num - 1].waitingAction()
                     printHeader("Работа с заметками окончена.", false)
                     showArchivesList()
                 }
@@ -39,7 +39,7 @@ class Start : PrintData() {
     private fun createArchive(): Boolean {
         printHeader("Создание архива.", true)
         val nameArh = askActionWithExit("Введите наименование Архива")
-        if (!nameArh.equals("q")) {
+        if (nameArh != "q") {
             val listNotes: ArrayList<Note> = arrayListOf()
             return listArchives.add(Archive(nameArh, listNotes))
         } else

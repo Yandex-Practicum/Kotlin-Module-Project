@@ -15,13 +15,13 @@ abstract class PrintData {
         val scanner = Scanner(System.`in`)
         println("Введите номер подпункта меню:")
         val number = scanner.nextLine()
-        return number;
+        return number
     }
 
     fun askActionWithExit(text: String): String {
         println("$text (или 'q' для отмены)")
         val scanner = Scanner(System.`in`)
         val number = scanner.nextLine()
-        return number;
+        return number
     }
 }
