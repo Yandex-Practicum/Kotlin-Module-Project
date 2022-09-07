@@ -16,7 +16,7 @@ data class Archive(private val title: String) {
         noteList.add(Note(title, text))
     }
 
-    public fun returnNoteList(): List<Note> {
+    public fun returnNoteList(): MutableList<Note> {
         return noteList
     }
 

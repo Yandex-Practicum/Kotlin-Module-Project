@@ -1,11 +1,12 @@
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PrintListUtils
+class PrintNoteListUtils
     <T>(
     private val title: String,
     private val firstItemText: String,
-    private val list: MutableList<T>
+    private val list: MutableList<T>,
+    private val currentArchive: Archive
     ) {
     init {
         val scanner = Scanner(System.`in`)
@@ -22,21 +23,15 @@ class PrintListUtils
             if (userInput != null) {
                 if (userInput <= list.size + 1) {
                     if (userInput == 0) {
-                        createNewArchive()
+                        currentArchive.addNote()
                         isInputOk = true
-                        PrintListUtils(title, firstItemText, list)
+                        PrintNoteListUtils(title, firstItemText, list, currentArchive)
                     } else if (userInput == list.size + 1) {
                         isInputOk = true
                     } else {
-                        val currentArchive: Archive = list[userInput - 1] as Archive
-                        PrintNoteListUtils(
-                            "Список заметок:",
-                            "заметку",
-                            currentArchive.returnNoteList(),
-                            currentArchive
-                        )
+                        PrintNoteUtils(list[userInput - 1] as Note)
                         isInputOk = true
-                        PrintListUtils(title, firstItemText, list)
+                        PrintNoteListUtils(title, firstItemText, list, currentArchive)
                     }
                 } else {
                     println("Действия с таким номером не существует, введите число от 0 до ${list.size + 1}")
