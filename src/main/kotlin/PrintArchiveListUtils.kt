@@ -1,5 +1,3 @@
-import java.util.*
-
 class PrintArchiveListUtils
     <T>(
     private val title: String,

@@ -1,6 +1,3 @@
-import java.util.*
-import kotlin.collections.ArrayList
-
 class PrintNoteListUtils
     <T>(
     private val title: String,

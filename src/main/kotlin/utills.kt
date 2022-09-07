@@ -1,9 +1,9 @@
 import java.util.Scanner
 
 val archiveList = mutableListOf<Archive>()
+val scanner = Scanner(System.`in`)
 
 fun createNewArchive() {
-    val scanner = Scanner(System.`in`)
     println("Введите название архива")
     val newArchiveName = scanner.nextLine()
     archiveList.add(Archive(newArchiveName))
@@ -16,7 +16,6 @@ fun <T>mainFunction(
     currentArchive: Archive?,
     note: Note?,
 ) {
-    val scanner = Scanner(System.`in`)
     if (note != null) {
         note.printFullNote()
         println("")

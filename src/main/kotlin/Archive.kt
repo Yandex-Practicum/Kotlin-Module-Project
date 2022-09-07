@@ -1,5 +1,3 @@
-import java.util.Scanner
-
 data class Archive(private val title: String) {
     private val noteList = mutableListOf<Note>()
     override fun toString(): String {
@@ -7,7 +5,6 @@ data class Archive(private val title: String) {
     }
 
     public fun addNote() {
-        val scanner = Scanner(System.`in`)
         println("Введите заголовок заметки")
         val title = scanner.nextLine()
         println("Введите текст заметки")
