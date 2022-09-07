@@ -1,9 +1,8 @@
 import java.util.Scanner
 
 abstract class PrintData {
-    fun printHeader(text: String, isMain: Boolean)
-    {
-        if(isMain)
+    fun printHeader(text: String, isMain: Boolean) {
+        if (isMain)
             println("=================")
         else
             println("-----------------")
@@ -19,7 +18,7 @@ abstract class PrintData {
         return number;
     }
 
-    fun askActionWithExit(text:String): String {
+    fun askActionWithExit(text: String): String {
         println("$text (или 'q' для отмены)")
         val scanner = Scanner(System.`in`)
         val number = scanner.nextLine()
