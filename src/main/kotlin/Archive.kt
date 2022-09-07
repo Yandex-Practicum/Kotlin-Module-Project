@@ -4,7 +4,7 @@ data class Archive(private val title: String) {
         return title
     }
 
-    public fun addNote() {
+    fun addNote() {
         println("Введите заголовок заметки")
         val title = scanner.nextLine()
         println("Введите текст заметки")
@@ -13,11 +13,7 @@ data class Archive(private val title: String) {
         noteList.add(Note(title, text))
     }
 
-    public fun returnNoteList(): MutableList<Note> {
+    fun returnNoteList(): List<Note> {
         return noteList
-    }
-
-    public fun printNoteList() {
-        noteList.forEachIndexed { i, note -> println("${i + 1} $note") }
     }
 }

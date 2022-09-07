@@ -12,7 +12,7 @@ fun createNewArchive() {
 fun <T>mainFunction(
     title: String,
     firstItemText: String,
-    list: MutableList<T>,
+    list: List<T>,
     currentArchive: Archive?,
     note: Note?,
 ) {
@@ -65,7 +65,7 @@ fun <T>mainFunction(
 fun <T>inputCreate(
     title: String,
     firstItemText: String,
-    list: MutableList<T>,
+    list: List<T>,
     currentArchive: Archive?
 ): Boolean {
     if (currentArchive != null) {
@@ -81,7 +81,7 @@ fun <T>inputCreate(
 fun <T>inputChooseItem(
     title: String,
     firstItemText: String,
-    list: MutableList<T>,
+    list: List<T>,
     userInput: Int,
     currentArchive: Archive?
 ): Boolean {

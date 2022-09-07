@@ -1,8 +1,8 @@
 class PrintArchiveListUtils
     <T>(
-    private val title: String,
-    private val firstItemText: String,
-    private val list: MutableList<T>
+    title: String,
+    firstItemText: String,
+    list: List<T>
     ) {
     init {
         mainFunction(title, firstItemText, list, null, null)

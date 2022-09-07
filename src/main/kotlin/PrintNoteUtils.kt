@@ -1,7 +1,7 @@
 class PrintNoteUtils
     <T>(
-    private val note: Note,
-    private val list: MutableList<T>,
+    note: Note,
+    list: List<T>,
     ) {
     init {
         mainFunction("title", "firstItemText", list, null, note)
