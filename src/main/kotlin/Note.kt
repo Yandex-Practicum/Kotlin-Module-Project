@@ -3,7 +3,7 @@ data class Note(val textNote: String) {
         return textNote
     }
 
-    fun printNote () {
+    fun printNote (): Unit {
         println("Текст заметки следующий: $textNote")
     }
 }
