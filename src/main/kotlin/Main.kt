@@ -1,5 +1,5 @@
 fun main() {
-    val archiveScreen = ArchiveScreen()
+    RepositoryObject.addMocks()
     println("Программа ведения заметок приветствует вас!")
-    archiveScreen.run()
+    ArchivesScreen().run()
 }
