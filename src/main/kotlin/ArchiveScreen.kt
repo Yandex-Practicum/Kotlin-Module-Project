@@ -1,4 +1,4 @@
-class ArchiveScreen(val currentArchive : Archive) {
+class ArchiveScreen(val ud: UserDialogue, val currentArchive : Archive) {
     private var currentNotesList = mutableListOf<Note>()
     private var newArchive: Archive? = null
 
@@ -12,15 +12,15 @@ class ArchiveScreen(val currentArchive : Archive) {
     }
 
     private fun addNote() {
-        val name = getAnswer("Введите название заметки")
-        val text = getAnswer("Введите текст заметки")
+        val name = ud.getAnswer("Введите название заметки")
+        val text = ud.getAnswer("Введите текст заметки")
         currentNotesList.add(Note(name, text))
         showMenu(currentNotesList)
     }
 
     private fun openNote(note: Note) {
         note.printNote()
-        getAnswer("Чтобы вернуться к списку заметок введите любой символ")
+        ud.getAnswer("Чтобы вернуться к списку заметок введите любой символ")
         showMenu(currentNotesList)
     }
 
@@ -33,7 +33,7 @@ class ArchiveScreen(val currentArchive : Archive) {
     private fun showMenu(commands: List<Note>) {
         println("Список заметок:")
         val currentCommands: List<Pair<String, () -> Unit>> = getCommands(commands)
-        chooseCommand(currentCommands)
+        ud.chooseCommand(currentCommands)
     }
 
     private fun getCommands(commands: List<Note>): List<Pair<String, () -> Unit>> {

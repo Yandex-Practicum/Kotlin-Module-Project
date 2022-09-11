@@ -1,4 +1,4 @@
-class StartScreen() {
+class StartScreen(val ud: UserDialogue) {
     private var archivesList = mutableListOf<Archive>()
 
     fun open() {
@@ -6,13 +6,13 @@ class StartScreen() {
     }
 
     private fun addArchive() {
-        val newArchiveName = getAnswer("Введите название архива")
+        val newArchiveName = ud.getAnswer("Введите название архива")
         archivesList.add(Archive(newArchiveName))
         showMenu(archivesList)
     }
 
     private fun openArchive(archive: Archive, position: Int) {
-        val archiveScreen = ArchiveScreen(archive)
+        val archiveScreen = ArchiveScreen(ud, archive)
         val newArchive = archiveScreen.open()
         if (newArchive != null)
             archivesList[position] = newArchive
@@ -22,7 +22,7 @@ class StartScreen() {
     private fun showMenu(commands: List<Archive>) {
         println("Список архивов:")
         val currentCommands: List<Pair<String, () -> Unit>> = getCommands(commands)
-        chooseCommand(currentCommands)
+        ud.chooseCommand(currentCommands)
     }
 
     private fun getCommands(commands: List<Archive>): List<Pair<String, () -> Unit>> {

@@ -1,4 +1,5 @@
 fun main() {
-    val startScreen = StartScreen()
+    val ud = UserDialogue()
+    val startScreen = StartScreen(ud)
     startScreen.open()
 }
