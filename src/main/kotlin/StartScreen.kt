@@ -1,7 +1,4 @@
-import java.util.*
-
 var archivesList = mutableListOf<Archive>()
-
 
 fun openStartScreen() {
     showStartScreenMenu(archivesList)
