@@ -1,32 +1,45 @@
-var archivesList = mutableListOf<Archive>()
+class StartScreen() {
+    private var archivesList = mutableListOf<Archive>()
 
-fun openStartScreen() {
-    showStartScreenMenu(archivesList)
-}
+    fun open() {
+        showMenu(archivesList)
+    }
 
-fun updateArchivesList(position: Int, newArchive: Archive) {
-    archivesList[position] = newArchive
-}
+    private fun addArchive() {
+        val newArchiveName = getAnswer("Введите название архива")
+        archivesList.add(Archive(newArchiveName))
+        showMenu(archivesList)
+    }
 
-fun addArchive() {
-    val newArchiveName = getAnswer("Введите название архива")
-    archivesList.add(Archive(newArchiveName))
-    showStartScreenMenu(archivesList)
-}
+    private fun openArchive(archive: Archive, position: Int) {
+        val archiveScreen = ArchiveScreen(archive)
+        val newArchive = archiveScreen.open()
+        if (newArchive != null)
+            archivesList[position] = newArchive
+        showMenu(archivesList)
+    }
 
-fun showStartScreenMenu(commands: List<Archive>) {
-    println("Список архивов:")
-    val currentCommands: List<Pair<String, () -> Unit>> = getStartScreenCommands(commands)
-    chooseCommand(currentCommands)
-}
+    private fun showMenu(commands: List<Archive>) {
+        println("Список архивов:")
+        val currentCommands: List<Pair<String, () -> Unit>> = getCommands(commands)
+        chooseCommand(currentCommands)
+    }
 
-fun getStartScreenCommands(commands: List<Archive>): List<Pair<String, () -> Unit>>{
-    var commandList: MutableList<Pair<String, () -> Unit>> = mutableListOf(Pair("0 - Создать архив", { -> addArchive() }))
-    commands.forEachIndexed { index, element -> commandList.add(Pair("${index + 1} - ${element.name}", { -> openArchiveScreen(element, index) })) }
-    commandList.add(Pair("${commandList.size} - Выход", { -> exit() }))
-    return commandList
-}
+    private fun getCommands(commands: List<Archive>): List<Pair<String, () -> Unit>> {
+        var commandList: MutableList<Pair<String, () -> Unit>> =
+            mutableListOf(Pair("0 - Создать архив", { -> addArchive() }))
+        commands.forEachIndexed { index, element ->
+            commandList.add(
+                Pair(
+                    "${index + 1} - ${element.name}",
+                    { -> openArchive(element, index) })
+            )
+        }
+        commandList.add(Pair("${commandList.size} - Выход", { -> exit() }))
+        return commandList
+    }
 
-fun exit() {
-    println("Работа программы завершена")
+    private fun exit() {
+        println("Работа программы завершена")
+    }
 }

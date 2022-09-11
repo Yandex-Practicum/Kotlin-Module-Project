@@ -1,46 +1,52 @@
-private var archiveName = ""
-private var currentNotesList = mutableListOf<Note>()
-private var archivePosition = 0
+class ArchiveScreen(val currentArchive : Archive) {
+    private var currentNotesList = mutableListOf<Note>()
+    private var newArchive: Archive? = null
 
-fun openArchiveScreen(archive: Archive, position: Int) {
-    currentNotesList.clear()
-    archiveName = archive.name
-    archivePosition = position
+    fun open(): Archive? {
+        while (newArchive == null) {
+            currentNotesList.clear()
+            currentArchive.notesList.forEach { note -> currentNotesList.add(note) }
+            showMenu(currentNotesList)
+        }
+        return newArchive
+    }
 
-    archive.notesList.forEach { note -> currentNotesList.add(note) }
-    showArchiveScreenMenu(archive.notesList)
-}
+    private fun addNote() {
+        val name = getAnswer("Введите название заметки")
+        val text = getAnswer("Введите текст заметки")
+        currentNotesList.add(Note(name, text))
+        showMenu(currentNotesList)
+    }
 
-fun addNote() {
-    val name = getAnswer("Введите название заметки")
-    val text = getAnswer("Введите текст заметки")
-    currentNotesList.add(Note(name, text))
-    showArchiveScreenMenu(currentNotesList)
-}
+    private fun openNote(note: Note) {
+        note.printNote()
+        getAnswer("Чтобы вернуться к списку заметок введите любой символ")
+        showMenu(currentNotesList)
+    }
 
-fun openNote(note: Note) {
-    note.printNote()
-    getAnswer("Чтобы вернуться к списку заметок введите любой символ")
-    showArchiveScreenMenu(currentNotesList)
-}
+    private fun saveArchive() {
+        val newNotesList: MutableList<Note> = mutableListOf()
+        newNotesList.addAll(currentNotesList)
+        newArchive = Archive(currentArchive.name, newNotesList)
+    }
 
-fun saveArchive() {
-    val newNotesList: MutableList<Note> = mutableListOf()
-    newNotesList.addAll(currentNotesList)
-    val newArchive = Archive(archiveName, newNotesList)
-    updateArchivesList(archivePosition, newArchive)
-    openStartScreen()
-}
+    private fun showMenu(commands: List<Note>) {
+        println("Список заметок:")
+        val currentCommands: List<Pair<String, () -> Unit>> = getCommands(commands)
+        chooseCommand(currentCommands)
+    }
 
-fun showArchiveScreenMenu(commands: List<Note>) {
-    println("Список заметок:")
-    val currentCommands: List<Pair<String, () -> Unit>> = getArchiveScreenCommands(commands)
-    chooseCommand(currentCommands)
-}
-
-fun getArchiveScreenCommands(commands: List<Note>): List<Pair<String, () -> Unit>>{
-    var commandsList: MutableList<Pair<String, () -> Unit>> = mutableListOf(Pair("0 - Создать заметку", { -> addNote() }))
-    commands.forEachIndexed { index, element -> commandsList.add(Pair("${index + 1} - ${element.name}", { -> openNote(element) })) }
-    commandsList.add(Pair("${commandsList.size} - Выход", { -> saveArchive() }))
-    return commandsList
+    private fun getCommands(commands: List<Note>): List<Pair<String, () -> Unit>> {
+        var commandsList: MutableList<Pair<String, () -> Unit>> =
+            mutableListOf(Pair("0 - Создать заметку", { -> addNote() }))
+        commands.forEachIndexed { index, element ->
+            commandsList.add(
+                Pair(
+                    "${index + 1} - ${element.name}",
+                    { -> openNote(element) })
+            )
+        }
+        commandsList.add(Pair("${commandsList.size} - Выход", { -> saveArchive() }))
+        return commandsList
+    }
 }

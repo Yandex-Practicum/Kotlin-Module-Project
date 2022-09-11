@@ -1,3 +1,4 @@
 fun main() {
-    openStartScreen()
+    val startScreen = StartScreen()
+    startScreen.open()
 }
