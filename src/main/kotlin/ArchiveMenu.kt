@@ -97,16 +97,17 @@ class ArchiveMenu {
             println("Введите номер заметки")
             var m = readln()
             if (isNumeric(m)) {
-                var n = m.toInt() - 1
-                if (n <= archiveList[currentArcivehNumber].noteList.size) {
-                    println("Выбрана заметка № ${n + 1} :")
-                    println(" ' ${archiveList[currentArcivehNumber].noteList[n]} ' ")
-                    println("Нажмите 0 для продолжения")
-                    var resumeProg = readln().toInt()
-                    if (resumeProg == 0) noteMenu(currentArcivehNumber) else println("Нажмите 0 для продолжения")
-                    choiceNote()
+                var n = m.toInt()
+                if (n <= archiveList[currentArcivehNumber].noteList.size && n>0) {
+                    println("Выбрана заметка № ${n} :")
+                    println(" ' ${archiveList[currentArcivehNumber].noteList[n-1]} ' ")
+
+                    println("Для продолжения нажмите любую клавишу")
+                    val resumeProg = readln()
+                    noteMenu(currentArcivehNumber)
+
                 } else {
-                    println("Номер заметки не должен превышать ${archiveList[currentArcivehNumber].noteList.size}")
+                    println("Номер заметки должен быть больше нуля и не должен превышать ${archiveList[currentArcivehNumber].noteList.size}")
                     choiceNote()
                 }
             } else {
@@ -132,13 +133,13 @@ class ArchiveMenu {
             println("Введите номер архива")
             var m = readln()
             if (isNumeric(m)) {
-                var n = m.toInt() - 1
-                if (n <= archiveList.size) {
-                    println("Выбран архив № ${n + 1}")
+                var n = m.toInt()
+                if (n <= archiveList.size && n>0) {
+                    println("Выбран архив № $n")
                     //-------------Выводим список заметок-------------------------------
-                    noteMenu(n)
+                    noteMenu(n-1)
                 } else {
-                    println("Номер архива не должен превышать ${archiveList.size}")
+                    println("Номер архива должен быть больше нуля и не превышать ${archiveList.size}")
                     choiceArchive()
                 }
             } else {
