@@ -5,7 +5,7 @@ class ArchiveMakeScreen {
         val repository = RepositoryObject.repository
 
         println("======")
-        println("Введите название архива:")
+        print("Введите название архива: ")
         val name = utils.readString()
         repository.add(ArchiveEntity(name))
     }

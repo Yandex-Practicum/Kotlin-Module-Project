@@ -44,7 +44,7 @@ class Utils {
         while (true) {
             val input = input.nextLine()
             if (input == "") {
-                println("Ввод не должен быть пустым, повторите ввод: ")
+                print("Ввод не должен быть пустым, повторите ввод: ")
                 continue
             }
             return input
