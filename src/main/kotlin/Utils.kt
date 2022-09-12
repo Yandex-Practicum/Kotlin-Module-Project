@@ -5,30 +5,35 @@ class Utils {
         val input = Scanner(System.`in`)
     }
 
-    fun<T: BaseEntity> showMenu(entities: MutableList<T>) {
-        if (entities.first() is ArchiveEntity) {
+    fun<T: BaseEntity> showMenu(entities: MutableList<T>, archiveName: String? = null) {
+        println("======")
+        if (archiveName == null) {
             println("Список архивов:")
-            println("0. Создать архив:")
+            println("0. Создать архив")
+        } else {
+            println("Список заметок архива $archiveName:")
+            println("0. Создать заметку")
         }
-        if (entities.first() is NoteEntity) {
-            println("Список заметок:")
-            println("0. Создать заметку:")
-        }
-        entities.forEachIndexed { index, entity -> println("${index + 1}. ${entity.name}") }
+
         val lastIndex = entities.size
+
+        if(lastIndex != 0) {
+            entities.forEachIndexed { index, entity -> println("${index + 1}. ${entity.name}") }
+        }
+
         println("${lastIndex + 1}. Выход")
-        println("Введите пункт меню: ")
+        print("Введите пункт меню: ")
     }
 
     fun readNumber(max: Int): Int {
         while (true) {
             val input = validateInput(input.nextLine())
             if (input == -1) {
-                println("Неверный ввод, введите целое число: ")
+                print("Неверный ввод, введите целое число от 0 до ${max + 1}: ")
                 continue
             }
-            if (input > max) {
-                println("Число должно быть от 0 до $max. Повторите ввод: ")
+            if (input > max + 1) {
+                print("Число должно быть от 0 до ${max + 1}. Повторите ввод: ")
                 continue
             }
             return input

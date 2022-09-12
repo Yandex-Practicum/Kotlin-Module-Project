@@ -6,9 +6,9 @@ object RepositoryObject {
             ArchiveEntity(
                 name = "Personal Tasks",
                 notes = mutableListOf(
-                    NoteEntity(name = "buy something"),
-                    NoteEntity(name = "sell something"),
-                    NoteEntity(name = "just have fun")
+                    NoteEntity("buy something", "details"),
+                    NoteEntity("sell something", "details"),
+                    NoteEntity("just have fun", "details")
                 )
             )
         )
@@ -16,9 +16,9 @@ object RepositoryObject {
             ArchiveEntity(
                 name = "Important Notes",
                 notes = mutableListOf(
-                    NoteEntity(name = "1234"),
-                    NoteEntity(name = "5678"),
-                    NoteEntity(name = "90")
+                    NoteEntity("1234", "details"),
+                    NoteEntity("5678", "details"),
+                    NoteEntity("90", "details")
                 )
             )
         )
@@ -26,9 +26,9 @@ object RepositoryObject {
             ArchiveEntity(
                 name = "PumPam",
                 notes = mutableListOf(
-                    NoteEntity(name = "something1"),
-                    NoteEntity(name = "something2"),
-                    NoteEntity(name = "fun")
+                    NoteEntity("something1", "details"),
+                    NoteEntity("something2", "details"),
+                    NoteEntity("fun", "details")
                 )
             )
         )

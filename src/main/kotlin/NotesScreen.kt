@@ -1,23 +1,24 @@
 class NotesScreen {
     private val utils = Utils()
 
-    fun run(position: Int) {
-        val archive = RepositoryObject.repository[position - 1]
+    fun run(archivesMenuIndex: Int) {
+        val archiveIndex = archivesMenuIndex - 1
+        val archiveName = RepositoryObject.repository[archiveIndex].name
+        val notes = RepositoryObject.repository[archiveIndex].notes
 
         while (true) {
-            val notes = archive.notes
             val numberOfNotes = notes.size
-            utils.showMenu(notes)
-            val input = utils.readNumber(numberOfNotes)
-            if (input == 0) {
-                //ArchiveMakeScreen().addArchive()
-            } else if (input == (numberOfNotes + 1)) {
+            utils.showMenu(entities = notes, archiveName = archiveName)
+            val menuIndex = utils.readNumber(numberOfNotes)
+            if (menuIndex == 0) {
+                NoteMakeScreen().addNote(archiveIndex)
+            } else if (menuIndex == (numberOfNotes + 1)) {
                 break
             } else {
+                val noteIndex = menuIndex - 1
                 println("======")
-                println("Имя заметки: ${notes[input].name}")
-                println("Текст: ${notes[input].text}")
-                println("======")
+                println("Имя заметки: ${notes[noteIndex].name}")
+                println("Текст: ${notes[noteIndex].text}")
             }
         }
     }
