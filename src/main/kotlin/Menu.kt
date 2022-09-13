@@ -1,16 +1,10 @@
-import java.util.Scanner
+class Menu {
 
-class ArchiveMenu {
-
-    var archiveList: MutableList<Archive> = ArrayList()
-    var archiveNum:Int = 0
-    var currentArcivehNumber:Int = 0
-
-    fun archiveMenu() {
+    fun archiveMenu(listA:ArchiveList) {
         print("Список архивов: ")
-        if(archiveList.isNotEmpty()) {
-            for (arch in archiveList) print("${arch.number} ")
-            } else println("пуст")
+        if(listA.archiveL.isNotEmpty()) {
+            for (arch in listA.archiveL) print("${arch.number} ")
+        } else println("пуст")
         println(" ")
         println("0. Создать новый архив")
         println("1. Выбрать архив")
@@ -21,22 +15,22 @@ class ArchiveMenu {
             var j = i.toInt()
             if(j in 0..2) archiveAction(j) else {
                 println("Введите число от 0 до 2 !")
-                archiveMenu()
+                archiveMenu(listA)
             }
         } else {
             println("Введите число !!!")
-            archiveMenu()
+            archiveMenu(listA)
         }
 
     }
 
-    fun noteMenu(archN:Int) {
-        currentArcivehNumber = archN
+    fun noteMenu(archN:Int,listA:ArchiveList) {
+        listA.currentArchivehNumber = archN
         print("Список заметок: ")
-        if (archiveList[archN].noteList.isNotEmpty()) {
-            for (note in archiveList[archN].noteList) print(
+        if (listA.archiveL[archN].noteList.isNotEmpty()) {
+            for (note in listA.archiveL[archN].noteList) print(
                 "${
-                    archiveList[archN].noteList.indexOf(
+                    listA.archiveL[archN].noteList.indexOf(
                         note
                     ) + 1
                 } "
@@ -51,46 +45,45 @@ class ArchiveMenu {
             var k = z.toInt()
             if(k in 0..2) noteAction(k) else {
                 println("Введите число от 0 до 2 !")
-                noteMenu(currentArcivehNumber)
+                noteMenu(listA.currentArchivehNumber,listA)
             }
         } else {
             println("Введите число !!!")
-            noteMenu(currentArcivehNumber)
+            noteMenu(listA.currentArchivehNumber)
+        }
+    }
+
+    fun noteAction(choice: Int){
+        when (choice) {
+            0 -> createNote()
+            1 -> choiceNote()
+            2 -> archiveMenu()
         }
     }
 
     fun archiveAction(choice: Int) {
-           when (choice) {
-                0 -> createArchive()
-                1 -> choiceArchive()
-                2 -> exitProg()
-            }
-
-    }
-
-
-    fun noteAction(choice: Int){
         when (choice) {
-                0 -> createNote()
-                1 -> choiceNote()
-                2 -> archiveMenu()
-                }
+            0 -> createArchive()
+            1 -> choiceArchive()
+            2 -> exitProg()
+        }
+
     }
 
-    fun createNote() {
+    fun createNote(listA: ArchiveList) {
         println("Введите текст заметки")
         val txtNote = readln()
-        archiveList[currentArcivehNumber].noteList.add(txtNote)
-        println("Ваша заметка создана и добавлена в архив № ${currentArcivehNumber+1}")
-        noteMenu(currentArcivehNumber)
+        listA.archiveL[listA.currentArchivehNumber].noteList.add(txtNote)
+        println("Ваша заметка создана и добавлена в архив № ${listA.currentArchivehNumber+1}")
+        noteMenu(listA.currentArchivehNumber)
     }
 
-    fun choiceNote() {
+    fun choiceNote(listA: ArchiveList) {
         print("Список заметок: ")
-        if (archiveList[currentArcivehNumber].noteList.isNotEmpty()) {
-            for (note in archiveList[currentArcivehNumber].noteList) print(
+        if (listA.archiveL[listA.currentArchivehNumber].noteList.isNotEmpty()) {
+            for (note in listA.archiveL[listA.currentArchivehNumber].noteList) print(
                 "${
-                    archiveList[currentArcivehNumber].noteList.indexOf(note)+1
+                    listA.archiveL[listA.currentArchivehNumber].noteList.indexOf(note)+1
                 } "
             )
             println(" ")
@@ -98,25 +91,25 @@ class ArchiveMenu {
             var m = readln()
             if (isNumeric(m)) {
                 var n = m.toInt()
-                if (n <= archiveList[currentArcivehNumber].noteList.size && n>0) {
+                if (n <= listA.archiveL[listA.currentArchivehNumber].noteList.size && n>0) {
                     println("Выбрана заметка № ${n} :")
-                    println(" ' ${archiveList[currentArcivehNumber].noteList[n-1]} ' ")
+                    println(" ' ${listA.archiveL[listA.currentArchivehNumber].noteList[n-1]} ' ")
 
                     println("Для продолжения нажмите любую клавишу")
                     val resumeProg = readln()
-                    noteMenu(currentArcivehNumber)
+                    noteMenu(listA.currentArchivehNumber,listA)
 
                 } else {
-                    println("Номер заметки должен быть больше нуля и не должен превышать ${archiveList[currentArcivehNumber].noteList.size}")
-                    choiceNote()
+                    println("Номер заметки должен быть больше нуля и не должен превышать ${listA.archiveL[listA.currentArchivehNumber].noteList.size}")
+                    choiceNote(listA)
                 }
             } else {
                 println("Введите число !!!")
-                choiceNote()
-                    }
+                choiceNote(listA)
+            }
         }else{
             println("список заметок пуст, выбор невозможен ")
-            noteMenu(currentArcivehNumber)
+            noteMenu(listA.currentArchivehNumber, listA)
 
         }
     }
@@ -125,44 +118,48 @@ class ArchiveMenu {
         println("Вы вышли из программы")
     }
 
-    fun choiceArchive() {
+    fun choiceArchive(listA: ArchiveList) {
         print("Список архивов: ")
-        if(archiveList.isNotEmpty()) {
-            for (arch in archiveList) print("${arch.number} ")
+        if(listA.archiveL.isNotEmpty()) {
+            for (arch in listA.archiveL) print("${arch.number} ")
             println(" ")
             println("Введите номер архива")
             var m = readln()
             if (isNumeric(m)) {
                 var n = m.toInt()
-                if (n <= archiveList.size && n>0) {
+                if (n <= listA.archiveL.size && n>0) {
                     println("Выбран архив № $n")
                     //-------------Выводим список заметок-------------------------------
-                    noteMenu(n-1)
+                    noteMenu(n-1,listA)
                 } else {
-                    println("Номер архива должен быть больше нуля и не превышать ${archiveList.size}")
-                    choiceArchive()
+                    println("Номер архива должен быть больше нуля и не превышать ${listA.archiveL.size}")
+                    choiceArchive(listA)
                 }
             } else {
                 println("Введите число !!!")
-                choiceArchive()
+                choiceArchive(listA)
             }
 
         } else {
             println("список архивов пуст, выбор невозможен ")
-            archiveMenu()
+            archiveMenu(listA)
         }
 
     }
 
-    fun createArchive() {
+    fun createArchive(listA: ArchiveList) {
         val nList: MutableList<String> = mutableListOf()
-        val newArch:Archive=Archive(++archiveNum, nList)
-        archiveList.add(newArch)
+        val newArch:Archive=Archive(++listA.archiveNum, nList)
+        listA.archiveL.add(newArch)
         println("Новый архив создан")
-        archiveMenu()
+        archiveMenu(listA)
     }
+
 
     fun isNumeric(toCheck: String): Boolean {
         return toCheck.all { char -> char.isDigit() }
     }
+
+
+
 }

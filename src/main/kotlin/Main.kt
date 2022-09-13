@@ -1,4 +1,5 @@
 fun main() {
-    val archMenu = ArchiveMenu()
-    archMenu.archiveMenu()
+    val archList = ArchiveList()
+    val aMenu=Menu()
+    aMenu.archiveMenu(archList)
 }
