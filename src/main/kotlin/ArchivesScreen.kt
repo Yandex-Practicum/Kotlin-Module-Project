@@ -2,7 +2,7 @@ class ArchivesScreen {
     private val utils = Utils()
 
     fun run() {
-        val archives = RepositoryObject.repository
+        val archives = RepositoryObject.getArchives()
 
         while (true) {
             val numberOfArchives = archives.size

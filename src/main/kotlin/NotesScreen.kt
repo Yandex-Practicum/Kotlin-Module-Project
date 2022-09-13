@@ -3,8 +3,11 @@ class NotesScreen {
 
     fun run(archivesMenuIndex: Int) {
         val archiveIndex = archivesMenuIndex - 1
-        val archiveName = RepositoryObject.repository[archiveIndex].name
-        val notes = RepositoryObject.repository[archiveIndex].notes
+        val archives = RepositoryObject.getArchives()
+        val chosenArchive = archives[archiveIndex]
+
+        val archiveName = chosenArchive.name
+        val notes = chosenArchive.notes
 
         while (true) {
             val numberOfNotes = notes.size

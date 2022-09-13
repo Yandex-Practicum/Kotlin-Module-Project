@@ -1,5 +1,13 @@
 object RepositoryObject {
-    val repository: MutableList<ArchiveEntity> = ArrayList()
+    private val repository: MutableList<ArchiveEntity> = ArrayList()
+
+    fun addArchive(archive: ArchiveEntity) {
+        repository.add(archive)
+    }
+
+    fun getArchives(): List<ArchiveEntity> {
+        return repository
+    }
 
     fun addMocks() {
         repository.add(
