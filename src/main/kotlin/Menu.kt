@@ -13,7 +13,7 @@ class Menu {
         var i = readln()
         if (isNumeric(i)) {
             var j = i.toInt()
-            if(j in 0..2) archiveAction(j) else {
+            if(j in 0..2) archiveAction(j,listA) else {
                 println("Введите число от 0 до 2 !")
                 archiveMenu(listA)
             }
@@ -43,28 +43,28 @@ class Menu {
         var z = readln()
         if (isNumeric(z)) {
             var k = z.toInt()
-            if(k in 0..2) noteAction(k) else {
+            if(k in 0..2) noteAction(k, listA) else {
                 println("Введите число от 0 до 2 !")
                 noteMenu(listA.currentArchivehNumber,listA)
             }
         } else {
             println("Введите число !!!")
-            noteMenu(listA.currentArchivehNumber)
+            noteMenu(listA.currentArchivehNumber,listA)
         }
     }
 
-    fun noteAction(choice: Int){
+    fun noteAction(choice: Int,listA: ArchiveList){
         when (choice) {
-            0 -> createNote()
-            1 -> choiceNote()
-            2 -> archiveMenu()
+            0 -> createNote(listA)
+            1 -> choiceNote(listA)
+            2 -> archiveMenu(listA)
         }
     }
 
-    fun archiveAction(choice: Int) {
+    fun archiveAction(choice: Int, listA: ArchiveList) {
         when (choice) {
-            0 -> createArchive()
-            1 -> choiceArchive()
+            0 -> createArchive(listA)
+            1 -> choiceArchive(listA)
             2 -> exitProg()
         }
 
@@ -75,7 +75,7 @@ class Menu {
         val txtNote = readln()
         listA.archiveL[listA.currentArchivehNumber].noteList.add(txtNote)
         println("Ваша заметка создана и добавлена в архив № ${listA.currentArchivehNumber+1}")
-        noteMenu(listA.currentArchivehNumber)
+        noteMenu(listA.currentArchivehNumber, listA)
     }
 
     fun choiceNote(listA: ArchiveList) {
