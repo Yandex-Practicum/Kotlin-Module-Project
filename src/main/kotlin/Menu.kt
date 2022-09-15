@@ -13,8 +13,18 @@ class Menu {
         " ",
         "0. Создать новую заметку",
         "1. Выбрать заметку",
-        "2. к списку архивов"
+        "2. К списку архивов"
     )
+
+    fun universalMenu(lstMenu:List<String>,listA:ArchiveList){
+        print(lstMenu[0])
+        listPrint(lstMenu,listA)
+        for(i in 2..lstMenu.size-1)
+            println(lstMenu[i])
+
+        inputAndCheck(lstMenu,listA,::universalAction)
+    }
+
     fun listPrint(lstMenu:List<String>,listA:ArchiveList){
         when (lstMenu[0]) {
             "Список архивов: " -> {
@@ -37,14 +47,6 @@ class Menu {
 
     }
 
-    fun universalMenu(lstMenu:List<String>,listA:ArchiveList){
-        print(lstMenu[0])
-        listPrint(lstMenu,listA)
-        for(i in 2..lstMenu.size-1)
-        println(lstMenu[i])
-
-        inputAndCheck(lstMenu,listA,::archiveAction)
-    }
 
     // Меню заметок
     fun noteMenu(lstMenu:List<String>,listA:ArchiveList) {
@@ -80,7 +82,16 @@ class Menu {
         when (choice) {
             0 -> createNote(lstMenu,listA)
             1 -> choiceNote(lstMenu,listA)
-            2 -> universalMenu(lstMenu,listA)
+            2 -> universalMenu(arhiveMenuList,listA)
+        }
+    }
+    fun universalAction(lstMenu:List<String>, choice: Int, listA: ArchiveList){
+        var isNote = false
+        if(lstMenu[0]=="Список заметок: ") isNote=true
+        when (choice) {
+            0 -> {if (isNote) createNote(noteMenuList,listA) else createArchive(listA)}
+            1 -> {if (isNote) choiceNote(noteMenuList,listA) else choiceArchive(arhiveMenuList,listA)}
+            2 -> {if (isNote) universalMenu(arhiveMenuList,listA) else exitProg()}
         }
     }
 
@@ -100,7 +111,7 @@ class Menu {
 
     fun archiveAction(lstMenu:List<String>,choice: Int, listA: ArchiveList) {
         when (choice) {
-            0 -> createArchive(lstMenu,listA)
+            0 -> createArchive(listA)
             1 -> choiceArchive(lstMenu,listA)
             2 -> exitProg()
         }
@@ -112,7 +123,7 @@ class Menu {
         val txtNote = readln()
         listA.archiveL[listA.currentArchivehNumber].noteList.add(txtNote)
         println("Ваша заметка создана и добавлена в архив № ${listA.currentArchivehNumber+1}")
-        noteMenu(lstMenu,listA)
+        universalMenu(noteMenuList,listA)
     }
 
     fun choiceNote(lstMenu:List<String>,listA: ArchiveList) {
@@ -134,7 +145,7 @@ class Menu {
 
                     println("Для продолжения нажмите любую клавишу")
                     val resumeProg = readln()
-                    noteMenu(lstMenu,listA)
+                    universalMenu(noteMenuList,listA)
 
                 } else {
                     println("Номер заметки должен быть больше нуля и не должен превышать ${listA.archiveL[listA.currentArchivehNumber].noteList.size}")
@@ -146,7 +157,7 @@ class Menu {
             }
         }else{
             println("список заметок пуст, выбор невозможен ")
-            noteMenu(lstMenu,listA)
+            universalMenu(noteMenuList,listA)
 
         }
     }
@@ -168,7 +179,8 @@ class Menu {
                     println("Выбран архив № $n")
                     //-------------Выводим список заметок-------------------------------
                     listA.currentArchivehNumber=n-1
-                    noteMenu(lstMenu,listA)
+                    //noteMenu(lstMenu,listA)
+                    universalMenu(noteMenuList, listA)
                 } else {
                     println("Номер архива должен быть больше нуля и не превышать ${listA.archiveL.size}")
                     choiceArchive(lstMenu,listA)
@@ -180,17 +192,17 @@ class Menu {
 
         } else {
             println("список архивов пуст, выбор невозможен ")
-            universalMenu(lstMenu,listA)
+            universalMenu(arhiveMenuList,listA)
         }
 
     }
 
-    fun createArchive(lstMenu:List<String>,listA: ArchiveList) {
+    fun createArchive(listA: ArchiveList) {
         val nList: MutableList<String> = mutableListOf()
         val newArch:Archive=Archive(++listA.archiveNum, nList)
         listA.archiveL.add(newArch)
         println("Новый архив создан")
-        universalMenu(lstMenu,listA)
+        universalMenu(arhiveMenuList,listA)
     }
 
 
