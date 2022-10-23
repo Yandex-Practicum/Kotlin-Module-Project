@@ -1,5 +1,16 @@
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    mainLoop@while (true) { // App life cycle
+        when(NoteApp.currentState) {
+            State.BEGIN -> NoteApp.onBegin()
+            State.ARCHIVE_CREATE -> NoteApp.onArchiveCreate()
+            State.ARCHIVE_CHOOSE -> NoteApp.onArchiveChoose()
+            State.NOTE_CREATE -> NoteApp.onNoteCreate()
+            State.NOTE_CHOOSE -> NoteApp.onNoteChoose()
+            State.VIEW_NOTE -> NoteApp.onViewNote()
+            State.EXIT -> {
+                NoteApp.onExit()
+                break@mainLoop
+            }
+        }
+    }
 }
