@@ -1,5 +1,6 @@
+import navigation.NavController
+import navigation.Screens
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    NavController.getInstance().goTo(Screens.ArchivesList)
 }
