@@ -10,5 +10,9 @@ fun main() {
             CREATE_ARCHIVE + "\n" +
             EXIT)
 
+    println(CHOOSE_ARCHIVE + "\n" +
+            CREATE_ARCHIVE + "\n" +
+            EXIT)
+
     println(scanner.nextLine())
 }
