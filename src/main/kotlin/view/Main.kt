@@ -34,6 +34,7 @@ fun main() {
             "1" -> {
                 stack.add(allArchivesScreen)
                 allArchivesScreen.show()
+
             }
 
             "2" -> {

@@ -1,6 +1,7 @@
 package presenter
 
 import model.Archive
+import kotlin.Exception
 
 
 class Presenter {
@@ -12,10 +13,13 @@ class Presenter {
        archives.add(Archive(name))
     }
 
-    fun showAllArchives(){
-        archives.forEachIndexed { index, archive ->
-            println("$index ${archive.name}")
+    fun chooseArchive(num : Int):Archive?{
+        return try {
+            archives[num-1]
+        }catch (e: Exception){
+            null
         }
     }
+
 
 }
