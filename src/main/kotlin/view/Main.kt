@@ -13,11 +13,11 @@ fun main() {
     val presenter = Presenter()
     val stack = ArrayDeque<Screen>()
 
-    val mainScreen = MainScreen(presenter)
+//    val mainScreen = MainScreen(presenter)
     val allArchivesScreen = AllArchiveScreen(presenter)
     val archiveCreationScreen = ArchiveCreationScreen(presenter)
 
-    stack.addFirst(mainScreen)
+    stack.addFirst(allArchivesScreen)
 
     while (stack.isNotEmpty()) {
         if (stack.size > 1) {
@@ -37,7 +37,7 @@ fun main() {
 
             }
 
-            "2" -> {
+            "+" -> {
                 stack.add(archiveCreationScreen)
                 archiveCreationScreen.show()
             }
