@@ -5,7 +5,7 @@ import presenter.Presenter
 import java.lang.NumberFormatException
 import java.util.*
 
-class NoteListScreen(private val archive: Archive, presenter: Presenter, val function: () -> (Unit)) :Screen(presenter) {
+class NoteListScreen(private val archive: Archive, presenter: Presenter,  function: () -> (Unit)) :Screen(presenter,function) {
     private val scanner = Scanner(System.`in`)
     override fun show() {
         println("3______${archive.name}_______3")
@@ -22,7 +22,7 @@ class NoteListScreen(private val archive: Archive, presenter: Presenter, val fun
         while (true){
             val command = scanner.nextLine()
             when(command){
-                "0"->function.invoke()
+                "0"->   onBackPressed.invoke()
                 "+"-> {
                     NoteCreationScreen(archive, presenter,::show).show()
                 }

@@ -5,7 +5,7 @@ import model.Note
 import presenter.Presenter
 import java.util.*
 
-class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val function: () -> (Unit)) :Screen(presenter) {
+class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val function: () -> (Unit)) :Screen(presenter,function) {
     private val scanner = Scanner(System.`in`)
 
     override fun show() {
@@ -16,6 +16,6 @@ class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val
         val text = scanner.nextLine()
         archive.notes.add(Note(title = title, text = text))
         println("_________заметка $title создана__________")
-        function.invoke()
+        onBackPressed.invoke()
     }
 }

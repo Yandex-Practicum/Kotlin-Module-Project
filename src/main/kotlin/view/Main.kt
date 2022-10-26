@@ -2,14 +2,17 @@ import presenter.Presenter
 import view.AllArchiveScreen
 
 import java.util.*
-
-
+import kotlin.system.exitProcess
 
 
 fun main() {
     val scanner = Scanner(System.`in`)
-    val allArchivesScreen = AllArchiveScreen(Presenter)
+   AllArchiveScreen(Presenter, ::exit).show()
 
-        allArchivesScreen.show()
+
 
 }
+
+ fun exit() {
+     exitProcess(0)
+ }

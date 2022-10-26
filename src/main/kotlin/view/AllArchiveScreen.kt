@@ -3,7 +3,7 @@ package view
 import presenter.Presenter
 import java.util.*
 
-class AllArchiveScreen(presenter: Presenter) : Screen(presenter) {
+class AllArchiveScreen(presenter: Presenter,  function: () -> (Unit)) : Screen(presenter, function ) {
     private val scanner = Scanner(System.`in`)
     override fun show() {
     println("1______AllArchiveScreen_______1")
@@ -23,12 +23,11 @@ class AllArchiveScreen(presenter: Presenter) : Screen(presenter) {
                         when (command) {
                             "0" -> {
                                 println("Bye Bye...")
-                                break
+                                onBackPressed.invoke()
                             }
                             "+" -> {
                                 ArchiveCreationScreen(presenter,::show).show()
                             }
-
                             else -> {
                                 try {
                                     val archive = presenter.chooseArchive(command.toInt())
