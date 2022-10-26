@@ -34,8 +34,10 @@ class AllArchiveScreen(presenter: Presenter, function: () -> (Unit)) : Screen(pr
                         NoteListScreen(archive, presenter, ::show).show()
                     } catch (e: NumberFormatException) {
                         println(NOT_CORRECT_INPUT)
+                        presenter.showAllArchives()
                     } catch (e: IndexOutOfBoundsException) {
                         println(THERE_IS_NO_VALUE)
+                        presenter.showAllArchives()
                     }
                 }
             }

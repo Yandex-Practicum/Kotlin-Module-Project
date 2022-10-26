@@ -30,8 +30,10 @@ class NoteListScreen(private val archive: Archive, presenter: Presenter, functio
                         NoteScreen(note, presenter, ::show).show()
                     } catch (e: NumberFormatException) {
                         println(NOT_CORRECT_INPUT)
+                        presenter.showNotes(archive)
                     } catch (e: IndexOutOfBoundsException) {
                         println(THERE_IS_NO_VALUE)
+                        presenter.showNotes(archive)
                     }
                 }
             }
