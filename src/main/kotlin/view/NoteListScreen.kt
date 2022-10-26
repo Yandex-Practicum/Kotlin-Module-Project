@@ -6,11 +6,11 @@ import java.lang.NumberFormatException
 import java.util.*
 
 class NoteListScreen(private val archive: Archive, presenter: Presenter,  function: () -> (Unit)) :Screen(presenter,function) {
-    private val scanner = Scanner(System.`in`)
     override fun show() {
-        println("Screen #3______${archive.name}_______")
+        println("Screen #3______архив: ${archive.name}_______")
         println("0 - НАЗАД")
         println("+ - добавить заметку")
+        println()
         if (archive.notes.isEmpty()){
             println("пока ни одной заметки нет")
         }else {
@@ -20,8 +20,7 @@ class NoteListScreen(private val archive: Archive, presenter: Presenter,  functi
         }
         println("____________________________________")
         while (true){
-            val command = scanner.nextLine()
-            when(command){
+            when(val command = scanner.nextLine()){
                 "0"->   onBackPressed.invoke()
                 "+"-> {
                     NoteCreationScreen(archive, presenter,::show).show()

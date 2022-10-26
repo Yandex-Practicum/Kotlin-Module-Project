@@ -4,12 +4,11 @@ import presenter.Presenter
 import java.util.*
 
 class AllArchiveScreen(presenter: Presenter,  function: () -> (Unit)) : Screen(presenter, function ) {
-    private val scanner = Scanner(System.`in`)
     override fun show() {
-    println("Screen #1______AllArchiveScreen_______")
+    println("Screen #1______основное меню_______")
         println("+ - создать архив\n" +
                 "0 - выход\n")
-        println("choose archive: ")
+        println("выберите архив по номеру: ")
         if (presenter.archives.size>0){
             presenter.archives.forEachIndexed { index, archive ->
                 println("${index + 1} - ${archive.name}")
@@ -19,10 +18,9 @@ class AllArchiveScreen(presenter: Presenter,  function: () -> (Unit)) : Screen(p
         }
         println("_______________")
                     while (true) {
-                        val command = scanner.nextLine()
-                        when (command) {
+                        when (val command = scanner.nextLine()) {
                             "0" -> {
-                                println("Bye Bye...")
+                                println("Пока...")
                                 onBackPressed.invoke()
                             }
                             "+" -> {

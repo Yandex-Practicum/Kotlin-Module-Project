@@ -5,19 +5,18 @@ import presenter.Presenter
 import java.util.*
 
 class NoteScreen(private val note: Note, presenter: Presenter, function: () -> (Unit)) :Screen(presenter, function) {
-    private val scanner = Scanner(System.`in`)
     override fun show() {
-        println("Screen #5_________${note.title}_________")
-        println("0 - НАЗАД")
-        println()
+        println("Screen #5_________заметка: ${note.title}_________")
         println(note.text)
         println("____________________")
+        println()
+        println("0 - НАЗАД")
+
         while (true) {
-            val command = scanner.nextLine()
-            when (command) {
+            when (scanner.nextLine()) {
                 "0" -> onBackPressed.invoke()
                 else -> {
-                    println("nope")
+                    println("не корректный ввод")
                 }
             }
         }
