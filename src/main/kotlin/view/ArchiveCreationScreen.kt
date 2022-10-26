@@ -2,7 +2,7 @@ package view
 
 import presenter.Presenter
 
-const val SCREEN_TITLE = "Screen #2______создание нового архива______"
+const val SCREEN_TITLE = "Screen #2______создание нового архива"
 private const val ENTER_NAME = "введите название нового архива"
 
 class ArchiveCreationScreen(presenter: Presenter,  function: () -> (Unit)) : Screen(presenter, function ) {

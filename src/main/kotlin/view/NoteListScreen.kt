@@ -3,26 +3,23 @@ package view
 import model.Archive
 import presenter.Presenter
 import java.lang.NumberFormatException
-import java.util.*
+
+
+const val BACK = "$EXIT_COMMAND - НАЗАД"
+private const val ADD = "$ADD_COMMAND - добавить заметку"
 
 class NoteListScreen(private val archive: Archive, presenter: Presenter,  function: () -> (Unit)) :Screen(presenter,function) {
     override fun show() {
-        println("Screen #3______архив: ${archive.name}_______")
-        println("0 - НАЗАД")
-        println("+ - добавить заметку")
+        println("Screen #3______архив: ${archive.name}")
+        println(BACK)
+        println(ADD)
         println()
-        if (archive.notes.isEmpty()){
-            println("пока ни одной заметки нет")
-        }else {
-            archive.notes.forEachIndexed { index, note ->
-                println("${index+1} - ${note.title}")
-            }
-        }
+        presenter.showNotes(archive)
         println("____________________________________")
         while (true){
             when(val command = scanner.nextLine()){
-                "0"->   onBackPressed.invoke()
-                "+"-> {
+                EXIT_COMMAND-> onBackPressed.invoke()
+                ADD_COMMAND-> {
                     NoteCreationScreen(archive, presenter,::show).show()
                 }
                 else->{
@@ -30,10 +27,10 @@ class NoteListScreen(private val archive: Archive, presenter: Presenter,  functi
                         val note = archive.notes[command.toInt()-1]
                         NoteScreen(note, presenter,::show).show()
                     }catch (e: NumberFormatException){
-                        println("некорректное значение")
+                        println(NOT_CORRECT_INPUT)
                     }
                     catch (e :IndexOutOfBoundsException){
-                        println("нет такого значения")
+                        println(THERE_IS_NO_VALUE)
                     }
                 }
             }

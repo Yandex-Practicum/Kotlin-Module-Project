@@ -3,12 +3,11 @@ package view
 import model.Archive
 import model.Note
 import presenter.Presenter
-import java.util.*
 
 class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val function: () -> (Unit)) :Screen(presenter,function) {
 
     override fun show() {
-        println("Screen #4_______создание заметки для архива: ${archive.name}_____")
+        println("Screen #4_______создание заметки для архива: ${archive.name}")
         println("введите название заметки:")
         val title = scanner.nextLine()
         println("введите текст заметки:")

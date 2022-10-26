@@ -2,9 +2,8 @@ package presenter
 
 import model.Archive
 
-import kotlin.Exception
 
-private const val NO_ARCHIVES = "архивов пока нет"
+private const val NOTHING = "ничего нет"
 object Presenter {
     private val archives = mutableListOf<Archive>()
 
@@ -14,9 +13,18 @@ fun showAllArchives() {
             println("${index + 1} - ${archive.name}")
         }
     } else {
-        println(NO_ARCHIVES)
+        println(NOTHING)
     }
 }
+    fun showNotes(archive: Archive){
+        if (archive.notes.isEmpty()){
+            println(NOTHING)
+        }else {
+            archive.notes.forEachIndexed { index, note ->
+                println("${index+1} - ${note.title}")
+            }
+        }
+    }
     fun addNewArchive(name: String) {
         archives.add(Archive(name))
         println("архив $name создан")
