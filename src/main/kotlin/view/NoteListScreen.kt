@@ -32,7 +32,7 @@ class NoteListScreen(private val archive: Archive, presenter: Presenter) :Screen
                 else->{
                     try{
                         val note = archive.notes[command.toInt()-1]
-                        println("SHOW NOTE SCREEN")
+                        NoteScreen(note, presenter).show()
                     }catch (e: NumberFormatException){
                         println("некорректное значение")
                     }
