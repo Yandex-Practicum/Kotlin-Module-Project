@@ -18,6 +18,10 @@ class Presenter {
        archives.add(Archive(name))
     }
 
+    fun addNewNote(name: String){
+        archives.add(Archive(name))
+    }
+
     fun chooseArchive(num : Int):Archive?{
         return try {
             archives[num-1]
