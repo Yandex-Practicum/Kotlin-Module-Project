@@ -7,8 +7,7 @@ class AllArchiveScreen(presenter: Presenter) : Screen(presenter) {
     val scanner = Scanner(System.`in`)
 //    val archiveCreationScreen = ArchiveCreationScreen(presenter)
     override fun show() {
-        println("_______________")
-        println("FIRST SCREEN")
+    println("_______AllArchiveScreen________")
         println("+ - создать архив\n" +
                 "0 - выход\n")
         println("choose archive: ")
@@ -22,7 +21,7 @@ class AllArchiveScreen(presenter: Presenter) : Screen(presenter) {
         println("_______________")
                     while (true) {
                         val command = scanner.nextLine()
-                        println("1  $command")
+//                        println("1  $command")
 
                         when (command) {
                             "0" -> {
@@ -36,11 +35,12 @@ class AllArchiveScreen(presenter: Presenter) : Screen(presenter) {
 
                             else -> {
                                 try {
-                                    println(2)
+//                                    println(2)
                                     val archive = presenter.chooseArchive(command.toInt())
                                     if (archive != null) {
                                         println("U chose  ${archive.name}")
                                         //next screen
+                                        NoteListScreen(archive, presenter).show()
                                     } else {
                                         println("нет такого значения")
 //                                        scanner.next()
