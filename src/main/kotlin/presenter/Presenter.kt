@@ -17,8 +17,9 @@ fun showAllArchives() {
         println(NO_ARCHIVES)
     }
 }
-    fun addNewArchive(name: String){
-       archives.add(Archive(name))
+    fun addNewArchive(name: String) {
+        archives.add(Archive(name))
+        println("архив $name создан")
     }
 
     fun chooseArchive(num : Int):Archive{
