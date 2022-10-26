@@ -7,7 +7,7 @@ import java.util.*
 class NoteScreen(private val note: Note, presenter: Presenter, function: () -> (Unit)) :Screen(presenter, function) {
     private val scanner = Scanner(System.`in`)
     override fun show() {
-        println("5_________${note.title}_________5")
+        println("Screen #5_________${note.title}_________")
         println("0 - НАЗАД")
         println()
         println(note.text)

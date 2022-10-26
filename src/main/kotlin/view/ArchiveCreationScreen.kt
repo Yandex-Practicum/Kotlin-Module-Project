@@ -7,7 +7,7 @@ class ArchiveCreationScreen(presenter: Presenter,  function: () -> (Unit)) : Scr
     private val scanner = Scanner(System.`in`)
 
     override fun show() {
-        println("2______ArchiveCreationScreen______2")
+        println("Screen #2______ArchiveCreationScreen______")
         println("CREATE ARCHIVE")
         println("enter name")
         val name = scanner.nextLine()

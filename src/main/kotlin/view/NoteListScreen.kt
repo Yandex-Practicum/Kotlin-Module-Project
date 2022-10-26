@@ -8,7 +8,7 @@ import java.util.*
 class NoteListScreen(private val archive: Archive, presenter: Presenter,  function: () -> (Unit)) :Screen(presenter,function) {
     private val scanner = Scanner(System.`in`)
     override fun show() {
-        println("3______${archive.name}_______3")
+        println("Screen #3______${archive.name}_______")
         println("0 - НАЗАД")
         println("+ - добавить заметку")
         if (archive.notes.isEmpty()){

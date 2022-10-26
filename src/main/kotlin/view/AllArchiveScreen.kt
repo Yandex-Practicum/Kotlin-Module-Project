@@ -6,7 +6,7 @@ import java.util.*
 class AllArchiveScreen(presenter: Presenter,  function: () -> (Unit)) : Screen(presenter, function ) {
     private val scanner = Scanner(System.`in`)
     override fun show() {
-    println("1______AllArchiveScreen_______1")
+    println("Screen #1______AllArchiveScreen_______")
         println("+ - создать архив\n" +
                 "0 - выход\n")
         println("choose archive: ")

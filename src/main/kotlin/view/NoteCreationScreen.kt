@@ -9,7 +9,7 @@ class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val
     private val scanner = Scanner(System.`in`)
 
     override fun show() {
-        println("4_______создание заметки для архива ${archive.name}_____4")
+        println("Screen #4_______создание заметки для архива ${archive.name}_____")
         println("введите название заметки:")
         val title = scanner.nextLine()
         println("введите текст заметки:")
