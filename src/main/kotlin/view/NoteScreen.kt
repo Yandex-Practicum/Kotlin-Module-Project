@@ -5,7 +5,7 @@ import presenter.Presenter
 
 private const val BACK_INFO = "для возврата в предыдущее меню - введите: 0"
 
-class NoteScreen(private val note: Note, presenter: Presenter, function: () -> (Unit)) :Screen(presenter, function) {
+class NoteScreen(private val note: Note, presenter: Presenter, function: () -> (Unit)) : Screen(presenter, function) {
     override fun show() {
         println("Screen #5_________заметка: ${note.title}")
         println(note.text)

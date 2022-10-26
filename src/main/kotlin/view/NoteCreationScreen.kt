@@ -1,19 +1,22 @@
 package view
 
 import model.Archive
-import model.Note
+
 import presenter.Presenter
 
-class NoteCreationScreen(private val archive: Archive, presenter: Presenter, val function: () -> (Unit)) :Screen(presenter,function) {
+private const val ENTER_TITLE = "введите название заметки:"
+private const val ENTER_TEXT = "введите текст заметки:"
+
+class NoteCreationScreen(private val archive: Archive, presenter: Presenter, function: () -> (Unit)) :
+    Screen(presenter, function) {
 
     override fun show() {
         println("Screen #4_______создание заметки для архива: ${archive.name}")
-        println("введите название заметки:")
+        println(ENTER_TITLE)
         val title = scanner.nextLine()
-        println("введите текст заметки:")
+        println(ENTER_TEXT)
         val text = scanner.nextLine()
-        archive.notes.add(Note(title = title, text = text))
-        println("_________заметка $title создана__________")
+        presenter.addNote(archive, title, text)
         onBackPressed.invoke()
     }
 }

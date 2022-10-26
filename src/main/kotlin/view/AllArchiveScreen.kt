@@ -3,13 +3,13 @@ package view
 import presenter.Presenter
 
 private const val SCREEN_1_TITLE = "Screen #1______основное меню"
- const val ADD_COMMAND = "+"
- const val EXIT_COMMAND = "0"
+const val ADD_COMMAND = "+"
+const val EXIT_COMMAND = "0"
 private const val EXIT = "$EXIT_COMMAND - выход"
 private const val ADD_ARCHIVE = "$ADD_COMMAND - создать архив"
 private const val CHOOSE_ARCHIVE = "выберите архив по номеру:"
- const val NOT_CORRECT_INPUT = "некорректное значение"
- const val THERE_IS_NO_VALUE = "нет такого значения"
+const val NOT_CORRECT_INPUT = "некорректное значение"
+const val THERE_IS_NO_VALUE = "нет такого значения"
 
 
 class AllArchiveScreen(presenter: Presenter, function: () -> (Unit)) : Screen(presenter, function) {
