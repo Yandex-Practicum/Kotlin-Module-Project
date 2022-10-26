@@ -7,7 +7,19 @@ import model.Note
 private const val NOTHING = "ничего нет"
 
 object Presenter {
-    private val archives = mutableListOf<Archive>()
+    private val arch1 = Archive("путешествия").apply {
+        notes.add(Note("Бали","На бали можно серфить и там жарко"))
+        notes.add(Note("Москва","в Москве холодно"))
+    }
+    private val arch2 = Archive("программирование").apply {
+        notes.add(Note("Котлин", "Котлин классный"))
+        notes.add(Note("Ковариантность","Это мрак"))
+    }
+
+    private val archives = mutableListOf(
+        arch1,
+        arch2
+    )
 
     fun showAllArchives() {
         if (archives.size > 0) {
@@ -41,5 +53,12 @@ object Presenter {
     fun addNote(archive: Archive, title: String, text: String) {
         archive.notes.add(Note(title, text))
         println("заметка $title создана")
+    }
+
+    fun showNote(note: Note){
+        println()
+        println(note.text)
+        println("____________________")
+        println()
     }
 }

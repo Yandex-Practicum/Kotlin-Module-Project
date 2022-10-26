@@ -8,9 +8,7 @@ private const val BACK_INFO = "для возврата в предыдущее �
 class NoteScreen(private val note: Note, presenter: Presenter, function: () -> (Unit)) : Screen(presenter, function) {
     override fun show() {
         println("Screen #5_________заметка: ${note.title}")
-        println(note.text)
-        println("____________________")
-        println()
+        presenter.showNote(note)
         println(BACK)
 
         while (true) {
