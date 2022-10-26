@@ -6,21 +6,7 @@ import model.Note
 
 private const val NOTHING = "ничего нет"
 
-object Presenter {
-    private val arch1 = Archive("путешествия").apply {
-        notes.add(Note("Бали","На бали можно серфить и там жарко"))
-        notes.add(Note("Москва","в Москве холодно"))
-    }
-    private val arch2 = Archive("программирование").apply {
-        notes.add(Note("Котлин", "Котлин классный"))
-        notes.add(Note("Ковариантность","Это мрак"))
-    }
-
-    private val archives = mutableListOf(
-        arch1,
-        arch2
-    )
-
+class Presenter(private val archives: MutableList<Archive>) {
     fun showAllArchives() {
         if (archives.size > 0) {
             archives.forEachIndexed { index, archive ->
