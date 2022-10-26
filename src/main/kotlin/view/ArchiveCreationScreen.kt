@@ -4,7 +4,7 @@ import presenter.Presenter
 import java.util.*
 
 class ArchiveCreationScreen(presenter: Presenter) : Screen(presenter) {
-    val scanner = Scanner(System.`in`)
+    private val scanner = Scanner(System.`in`)
 
     override fun show() {
         println("______________")
@@ -14,5 +14,6 @@ class ArchiveCreationScreen(presenter: Presenter) : Screen(presenter) {
         presenter.addNewArchive(name)
         println("archive $name created")
         println("___________________")
+        presenter.allArchivesScreen.show()
     }
 }
