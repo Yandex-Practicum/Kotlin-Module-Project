@@ -7,6 +7,10 @@ object ScreenStack {
 
     /** Добавляет [item] в Стек, если его в нем нет и вызывает соответствующий "Экран" */
     fun push(item: Screen) {
+        if (stack.isEmpty() && item !is ListOfArchives) {
+            println("Initialization error.")
+            return
+        }
         if (stack.contains(item)) return
         stack.add(item)
         item.onScreen()

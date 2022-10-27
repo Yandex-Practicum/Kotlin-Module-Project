@@ -1,3 +1,3 @@
 fun main() {
-    ScreenStack.push(ListOfArchives())
+    ListOfArchives.run()
 }

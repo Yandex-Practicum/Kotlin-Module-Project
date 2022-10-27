@@ -1,7 +1,7 @@
 /**
  * Содержит список архивов
  */
-class ListOfArchives : Screen {
+class ListOfArchives private constructor() : Screen {
     private val title = "Список архивов"
     override val commandName: String = title
     val listOfArchives = mutableListOf<Archive>()
@@ -10,5 +10,9 @@ class ListOfArchives : Screen {
 
     override fun onScreen() {
         menu.run()
+    }
+
+    companion object {
+        fun run() = ScreenStack.push(ListOfArchives())
     }
 }
