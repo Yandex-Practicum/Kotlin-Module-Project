@@ -1,5 +1,11 @@
+import java.util.*
+import kotlin.collections.HashMap
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+
+    println("Привет. Начнем работу")
+
+    val archiveCollector: ArchiveCollector = ArchiveCollector("default")
+    archiveCollector.createMenu()
+
 }
