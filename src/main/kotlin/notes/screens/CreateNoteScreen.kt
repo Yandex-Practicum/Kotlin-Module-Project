@@ -30,8 +30,8 @@ class CreateNoteScreen(private val archiveId: Int) : BaseScreen() {
             }
             noteTitle = it
             println(ASK_FOR_DESCRIPTION_TEXT)
-            waitForInput {
-                onTextInput(input)
+            waitForInput { newInput ->
+                onTextInput(newInput)
             }
         }
     }
