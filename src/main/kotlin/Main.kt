@@ -1,5 +1,9 @@
+import data.Database
+import screens.ArchivesListScreen
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    println("Привет!")
+    val database = Database()
+    val archivesListScreen = ArchivesListScreen(database)
+    archivesListScreen.start()
 }
