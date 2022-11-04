@@ -1,4 +1,4 @@
-enum class State {
+enum class State  {
     CHOOSE_ARCHIVE,
     ADD_ARCHIVE,
     OPEN_ARCHIVE,

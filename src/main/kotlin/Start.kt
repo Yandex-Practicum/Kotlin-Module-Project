@@ -1,6 +1,6 @@
 class Start: NavigationListener {
     private var state = State.CHOOSE_ARCHIVE
-    fun start() {
+    fun start()  {
         println("Привет")
         val screen: Screen = Screen(this)
         while (true) {
