@@ -3,7 +3,7 @@ import java.util.Scanner
 class Screen(val navigationListener: NavigationListener) {
     val list: MutableList<Archive> = mutableListOf()
     private var currentArchive : Int = 0
-    private var currentNote : Int = 0
+    private var currentNote: Int = 0
 
     fun chooseArchiveScreen() {
         println("0. Создать Архив")
