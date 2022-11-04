@@ -1,5 +1,5 @@
 package base
 data class Note(
-    val name: String,
+    override val name: String,
     val text: String
-)
+): Text

@@ -1,28 +1,21 @@
 package notes
 
-import base.Archive
-import java.util.*
+import base.BaseOpener
+import base.Note
 
-object ChooseNoteScreen {
+object ChooseNoteScreen : BaseOpener<Note>() {
 
-    fun openNote(archive: Archive) {
-        while (true) {
-            println("Чтобы открыть заметку введите ее название")
-            println("Чтобы вернуться назад введите - < 0 >")
-            println()
+    override fun info() {
+        println("Чтобы открыть заметку введите ее название")
+        println("Чтобы вернуться назад введите - < 0 >")
+        println()
+    }
 
-            val noteName = Scanner(System.`in`).nextLine().toString()
-            if (noteName == "0") return
+    override fun greetings() = Unit
 
-            val note = archive.listOfNotes.find { it.name == noteName }
-
-            if (note == null) {
-                println("Нет такой заметки")
-                continue
-            }
-
-            println("Заметка открылась, текст заметки - ${note.text}")
-            return
-        }
+    override fun someWork(text: Note, stopLoop: () -> Unit) {
+        println("Заметка открылась, текст заметки - ${text.name}")
+        stopLoop.invoke()
+        return
     }
 }
