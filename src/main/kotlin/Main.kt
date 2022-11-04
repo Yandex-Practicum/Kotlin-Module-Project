@@ -1,5 +1,8 @@
+enum class Input(val code: String) {
+    EXIT("0"), CREATE("1")
+}
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    val mainScreen = MainScreen()
+    mainScreen.navigate()
 }
