@@ -3,7 +3,7 @@ package screens
 import data.Database
 import model.MenuItem
 
-class ArchivesListScreen(private val database: Database) {
+class ArchivesListScreen {
 
     private var menuWorker: MenuWorker = MenuWorker(listOfWhat = "Список архивов:")
 
@@ -20,14 +20,11 @@ class ArchivesListScreen(private val database: Database) {
 
     private fun prepareMenuItems(): Map<Int, MenuItem> {
         val menuItems = mutableMapOf<Int, MenuItem>()
-        menuItems[0] = MenuItem("0. Создать архив") { CreateArchiveScreen(database) }
-        database.archives.keys.forEachIndexed { index, archive: String ->
+        menuItems[0] = MenuItem("0. Создать архив") { CreateArchiveScreen() }
+        Database.archives.keys.forEachIndexed { index, archive: String ->
             menuItems[index + 1] =
                 MenuItem("${index + 1}. $archive") {
-                    NotesListScreen(
-                        database,
-                        archive
-                    ).also { it.start() }
+                    NotesListScreen(archive).also { it.start() }
                 }
         }
         return menuItems

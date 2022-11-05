@@ -5,10 +5,7 @@ import model.Note
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class CreateNoteScreen(
-    private val database: Database,
-    private val archive: String
-) {
+class CreateNoteScreen(private val archive: String) {
 
     private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd - HH:mm")
 
@@ -23,7 +20,7 @@ class CreateNoteScreen(
         val text = readLine()!!
         val date = provideCurrentDate()
         val note = Note(title, text, date)
-        database.addNote(archive, note)
+        Database.addNote(archive, note)
         println("Заметка ${note.title} успешно создана!")
     }
 

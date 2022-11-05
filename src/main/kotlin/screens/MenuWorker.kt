@@ -8,22 +8,21 @@ class MenuWorker(private val listOfWhat: String) {
     private val goBackMenuItemIndex get() = menuItems.size
 
     fun showMenu() {
-        println()
-        println(listOfWhat)
+        println("\n$listOfWhat")
         menuItems.forEach { menuItem ->
             println(menuItem.value.itemName)
         }
         println("$goBackMenuItemIndex. Выход")
     }
 
-
     fun performActionOnMenuItemClick(): Boolean {
         val userChoice = requestUserChoice()
-        if (userChoice == goBackMenuItemIndex) {
-            return true
+        return if (userChoice == goBackMenuItemIndex) {
+            true
+        } else {
+            menuItems[userChoice]?.action?.invoke()
+            false
         }
-        menuItems[userChoice]?.action?.invoke()
-        return false
     }
 
     private fun requestUserChoice(): Int {

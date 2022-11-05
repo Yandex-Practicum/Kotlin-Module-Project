@@ -2,7 +2,7 @@ package data
 
 import model.Note
 
-class Database {
+object Database {
     val archives: MutableMap<String, MutableList<Note>> = mutableMapOf()
 
     fun addArchive(archiveName: String) {
