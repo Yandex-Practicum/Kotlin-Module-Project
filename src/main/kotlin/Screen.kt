@@ -9,9 +9,9 @@ class Screen(val navigationListener: NavigationListener) {
         println("0. Создать Архив")
         list.forEachIndexed { index, archive -> println("${index + 1}. ${archive.name}") }
         println("${list.size + 1}. Выход.")
-        val choice = checkInput(list.size + 1)
+        var choice = checkInput(list.size + 1)
         while (choice == - 1) {
-            chooseArchiveScreen()
+            choice = checkInput(list.size + 1)
         }
         when (choice) {
             0 -> navigationListener.state(State.ADD_ARCHIVE)
@@ -35,9 +35,9 @@ class Screen(val navigationListener: NavigationListener) {
         list[currentArchive - 1].list.forEachIndexed { index, note -> println("${index + 1}. ${note.noteName}") }
         println("${list[currentArchive - 1].list.size + 1}. Выход.")
         val listLength = list[currentArchive - 1].list.size
-        val choice = checkInput(listLength + 1)
+        var choice = checkInput(listLength + 1)
         while (choice == - 1) {
-           openArchive()
+           choice = checkInput(list[currentArchive - 1].list.size + 1)
         }
         when (choice) {
             0 -> navigationListener.state(State.ADD_NOTE)
