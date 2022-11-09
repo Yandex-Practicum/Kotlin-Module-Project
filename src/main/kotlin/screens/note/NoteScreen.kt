@@ -14,8 +14,8 @@ object NoteScreen: EntityScreen {
     override val entityScreenLogic = EntityScreenLogic(this)
 
     fun show(note: Note, noteArchive: Archive, archives: MutableList<Archive>) {
-        println("Имя заметки - ${note.name}")
-        println("Текст заметки - ${note.text}")
+        println("Имя заметки - ${note.name} \n" +
+                "Текст заметки - ${note.text}")
 
         entityScreenLogic.createMenu(noteArchive, archives)
     }
