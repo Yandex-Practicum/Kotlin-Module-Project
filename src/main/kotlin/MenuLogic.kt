@@ -1,7 +1,7 @@
 import entities.MenuItem
 import java.util.*
 
-class MenuLogic(private val menu: MutableList<out MenuItem>) {
+class MenuLogic(private val menu: MutableList<MenuItem>) {
 
     fun showMenu() {
         println()
@@ -20,14 +20,13 @@ class MenuLogic(private val menu: MutableList<out MenuItem>) {
             println()
             if (answer.toIntOrNull() != null) {
                 val menuIndex = answer.toInt()
-                if (menuIndex >= menu.size) {
+                if ((menuIndex >= menu.size) or (menuIndex < 0)) {
                     println("Данный пункт меню недоступен")
                 } else {
                     menu[answer.toInt()].action()
                 }
             } else {
-                println("Была введене не цифра.")
-                println("Попробуйте ещё раз.")
+                println("Была введене не цифра. Попробуйте ещё раз.")
             }
         }
     }

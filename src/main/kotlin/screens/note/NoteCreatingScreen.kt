@@ -7,7 +7,7 @@ import java.util.*
 
 object NoteCreatingScreen {
 
-    fun createNote(archive: Archive, archives: MutableList<Archive>) {
+    fun create(archive: Archive, archives: MutableList<Archive>) {
         print("Введите имя заметки: ")
         val name = Scanner(System.`in`).nextLine().toString()
 
@@ -21,6 +21,6 @@ object NoteCreatingScreen {
         )
 
         archive.notes.add(note)
-        ArchiveScreen.showArchive(archive, archives)
+        ArchiveScreen.show(archive, archives)
     }
 }

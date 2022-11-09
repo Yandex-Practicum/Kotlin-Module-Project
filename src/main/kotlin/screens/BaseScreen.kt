@@ -5,20 +5,21 @@ import entities.Archive
 import entities.MenuItem
 import screens.archive.ArchiveCreatingScreen
 import screens.archive.ArchiveSelectionScreen
+import screens.interfaces.Screen
 import kotlin.system.exitProcess
 
-object BaseScreen {
+object BaseScreen: Screen {
 
     private val archives = mutableListOf<Archive>()
 
-    private val menu = mutableListOf(
+    override val menu = mutableListOf(
         MenuItem("Выйти из программы") { closeApplication() },
-        MenuItem("Посмотреть архивы") { ArchiveSelectionScreen.showArchives(archives) },
-        MenuItem("Создать архив") { ArchiveCreatingScreen.createArchive(archives) },
+        MenuItem("Посмотреть архивы") { ArchiveSelectionScreen.show(archives) },
+        MenuItem("Создать архив") { ArchiveCreatingScreen.create(archives) },
     )
 
 
-    private val menuLogic = MenuLogic(menu)
+    override val menuLogic = MenuLogic(menu)
 
     fun start() {
         menuLogic.showMenu()

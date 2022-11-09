@@ -6,7 +6,7 @@ import java.util.*
 
 object ArchiveCreatingScreen {
 
-    fun createArchive(archiveList: MutableList<Archive>) {
+    fun create(archiveList: MutableList<Archive>) {
         print("Введите имя архива: ")
         val name = Scanner(System.`in`).nextLine().toString()
 

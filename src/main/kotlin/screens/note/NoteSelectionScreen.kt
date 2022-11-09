@@ -3,39 +3,17 @@ package screens.note
 import MenuLogic
 import entities.Archive
 import entities.MenuItem
-import screens.archive.ArchiveSelectionScreen
+import screenLogic.EntityScreenLogic
+import screens.interfaces.EntityScreen
 
-object NoteSelectionScreen {
+object NoteSelectionScreen: EntityScreen {
 
-    private val menu = mutableListOf<MenuItem>()
-    private val menuLogic = MenuLogic(menu)
+    override val menu = mutableListOf<MenuItem>()
+    override val menuLogic = MenuLogic(menu)
+    override val entityScreenLogic = EntityScreenLogic(this)
 
-    fun showNotes(archive: Archive, archives: MutableList<Archive>) {
+    fun show(archive: Archive, archives: MutableList<Archive>) {
         print("Список заметок: ")
-        createNoteSelectionMenu(archive, archives)
-        menuLogic.showMenu()
-    }
-
-    private fun createNoteSelectionMenu(archive: Archive, archives: MutableList<Archive>) {
-        menu.clear()
-
-        menu.add(
-            MenuItem("Перейти к предыдущему экрану ") {
-                ArchiveSelectionScreen.showArchives(
-                    archives
-                )
-            }
-        )
-
-        for (note in archive.notes) {
-            val menuItem = MenuItem(
-                note.name
-            ) { NoteScreen.showNote(note, archive, archives) }
-            menu.add(menuItem)
-        }
-
-        menu.add(
-            MenuItem("Создать заметку") { NoteCreatingScreen.createNote(archive, archives) }
-        )
+        entityScreenLogic.createMenu(archive, archives)
     }
 }

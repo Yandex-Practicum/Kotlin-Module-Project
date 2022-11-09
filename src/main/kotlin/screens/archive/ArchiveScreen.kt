@@ -3,32 +3,24 @@ package screens.archive
 import MenuLogic
 import entities.Archive
 import entities.MenuItem
-import screens.note.NoteCreatingScreen
+import screenLogic.EntityScreenLogic
+import screens.interfaces.EntityScreen
 import screens.note.NoteSelectionScreen
 
-object ArchiveScreen {
+object ArchiveScreen: EntityScreen {
 
-    private val menu = mutableListOf<MenuItem>()
-    private val menuLogic = MenuLogic(menu)
+    override val menu = mutableListOf<MenuItem>()
+    override val menuLogic = MenuLogic(menu)
+    override val entityScreenLogic = EntityScreenLogic(this)
 
-    fun showArchive(archive: Archive, archives: MutableList<Archive>) {
+    fun show(archive: Archive, archives: MutableList<Archive>) {
         println("Архив - ${archive.name}")
         if (archive.notes.size == 0) {
             println("Список заметок в архиве ${archive.name} пустой, добавьте заметку")
         } else {
-            NoteSelectionScreen.showNotes(archive, archives)
+            NoteSelectionScreen.show(archive, archives)
         }
-        createArchiveScreenMenu(archive, archives)
-        menuLogic.showMenu()
+        entityScreenLogic.createMenu(archive, archives)
     }
 
-    private fun createArchiveScreenMenu(archive: Archive, archives: MutableList<Archive>) {
-        menu.clear()
-        menu.add(MenuItem("Перейти к предыдущему экрану") {
-            ArchiveSelectionScreen.showArchives(
-                archives
-            )
-        })
-        menu.add(MenuItem("Добавить заметку") { NoteCreatingScreen.createNote(archive, archives) })
-    }
 }
