@@ -1,5 +1,22 @@
+import java.util.*
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    val scanner = Scanner(System.`in`)
+    println("Привет это заметки")
+
+    val archiveCollector: ArchiveCollector = ArchiveCollector()
+
+    while (true) {
+        archiveCollector.menu()
+        when (val input: Int = archiveCollector.input()) {
+            0 -> archiveCollector.execute()
+            archiveCollector.collection.size + 1 -> break
+            else -> {
+                archiveCollector.collection[input - 1].menu()
+                archiveCollector.collection[input - 1].action()
+
+            }
+        }
+    }
 }
+
