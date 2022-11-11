@@ -1,6 +1,6 @@
 import screens.ChooseArchiveScreen
 
 fun main() {
-    ChooseArchiveScreen.start()
+    ChooseArchiveScreen.start(0)
 }
 

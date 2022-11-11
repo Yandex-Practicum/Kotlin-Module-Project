@@ -1,28 +1,12 @@
 package screens
 
-import screens.MenuUtils.getChoice
-import screens.MenuUtils.goToMenuItem
-import screens.MenuUtils.printMenu
-import model.MenuItem
 import data.DataSource
+import model.Archive
 
-object ChooseArchiveScreen {
-    fun start() {
-        while (true) {
-            val elements: MutableList<MenuItem> = mutableListOf()
-            elements.add(MenuItem(1, "Создать новый архив", operation = { CreateArchiveScreen.start(0) }))
-            var itemIndex = 2
-            for (archive in DataSource.getArchives()) {
-                elements.add(MenuItem(itemIndex, archive.toString(), operation = { ChooseNoteScreen.start(archive.id) }))
-                itemIndex++
-            }
-            elements.add(MenuItem(itemIndex, "Выход", null))
-            printMenu("Меню выбора архива", elements)
-            val choice = getChoice(elements)
-            if (choice != null) {
-                if (choice == itemIndex) return
-                goToMenuItem(choice, elements)
-            }
-        }
-    }
+object ChooseArchiveScreen: ChooseScreenAbstract <Archive>() {
+    override val title = "Меню выбора архива"
+    override val createItemLine = "Создать новый архив"
+    override val createItemOperation = { CreateArchiveScreen.start(0) }
+    override val chooseItemOperation = { element: Archive -> ChooseNoteScreen.start(element.id) }
+    override val getElementList = { _: Int -> DataSource.getArchives() }
 }
