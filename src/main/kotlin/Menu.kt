@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-class Menu : CommonFunctions<Archive>() {
+class Menu : AbstractMenu<Archive>() {
     private val archives: MutableList<Archive> = mutableListOf()
 
 

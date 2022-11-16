@@ -2,7 +2,7 @@ import java.util.Scanner
 
 class Archive(
     val name: String
-) : CommonFunctions<Note>() {
+) : AbstractMenu<Note>() {
     init {
         println("Создан новый архив с именем $name")
     }

@@ -1,6 +1,6 @@
 class Note(
     val name: String, private val content: String
-) : Any() {init {
+) {init {
     println("Создана новая заметка с именем $name")
 }
 
