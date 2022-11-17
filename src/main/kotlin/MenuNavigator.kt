@@ -28,18 +28,14 @@ object MenuNavigator {
             }
             is Screen.ChosenNote -> {
                 if(screen.note.content == "") {
-                    println("Введите текст заметки")
-                    screen.note.content = Scanner(System.`in`).nextLine()
-                    demonstrateScreen(Screen.AllArchives)
+                    addNoteContent(screen.note)
                 }
                 else {
                     println(screen.note.content)
                     println("Введите '1', если хотите изменить текст заметки, введите любое другое число, чтобы вернуться в главное меню")
                     when(getUserInput()) {
                         1 -> {
-                            println("Введите новый текст заметки")
-                            screen.note.content = Scanner(System.`in`).nextLine()
-                            demonstrateScreen(Screen.AllArchives)
+                            addNoteContent(screen.note)
                         }
                         else -> demonstrateScreen(Screen.AllArchives)
                     }
@@ -104,6 +100,12 @@ object MenuNavigator {
         }
 
         return i.toInt()
+    }
+
+    private fun addNoteContent(note: Note) {
+        println("Введите текст заметки")
+        note.content = Scanner(System.`in`).nextLine()
+        demonstrateScreen(Screen.AllArchives)
     }
 
     const val NUMBER_OF_SYSTEM_ENTRIES = 2
