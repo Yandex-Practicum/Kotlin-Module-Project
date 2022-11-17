@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.Scanner
 
 class Note(override val id: Int, override val name: String, private val text: String) : MenuFields {
     private val input = Scanner(System.`in`)
@@ -6,13 +6,12 @@ class Note(override val id: Int, override val name: String, private val text: St
         NotesMenu(0, "Вернуться в меню архива"),
         NotesMenu(1, "Показать заметку")
     )
-    private val naviFunctions = NaviFunctions()
 
     override fun start() {
         while (true) {
-            println(naviFunctions.showMenu(menuNote, "Вы внутри заметки", ""))
+            println(NaviFunctions.showMenu(menuNote, "Вы внутри заметки", ""))
             val inputString = input.nextLine().toString()
-            if (naviFunctions.checkInput(menuNote, inputString)) {
+            if (NaviFunctions.checkInput(menuNote, inputString)) {
                 val inputInt = inputString.toInt()
                 if (!chooseNote(inputInt)) {
                     return
@@ -22,7 +21,7 @@ class Note(override val id: Int, override val name: String, private val text: St
     }
 
     private fun chooseNote(inputInt: Int): Boolean {
-        for (m in menuNote) {
+        for (menu in menuNote) {
             return when (inputInt) {
                 0 -> {
                     println("Возвращаемся в меню архива")

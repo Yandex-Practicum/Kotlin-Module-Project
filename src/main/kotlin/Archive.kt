@@ -4,11 +4,10 @@ class Archive(override val id: Int, override val name: String) : MenuFields {
         Note(0, "Вернуться в главное меню", ""),
         Note(1, "Создать заметку", "")
     )
-    private val naviFunctions = NaviFunctions()
 
     override fun start() {
         while (true) {
-            if (naviFunctions.push(
+            if (NaviFunctions.push(
                     menuArchive,
                     "Меню архива",
                     "заметку",

@@ -4,11 +4,9 @@ class InitialMenu {
         Archive(1, "Создать архив")
     )
 
-    private val naviFunctions = NaviFunctions()
-
     fun start() {
         while (true) {
-            if (naviFunctions.push(
+            if (NaviFunctions.push(
                     mainMenu,
                     "Главное меню",
                     "Архив",
