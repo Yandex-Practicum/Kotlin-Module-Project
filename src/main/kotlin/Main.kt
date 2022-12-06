@@ -1,5 +1,14 @@
+import java.util.Scanner
+
+val scanner = Scanner(System.`in`)
+
+val archives = mutableMapOf<String, MutableList<String>>()
+var archiveName: String? = null
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+
+    println("Добро пожаловать в приложение Заметки!\nВыберите пункт меню:")
+
+    menu("архив",archives.keys,::creationMenu,::menuNotes)
+
 }
