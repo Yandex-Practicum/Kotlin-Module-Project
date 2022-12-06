@@ -6,6 +6,10 @@ class Archive(val archiveName: String) {
     fun newNote(index: Int){
         println("Введите название заметки")
         val name = sc.nextLine()
+        if(archiveData.map{element -> element.noteName}.contains(name)){
+            println("Заметка с таким именем уже существует!")
+            newNote(index)
+        }
         println("Введите текст заметки")
         val text = sc.nextLine()
         archiveData.add(Note(name, text))

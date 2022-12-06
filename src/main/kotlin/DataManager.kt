@@ -3,12 +3,16 @@ class DataManager {
     fun createArchive(){
         println("Введите название для нового архива")
         val name: String = sc.nextLine()
+        if(archives.map{element -> element.archiveName}.contains(name)) {
+            println("Архив с таким именем уже существует!")
+            dm.createArchive()
+        }
         archives.add(Archive(name))
         println("Архив $name был успешно создан")
         start(true)
     }
     fun manageArchives(){
-        if(!archives.isEmpty()) {
+        if(archives.isNotEmpty()) {
             println("Ваши архивы:")
             for(a in archives){
                 println(a.archiveName)
@@ -31,10 +35,9 @@ class DataManager {
     fun askAction(index: Int){
         val workWith = archives.get(index)
             println("Что вы хотите сделать с архивом ${workWith.archiveName}?\n0. Создать в нем новую заметку\n1.Прочитать заметку\nЛюбой иной вариант - Назад")
-        val response = sc.nextLine()
-        when(response){
+        when(sc.nextLine()){
             "0" -> workWith.newNote(index)
-            "1" -> if(!workWith.archiveData.isEmpty()) workWith.readNote(index) else {
+            "1" -> if(workWith.archiveData.isNotEmpty()) workWith.readNote(index) else {
                 println("В этом архиве пока нет заметок для прочтения!")
                 askAction(index)
             }
