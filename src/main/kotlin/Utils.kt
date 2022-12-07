@@ -12,17 +12,21 @@ fun getStringInput(): String {
     }
 }
 
-fun selectAction(caption: String, menuActions: List<String>): Int {
-    println("$caption:")
-    for (i in menuActions.indices) println("${i}. ${menuActions[i]}")
-    println("${menuActions.size}. Выход")
-    var value: String
+fun selectAction(caption: String, menuActions: List<String>, onSelect: (Int) -> Unit) {
     while (true) {
-        value = Scanner(System.`in`).nextLine()
-        if (value.isNotEmpty() && isNumeric(value) && value.toInt() in 0..menuActions.size) {
-            return value.toInt()
+        println("$caption:")
+        for (i in menuActions.indices) println("${i}. ${menuActions[i]}")
+        println("${menuActions.size}. Выход")
+        var value: String
+        while (true) {
+            value = Scanner(System.`in`).nextLine()
+            if (value.isNotEmpty() && isNumeric(value) && value.toInt() in 0..menuActions.size) {
+                break
+            }
+            println("Пожалуйста, выберите пункт из меню.\n")
         }
-        println("Пожалуйста, выберите пункт из меню.")
+        if (value.toInt() == menuActions.size) break
+        else onSelect.invoke(value.toInt())
     }
 }
 
