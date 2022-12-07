@@ -1,5 +1,12 @@
+import java.util.Scanner
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    val read = Scanner(System.`in`)
+    var list: NotesList = NotesList()
+    list.createNote()
+    println("-----------------------------------------")
+    list.showNotes()
+    println("-----------------------------------------")
+    list.showNotes()
+    list.openNote()
+    list.deleteNote()
 }
