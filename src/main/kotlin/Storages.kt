@@ -51,7 +51,7 @@ open class Storage<T>(                                     // Хранилище
             line = 1
             for (key in content.keys) {
                 println("$line. Выбрать $accName $key")
-                menuList.put(line, key)
+                menuList[line] = key
                 line++
             }
             println("$line. Выход")
@@ -73,7 +73,7 @@ open class Storage<T>(                                     // Хранилище
                             return 0
                         }
                         in 1 until line -> {
-                            keyName = menuList.get(menuLine)!!
+                            keyName = menuList[menuLine]!!
                             println("Вы ввели $menuLine  - Выбрать $accName $keyName")
                             return 1
                         }
