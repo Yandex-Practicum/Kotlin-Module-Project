@@ -1,11 +1,10 @@
 import java.util.Scanner
-data class NotesList(
+open class NotesList(
+    var name : String = "",
     var notes : HashMap<String, Note> = HashMap(),
     var noteNames : HashSet<String> = HashSet()
-    ) : Choise(title = "Notes", list = noteNames)
+    ) : Choise(title = name, list = noteNames)
 {
-    val read: Scanner = Scanner(System.`in`)
-
     fun createNote(){
         val title = getTitle(2)
         println("Enter the text")
@@ -28,31 +27,6 @@ data class NotesList(
     fun openNote(){
         val title = getTitle(1)
         notes.get(title)?.showNote()
-    }
-
-    fun getTitle(variant : Int) : String{
-        var text : String = ""
-        when (variant){
-            1-> text = "Title is not exist"
-            2-> text = "Title is already exist"
-        }
-        println("Enter the title of note")
-        var title : String = read.nextLine()
-        when (variant) {
-            1 -> {
-                while (!noteNames.contains(title)) {
-                    println(text)
-                    title = read.nextLine()
-                }
-            }
-            2 -> {
-                while (noteNames.contains(title)) {
-                    println(text)
-                    title = read.nextLine()
-                }
-            }
-        }
-        return title
     }
 }
 
