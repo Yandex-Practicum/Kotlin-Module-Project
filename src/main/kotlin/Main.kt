@@ -30,7 +30,7 @@ fun menu(name: String, items: Iterable<String>, openNote: (Int) -> Unit, create:
             menuCounter -> {
                 break
             }
-            else -> println("Введено неверное значение.")
+            else -> println("Введено неверное значение, попобуйте ещё раз.")
         }
     }
 }
