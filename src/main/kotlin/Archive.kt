@@ -1,5 +1,5 @@
 class Archive : Screen() {
-    override var menu: MutableList<String> = mutableListOf()
+//    override var menu: MutableList<String> = mutableListOf()
     override val theme = "архивов"
     override val title = "архив"
 
@@ -8,11 +8,11 @@ class Archive : Screen() {
         show(store.keys.toList(), theme, title)
         var inp = readln()
 
-        while (!inputError(inp, menu)) { //errors check
+        while (!inputError(inp, store.keys.size + 1)) { //errors check
             show(store.keys.toList(), theme, title)
             inp = readln()
         }
-        when (inp?.toIntOrNull()) {
+        when (inp.toIntOrNull()) {
             0 -> {
                 showCreate(title, store); run(store)
             }
