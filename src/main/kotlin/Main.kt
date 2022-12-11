@@ -23,14 +23,13 @@ fun menu(name: String, items: Iterable<String>, openNote: (Int) -> Unit, create:
         while (scanner.hasNext() and !scanner.hasNextInt()) {
             println("Введено неверное значение  ${scanner.next()}.Повторите попытку.")
         }
-        var input = scanner.nextInt()
-        when (input) {
+        when (val input = scanner.nextInt()) {
             0 -> create(name)
             in 0 until menuCounter -> openNote(input)
             menuCounter -> {
                 break
             }
-            else -> println("Введено неверное значение, попобуйте ещё раз.")
+            else -> println("Введено неверное значение.")
         }
     }
 }
