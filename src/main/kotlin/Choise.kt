@@ -15,7 +15,7 @@ open class Choise(
             println("now is empty")
     }
     fun getTitle(variant : Int) : String{
-        var text = ""
+        val text : String
         println("Enter the title")
         var title : String = read.nextLine()
         when (variant) {

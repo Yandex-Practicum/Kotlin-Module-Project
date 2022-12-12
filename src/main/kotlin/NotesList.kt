@@ -1,7 +1,7 @@
 open class NotesList(
-    var name : String = "",
-    var notes : HashMap<String, Note> = HashMap(),
-    var noteNames : HashSet<String> = HashSet()
+    name : String = "",
+    private var notes : HashMap<String, Note> = HashMap(),
+    private var noteNames : HashSet<String> = HashSet()
     ) : Choise(title = name, list = noteNames)
 {
     fun createNote(){
@@ -9,7 +9,7 @@ open class NotesList(
         println("Enter the text")
         val text: String = read.nextLine()
         noteNames.add(title)
-        notes.set(title, Note(title, text))
+        notes[title] = Note(title, text)
         println("The note was created successfully")
     }
 
@@ -25,15 +25,15 @@ open class NotesList(
 
     fun openNote(){
         val title = getTitle(1)
-        notes.get(title)?.showNote()
+        notes[title]?.showNote()
     }
     fun redactNote(){
         val title = getTitle(1)
-        notes.get(title)?.addText()
+        notes[title]?.addText()
     }
     fun cleanNote(){
         val title = getTitle(1)
-        notes.get(title)?.removeText()
+        notes[title]?.removeText()
     }
 }
 

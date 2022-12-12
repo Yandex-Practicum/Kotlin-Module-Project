@@ -1,10 +1,10 @@
 import java.util.*
 
 class Note(
-    val title : String,
-    var text : String?
+    private val title : String,
+    private var text : String?
 ) {
-    val read: Scanner = Scanner(System.`in`)
+    private val read: Scanner = Scanner(System.`in`)
     fun showNote(){
         println("-- $title --")
         println(text)
