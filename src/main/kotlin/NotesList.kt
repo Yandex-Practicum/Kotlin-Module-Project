@@ -1,4 +1,3 @@
-import java.util.Scanner
 open class NotesList(
     var name : String = "",
     var notes : HashMap<String, Note> = HashMap(),
@@ -27,6 +26,14 @@ open class NotesList(
     fun openNote(){
         val title = getTitle(1)
         notes.get(title)?.showNote()
+    }
+    fun redactNote(){
+        val title = getTitle(1)
+        notes.get(title)?.addText()
+    }
+    fun cleanNote(){
+        val title = getTitle(1)
+        notes.get(title)?.removeText()
     }
 }
 

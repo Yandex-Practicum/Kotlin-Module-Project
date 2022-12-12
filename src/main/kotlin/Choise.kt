@@ -8,9 +8,11 @@ open class Choise(
     val read: Scanner = Scanner(System.`in`)
     open fun showElements(){
         println("$title :")
-        var position = 0
+        var position = 1
         for (element in list)
             println("${position++}. $element" )
+        if(list.size == 0)
+            println("now is empty")
     }
     fun getTitle(variant : Int) : String{
         var text = ""

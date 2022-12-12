@@ -18,6 +18,7 @@ data class Archives(
         val title = getTitle(1)
         listNames.remove(title)
         listsOfNotes.remove(title)
+        println("Archive successfully deleted")
     }
 
     fun openNoteList(){
