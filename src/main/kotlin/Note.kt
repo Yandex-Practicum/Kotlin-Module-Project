@@ -1,0 +1,1 @@
+class Note(var name: String, var content: String) {}
