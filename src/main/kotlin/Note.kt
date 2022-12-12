@@ -13,8 +13,10 @@ class Note(
         println("Enter the text")
         val newText = read.nextLine()
         text += newText
+        showNote()
     }
     fun removeText(){
         text = ""
+        showNote()
     }
 }

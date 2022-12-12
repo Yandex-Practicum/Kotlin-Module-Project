@@ -11,6 +11,7 @@ open class NotesList(
         noteNames.add(title)
         notes[title] = Note(title, text)
         println("The note was created successfully")
+        showNotes()
     }
 
     fun showNotes() {
@@ -21,6 +22,7 @@ open class NotesList(
         val title = getTitle(1)
         noteNames.remove(title)
         notes.remove(title)
+        showNotes()
     }
 
     fun openNote(){

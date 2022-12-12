@@ -10,6 +10,7 @@ data class Archives(
         listNames.add(title)
         listsOfNotes[title] = NotesList(title)
         println("The archive was created successfully")
+        showNotesLists()
     }
 
     fun showNotesLists() {
@@ -21,6 +22,7 @@ data class Archives(
         listNames.remove(title)
         listsOfNotes.remove(title)
         println("Archive successfully deleted")
+        showNotesLists()
     }
 
     fun openNoteList(){
