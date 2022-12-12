@@ -3,6 +3,8 @@ data class Archives(
     var listNames: HashSet<String> = HashSet()
 ):Choise(title = "NoteList", list = listNames)
 {
+    var lastOpened : NotesList? = null
+
     fun createNotesList(){
         val title = getTitle(2)
         listNames.add(title)
@@ -24,5 +26,19 @@ data class Archives(
     fun openNoteList(){
         val title = getTitle(1)
         listsOfNotes.get(title)?.showNotes()
+        lastOpened=listsOfNotes.get(title)
+    }
+    fun makeNewNote(){
+        lastOpened?.createNote()
+    }
+    fun showMyNotes(){
+        lastOpened?.showNotes()
+    }
+    fun deleteOneNote(){
+        lastOpened?.deleteNote()
+    }
+    fun backFromNoteList(){
+        lastOpened=null
+        showNotesLists()
     }
 }

@@ -7,7 +7,7 @@ open class Choise(
 ) {
     val read: Scanner = Scanner(System.`in`)
     open fun showElements(){
-        println("$title :")
+        println("$title:")
         var position = 1
         for (element in list)
             println("${position++}. $element" )
