@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-object UserScreen {
+object UserScreen : ScreenHandler() {
 
     private val archives: MutableList<Archive> = mutableListOf()
     private val sc = Scanner(System.`in`)
@@ -10,23 +10,21 @@ object UserScreen {
             is State.ArchiveListView -> {
                 printItems("Список архивов\n0. Создать архив", archives)
                 val userInput = inputCheck(archives)
-                render(
-                    userInput, archives,
+                navigate(userInput,
+                    archives,
                     { showScreen(State.ArchiveCreationView) },
                     { showScreen(State.ArchiveView(archives[userInput - 1])) },
-                    { exit() }
-                )
+                    { exit() })
             }
 
             is State.ArchiveView -> {
                 printItems("Список заметок в архиве ${state.item.name}\n0. Создать заметку", state.item.notes)
                 val userInput = inputCheck(state.item.notes)
-                render(
-                    userInput, state.item.notes,
+                navigate(userInput,
+                    state.item.notes,
                     { showScreen(State.NoteCreationView(state.item)) },
                     { showScreen(State.NoteView(state.item.notes[userInput - 1])) },
-                    { showScreen(State.ArchiveListView) }
-                )
+                    { showScreen(State.ArchiveListView) })
             }
 
             is State.ArchiveCreationView -> {
@@ -39,9 +37,7 @@ object UserScreen {
 
             is State.NoteView -> {
                 println("Просмотр заметки:\n\n${state.item.text}\nДля возврата введите 0")
-                while (sc.hasNext()) {
-                    if (sc.nextLine() == "0") break
-                }
+                noteExit()
                 showScreen(State.ArchiveView(state.item.archive))
             }
 
@@ -55,9 +51,9 @@ object UserScreen {
         }
     }
 
-    private fun render(
+    private fun navigate(
         userInput: Int,
-        list: List<Printable>,
+        list: List<Any>,
         createItem: () -> Unit,
         showItem: (Int) -> Unit,
         exit: () -> Unit,
@@ -67,33 +63,5 @@ object UserScreen {
             in 1..list.size -> showItem(userInput - 1)
             list.size + 1 -> exit()
         }
-    }
-
-    private fun printItems(tittle: String, list: List<Printable>) {
-        println(tittle)
-        list.forEachIndexed { index, it ->
-            println("${index + 1}. ${it.getItem().take(10)}...")
-        }
-        println("${list.size + 1}. Выход")
-    }
-
-    private fun inputCheck(list: List<Printable>): Int {
-        while (true) {
-            try {
-                val input = sc.nextLine().toInt()
-                if (input < 0 || input > list.size + 1) {
-                    println("Упс! Кажется, произошел промах по цифрам... Давайте еще попробуем")
-                } else {
-                    return input
-                }
-            } catch (e: Exception) {
-                println("Ой! Ошибочка! Попробуйте ввести цифры от 0 до ${list.size + 1}:")
-            }
-        }
-    }
-
-    private fun exit() {
-        println("Урадавайура!")
-        return
     }
 }

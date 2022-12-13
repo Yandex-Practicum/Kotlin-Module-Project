@@ -1,4 +1,3 @@
-class Archive(val name: String) : Printable {
-    val notes = mutableListOf<Note>()
-    override fun getItem() = name
+class Archive(val name: String,val notes: MutableList<Note> = mutableListOf<Note>()) {
+    override fun toString() = name
 }

@@ -1,3 +1,3 @@
-class Note(val text: String, val archive: Archive) : Printable {
-    override fun getItem() = text
+class Note(val text: String, val archive: Archive) {
+    override fun toString() = text
 }
