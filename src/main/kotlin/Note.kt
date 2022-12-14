@@ -1,1 +1,1 @@
-class Note(var name: String, var content: String) {}
+class Note(var noteName: String, var content: String) : Title(noteName) {}

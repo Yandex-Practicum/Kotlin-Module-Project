@@ -1,4 +1,4 @@
-class Archive(var name: String, var notes: MutableList<Note> = mutableListOf()) {
+class Archive(var archName: String, var notes: MutableList<Note> = mutableListOf()) : Title(archName) {
     fun addNote(note: Note) {
         notes.add(note)
     }

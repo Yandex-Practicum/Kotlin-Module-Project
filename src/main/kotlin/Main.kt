@@ -3,15 +3,11 @@ import java.lang.IndexOutOfBoundsException
 import kotlin.system.exitProcess
 
 fun notesListScreen(archive: Archive) {
-    println("Выберите заметку или введите 'архив' чтобы вернуться к архиву")
     val notes: MutableList<Note> = archive.getAllNotes()
-    notes.forEachIndexed { index, note ->
-        println("$index. ${note.name}")
-    }
     try {
-        val userChoice: String = readln()
+        var userChoice = selectScreen(notes)
         when (userChoice) {
-            "архивы" -> singleArchiveScreen(archive)
+            "назад" -> singleArchiveScreen(archive)
             else -> {
                 val userSelectedNote = notes[userChoice.toInt()]
                 println("${userSelectedNote.content}")
@@ -43,10 +39,8 @@ fun createNote() :Note {
 }
 
 fun singleArchiveScreen (userSelectedArchive: Archive) {
-    println("1. Создать заметку")
-    println("2. Показать все заметки")
-    println("3. Вернуться в список архивов")
-    val userChoice = readln()
+    val userChoice = defaultInputScreen("Архивы \n" +
+            "1. Создать заметку \n2. Список заметок \n3. Вернуться в список архивов")
     when (userChoice) {
         "1" -> {
             userSelectedArchive.addNote(createNote())
@@ -62,15 +56,23 @@ fun singleArchiveScreen (userSelectedArchive: Archive) {
 
 }
 
-fun archiveScreen() {
-    println("Выберите архив или введите 'меню' чтобы вернуться в начальное меню")
-    archievs.forEachIndexed { index, archive ->
-        println("$index. ${archive.name}")
+
+fun <T: Title> selectScreen(mutableList: MutableList<T>) : String  {
+    println("Введите нужную вам цифру или введите 'назад' чтобы вернуться назад")
+    mutableList.forEachIndexed { index, t ->
+        println("$index. ${t.name}")
     }
+    var userChoice = readln()
+    return userChoice
+
+}
+
+
+fun archiveScreen() {
     try {
-        val userChoice = readln()
+        var userChoice = selectScreen(archievs)
         when (userChoice) {
-            "меню" -> menu()
+            "назад" -> menu()
             else -> {
                 val userSelectedArchive = archievs[userChoice.toInt()]
                 singleArchiveScreen(userSelectedArchive)
@@ -102,16 +104,21 @@ fun createArchive() : Archive{
 }
 
 
+
+fun defaultInputScreen(string: String) : String {
+    println(string)
+    val userInput = readln()
+    return userInput
+}
+
+
 var archievs: MutableList<Archive> = mutableListOf()
 
 
 
 fun menu(){
-    println("Меню")
-    println("1. Создать архив")
-    println("2. Список архивов")
-    println("3. Выход")
-    val userInput = readln()
+    val userInput = defaultInputScreen("Меню \n" +
+            "1. Создать архив \n2. Список архивов \n3. Выход")
     when (userInput) {
         "1" -> {
             archievs.add(createArchive())
@@ -123,10 +130,12 @@ fun menu(){
             println("Неверный ввод")
             menu()
         }
-
-
     }
 }
+
+
+
+
 
 fun main() {
     menu()
