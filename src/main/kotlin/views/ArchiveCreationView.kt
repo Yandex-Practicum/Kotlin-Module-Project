@@ -4,10 +4,11 @@ import data.Archive
 import java.util.*
 
 class ArchiveCreationView(private val archiveList : MutableList<Archive>): View() {
-
     override var viewName = "Экран создания архива"
+    override var navigateText = "Возвращаемся к экрану списка архивов."
+    override var commandNumbers = archiveList.size + 1
 
-    private fun createArchive() {
+    private fun createArchive(): () -> Unit = {
         lateinit var archive: Archive
         println("Введите название архива:")
         val archiveName = Scanner(System.`in`).nextLine()
@@ -18,38 +19,11 @@ class ArchiveCreationView(private val archiveList : MutableList<Archive>): View(
         archiveList.add(archive)
     }
 
-    override fun showContent() {
-        println(viewName)
-        println("0. Создать новый архив")
-        println("1. Вернуться к экрану списка архивов.")
-    }
-
-    override fun readCommand(): Int {
-        var number: Int?
-        while (true) {
-            println("Введите команду по номеру поля.")
-            number = Scanner(System.`in`).nextLine().toIntOrNull()
-            if (number !in 0..archiveList.size + 1) {
-                println("Введен некорректный номер, ввидите цифру из списка.")
-            } else {
-                break
-            }
-        }
-        return number!!
-    }
-
-    override fun commandReader() {
-        while (!isEnd) {
-            showContent()
-            when (readCommand()) {
-                0 -> createArchive()
-                1 -> exit()
-            }
-        }
-    }
-
-    override fun exit() {
-        println("Возвращаемся к экрану списка архивов.")
-        isEnd = true
+    override fun createCommands(): MutableList<Pair<String, () -> Unit>> {
+        val commandList = mutableListOf<Pair<String, () -> Unit>>()
+        commandList.add(
+            Pair("0. Создать новый архив", createArchive()))
+        commandList.add(Pair("1. Вернуться к экрану списка архивов.", exit()))
+        return commandList
     }
 }

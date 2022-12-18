@@ -1,46 +1,29 @@
 package views
 
 import data.Archive
-import java.util.Scanner
 
 class ArchiveViewList(var archive: MutableList<Archive>) : View() {
     override var viewName = "Экран списка архивов"
+    override var navigateText = "Выходим из приложения."
+    override var commandNumbers = archive.size + 1
 
-    override fun showContent() {
-        println(viewName)
-        println("0. Перейти к экрану созданию нового архива")
-        archive.forEachIndexed { index, archive -> println("${index + 1}. Перейти к архиву ${archive.name}") }
-        println("${archive.size + 1}. Выход")
-    }
-
-    override fun readCommand(): Int {
-        var number: Int?
-        while (true) {
-            println("Введите команду по номеру поля.")
-            number = Scanner(System.`in`).nextLine().toIntOrNull()
-            if (number !in 0..archive.size + 1) {
-                println("Введен некорректный номер, ввидите цифру из списка.")
-            } else {
-                break
-            }
+    override fun createCommands(): MutableList<Pair<String, () -> Unit>> {
+        val commandList = mutableListOf<Pair<String, () -> Unit>>()
+        commandList.add(
+            Pair(
+                "0. Перейти к экрану созданию архивов.",
+                ArchiveCreationView(archive).commandReader()
+            )
+        )
+        for (index in 0 until archive.size) {
+            commandList.add(
+                Pair(
+                    "${index + 1}. ${archive[index].name}",
+                    NoteViewList(archive[index].notesList).commandReader()
+                )
+            )
         }
-        return number!!
-    }
-
-    override fun commandReader() {
-        while (!isEnd) {
-            showContent()
-            when (val command = readCommand()) {
-                0 -> (ArchiveCreationView(archive).commandReader())
-                archive.size + 1 -> exit()
-                else -> NoteViewList(archive[command - 1].notesList).commandReader()
-            }
-        }
-    }
-
-    override fun exit() {
-        println("Выходим из приложения.")
-        archive.clear()
-        isEnd = true
+        commandList.add(Pair("${archive.size + 1}. Выходим из приложения.", exit()))
+        return commandList
     }
 }

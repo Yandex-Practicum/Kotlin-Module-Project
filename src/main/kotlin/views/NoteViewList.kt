@@ -1,39 +1,20 @@
 package views
 
 import data.Note
-import java.util.*
 
 class NoteViewList(private val noteList: MutableList<Note>) : View() {
     override var viewName = "Экран списка заметок"
+    override var navigateText = "Возвращаемся к списку архивов."
+    override var commandNumbers = noteList.size + 1
 
-    override fun showContent() {
-        println(viewName)
-        println("0. Перейти к экрану созданию заметок.")
-        noteList.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
-        println("${noteList.size + 1}. Вернуться к экрану списка архивов.")
-    }
-
-    override fun readCommand(): Int {
-        var number: Int? = null
-        while (number !in 0..noteList.size + 1) {
-            number = Scanner(System.`in`).nextLine().toIntOrNull()
+    override fun createCommands(): MutableList<Pair<String, () -> Unit>> {
+        val commandList = mutableListOf<Pair<String, () -> Unit>>()
+        commandList.add(
+            Pair("0. Перейти к экрану созданию заметок.", NoteCreationView(noteList).commandReader()))
+        for (note in 0 until noteList.size) {
+            commandList.add(Pair("${note + 1}. ${noteList[note].name}", NoteView(noteList[note]).commandReader()))
         }
-        return number!!
-    }
-
-    override fun commandReader() {
-        while (!isEnd) {
-            showContent()
-            when (val command = readCommand()) {
-                0 -> NoteCreationView(noteList).commandReader()
-                noteList.size + 1 -> exit()
-                else -> NoteView(noteList[command - 1]).commandReader()
-            }
-        }
-    }
-
-    override fun exit() {
-        println("Возвращаемся к списку архивов.")
-        isEnd = true
+        commandList.add(Pair("${noteList.size + 1}. Вернуться к экрану списка архивов.", exit()))
+        return commandList
     }
 }
