@@ -1,6 +1,7 @@
 import java.util.Scanner
 
 object ViewNotes: Menu(), Interface {
+
     override var menuTitle: String = "\nВы в меню просмотра заметки:"
     override val menuItems: ArrayList<String> = arrayListOf(
         "Введите 0, чтобы выйти."

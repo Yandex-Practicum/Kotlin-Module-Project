@@ -37,7 +37,6 @@ object ViewArchive : Menu(), Interface {
         }
     }
 
-
     override fun inputData(): String {
         val scanner = Scanner(System.`in`)
         return scanner.nextLine()

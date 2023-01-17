@@ -1,5 +1,6 @@
 import java.util.Scanner
 
+
 object CreateNotesMenu : Menu(), Interface {
 
     override var menuTitle: String = "\nВы в меню создания заметок:"

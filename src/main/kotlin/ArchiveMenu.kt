@@ -1,6 +1,7 @@
 import java.util.Scanner
 
     object ArchiveMenu: Menu(), Interface {
+
         override var menuTitle: String = "\nВы в меню архивов:"
         override val menuItems: ArrayList<String> = arrayListOf(
             "Создать архив.",

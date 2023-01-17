@@ -12,7 +12,7 @@ object ArchiveCreating : Menu(), Interface {
         while (true) {
             outputData(menuItems, -1, false, error)
             var answer = inputData()
-            when(answer) {
+            when (answer) {
                 "0" -> return
                 else -> {
                     ArchiveMenu.createArchive(answer)

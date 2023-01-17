@@ -1,6 +1,7 @@
 import java.util.Scanner
 
 object ArchiveMenuVariants : Menu(), Interface {
+
     override var menuTitle: String = "\nВы в меню выбора архивов:"
     override val menuItems: ArrayList<String> = arrayListOf(
         "Введите 0, чтобы выйти."
