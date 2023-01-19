@@ -1,11 +1,10 @@
-class Notes (
+class Notes(
     var title: String,
     var description: String
 ) {
 
     override fun toString(): String {
-        val result = "$title\n$description\n"
-        return result
+        return "$title\n$description\n"
     }
 
 }

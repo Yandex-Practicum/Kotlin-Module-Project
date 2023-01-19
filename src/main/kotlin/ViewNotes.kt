@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-object ViewNotes: Menu(), Interface {
+object ViewNotes : Menu() {
 
     override var menuTitle: String = "\nВы в меню просмотра заметки:"
     override val menuItems: ArrayList<String> = arrayListOf(
@@ -12,14 +12,15 @@ object ViewNotes: Menu(), Interface {
     fun printMenu(archieveIndex: Int, noteIndex: Int) {
         while (true) {
             outputData(menuItems, -1, false, error)
-
             println(ArchiveMenu.archivesList[archieveIndex].notesList[noteIndex].toString())
+            error = "Пожалуйста, введите число 0, чтобы выйти из режима просмотра заметки."
+            val answer = inputData()
 
-            var answer = inputData()
-            if (answer.toInt() == 0) {
-                return
-            }
-            else {
+            if (answer.isValidInt()) {
+                if (answer.toInt() == 0) {
+                    return
+                }
+            } else {
                 outputData(menuItems, -1, true, error)
             }
 
@@ -43,13 +44,11 @@ object ViewNotes: Menu(), Interface {
             for (menuItem in menuItems) {
                 println(menuItem)
             }
-        }
-        else {
+        } else {
             println(error)
         }
         println()
     }
-
 
 
 }

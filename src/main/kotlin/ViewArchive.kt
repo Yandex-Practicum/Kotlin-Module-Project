@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-object ViewArchive : Menu(), Interface {
+object ViewArchive : Menu() {
 
     override var menuTitle: String = "\nВы в меню архива"
     override val menuItems: ArrayList<String> = arrayListOf(
@@ -11,27 +11,26 @@ object ViewArchive : Menu(), Interface {
 
     fun printMenu(archiveIndex: Int) {
         while (true) {
+            val archiveSize: Int = ArchiveMenu.archivesList[archiveIndex].notesList.size
             outputData(menuItems, archiveIndex, false, error)
-            error = "Введите корректное значение между 0 и ${ArchiveMenu.archivesList[archiveIndex].notesList.size + 1}."
-            var answer = inputData()
+            error = "Введите корректное значение между 0 и ${archiveSize + 1}."
+            val answer = inputData()
             if (answer.isValidInt()) {
-                if (answer.toInt() in (0..(ArchiveMenu.archivesList[archiveIndex].notesList.size + 1))) {
-                    when(answer.toInt()) {
-                        ArchiveMenu.archivesList[archiveIndex].notesList.size -> {
+                if (answer.toInt() in (0..(archiveSize + 1))) {
+                    when (answer.toInt()) {
+                        archiveSize -> {
                             CreateNotesMenu.printMenu(archiveIndex)
                             continue
                         }
-                        ArchiveMenu.archivesList[archiveIndex].notesList.size + 1 -> {
+                        archiveSize + 1 -> {
                             return
                         }
                         else -> ViewNotes.printMenu(archiveIndex, answer.toInt())
                     }
-                }
-                else {
+                } else {
                     outputData(menuItems, archiveIndex, true, error)
                 }
-            }
-            else {
+            } else {
                 outputData(menuItems, archiveIndex, true, error)
             }
         }
@@ -42,13 +41,19 @@ object ViewArchive : Menu(), Interface {
         return scanner.nextLine()
     }
 
-    override fun outputData(menuItems: ArrayList<String>, elementIndex: Int, hasError: Boolean, error: String) {
-
-        val stringForFun: String = "${ArchiveMenu.archivesList[elementIndex].notesList.size}. ${menuItems[0]} \n${ArchiveMenu.archivesList[elementIndex].notesList.size + 1}. ${menuItems[1]}\n"
+    override fun outputData(
+        menuItems: ArrayList<String>,
+        elementIndex: Int,
+        hasError: Boolean,
+        error: String
+    ) {
+        val elementIndexSize: Int = ArchiveMenu.archivesList[elementIndex].notesList.size
+        val stringForFun: String =
+            "${elementIndexSize}. ${menuItems[0]} \n${elementIndexSize + 1}. ${menuItems[1]}\n"
 
         if (!hasError) {
             println("$menuTitle '${ArchiveMenu.archivesList[elementIndex].title}'")
-            if (ArchiveMenu.archivesList[elementIndex].notesList.size == 0) {
+            if (elementIndexSize == 0) {
                 println("Заметок не найдено, пожалуйста, создайте их.\n${stringForFun}")
             } else {
                 for (note in ArchiveMenu.archivesList[elementIndex].notesList) {
@@ -56,12 +61,11 @@ object ViewArchive : Menu(), Interface {
                 }
                 println(stringForFun)
             }
+        } else {
+            println(error)
         }
-        else {
-                println(error)
-        }
-            println()
-        }
+        println()
+    }
 
 }
 
