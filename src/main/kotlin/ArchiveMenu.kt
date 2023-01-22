@@ -7,37 +7,28 @@ import java.util.*
 class ArchiveMenu() {
     val contain: MutableSet<Archive> = mutableSetOf()
     val menu: MutableList<String> = mutableListOf("Создать архив", "Выйти из программы")
+    val navigator = Navigation()
 
+    fun makeArchive() {
+        println("Введите имя архива:")
+        val newArchive = Archive(Scanner(System.`in`).nextLine())
+        contain.add(newArchive)
+        menu.add("Открыть архив ${newArchive.name}")
+        println("${newArchive.name} добавлен к списку архивов")
+    }
     fun showArchiveMenu() {
 
         while(true) {
-            println("Выберите пункт меню:")
-            for(i in menu) {
-                println("${menu.indexOf(i)}: $i")
-            }
-            var input: Int = 42
-            try {
-                input = Scanner(System.`in`).nextLine().toInt()
-            } catch(e: NumberFormatException) {
-                println("Вы попытались ввести строку")
-            }
-
+            navigator.showMenu(menu)
+            val input = navigator.checkInput()
             when(input) {
-                0 -> {
-                    println("Введите имя архива:")
-                    val newArchive: Archive = Archive(Scanner(System.`in`).nextLine())
-                    contain.add(newArchive)
-                    menu.add(newArchive.name)
-                    println("${newArchive.name} добавлен к списку архивов")
-                }
-                1 -> break
+                0 -> makeArchive()
+                1 -> return
                 in 2..menu.size - 1 -> {
                     contain.elementAt(input-2).showMenu()
-                    contain.elementAt(input-2).showNotes(Scanner(System.`in`).nextLine().toInt())
                 }
                 else -> {
-                   // println("${menu[input.toInt()]}")
-                    println("Введите число, соответствующее пункту меню")
+                   println("Введите число, соответствующее пункту меню")
                 }
             }
         }
