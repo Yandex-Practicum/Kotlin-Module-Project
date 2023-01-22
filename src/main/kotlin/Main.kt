@@ -20,7 +20,11 @@ fun navigationInput2(title: String, navigation: List<String>, funbb: (Int) -> Un
         //какая то функция
         funbb(temp)
     } else {
-        println("Ошибка")
+        if (temp == null){
+            println("Ошибка, введите цифру")
+        }else {
+        println("Ошибка, такого номера нет, выберете из предложенного")
+        }
         navigationInput2(title, navigation, funbb)
     }
 }
