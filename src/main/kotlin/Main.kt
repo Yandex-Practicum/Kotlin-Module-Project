@@ -1,5 +1,26 @@
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+    val arches = mutableListOf<Arch>()
+    val navigator = Navigator(
+        createArch = {
+            arches.add(it)
+        },
+        getArches = { arches }
+    )
+    navigator.nextScreen(AllScreens.ARCH,null)
+}
+
+fun navigationInput2(title: String, navigation: List<String>, funbb: (Int) -> Unit) {
+    println(title)
+    navigation.forEachIndexed { index, s ->
+        println("${index + 1} - $s")
+    }
+    val answer = readLine()
+    val temp = answer?.trim()?.toIntOrNull()
+    if (temp != null && temp <= navigation.count()) {
+        //какая то функция
+        funbb(temp)
+    } else {
+        println("Ошибка")
+        navigationInput2(title, navigation, funbb)
+    }
 }
