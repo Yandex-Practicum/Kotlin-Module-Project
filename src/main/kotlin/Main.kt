@@ -104,14 +104,16 @@ fun main () {
                     }
                 }
             } else {
-                if (j.toInt() > listOfNotes.size) { //проверка правильности номера сохраненной заметки Note
+                if (j.toInt() > listOfNotes.size) { //проверка правильности номера сохраненной
+                    // заметки Note
                     println("Invalid input")
                 } else {
 
                     noteCycle = false
                     noteFillCycle =true
 
-                    //Переходим в выбранную Заметку Note ${listOfNotes[j.toInt() - 1]} и в цикл  ввода текста
+                    //Переходим в выбранную Заметку Note ${listOfNotes[j.toInt() - 1]} и в цикл
+                    // ввода текста
 
                     //начало меню  Fill Note
                     while (noteFillCycle){
@@ -131,14 +133,7 @@ fun main () {
                         val keyInPut:String  = Scanner(System.`in`).nextLine()
                         when (keyInPut) {
                             'n'.toString() -> { //редактируем или добавляем новый текст в заметке
-                                //вызов метода ввода текста в консоль текст ниже вынести в отдельный метод
-                                /*
-                                 println("Enter the text in the line below: ")
-                                 var newNoteText: String? = Scanner(System.`in`).nextLine()
-                                 if (newNoteText.isNullOrEmpty()) newNoteText=""
-                                 val savedNoteText: String? = notesText[noteTextKey]
-                                 notesText.put(noteTextKey, "${savedNoteText}\n${newNoteText}")
-                                 */
+
                                 newTextFill.noteFill(noteTextKey)
                             }
                             'q'.toString() -> {
