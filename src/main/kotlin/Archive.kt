@@ -1,3 +1,5 @@
+import java.util.*
+
 /*
 класс Архив содержит поле название архива, и контент - изменяемый список заметок.
 заметки first и second введены для тестов, чтобы можно было посмотреть на работу функции showContent
@@ -7,13 +9,27 @@
 class Archive(
     val name: String
 ) {
-    val first = Note("Заметка 1", "Текст Заметки один")
-    val second: Note = Note("Заметка 2", "Текст заметки Два")
-    val content: MutableList<Note> = mutableListOf(first, second)
+    val content: MutableList<Note> = mutableListOf()
+    val menu: MutableList<String> = mutableListOf("Создать заметку", "Выйти в меню архивов")
 
-    fun showContent() {
-        for(i in content) {
-            println("${content.indexOf(i)}: ${i.name}")
+    fun newNote() {
+        println("Введите имя заметки, нажмите Enter и введите содержимое заметки")
+        val newNote = Note(Scanner(System.`in`).nextLine(), Scanner(System.`in`).nextLine())
+        content.add(newNote)
+        menu.add(newNote.name)
+    }
+
+    fun showMenu() {
+        println("Выберите пункт меню:")
+        for(i in menu) {
+            println("${menu.indexOf(i)}: $i")
+        }
+    }
+    fun showNotes(index: Int) {
+        when(index) {
+            0 -> newNote()
+            1 -> return
+            in 2..menu.size - 1 -> content.elementAt(index-2).showNote()
         }
     }
 }

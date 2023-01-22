@@ -32,7 +32,8 @@ class ArchiveMenu() {
                 }
                 1 -> break
                 in 2..menu.size - 1 -> {
-                    contain.elementAt(input-2).showContent()
+                    contain.elementAt(input-2).showMenu()
+                    contain.elementAt(input-2).showNotes(Scanner(System.`in`).nextLine().toInt())
                 }
                 else -> {
                    // println("${menu[input.toInt()]}")
