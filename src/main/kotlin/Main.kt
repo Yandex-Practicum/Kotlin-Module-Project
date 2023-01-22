@@ -6,10 +6,10 @@ fun main() {
         },
         getArches = { arches }
     )
-    navigator.nextScreen(AllScreens.ARCH,null)
+    navigator.nextScreen(AllScreens.ARCH, null)
 }
 
-fun navigationInput2(title: String, navigation: List<String>, funbb: (Int) -> Unit) {
+fun navigationInput2(title: String, navigation: List<String>, function: (Int) -> Unit) {
     println(title)
     navigation.forEachIndexed { index, s ->
         println("${index + 1} - $s")
@@ -17,14 +17,13 @@ fun navigationInput2(title: String, navigation: List<String>, funbb: (Int) -> Un
     val answer = readLine()
     val temp = answer?.trim()?.toIntOrNull()
     if (temp != null && temp <= navigation.count()) {
-        //какая то функция
-        funbb(temp)
+        function(temp)
     } else {
-        if (temp == null){
+        if (temp == null) {
             println("Ошибка, введите цифру")
-        }else {
-        println("Ошибка, такого номера нет, выберете из предложенного")
+        } else {
+            println("Ошибка, такого номера нет, выберете из предложенного")
         }
-        navigationInput2(title, navigation, funbb)
+        navigationInput2(title, navigation, function)
     }
 }
