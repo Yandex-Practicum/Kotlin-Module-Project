@@ -2,14 +2,16 @@ import java.util.Scanner
 
 
 const val SEPARATOR = "-----------------------------------------------------------------------------------------------"
+const val newMenu: Char = 'n'
+const val exitMenu: Char = 'q'
 
-fun main () {
+fun main() {
     // меню Архивы
 
-    val newArchive  = Archives()
+    val newArchive = Archives()
     val newNote = Notes()
     val newTextFill = NoteFill()
-    var archiveCycle= true//переменная для работы в цикле Archive
+    var archiveCycle = true//переменная для работы в цикле Archive
     var noteCycle = false//переменная для работы в цикле Note
     var noteFillCycle = false//переменная для работы в цикле noteFill
     var currentArchiveNumber = 0
@@ -28,17 +30,20 @@ fun main () {
         printCommand("archive")
 
 
-        val keyInPut:String  = Scanner(System.`in`).nextLine()
+        val keyInPut: String = Scanner(System.`in`).nextLine()
         //проверяем, что не введена пустая строка или пробел
-        if (!isNumeric(keyInPut)||keyInPut.isNullOrBlank()||keyInPut.toInt()==0) {
+        if (!isNumeric(keyInPut) || keyInPut.isNullOrBlank() || keyInPut.toInt() == 0) {
 
             when (keyInPut) {
 
-                'n'.toString() -> {
+
+                newMenu.toString() -> {
                     newArchive.createOfArchive()//создаем новый архив
                     currentArchiveNumber++
                 }
-                'q'.toString() -> {
+
+                //'q'.toString() -> {
+                exitMenu.toString() -> {
                     println("Exit the program")
                     break
                 }
@@ -52,11 +57,11 @@ fun main () {
             } else {
                 archiveCycle = false
                 noteCycle = true
-                currentArchiveNumber=keyInPut.toInt()-1
+                currentArchiveNumber = keyInPut.toInt() - 1
                 //перед выходом из цикла Archive записываем имя текущего архива
                 //и перезаписываем архив заметок из текущего архива в listOfNotes
                 //с которым будем работать в цикле Note
-                currentArchiveName=listOfArchive.elementAt(keyInPut.toInt()-1)
+                currentArchiveName = listOfArchive.elementAt(keyInPut.toInt() - 1)
                 archiveAndNotes[currentArchiveName]?.forEach { listOfNotes.add(it) }
 
             }
@@ -78,24 +83,25 @@ fun main () {
                 listOfNotes.forEachIndexed { index, element -> println("'${index + 1}.' $element") }
             }
             printCommand("note")
-            val j = Scanner(System.`in`).nextLine()
+            val keyInPut = Scanner(System.`in`).nextLine()
             //проверяем, что не введена пустая строка или пробел
-            if (!isNumeric(j) || j.isNullOrBlank()||j.toInt()==0) {
+            if (!isNumeric(keyInPut) || keyInPut.isNullOrBlank() || keyInPut.toInt() == 0) {
 
-                when (j) {
-                    'n'.toString() -> { //создаем новую заметку
+                when (keyInPut) {
+                    newMenu.toString() -> { //создаем новую заметку
                         newNote.createNewNote()
                     }
-                    'q'.toString() -> {
+
+                    exitMenu.toString() -> {
                         //перезаписываем содержимое архива listOfNotes с новыми заметками
                         // в архив archiveAndNotes и обнуляем содержимое listOfNotes
-                        fillArchive(currentArchiveNumber,listOfNotes)
+                        fillArchive(currentArchiveNumber, listOfNotes)
                         listOfNotes.clear()
-                        numberOfNotes=0
+                        numberOfNotes = 0
                         //выходим в Archive menu
                         archiveCycle = true
                         noteCycle = false
-                        noteFillCycle =false
+
 
                     }
 
@@ -104,42 +110,38 @@ fun main () {
                     }
                 }
             } else {
-                if (j.toInt() > listOfNotes.size) { //проверка правильности номера сохраненной
-                    // заметки Note
+                if (keyInPut.toInt() > listOfNotes.size) { //проверка правильности номера сохраненной заметки Note
                     println("Invalid input")
                 } else {
+                    noteFillCycle = true
 
-                    noteCycle = false
-                    noteFillCycle =true
-
-                    //Переходим в выбранную Заметку Note ${listOfNotes[j.toInt() - 1]} и в цикл
-                    // ввода текста
+                    //Переходим в выбранную Заметку Note ${listOfNotes[j.toInt() - 1]} и в цикл  ввода текста
 
                     //начало меню  Fill Note
-                    while (noteFillCycle){
+                    while (noteFillCycle) {
 
-                        val noteTextKey:String = "${currentArchiveName}${j.toInt()-1}"
+                        val noteTextKey: String = "${currentArchiveName}${keyInPut.toInt() - 1}"
                         println("VIEW NOTE's text.")
                         //Печатаем на экране сохраненный текст заметки:
                         println(SEPARATOR)
-                        println("Archive: ${currentArchiveName}\t Note: ${listOfNotes[j.toInt() - 1]}")
-                        if (notesText[noteTextKey].isNullOrEmpty()) notesText.put(noteTextKey,"")
+                        println("Archive: ${currentArchiveName}\t Note: ${listOfNotes[keyInPut.toInt() - 1]}")
+                        if (notesText[noteTextKey].isNullOrEmpty()) notesText.put(noteTextKey, "")
                         else {
                             println("${notesText[noteTextKey]}")
                         }
                         println(SEPARATOR)
                         printCommand("text")
 
-                        val keyInPut:String  = Scanner(System.`in`).nextLine()
+                        val keyInPut: String = Scanner(System.`in`).nextLine()
                         when (keyInPut) {
-                            'n'.toString() -> { //редактируем или добавляем новый текст в заметке
-
+                            newMenu.toString() -> { //редактируем или добавляем новый текст в заметке
                                 newTextFill.noteFill(noteTextKey)
                             }
-                            'q'.toString() -> {
+
+                            exitMenu.toString() -> {
                                 archiveCycle = false
                                 noteCycle = true
-                                noteFillCycle =false
+                                noteFillCycle = false
 
 
                             }
@@ -151,20 +153,17 @@ fun main () {
 
                         //Возвращаемся в меню NOTES
                     }
-                    noteFillCycle =false
                     noteCycle = true
                 }
 
             }
 
-        }//окончание цикла Note
+        }/* окончание цикла Note */
 
 
-    }////окончание цикла Archive
+    }/* окончание цикла Archive */
 
 }
-
-
 
 
 //если строка  - последовательность цифр: true, иначе false
@@ -172,8 +171,8 @@ fun isNumeric(s: String): Boolean {
     return s.chars().allMatch { Character.isDigit(it) }
 }
 
-fun fillArchive (x:Int,y:MutableList<String>) {
-    archiveAndNotes.put(listOfArchive.elementAt(x), y.toMutableList() )
+fun fillArchive(x: Int, y: MutableList<String>) {
+    archiveAndNotes.put(listOfArchive.elementAt(x), y.toMutableList())
 }
 
 fun printCommand(name: String) {

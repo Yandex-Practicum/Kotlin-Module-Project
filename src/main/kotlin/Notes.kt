@@ -1,14 +1,16 @@
 import java.util.Scanner
 
 
-var numberOfNotes:Int=0
+var numberOfNotes: Int = 0
 var listOfNotes: MutableList<String> = mutableListOf()
 
 
 class Notes {
 
     fun createNewNote(): MutableList<String> {
-        if (listOfNotes.size == 0) numberOfNotes = 0
+        if (listOfNotes.size == 0) {
+            numberOfNotes = listOfNotes.size
+        }
         else numberOfNotes = listOfNotes.size
         println("NOTE MENU")
         println("To create a new note type the note name:")
