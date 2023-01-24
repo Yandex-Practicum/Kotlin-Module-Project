@@ -9,9 +9,9 @@ abstract class Screen<T>(private val name : String, private val list : MutableLi
                 } else {
                     println("Список пуст. Создайте хотя бы один объект $name.")
             }
-            when (val action : Int = Scanner(System.`in`).nextInt()) {
+            when (val action : Int? = Scanner(System.`in`).nextLine().toIntOrNull()) {
                 0 -> add()
-                in 1..list.size -> select(action)
+                in 1..list.size -> action?.let { select(it) }
                 list.size+1 -> goBack()
                 else -> println("Введенное значение недопустимо. Введите целое значение от 0 до ${list.size+1}")
 
