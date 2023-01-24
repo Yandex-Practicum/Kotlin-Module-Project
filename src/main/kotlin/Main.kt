@@ -1,4 +1,3 @@
 fun main() {
-    val mainScreen = ArchiveScreen(mutableListOf())
-    mainScreen.show()
+    ArchiveScreen(mutableListOf()).show()
 }
