@@ -19,9 +19,11 @@ class ArchiveMenu() {
      // вывести
     fun showArchiveMenu() {
          while(true) {
-             menu["0: Создать архив"] = {makeArchive()}
-             menu["1: Выйти"] = {println("Функция выхода из программы")}
-             menu.keys.forEach { println("$it") }
+             menu["Создать архив"] = {makeArchive()}
+             menu["Выйти"] = {println("Здесь должна быть функция выхода из программы")}
+             for(i in menu.keys.toList()) {
+                 println("${menu.keys.toList().indexOf(i)}: $i")
+             }
              val input = navigator.checkInput()
              menu.values.toList()[input].invoke()
         }
