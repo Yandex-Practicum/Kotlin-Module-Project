@@ -5,32 +5,25 @@
 import java.util.*
 
 class ArchiveMenu() {
-    val contain: MutableSet<Archive> = mutableSetOf()
-    val menu: MutableList<String> = mutableListOf("Создать архив", "Выйти из программы")
+    val contain: MutableMap<String, Archive> = mutableMapOf()
+    val menu: MutableMap<String, () -> Unit> = mutableMapOf()
     val navigator = Navigation()
 
     fun makeArchive() {
         println("Введите имя архива:")
         val newArchive = Archive(Scanner(System.`in`).nextLine())
-        contain.add(newArchive)
-        menu.add("Открыть архив ${newArchive.name}")
+        contain.put(newArchive.name, newArchive)
+        menu["Открыть ${newArchive.name}"] = { contain[newArchive.name]?.showMenu()}
         println("${newArchive.name} добавлен к списку архивов")
     }
+     // вывести
     fun showArchiveMenu() {
-
-        while(true) {
-            navigator.showMenu(menu)
-            val input = navigator.checkInput()
-            when(input) {
-                0 -> makeArchive()
-                1 -> return
-                in 2..menu.size - 1 -> {
-                    contain.elementAt(input-2).showMenu()
-                }
-                else -> {
-                   println("Введите число, соответствующее пункту меню")
-                }
-            }
+         while(true) {
+             menu["0: Создать архив"] = {makeArchive()}
+             menu["1: Выйти"] = {println("Функция выхода из программы")}
+             menu.keys.forEach { println("$it") }
+             val input = navigator.checkInput()
+             menu.values.toList()[input].invoke()
         }
 
     }

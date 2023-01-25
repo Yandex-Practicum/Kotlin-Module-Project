@@ -22,17 +22,4 @@ class Navigation() {
             println("${menu.indexOf(i)}: $i")
         }
     }
-
-   /* fun makeChoice(, input: Int) {
-        when(input) {
-            0 -> makeArchive()
-            1 -> return
-            in 2..menu.size - 1 -> {
-                contain.elementAt(input - 2).showMenu()
-            }
-            else -> {
-                println("Введите число, соответствующее пункту меню")
-            }
-        }
-    }*/
 }
