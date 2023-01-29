@@ -4,9 +4,9 @@ class Note(
     val name: String,
     var contain: String,
     val source: Archive
-): Menu {
+): Menu() {
     //val menu: MutableMap<String, () -> Unit> = mutableMapOf()
-    override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
+   // override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
 
     fun showNote() {
         println("Название заметки: $name\nТекст заметки: $contain")

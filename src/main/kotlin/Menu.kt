@@ -1,5 +1,5 @@
 import kotlin.system.exitProcess
 
-interface Menu {
-    val menu: MutableMap<String, () -> Unit>
+open class Menu() {
+    val menu: MutableMap<String, () -> Unit> = mutableMapOf()
 }

@@ -1,8 +1,8 @@
 import java.util.*
 
-class Archive(val name: String, val source: StartMenu): Menu {
+class Archive(val name: String, val source: StartMenu): Menu() {
     val content: MutableMap<String, Note> =  mutableMapOf()
-    val navigator = Navigation<Note>()
+    val navigator = Navigation()
     fun newNote() {
         println("Введите имя заметки, нажмите Enter и введите содержимое заметки")
         val newNote = Note(Scanner(System.`in`).nextLine(), Scanner(System.`in`).nextLine(), this)
@@ -11,7 +11,7 @@ class Archive(val name: String, val source: StartMenu): Menu {
 
     }
 
-    override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
+  //  override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
 
 }
 

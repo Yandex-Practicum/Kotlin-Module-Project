@@ -1,9 +1,9 @@
 import java.util.*
 
-class StartMenu() : Menu {
+class StartMenu() : Menu() {
     val content: MutableMap<String, Archive> = mutableMapOf()
-    val navigator = Navigation<Archive>()
-    override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
+    val navigator = Navigation()
+  //  override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
 
     fun makeArchive() {
         println("Введите имя архива:")
