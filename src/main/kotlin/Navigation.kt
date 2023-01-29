@@ -1,8 +1,45 @@
 import java.util.*
+import kotlin.system.exitProcess
 
-class Navigation() {
+class Navigation<T>(
+//    val source: T
+) {
 
-    fun checkInput(): Int {
+    fun show(source: T) {
+        while (true) {
+
+            if (source is StartMenu) {
+                source.menu["Создать архив"] = { source.makeArchive() }
+                source.menu["Выйти"] = { exitProcess(1) }
+                for (i in source.menu.keys.toList()) {
+                    println("${source.menu.keys.toList().indexOf(i)}: $i")
+                }
+                val input = checkInput()
+                source.menu.values.toList()[input].invoke()
+            } else if (source is Archive) {
+                source.menu["Создать заметку"] = { source.newNote() }
+                source.menu["Выйти из программы"] = {exitProcess(1)}
+                for (i in source.menu.keys.toList()) {
+                    println("${source.menu.keys.toList().indexOf(i)}: $i")
+                }
+                val input = checkInput()
+                source.menu.values.toList()[input].invoke()
+            } else if (source is Note) {
+                source.menu["Изменить текст заметки"] = { source.changeNote() }
+                source.menu["Выйти из программы"] = { exitProcess(1) }
+                source.menu["Показать заметку"] = {source.showNote()}
+                for (i in source.menu.keys.toList()) {
+                    println("${source.menu.keys.toList().indexOf(i)}: $i")
+                }
+                val input = checkInput()
+                source.menu.values.toList()[input].invoke()
+
+            }
+
+        }
+    }
+
+        fun checkInput(): Int {
         var output: Int? = null
         while (output == null) {
             println("Введите число, соответствующее выбранному пункту меню")
@@ -14,12 +51,5 @@ class Navigation() {
             }
         }
         return output
-    }
-
-    fun showMenu(menu: MutableList<String>) {
-        println("Выберите пункт меню:")
-        for (i in menu) {
-            println("${menu.indexOf(i)}: $i")
-        }
     }
 }
