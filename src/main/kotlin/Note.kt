@@ -2,9 +2,11 @@ import java.util.Scanner
 
 class Note(
     val name: String,
-    var contain: String
-) {
-    val menu: MutableMap<String, () -> Unit> = mutableMapOf()
+    var contain: String,
+    val source: Archive
+): Menu {
+    //val menu: MutableMap<String, () -> Unit> = mutableMapOf()
+    override val menu: MutableMap<String, () -> Unit> = mutableMapOf()
 
     fun showNote() {
         println("Название заметки: $name\nТекст заметки: $contain")
