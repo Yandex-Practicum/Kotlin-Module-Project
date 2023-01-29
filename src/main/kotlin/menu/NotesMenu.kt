@@ -35,7 +35,6 @@ class NotesMenu(private val parentMenu: ArchiveMenu, private val elem: Archive):
         const val CREATE = "0. Чтобы создать заметку"
         const val ENTER_CONTENT = "Введите содержание записки:"
         const val ENTER_NAME = "Введите название название заметки или введите \"${ArchiveMenu.GO_BACK}\" для возвращения на предыдущий экран"
-        const val EXIT = "Выйти из приложения"
         const val NOTE_CREATED = "Записка создана"
     }
 }
