@@ -18,15 +18,22 @@ class Navigation() {
                 source.menu["Вернуться к выбору заметки"] = { Navigation().show(source.source) }
                 source.menu["Показать заметку"] = { source.showNote() }
             }
-            for (i in source.menu.keys.toList()) {
-                println("${source.menu.keys.toList().indexOf(i)}: $i")
-            }
-            val input = checkInput()
-            source.menu.values.toList()[input].invoke()
+            makeMenu(source)
             }
 
         }
 
+        fun <T: Menu> makeMenu(source: T){
+            for (i in source.menu.keys.toList()) {
+                println("${source.menu.keys.toList().indexOf(i)}: $i")
+            }
+            val input = checkInput()
+            try {
+                source.menu.values.toList()[input].invoke()
+            } catch (e: java.lang.IndexOutOfBoundsException) {
+                println("Вы ввели слишком большое число. Введите число, соответствующее выбранному пункту меню")
+            }
+        }
 
         fun checkInput(): Int {
         var output: Int? = null
