@@ -1,11 +1,16 @@
- open class Note : InterfaceNote {
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 
-    val noteList: MutableList<String> = mutableListOf()
+open class Note : InterfaceNote {
 
+    private val noteList: MutableList<String> = mutableListOf()
 
     override fun createNote(strNote: String): MutableList<String> {
-        noteList.add(strNote)
+        val date = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
+        noteList.add("Note creation date $date: $strNote")
         return noteList
     }
 
@@ -32,3 +37,4 @@
 
 
 }
+
