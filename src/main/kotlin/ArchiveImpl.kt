@@ -10,13 +10,13 @@ class ArchiveImpl : InterfaceArchive {
 
     override fun createArchive(titleArchive: String) {
         archiveMap[titleArchive] = mutableListOf()
-        println(archiveMap)
+        println("Вы создали архив $archiveMap")
     }
 
     override fun removeArchive(titleArchive: String) {
         if (archiveMap.containsKey(titleArchive)) {
             archiveMap.remove(titleArchive)
-            println(archiveMap)
+            println("Вы удалили $archiveMap")
             println("Archive deleted")
         } else {
             println("Archive does not exist")
