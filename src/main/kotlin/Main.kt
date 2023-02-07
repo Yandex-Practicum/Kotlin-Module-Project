@@ -8,17 +8,18 @@ fun main() {
     while (isStartStop(answer)) {
         val archive = ArchiveImpl()
         val sca = Scanner(System.`in`)
-        val scannerArchiveTittle = Scanner(System.`in`)
-        val scannerNote = Scanner(System.`in`)
         printMenuArh()
         val answer = sca.nextLine()
         val numberMenu = answer?.trim()?.toIntOrNull()
 
-        while (isChekEnter(numberMenu)) {
+        while (isCheckEnter(numberMenu)) {
             println("Введите число")
             break
         }
+
         if (numberMenu != null) {
+            val scannerArchiveTittle = Scanner(System.`in`)
+            val scannerNote = Scanner(System.`in`)
             when (numberMenu.toInt()) {
                 1 -> println("Введите название архива").apply {
                     archive.createArchive(scannerArchiveTittle.nextLine())
@@ -45,8 +46,8 @@ fun main() {
                 0 -> break
             }
         }
-        }
     }
+}
 
 
 private fun printMenuArh() {
@@ -73,7 +74,7 @@ private fun helloPrint() {
     println("Для запуска приложения введите Start, при вводе других слов, символов программа будет закрыта")
 }
 
-private fun isChekEnter(str: Int?): Boolean {
+private fun isCheckEnter(str: Int?): Boolean {
     if (str == null) {
         return true
     }

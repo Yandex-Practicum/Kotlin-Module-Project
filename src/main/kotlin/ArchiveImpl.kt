@@ -5,7 +5,7 @@ import java.time.format.FormatStyle
 class ArchiveImpl : InterfaceArchive {
 
     private var archiveMap: MutableMap<String, MutableList<String>> = mutableMapOf()
-    private var noteList:MutableList<String> = mutableListOf()
+    private var noteList :MutableList<String> = mutableListOf()
 
 
     override fun createArchive(titleArchive: String) {
@@ -59,6 +59,7 @@ class ArchiveImpl : InterfaceArchive {
             .format(DateTimeFormatter
                 .ofLocalizedDate(FormatStyle.SHORT))
         noteList.add("Note creation date $date: $strNote")
+        println("Note creation date $date: $strNote")
         return "Note creation date $date: $strNote"
     }
 
