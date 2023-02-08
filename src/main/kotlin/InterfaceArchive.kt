@@ -2,11 +2,11 @@ interface InterfaceArchive {
 
     fun createArchive(titleArchive: String)
     fun removeArchive(titleArchive: String)
-    fun addNoteToArchive(titleArchive: String, note:String)
+    fun addNoteToArchive(titleArchive: String)
     fun clearArchive()
     fun printAllArchive()
     fun printAllNote()
-    fun viewNote(titleArchive: String)
     fun createNote(strNote:String)
-    fun removeNote(strNote: String)
+    fun removeNote(titleArchive: String)
+
 }

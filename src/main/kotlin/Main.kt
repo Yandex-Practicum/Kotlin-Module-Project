@@ -1,6 +1,8 @@
 import java.util.Scanner
 
 fun main() {
+
+
     val archive = ArchiveImpl()
     helloPrint()
     val sc = Scanner(System.`in`)
@@ -15,6 +17,7 @@ fun main() {
             println("Введите число")
             break
         }
+
         if (numberMenu != null) {
             val scannerArchiveTittle = Scanner(System.`in`)
             val scannerNote = Scanner(System.`in`)
@@ -33,18 +36,18 @@ fun main() {
                     archive.createNote(scannerNote.nextLine())
                 }
 
-                6 -> println("Введите название удаляемой заметки")
+                6 -> println("Введите название заметки которую нужно удалить")
+                    .apply { archive.printAllNote() }
                     .apply { archive.removeNote(scannerNote.nextLine()) }
 
                 7 -> println("Введите название архива")
                     .apply {
                         archive.addNoteToArchive(
                             scannerArchiveTittle.nextLine()
-                                .apply { println("Введите заметку") },
-                            scannerNote.nextLine()
                         )
                     }
                 8 -> archive.printAllNote()
+
                 0 -> break
             }
         }
@@ -53,7 +56,7 @@ fun main() {
 
 private fun printMenuArh() {
     println(
-                "1 - Создать архив\n" +
+        "1 - Создать архив\n" +
                 "2 - Показать все архивы\n" +
                 "3 - Удалить один архив\n" +
                 "4 - Удалить все архивы\n" +
