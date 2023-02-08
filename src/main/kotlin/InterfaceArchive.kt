@@ -7,6 +7,6 @@ interface InterfaceArchive {
     fun printAllArchive()
     fun printAllNote()
     fun viewNote(titleArchive: String)
-    fun createNote(strNote:String):String
-    fun removeNote(titleArchive: String)
+    fun createNote(strNote:String)
+    fun removeNote(strNote: String)
 }

@@ -5,7 +5,7 @@ import java.time.format.FormatStyle
 class ArchiveImpl : InterfaceArchive {
 
     private var archiveMap: MutableMap<String, MutableList<String>> = mutableMapOf()
-    private var noteList :MutableList<String> = mutableListOf()
+    private var noteList: MutableList<String> = mutableListOf()
 
 
     override fun createArchive(titleArchive: String) {
@@ -25,11 +25,13 @@ class ArchiveImpl : InterfaceArchive {
 
     override fun addNoteToArchive(titleArchive: String, note: String) {
         if (archiveMap.containsKey(titleArchive)) {
+            println("Найден архив $titleArchive")
             noteList.add(note)
             archiveMap[titleArchive] = noteList
-            println(archiveMap)
+            noteList.remove(note)
+            println(noteList)
         } else {
-            println("This archive does not exist.")
+            println("This archive or note does not exist.")
         }
     }
 
@@ -47,26 +49,32 @@ class ArchiveImpl : InterfaceArchive {
     }
 
     override fun printAllNote() {
-        println(noteList)
+        if (noteList.isNotEmpty()) {
+            println(noteList)
+        } else {
+            println("Note is empty")
+        }
     }
 
     override fun viewNote(titleArchive: String) {
         return println(archiveMap.getValue(titleArchive))
     }
 
-    override fun createNote(strNote: String): String {
+    override fun createNote(strNote: String) {
         val date = LocalDate.now()
-            .format(DateTimeFormatter
-                .ofLocalizedDate(FormatStyle.SHORT))
+            .format(
+                DateTimeFormatter
+                    .ofLocalizedDate(FormatStyle.SHORT)
+            )
         noteList.add("Note creation date $date: $strNote")
         println("Note creation date $date: $strNote")
-        return "Note creation date $date: $strNote"
     }
 
-    override fun removeNote(titleArchive: String) {
-        if (archiveMap.containsKey(titleArchive)) {
-            archiveMap[titleArchive] = mutableListOf()
-            println(archiveMap)
+    override fun removeNote(strNote: String) {
+        if (noteList.contains(strNote)) {
+            val remNote = noteList.indexOf(strNote)
+            noteList.removeAt(remNote)
+            println(noteList)
         } else {
             println("This note does not exist")
         }
