@@ -4,39 +4,33 @@ import kotlin.String
 
 class ArchiveImpl : Manipulation {
 
-
-    var listArchive: MutableMap<String, List<String>> = mutableMapOf()
-    var listNote: MutableList<String> = mutableListOf()
-
+    val listArchive: MutableMap<String, MutableList<String>> = mutableMapOf()
 
     override fun createArchive(titleArchive: String) {
         if (titleArchive != null) {
-            listArchive[titleArchive] = listOf()
+            listArchive[titleArchive] = mutableListOf()
         } else {
             println("Введите название архива")
         }
     }
 
-    override fun createNote(strNote: String): MutableList<String> {
-        if (strNote != null) {
-            listNote.add(strNote)
+    override fun addNoteToTheArchive(titleArchive: String, strNote: String) {
+        if (listArchive.containsKey(titleArchive)) {
+            val list = listArchive.getValue(titleArchive)
+            list.add(strNote)
+            listArchive[titleArchive] = list
         } else {
-            println("Введите заметка")
-        }
-        return listNote
-    }
-
-    override fun addNoteToTheArchive(titleArchive: String,strNote: String) {
-        if(listArchive.containsKey(titleArchive)) {
-            listArchive[titleArchive] = createNote(strNote)
+            println("Такого архива не существует")
         }
     }
 
     override fun printNote(titleArchive: String) {
-        if(listArchive.containsKey(titleArchive)) {
-           println(listArchive.getValue(titleArchive))
+        if (listArchive.containsKey(titleArchive)) {
+            println(listArchive.getValue(titleArchive))
         } else {
             println("Такого архива не существует")
         }
     }
 }
+
+
