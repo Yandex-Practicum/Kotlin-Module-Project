@@ -1,84 +1,42 @@
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
+package com.example.practicumkotlin
+
+import kotlin.String
+
+class ArchiveImpl : Manipulation {
 
 
-class ArchiveImpl : InterfaceArchive {
+    var listArchive: MutableMap<String, List<String>> = mutableMapOf()
+    var listNote: MutableList<String> = mutableListOf()
 
-    private var archiveMap: MutableMap<String, MutableList<String>> = mutableMapOf()
-    private var noteList: MutableList<String> = mutableListOf()
 
-    //создание архива
     override fun createArchive(titleArchive: String) {
-        archiveMap[titleArchive] = mutableListOf()
-        println("You have created an archive $archiveMap")
-    }
-
-    // удаление архива
-    override fun removeArchive(titleArchive: String) {
-        if (archiveMap.containsKey(titleArchive)) {
-            archiveMap.remove(titleArchive)
-            println("Вы удалили $titleArchive")
+        if (titleArchive != null) {
+            listArchive[titleArchive] = listOf()
         } else {
-            println("Archive does not exist")
+            println("Введите название архива")
         }
     }
 
-    //добавление заметки в архив
-    override fun addNoteToArchive(titleArchive: String) {
-        if (archiveMap.containsKey(titleArchive)) {
-            println("The note will be added to the archive $titleArchive")
-            archiveMap[titleArchive] = noteList
-            println(archiveMap)
+    override fun createNote(strNote: String): MutableList<String> {
+        if (strNote != null) {
+            listNote.add(strNote)
         } else {
-            println("This archive or note does not exist.")
+            println("Введите заметка")
+        }
+        return listNote
+    }
+
+    override fun addNoteToTheArchive(titleArchive: String,strNote: String) {
+        if(listArchive.containsKey(titleArchive)) {
+            listArchive[titleArchive] = createNote(strNote)
         }
     }
 
-    //удаление всех архивов
-    override fun clearArchive() {
-        archiveMap.clear()
-        println(archiveMap)
-    }
-
-    //показать все архивы
-    override fun printAllArchive() {
-        if (archiveMap.isNotEmpty()) {
-            for (item in archiveMap) {
-                println(item)
-            }
+    override fun printNote(titleArchive: String) {
+        if(listArchive.containsKey(titleArchive)) {
+           println(listArchive.getValue(titleArchive))
         } else {
-            println("Archive is empty")
-        }
-    }
-
-    //показать все заметки
-    override fun printAllNote() {
-        if (noteList.isNotEmpty()) {
-            println(noteList)
-
-        } else {
-            println("Note is empty")
-        }
-    }
-
-    //создание заметки
-    override fun createNote(strNote: String) {
-        println(strNote)
-        noteList.add(strNote)
-
-    }
-
-    // удаление заметки
-    override fun removeNote(titleArchive: String) {
-        if (noteList.contains(titleArchive)) {
-            noteList.remove(titleArchive)
-        } else {
-            println("This note does not exist")
+            println("Такого архива не существует")
         }
     }
 }
-
-
-
-
