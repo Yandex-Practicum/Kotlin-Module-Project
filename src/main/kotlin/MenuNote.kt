@@ -21,8 +21,7 @@ class MenuNote {
                         val scNote = Scanner(System.`in`).nextLine()
                         Menu.archive.addNoteToTheArchive(scArch,scNote)
                         println(Menu.archive.listArchive)
-                        break
-
+                        menuNote()
                     }
 
                     2 -> {
