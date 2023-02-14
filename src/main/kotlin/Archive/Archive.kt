@@ -1,3 +1,7 @@
+package Archive
+
+import Note
+
 class Archive(val name: String, var mapOfNote: MutableMap<String, Note>) {
     fun addNote(newNote: Note) {
         mapOfNote[newNote.name] = newNote

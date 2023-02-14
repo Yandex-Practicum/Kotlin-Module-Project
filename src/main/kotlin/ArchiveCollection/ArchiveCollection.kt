@@ -1,3 +1,7 @@
+package ArchiveCollection
+
+import Archive.Archive
+
 class ArchiveCollection(val name: String, var mapOfArchives: MutableMap<String, Archive>) {
 
     fun addArchive(archive: Archive) {
