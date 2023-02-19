@@ -1,5 +1,5 @@
+package com.example.practicumkotlin
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+val menu = Menu().menuStart()
 }
