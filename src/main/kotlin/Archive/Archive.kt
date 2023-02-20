@@ -2,7 +2,7 @@ package Archive
 
 import Note
 
-class Archive(val name: String, var mapOfNote: MutableMap<String, Note>) {
+class Archive(val name: String, var mapOfNote: MutableMap<String, Note> = emptyMap<String, Note>() as MutableMap<String, Note>) {
     fun addNote(newNote: Note) {
         mapOfNote[newNote.name] = newNote
     }
@@ -15,4 +15,6 @@ class Archive(val name: String, var mapOfNote: MutableMap<String, Note>) {
         return listOfNoteNames
         return super.toString()
     }
+    fun createArchive () {}
+
 }

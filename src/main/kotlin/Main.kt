@@ -1,24 +1,15 @@
-import Screen.Screen
-import AppState.AppState
-import java.util.Scanner
 
+import AppState.AppState
+import java.util.*
 fun main() {
 
-    val appScreens: AppState =
-        AppState(screenMap = mapOf(
-            "choseArchive" to Screen(name = "choseArchive", menu = Menu.CHOSEARCHIVE),
-            "createArchive" to Screen(name = "createArchive", menu = Menu.CREATEARCHIVE),
-            "choseNote" to Screen(name = "choseNote", menu = Menu.CHOSENOTE),
-            "createNote" to Screen(name = "createNote", menu = Menu.CREATENOTE),
-            "noteView" to Screen(name = "noteView", menu = Menu.NOTEVIEW)
-        ), keyPoint = "choseArchive")
 
     while (true) {
 
-        appScreens.showScreen()?.showMenu()
+        AppState.showScreen()
 
-        appScreens.nextScreen(0)
-        appScreens.showScreen()?.showMenu()
+        AppState.nextScreen(enteredCode = 0)
+        AppState.showScreen()?.showMenu()
 
         var scanner = Scanner(System.`in`).nextLine()
 
@@ -28,3 +19,5 @@ fun main() {
    // screenList.onEach { it.showMenu() }
 
 }
+
+
