@@ -10,28 +10,28 @@ enum class Menu(val menuList: String) {
 
     override fun toString(): String = "- - - - - -\n\n" + menuList + "\n\n- - - - - -"
 
-    val createArchiveAct0: (String) -> Archive = { Archive(name = it) }
-    val goBack: () -> Unit = {}
-    val createNoteAct0: (String) -> Note = { Note(textOfNote = it) }
+    val createArchive: (String) -> Unit = { ArchiveCollection.addArchive(Archive(name = it)) } //Ф-ия добавляющая новый архив
 
-    fun zeroActivity() = when {
-        this == CHOSEARCHIVE -> createArchiveAct0
-        this == CREATEARCHIVE -> goBack
-        this == CHOSENOTE -> createNoteAct0
-        this == CREATENOTE -> goBack
-        else -> goBack
+    val createNote: (String) -> Note = { Note(textOfNote = it) } // Ф-ия добавления новой записки
+
+    // ф-ия, которая в зависимости от типа меню возвращает лямбду, для выполнения действия
+    fun createActivity() = when {
+        this == CHOSEARCHIVE -> createArchive
+        this == CHOSENOTE -> createNote
+        else -> println("")
     }
 
-    val choseArchive: (name: String, archiveCollection: ArchiveCollection) -> Archive? =
-        { name, archiveCollection -> archiveCollection.choseArchive(name) }
+    // Ф-ия возвращает выбранный пользователем архив. Выбор производится по средствам ввода названия архива
+    val choseArchive: (name: String) -> Archive? =
+        { name -> ArchiveCollection.choseArchive(name) }
+    // Ф-ия возращает выбранную пользователем записку. Выбор производится по средствам ввода названия записки
     val choseNote: (name: String, archive: Archive) -> Note? =
         { name, archive -> archive.choseNote(name) }
-    val errorOfAction: () -> Unit = { println("Error") }
 
-    fun firstActivity() = when {
+    fun choseActivity() = when {
         this == CHOSEARCHIVE -> choseArchive
         this == CHOSENOTE ->choseNote
-        else ->errorOfAction
+        else -> println("")
     }
 
 }

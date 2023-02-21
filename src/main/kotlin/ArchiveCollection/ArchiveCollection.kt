@@ -2,7 +2,8 @@ package ArchiveCollection
 
 import Archive.Archive
 
-class ArchiveCollection(val name: String, var mapOfArchives: MutableMap<String, Archive>) {
+object ArchiveCollection {
+    private var mapOfArchives: MutableMap<String, Archive> = emptyMap<String, Archive>() as MutableMap<String, Archive>
 
     fun addArchive(archive: Archive) {
         mapOfArchives[archive.name] = archive

@@ -1,23 +1,25 @@
-
 import AppState.AppState
 import java.util.*
+
 fun main() {
 
 
-    while (true) {
-
+    do {
+        var endedCode: Int = 200
         AppState.showScreen()
+        var massage = ""
+        do {
+            massage = readText()
+            endedCode = AppState.movement(massage)
 
-        AppState.nextScreen(enteredCode = 0)
-        AppState.showScreen()?.showMenu()
+            if(endedCode ==400) println("Wrong code, pleas try again")
+        } while (endedCode==400)
 
-        var scanner = Scanner(System.`in`).nextLine()
 
-        if (scanner == "0") {break}
-
-    }
-   // screenList.onEach { it.showMenu() }
+    } while(AppState.locationInApp != "Exit")
+    // screenList.onEach { it.showMenu() }
 
 }
 
+fun readText(): String = Scanner(System.`in`).nextLine()
 
