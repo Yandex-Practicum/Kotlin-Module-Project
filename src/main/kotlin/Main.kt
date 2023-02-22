@@ -1,5 +1,4 @@
 import AppState.AppState
-import java.util.*
 
 fun main() {
 
@@ -9,7 +8,7 @@ fun main() {
         AppState.showScreen()
         var massage = ""
         do {
-            massage = readText()
+            massage = AppState.readText()
             endedCode = AppState.movement(massage)
 
             if(endedCode ==400) println("Wrong code, pleas try again")
@@ -21,5 +20,5 @@ fun main() {
 
 }
 
-fun readText(): String = Scanner(System.`in`).nextLine()
+
 

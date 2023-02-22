@@ -1,7 +1,9 @@
 package AppState
 
+import ArchiveCollection.ArchiveCollection
 import Menu
 import Screen.Screen
+import java.util.*
 
 // Singleton представляющий собой дерево экранов и предоставляющий функционал для выполнения действий над ними.
 
@@ -29,7 +31,7 @@ object AppState {
                 else -> return 400
             }
             "1" -> locationInApp = when (locationInApp) {
-                "choseArchive","choseNote" -> screenMap[locationInApp]!!.activityChose(massage)
+                "choseArchive","choseNote" -> ArchiveCollection.activityChose(screenMap[locationInApp]!!)
                 else -> return 400
             }
             "2" -> locationInApp = when (locationInApp) {
@@ -38,7 +40,7 @@ object AppState {
                 else -> return 400
             }
             else -> locationInApp = when (locationInApp) {
-                "createArchive", "createNote" -> screenMap[locationInApp]!!.activityCreate(massage)
+                "createArchive", "createNote" -> ArchiveCollection!!.activityCreate(massage= massage, screen = screenMap[locationInApp]!!)
                  else -> return 400
             }
 
@@ -50,6 +52,6 @@ object AppState {
 
     // Функция передающая экран с которым происходит взаимодействие на данный момент
     fun showScreen() = screenMap[locationInApp]?.showMenu()
-
+    fun readText(): String = Scanner(System.`in`).nextLine()
 
 }
