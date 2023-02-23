@@ -4,7 +4,7 @@ fun main() {
 
 
     do {
-        var endedCode: Int = 200
+        var endedCode: Int
         AppState.showScreen()
         var massage = ""
         do {
