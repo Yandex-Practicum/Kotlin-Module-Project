@@ -19,7 +19,7 @@ object ArchiveCollection {
     override fun toString(): String {
 
         var archiveString = "It is the hole List of Archives: \n"
-        mapOfArchives.forEach { (key, archive) -> archiveString += "Name: $key; " }
+        mapOfArchives.forEach { (key, _) -> archiveString += "Name: $key; " }
         return archiveString
     }
 
@@ -48,7 +48,6 @@ object ArchiveCollection {
                 return screen.name
             }
         }
-        return screen.name
     }
 
     private fun chooseArchive() {

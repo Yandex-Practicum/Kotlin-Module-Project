@@ -5,7 +5,7 @@ import Menu
 import Screen.Screen
 import java.util.*
 
-// Singleton представляющий собой дерево экранов и предоставляющий функционал для выполнения действий над ними.
+// Singleton вляющийся деревом экранов и предоставляющий функционал для выполнения действий над ними.
 
 object AppState {
     val screenMap: Map<String, Screen> = mapOf(
@@ -40,7 +40,7 @@ object AppState {
                 else -> return 400
             }
             else -> locationInApp = when (locationInApp) {
-                "createArchive", "createNote" -> ArchiveCollection!!.activityCreate(massage= massage, screen = screenMap[locationInApp]!!)
+                "createArchive", "createNote" -> ArchiveCollection.activityCreate(massage= massage, screen = screenMap[locationInApp]!!)
                  else -> return 400
             }
 

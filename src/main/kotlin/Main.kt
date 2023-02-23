@@ -16,7 +16,7 @@ fun main() {
 
 
     } while(AppState.locationInApp != "Exit")
-    // screenList.onEach { it.showMenu() }
+
 
 }
 

@@ -9,13 +9,5 @@ enum class Menu(val menuList: String) {
 
     override fun toString(): String = "- - - - - -\n\n" + menuList + "\n\n- - - - - -"
 
-  /*  val choseArchive: (name: String) -> Archive? =
-        { name -> ArchiveCollection.choseArchive(name) }
-
-    // Ф-ия возращает выбранную пользователем записку. Выбор производится по средствам ввода названия записки
-    val choseNote: (name: String, archive: Archive) -> Note? =
-        { name, archive -> archive.choseNote(name) }
-
-   */
 }
 
