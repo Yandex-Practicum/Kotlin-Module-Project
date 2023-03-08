@@ -2,7 +2,7 @@ class Utils {
     /**
      * проверка на пустой ввод
      */
-    fun validateInput(input: String): Boolean {
+    fun validateInput(input: String?): Boolean {
         when {
             input == null -> {
                 println("Упс. Что-то пошло не так. Попробуйте еще раз.")

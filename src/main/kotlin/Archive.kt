@@ -25,7 +25,7 @@ class Archive(val name: String) {
                 } else {
                     when (number) {
                         // создание заметки
-                        0 -> createNote()
+                        0 -> createNote(scanner)
                         // просмотр заметки
                         in 1..notes.size -> {
                             notes[number - 1].showNote()
@@ -42,8 +42,7 @@ class Archive(val name: String) {
     /**
      * создает заметку
      */
-    private fun createNote() {
-        val scanner = Scanner(System.`in`)
+    private fun createNote(scanner: Scanner) {
         println("Введите название заметки:")
         val noteName = scanner.nextLine()
         println("Введите текст заметки:")
