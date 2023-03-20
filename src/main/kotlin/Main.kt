@@ -5,7 +5,7 @@ val archives = mutableMapOf<String, MutableMap<String, String>>()
 var currentArchive: String? = null
 
 fun main() {
-    println("=====================================")
+    println("==============================")
     val mainMenu = MainMenu()
     mainMenu.show()
 }
