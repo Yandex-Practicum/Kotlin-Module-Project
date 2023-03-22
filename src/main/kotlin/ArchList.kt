@@ -1,14 +1,14 @@
+import kotlin.system.exitProcess
+
 class ArchList : Commander() {
-    var archMenu: MutableMap<Int, Archive> = HashMap()
+    private var archMenu: MutableMap<Int, Archive> = HashMap()
 
     private fun addArch() {
-        val noteMenu = NoteList()
         println("Введите имя нового архива:")
         val n = readLine()!!
-        println("Создайте первую заметку в архиве:")
-        noteMenu.printing()
-        val a = Archive(n, noteMenu)
+        val a = Archive(n, NoteList())
         archMenu[(archMenu.size + 1)] = a
+        printing()
     }
 
     override fun command() {
@@ -28,7 +28,7 @@ class ArchList : Commander() {
             choice = commandReader()
             when (choice) {
                 0 -> addArch()
-                menuNumb -> return
+                menuNumb -> exitProcess(1)
                 else -> if (archMenu.contains(choice)) archMenu[choice]?.noteMenu?.printing() else println(
                     "Архива с выбранным номером не существует"
                 )
