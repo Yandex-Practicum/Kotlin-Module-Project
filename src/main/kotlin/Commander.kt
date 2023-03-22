@@ -1,21 +1,12 @@
-import java.util.Scanner
-
 abstract class Commander {
-    var menu: MutableMap<Int, String> = HashMap()
     var menuNumb: Int = 0
     var choice: Int = 0
-    var noteText: MutableMap<Int, String> = HashMap()
+    var noteText: MutableMap<Int, Note> = HashMap()
 
-    fun command(): Int {
-        for (j in 1..menu.size) {
-            val str = menu[j]
-            println("$j. $str")
-        }
-        return menu.size
-    }
+    abstract fun command()
 
     fun commandReader(): Int {
-        var comChoice = 0
+        val comChoice: Int
         while (true) {
             val reader = readLine()
             if (reader != null) {

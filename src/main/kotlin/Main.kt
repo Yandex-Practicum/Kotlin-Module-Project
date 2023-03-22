@@ -1,8 +1,5 @@
-import java.util.Scanner
-
-
 fun main() {
-    val archScreen: ArchList = ArchList()
+    val archScreen = ArchList()
     archScreen.printing()
 }
 

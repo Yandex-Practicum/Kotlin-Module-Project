@@ -1,24 +1,37 @@
-class ArchList() : Commander() {
-    private fun addArch(): String {
+class ArchList : Commander() {
+    var archMenu: MutableMap<Int, Archive> = HashMap()
+
+    private fun addArch() {
+        val noteMenu = NoteList()
         println("Введите имя нового архива:")
-        return readLine()!!
+        val n = readLine()!!
+        println("Создайте первую заметку в архиве:")
+        noteMenu.printing()
+        val a = Archive(n, noteMenu)
+        archMenu[(archMenu.size + 1)] = a
+    }
+
+    override fun command() {
+        for (j in 1..archMenu.size) {
+            val str = archMenu[j]?.name
+            println("$j. $str")
+        }
     }
 
     override fun printing() {
-        val noteMenu = NoteList()
         while (true) {
             println("Список архивов")
             println("0. Создать архив")
-            menuNumb = menu.size + 1
-            if (menu.isNotEmpty()) command()
+            menuNumb = archMenu.size + 1
+            if (archMenu.isNotEmpty()) command()
             println("${menuNumb}. Выход.")
             choice = commandReader()
             when (choice) {
-                0 -> {
-                    menu[menuNumb] = addArch()
-                }
+                0 -> addArch()
                 menuNumb -> return
-                else -> if (menu.contains(choice)) noteMenu.printing() else println("Архива с выбранным номером не существует")
+                else -> if (archMenu.contains(choice)) archMenu[choice]?.noteMenu?.printing() else println(
+                    "Архива с выбранным номером не существует"
+                )
             }
         }
     }

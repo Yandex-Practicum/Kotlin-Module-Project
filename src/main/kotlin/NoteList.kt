@@ -1,34 +1,36 @@
-class NoteList() : Commander() {
-    private fun addNote(): String {
+class NoteList : Commander() {
+
+    private fun addNote() {
         println("Введите имя новой заметки:")
-        return readLine()!!
+        val n = readLine()!!
+        println("Введите текст заметки")
+        val text = readLine()!!
+        println("Заметка сохранена")
+        val newNote = Note(n, text)
+        noteText[(noteText.size + 1)] = newNote
     }
 
-    private fun writeNote() {
-        println("Введите текст заметки")
-        noteText[menu.size] = readLine()!!
-        println("Заметка сохранена")
+    override fun command() {
+        for (j in 1..noteText.size) {
+            val str = noteText[j]?.name
+            println("$j. $str")
+        }
     }
 
     override fun printing() {
         while (true) {
             println("Список заметок")
             println("0. Создать заметку")
-            menuNumb = menu.size + 1
-            if (menu.isNotEmpty()) command()
+            menuNumb = noteText.size + 1
+            if (noteText.isNotEmpty()) command()
             println("${menuNumb}. Выход в меню архивов.")
             choice = commandReader()
             when (choice) {
-                0 -> {
-                    menu[menuNumb] = addNote()
-                    println("Новая заметка создана!")
-                    writeNote()
-                }
+                0 -> addNote()
                 menuNumb -> return
-                else -> if (menu.contains(choice)) {
+                else -> if (noteText.contains(choice)) {
                     println("Текст заметки:")
-                    println(noteText[choice])
-
+                    println(noteText[choice]?.noteText)
                 } else println("Заметки с выбранным номером не существует")
             }
         }
