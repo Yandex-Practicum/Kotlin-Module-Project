@@ -8,12 +8,13 @@ class ProgramManager {
         const val EXIT_ARCHIVE = "Выйти из архива"
     }
 
+
     fun isStringInt(str: String): Boolean {
         return str.toIntOrNull() != null
     }
 
     fun checkUserInput(number: Int, commandList: List<String>): Boolean {
-        if (number > commandList.size) {
+        if (number > commandList.size - 1) {
             println("Число больше")
             return false
         } else if (number < 0) {
