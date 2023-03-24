@@ -1,0 +1,5 @@
+package Archive
+
+class ArchivesMenu
+{
+}
