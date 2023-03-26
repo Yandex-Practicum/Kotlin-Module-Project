@@ -1,6 +1,6 @@
 package Notes
 
-class Note(
+class Notes(
     val name: String,
-    val noteText: String
+    val textNote: String
 )

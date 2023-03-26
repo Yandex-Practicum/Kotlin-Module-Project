@@ -1,8 +1,9 @@
 package Archive
 
+import Notes.Notes
 import Notes.NotesMenu
 
 class Archive(
     val name: String,
-    val notesMenu: NotesMenu = NotesMenu()
+    val notesList: MutableList<Notes>
 )
