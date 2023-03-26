@@ -1,3 +1,6 @@
+import java.util.Scanner
+
+
 class spisZmt {
 
     val zamArrayList = ArrayList<String>()
@@ -5,9 +8,7 @@ class spisZmt {
     fun dodZamet(
 
     ) {
-
-        zamArrayList.add(scanner)
-
+        zamArrayList.add(scanner.toString())
     }
 
 }
