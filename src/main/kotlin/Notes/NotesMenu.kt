@@ -23,9 +23,13 @@ class NotesMenu {
             notesMenu.add(Notes("Выход", ""))
         }
         while (true) {
-            showNotesMenu(notesMenu)
             try {
+                showNotesMenu(notesMenu)
                 val userInputMenuItem = Scanner(System.`in`).nextInt()
+                if (userInputMenuItem > notesMenu.size - 1) {
+                    println("Введите число в рамках предложенных вариантов")
+                    continue
+                }
                 when (userInputMenuItem) {
                     0 -> addNote(notesMenu)
                     notesMenu.size - 1 -> return

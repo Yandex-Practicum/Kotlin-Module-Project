@@ -24,9 +24,13 @@ class ArchivesMenu {
     }
     fun interactWithArchiveMenu(): MutableList<Notes> {
         while (true) {
-            showArchiveMenu()
             try {
+                showArchiveMenu()
                 val userInputMenuItem = Scanner(System.`in`).nextInt()
+                if (userInputMenuItem > archiveMenu.size - 1) {
+                    println("Введите число в рамках предложенных вариантов")
+                    continue
+                }
                 when (userInputMenuItem) {
                     0 -> addArchive()
                     archiveMenu.size - 1 -> System.exit(0)
