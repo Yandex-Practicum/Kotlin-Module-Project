@@ -40,3 +40,8 @@ fun logika(
     }
 }
 
+fun viborspiska{
+
+    println("Выберете из списка:")
+
+}

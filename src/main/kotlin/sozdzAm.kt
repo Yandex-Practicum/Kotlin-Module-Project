@@ -3,7 +3,7 @@ import java.util.Scanner
 
 class spisZmt {
 
-    val zamArrayList = ArrayList<String>()
+    val zamArrayList: MutableList<String> = ArrayList()
 
     fun dodZamet(
 

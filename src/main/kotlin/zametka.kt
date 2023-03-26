@@ -3,8 +3,20 @@ import java.util.Scanner
 
 class zametkaVvod {
 
-    fun vividZam() {
-        println("Введите тескст Заметки:")
+    fun newZam {
+        println("Ввведите название заметки")
+        scanner
+        return scanner.next()
+    }
+    fun vvodText {
+        println("Введите текс заметки")
+        scanner
+        return scanner.next()
+    }
+    fun vvodZam {
+        println("Текст заметки")
+        //зпринт номера массива с заметками
+
     }
 
 }
