@@ -25,12 +25,15 @@ class ArchivesMenu {
     fun interactWithArchiveMenu(): MutableList<Notes> {
         while (true) {
             showArchiveMenu()
-            val userInputMenuItem = Scanner(System.`in`).nextInt()
-            when (userInputMenuItem) {
-                0 -> addArchive()
-                archiveMenu.size - 1 -> System.exit(0)
-                else -> notesMenu.interactWithNotesMenu(archiveMenu.get(userInputMenuItem).notesList)
-
+            try {
+                val userInputMenuItem = Scanner(System.`in`).nextInt()
+                when (userInputMenuItem) {
+                    0 -> addArchive()
+                    archiveMenu.size - 1 -> System.exit(0)
+                    else -> notesMenu.interactWithNotesMenu(archiveMenu.get(userInputMenuItem).notesList)
+                }
+            } catch (e: java.util.InputMismatchException) {
+                println("Введите число в рамках предложенных вариантов")
             }
         }
     }

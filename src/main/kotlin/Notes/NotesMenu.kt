@@ -24,12 +24,15 @@ class NotesMenu {
         }
         while (true) {
             showNotesMenu(notesMenu)
-            val userInputMenuItem = Scanner(System.`in`).nextInt()
-            when (userInputMenuItem) {
-                0 -> addNote(notesMenu)
-                notesMenu.size - 1 -> return
-                else -> println(notesMenu.get(userInputMenuItem).textNote)
-
+            try {
+                val userInputMenuItem = Scanner(System.`in`).nextInt()
+                when (userInputMenuItem) {
+                    0 -> addNote(notesMenu)
+                    notesMenu.size - 1 -> return
+                    else -> println(notesMenu.get(userInputMenuItem).textNote)
+                }
+            } catch (e: java.util.InputMismatchException) {
+                println("Введите число в рамках предложенных вариантов")
             }
         }
     }
