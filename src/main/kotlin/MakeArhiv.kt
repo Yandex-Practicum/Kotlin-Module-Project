@@ -1,19 +1,40 @@
 import java.util.Scanner
 
-//class inArhive {
 
 
-    //val arhivArrayList: MutableList<String> = ArrayList()
+class Onearhiv {
+    val name: String
+    val zamList: MutableList<Zametka>
 
-    //fun spiSka(
+    constructor(name: String, zamList: MutableList<Zametka>) {
+        this.name = name
+        this.zamList = zamList
+    }
+}
 
-    //) {
-        //arhivArrayList.add(scanner.toString())
-    //}
+class inArhive {
 
-//}
 
-fun makeArhive(
+    var arhivList = mutableListOf<String>()
+
+    fun nazvanitArhiv() {
+        println("Введите название Архива")
+        arhivDob()
+    }
+
+    fun arhivDob() {
+
+
+        var test = arhivList.add(Scanner(System.`in`).nextLine())
+        //for (i in 0...test.arhivList.size - 1) {
+            //println("$i. ${test.arhivList.get(i)}")
+        //}
+        println("Архив создан")
+
+    }
+}
+
+fun makeArive(
 
 ) {
     println("Список архивов:")
@@ -24,29 +45,5 @@ fun makeArhive(
     logika()
 }
 
-class Card(val numbers: Map<String, MutableSet<String>>)
-
-class inArhive(val name: String) {
-    val card: Card = spiSka()
-    private fun spiSka(): Card {
-        val numbers: Set<String> = generateNumbers()
-        val iterator: Iterator<Int> = numbers.iterator()
-        var currentLine = 1
-        val cardNumbers: MutableMap<String, MutableSet<String>> = mutableMapOf(
-            1 to mutableSetOf(),
-            2 to mutableSetOf(),
-            3 to mutableSetOf()
-        )
-        while (iterator.hasNext()) {
-            val number = iterator.next()
-            cardNumbers[currentLine]?.add(number)
-            if (currentLine < 3) {
-                currentLine++
-            } else {
-                currentLine = 1
-            }
-        }
-        return Card(cardNumbers)
-    }
 
 
