@@ -16,11 +16,10 @@ class zametkaVvod : Empty<Any?>() {
     }
 }
 
-
 fun makeZmtka(
 
 ) {
-    println("Список заметок:")
+    println("Меню заметок:")
     println("3. Создать заметку")
     println("4. Уже созданная заметка")
     println("5. Выход в меню Архивов")
