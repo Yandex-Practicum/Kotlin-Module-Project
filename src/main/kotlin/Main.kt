@@ -1,4 +1,3 @@
-
 val newarhiv = mutableMapOf<String, MutableMap<String, String>>()
 var thisArhiv: String? = null
 

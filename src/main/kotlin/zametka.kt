@@ -1,18 +1,7 @@
 import java.util.Scanner
 
-/*class spisZmt {
 
-    val zamArrayList: MutableList<String> = ArrayList()
-
-    fun dodZamet(
-
-    ) {
-        zamArrayList.add(Scanner(System.`in`).toString())
-    }
-
-}*/
-
-class zametkaVvod: Empty<Any?>() {
+class zametkaVvod : Empty<Any?>() {
 
     override fun nachalo() {
 
@@ -28,9 +17,6 @@ class zametkaVvod: Empty<Any?>() {
 }
 
 
-
-
-
 fun makeZmtka(
 
 ) {
@@ -39,6 +25,5 @@ fun makeZmtka(
     println("4. Уже созданная заметка")
     println("5. Выход в меню Архивов")
     println("Выберите пункт меню")
-
 
 }

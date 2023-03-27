@@ -1,8 +1,7 @@
 import java.util.Scanner
 
 
-
-class inArhive: Empty<Any?>() {
+class inArhive : Empty<Any?>() {
 
     override fun nachalo() {
 
@@ -21,7 +20,6 @@ class inArhive: Empty<Any?>() {
 }
 
 
-
 fun makeArive(
 
 ) {
@@ -30,7 +28,7 @@ fun makeArive(
     println("1. Уже созданный архив")
     println("2. Выход из программы")
     println("Выберите пункт меню")
-    logika()
+    Logika()
 }
 
 

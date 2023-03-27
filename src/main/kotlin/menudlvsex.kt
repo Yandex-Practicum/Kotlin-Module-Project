@@ -2,33 +2,28 @@ import java.util.Scanner
 import kotlin.system.exitProcess
 
 
-
 val scanner = Scanner(System.`in`)
 
-fun logika(
-
-
-) {
+fun Logika() {
 
     val arhivAd = inArhive()
-    //val zametki = makeArive()
-    //val testarhiv = Onearhiv("fggg")
     while (true) {
-
-
 
         if (scanner.hasNextInt()) {
             val scan = scanner.nextInt()
-            if (scan < 7) {
-
+            if (scan in 0..2) {
                 when (scan) {
-                    0 -> arhivAd
-                    1 -> println(arhivAd.nachalo().toString())
+                    0 -> arhivAd.nachalo()
+                    1 -> println("ghbdtn")
                     2 -> exitProcess(-1) //выход из программы
-                    3 -> makeZmtka() //("создать заметку")
-                    4 -> println(makeArive()) //("Выбор из списка заметок переделать")
+
+                }
+            } else if (scan in 3..5) {
+                when (scan) {
+
+                    3 -> println("makeZmtka()") //("создать заметку")
+                    4 -> println("makeArive()") //("Выбор из списка заметок переделать")
                     5 -> exitProcess(-1) //выход в меню 1
-                    6 -> exitProcess(-1) //выход в меню 2
                 }
             } else {
                 println("Введите пункт меню")
@@ -41,11 +36,3 @@ fun logika(
         break
     }
 }
-
-
-
-//fun viborspiska() {}
-
-    //println("Выберете из списка:")
-
-//}
