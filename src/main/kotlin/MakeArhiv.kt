@@ -2,37 +2,25 @@ import java.util.Scanner
 
 
 
-class Onearhiv {
-    val name: String
-    val zamList: MutableList<Zametka>
+class inArhive: Empty<Any?>() {
 
-    constructor(name: String, zamList: MutableList<Zametka>) {
-        this.name = name
-        this.zamList = zamList
-    }
-}
+    override fun nachalo() {
 
-class inArhive {
-
-
-    var arhivList = mutableListOf<String>()
-
-    fun nazvanitArhiv() {
         println("Введите название Архива")
-        arhivDob()
-    }
+        val arhivVvod = Scanner(System.`in`).nextLine()
+        if (newarhiv.containsKey(arhivVvod)) {
+            println("Архив с таким именем уже существует.")
+            return
+        }
 
-    fun arhivDob() {
-
-
-        var test = arhivList.add(Scanner(System.`in`).nextLine())
-        //for (i in 0...test.arhivList.size - 1) {
-            //println("$i. ${test.arhivList.get(i)}")
-        //}
+        newarhiv[arhivVvod] = mutableMapOf()
         println("Архив создан")
+        thisArhiv = arhivVvod
 
     }
 }
+
+
 
 fun makeArive(
 

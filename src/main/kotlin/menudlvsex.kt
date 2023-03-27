@@ -11,7 +11,7 @@ fun logika(
 ) {
 
     val arhivAd = inArhive()
-    val zametki = spisZmt()
+    //val zametki = makeArive()
     //val testarhiv = Onearhiv("fggg")
     while (true) {
 
@@ -22,11 +22,11 @@ fun logika(
             if (scan < 7) {
 
                 when (scan) {
-                    0 -> arhivAd.nazvanitArhiv()
-                    1 -> println(arhivAd.arhivList.toString())
+                    0 -> arhivAd
+                    1 -> println(arhivAd.nachalo().toString())
                     2 -> exitProcess(-1) //выход из программы
-                    3 -> zametkaVvod() //("создать заметку")
-                    4 -> println(zametki.zamArrayList.toString()) //("Выбор из списка заметок")
+                    3 -> makeZmtka() //("создать заметку")
+                    4 -> println(makeArive()) //("Выбор из списка заметок переделать")
                     5 -> exitProcess(-1) //выход в меню 1
                     6 -> exitProcess(-1) //выход в меню 2
                 }
@@ -38,7 +38,7 @@ fun logika(
             println("Введите номер пункта который хотите выбрать")
             scanner.next()
         }
-
+        break
     }
 }
 

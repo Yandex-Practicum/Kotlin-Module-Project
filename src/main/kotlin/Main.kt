@@ -1,4 +1,6 @@
 
+val newarhiv = mutableMapOf<String, MutableMap<String, String>>()
+var thisArhiv: String? = null
 
 fun main() {
 
@@ -7,11 +9,11 @@ fun main() {
 
     makeArive()
 
-
-
 }
 
-
+abstract class Empty<T> {
+    abstract fun nachalo()
+}
 
 //класс открытия меню
 

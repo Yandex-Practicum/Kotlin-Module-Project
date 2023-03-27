@@ -1,12 +1,6 @@
 import java.util.Scanner
 
-class Zametka(
-
-    val name: String,
-    val textZametka: String
-)
-
-class spisZmt {
+/*class spisZmt {
 
     val zamArrayList: MutableList<String> = ArrayList()
 
@@ -16,29 +10,24 @@ class spisZmt {
         zamArrayList.add(Scanner(System.`in`).toString())
     }
 
+}*/
+
+class zametkaVvod: Empty<Any?>() {
+
+    override fun nachalo() {
+
+        println("Введите название Заметки")
+        val zamVvod = Scanner(System.`in`).nextLine()
+        println("Введите текст заметки:")
+        val textZametki = Scanner(System.`in`).nextLine()
+
+        println("Заметка создана")
+        newarhiv[thisArhiv]?.set(zamVvod, textZametki)
+
+    }
 }
 
 
-
-class zametkaVvod {
-
-    fun newZam() {
-        println("Ввведите название заметки")
-        Scanner(System.`in`)
-        //return scanner.next()
-    }
-    fun vvodText() {
-        println("Введите текс заметки")
-        Scanner(System.`in`)
-        //return scanner.next()
-    }
-    fun vvodZam() {
-        println("Текст заметки")
-        //зпринт номера массива с заметками
-
-    }
-
-}
 
 
 
