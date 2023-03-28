@@ -15,6 +15,38 @@ class zametkaVvod : Empty<Any?>() {
         println("Выберете заметку для просмотра или создайте новую")
         makeZmtka()
     }
+
+
+}
+
+class spisokZamet : Empty<Any?>() {
+
+    override fun nachalo() {
+/*
+        if (newarhiv[thisArhiv].isEmpty()) {
+            println("Список архивов пустой, Вас вернет в предыдущее меню")
+            makeArive()
+        } else { */
+            println("Список созданных заметок в архиве:")
+            println(newarhiv[thisArhiv].toString())
+            println("Выберите Заметку для просмотра или напишите 'Выход' для выхода в Меню заметок")
+            val vivZam = Scanner(System.`in`).nextLine()
+
+            if (vivZam.equals("Выход", ignoreCase = true)) makeZmtka()
+            else if (newarhiv[thisArhiv]?.containsKey(vivZam) == true) {
+                println("Текст заметки:")
+                println(newarhiv[thisArhiv])
+                println("Введите любой символ для выхода в Меню заметок")
+                Scanner(System.`in`).nextLine()
+                        makeZmtka()
+            }
+            else {
+                println("Введите правильное название заметки")
+                vivZam
+            }
+        }
+
+
 }
 
 

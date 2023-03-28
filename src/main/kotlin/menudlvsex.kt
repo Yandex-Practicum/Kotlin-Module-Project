@@ -16,14 +16,14 @@ fun Logika() {
                 when (scan) {
                     0 -> arhivAd.nachalo() //создать архив
                     1 -> spisokArhiv().nachalo() //список архивов
-                    2 -> exitProcess(-1) //выход из программы
+                    2 -> exitProcess(130) //выход из программы
 
                 }
             } else if (scan in 3..5) {
                 when (scan) {
 
                     3 -> zametkaVvod().nachalo() //создать заметку
-                    4 -> println("makeArive()") //Выбор из списка заметок
+                    4 -> spisokZamet().nachalo() //Выбор из списка заметок
                     5 -> makeArive() //выход в меню 1
                 }
             } else {

@@ -37,7 +37,7 @@ class spisokArhiv : Empty<Any?>() {
             if (vivArhi.equals("Выход", ignoreCase = true)) makeArive()
             else if (newarhiv.containsKey(vivArhi)) makeZmtka()
             else {
-                println("Введите правльное название архива")
+                println("Введите правильное название архива")
                 vivArhi
             }
         }
