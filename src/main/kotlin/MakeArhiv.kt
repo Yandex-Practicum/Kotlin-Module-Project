@@ -15,8 +15,9 @@ class inArhive : Empty<Any?>() {
         newarhiv[arhivVvod] = mutableMapOf()
         println("Архив создан")
         thisArhiv = arhivVvod
-        //makeZmtka()
-        Logika()
+        println("Выберете заметку или создайте новую в Архиве")
+        makeZmtka()
+
     }
 }
 
@@ -34,7 +35,7 @@ class spisokArhiv : Empty<Any?>() {
             val vivArhi = Scanner(System.`in`).nextLine()
 
             if (vivArhi.equals("Выход", ignoreCase = true)) makeArive()
-            else if (newarhiv.containsKey(vivArhi)) println(newarhiv.containsKey(vivArhi))
+            else if (newarhiv.containsKey(vivArhi)) makeZmtka()
             else {
                 println("Введите правльное название архива")
                 vivArhi

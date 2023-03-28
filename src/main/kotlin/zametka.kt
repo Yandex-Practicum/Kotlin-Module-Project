@@ -12,9 +12,12 @@ class zametkaVvod : Empty<Any?>() {
 
         println("Заметка создана")
         newarhiv[thisArhiv]?.set(zamVvod, textZametki)
-
+        println("Выберете заметку для просмотра или создайте новую")
+        makeZmtka()
     }
 }
+
+
 
 fun makeZmtka(
 

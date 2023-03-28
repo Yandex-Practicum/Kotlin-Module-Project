@@ -22,7 +22,7 @@ fun Logika() {
             } else if (scan in 3..5) {
                 when (scan) {
 
-                    3 -> println("makeZmtka()") //создать заметку
+                    3 -> zametkaVvod().nachalo() //создать заметку
                     4 -> println("makeArive()") //Выбор из списка заметок
                     5 -> makeArive() //выход в меню 1
                 }
