@@ -11,6 +11,7 @@ fun main() {
 }
 
 abstract class Empty<T> {
+
     abstract fun nachalo()
 }
 

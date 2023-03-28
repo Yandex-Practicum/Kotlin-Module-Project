@@ -7,6 +7,7 @@ val scanner = Scanner(System.`in`)
 fun Logika() {
 
     val arhivAd = inArhive()
+    val sozdam = zametkaVvod()
 
     while (true) {
 
@@ -22,7 +23,7 @@ fun Logika() {
             } else if (scan in 3..5) {
                 when (scan) {
 
-                    3 -> zametkaVvod().nachalo() //создать заметку
+                    3 -> sozdam.nachalo() //создать заметку
                     4 -> spisokZamet().nachalo() //Выбор из списка заметок
                     5 -> makeArive() //выход в меню 1
                 }
