@@ -1,10 +1,11 @@
 package Archive
 
+import Menu.Menu
 import Notes.Notes
 import Notes.NotesMenu
 import java.util.*
 
-class ArchivesMenu {
+class ArchivesMenu: Menu() {
     val archiveMenu: MutableList<Archive> = mutableListOf(
         Archive("Создать архив", mutableListOf()),
         Archive("Выход", mutableListOf())
@@ -24,21 +25,15 @@ class ArchivesMenu {
     }
     fun interactWithArchiveMenu(): MutableList<Notes> {
         while (true) {
-            try {
-                showArchiveMenu()
-                val userInputMenuItem = Scanner(System.`in`).nextInt()
-                if (userInputMenuItem > archiveMenu.size - 1) {
-                    println("Введите число в рамках предложенных вариантов")
-                    continue
-                }
-                when (userInputMenuItem) {
-                    0 -> addArchive()
-                    archiveMenu.size - 1 -> System.exit(0)
-                    else -> notesMenu.interactWithNotesMenu(archiveMenu.get(userInputMenuItem).notesList)
-                }
-            } catch (e: java.util.InputMismatchException) {
-                println("Введите число в рамках предложенных вариантов")
+            showArchiveMenu()
+            val amountElements = archiveMenu.size - 1
+            val menuItem = handleExceptions(amountElements)
+            when (menuItem) {
+                0 -> addArchive()
+                archiveMenu.size - 1 -> System.exit(0)
+                else -> notesMenu.interactWithNotesMenu(archiveMenu.get(menuItem).notesList)
             }
+
         }
     }
 }
