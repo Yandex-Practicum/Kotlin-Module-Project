@@ -6,7 +6,7 @@ fun main() {
     NoteTools.printContext(TitleTypes.HEAD)
     //переход в меню "Архивы" и переходим по: Архивы <-> Заметки
     while (true) {
-        WorkArchives(userArchive).onCreate()
+        MenuArchives(userArchive).onCreate()
     }
 }
 

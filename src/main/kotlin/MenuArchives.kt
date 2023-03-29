@@ -1,6 +1,6 @@
 import kotlin.system.exitProcess
 
-class WorkArchives(private val userArchive: MutableList<UserArchives>) : CommonMenu(TitleTypes.ARCHIVES, null) {
+class MenuArchives(private val userArchive: MutableList<UserArchives>) : MenuCommon(TitleTypes.ARCHIVES, null) {
     private var currArchive = 0
     override fun goPrevious() {
         println("Завершение работы приложения")
@@ -50,6 +50,6 @@ class WorkArchives(private val userArchive: MutableList<UserArchives>) : CommonM
     }
 
     override fun goNext() {
-        WorkNotes(userArchive[currArchive].notesList, userArchive[currArchive].archiveName).onCreate()
+        MenuNotes(userArchive[currArchive].notesList, userArchive[currArchive].archiveName).onCreate()
     }
 }

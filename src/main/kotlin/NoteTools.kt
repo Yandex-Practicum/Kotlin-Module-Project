@@ -3,15 +3,16 @@ import kotlin.collections.ArrayList
 
 object NoteTools {
     private val menu: MutableMap<Int, List<String>> = mutableMapOf()
+
     init {
         onCreate()
     }
 
     fun printContext(type: TitleTypes) {
-        when (type.name) {
-            "HEAD" -> printHeadTitle()
-            "ARCHIVES" -> printArchiveTitle()
-            "NOTES" -> printNotesTitle()
+        when (type) {
+            TitleTypes.HEAD -> printHeadTitle()
+            TitleTypes.ARCHIVES -> printArchiveTitle()
+            TitleTypes.NOTES -> printNotesTitle()
         }
     }
 
@@ -124,13 +125,13 @@ object NoteTools {
         return "$num. $title"
     }
 
+    private var consoleInpScanner = Scanner(System.`in`)
     fun waitUserResponse(waitType: UserResponseType, minVal: Int, maxVal: Int): String {
-        //var userResponse = ""
-        when (waitType.name) {
-            "SELECTED_MENU" -> {
+        when (waitType) {
+            UserResponseType.SELECTED_MENU -> {
                 print("Введите номер меню: ")
                 while (true) {
-                    val inp = Scanner(System.`in`).nextLine()
+                    val inp = consoleInpScanner.nextLine()
                     val num: Int? = inp.toIntOrNull()
                     if (num != null) {
                         if (num in minVal..maxVal) {
@@ -140,7 +141,7 @@ object NoteTools {
                 }
             }
 
-            else -> return Scanner(System.`in`).nextLine()
+            else -> return consoleInpScanner.nextLine()
         }
     }
 }
@@ -150,10 +151,8 @@ enum class TitleNamesText(val order: Int, val text: String) {
     CREATE_ARCHIVE(2, "Создать архив"),
     SELECT_ARCHIVE(3, "Выбрать архив"),
 
-    //DELETE_ARCHIVE(4, "Удалить архив"),
     CREATE_NOTE(2, "Создать заметку"),
     SELECT_NOTE(3, "Выбрать заметку"),
-    //DELETE_NOTE(4, "Удалить заметку"),
 }
 
 enum class TitleTypes(val text: String) {

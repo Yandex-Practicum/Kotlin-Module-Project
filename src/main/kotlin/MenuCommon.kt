@@ -1,8 +1,8 @@
-abstract class CommonMenu(private val typeElement: TitleTypes, private val archName: String?) {
+abstract class MenuCommon(private val typeElement: TitleTypes, private val archName: String?) {
     //метод onCreate() - общий для окна "Архивы" и для "Заметки", в нем - отображение пунктов меню
     fun onCreate() {
         NoteTools.printArchiveNotesHead(typeElement)
-        if (typeElement.name == "NOTES") {
+        if (typeElement == TitleTypes.NOTES) {
             archName?.let { println("Работа с архивом: $archName") }
         }
         NoteTools.printContext(typeElement)

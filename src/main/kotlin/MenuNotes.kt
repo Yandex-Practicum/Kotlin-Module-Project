@@ -1,5 +1,5 @@
-class WorkNotes(private val userNote: MutableList<UserNotes>, archName: String) :
-    CommonMenu(TitleTypes.NOTES, archName) {
+class MenuNotes(private val userNote: MutableList<UserNotes>, archName: String) :
+    MenuCommon(TitleTypes.NOTES, archName) {
     override fun goPrevious() {
         //go back to WorkArchives
         println("Возврат в меню архивов")
