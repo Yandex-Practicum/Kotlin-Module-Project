@@ -4,6 +4,9 @@ import Menu.Menu
 import java.util.*
 
 class NotesMenu: Menu() {
+    override val menuName: String
+        get() = "ЗАМЕТКИ"
+
     fun addNote(notesMenu: MutableList<Notes>) {
         println("Введите название заметки")
         val noteName = Scanner(System.`in`).nextLine()
@@ -13,20 +16,13 @@ class NotesMenu: Menu() {
         println("Заметка создана")
     }
 
-    fun showNotesMenu(notesMenu: MutableList<Notes>) {
-        println("ЗАМЕТКИ")
-        for (i in 0..notesMenu.size - 1) {
-            println("$i. ${notesMenu.get(i).name}")
-        }
-    }
-
     fun interactWithNotesMenu(notesMenu: MutableList<Notes>) {
         if (notesMenu.size == 0) {
             notesMenu.add(Notes("Создать заметку", ""))
             notesMenu.add(Notes("Выход", ""))
         }
         while (true) {
-            showNotesMenu(notesMenu)
+            showMenu(notesMenu)
             val amountElements = notesMenu.size - 1
             val menuItem = handleExceptions(amountElements)
             when (menuItem) {

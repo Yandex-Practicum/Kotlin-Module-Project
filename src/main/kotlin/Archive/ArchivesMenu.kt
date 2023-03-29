@@ -10,6 +10,8 @@ class ArchivesMenu: Menu() {
         Archive("Создать архив", mutableListOf()),
         Archive("Выход", mutableListOf())
     )
+    override val menuName: String
+        get() = "АРХИВЫ"
     val notesMenu = NotesMenu()
 
     fun addArchive() {
@@ -17,15 +19,10 @@ class ArchivesMenu: Menu() {
         val userInput = Scanner(System.`in`).nextLine()
         archiveMenu.add(archiveMenu.size - 1, Archive(userInput, mutableListOf()))
     }
-    fun showArchiveMenu() {
-        println("АРХИВЫ")
-        for(i in 0..archiveMenu.size - 1) {
-            println("$i. ${archiveMenu.get(i).name}")
-        }
-    }
+
     fun interactWithArchiveMenu(): MutableList<Notes> {
         while (true) {
-            showArchiveMenu()
+            showMenu(archiveMenu)
             val amountElements = archiveMenu.size - 1
             val menuItem = handleExceptions(amountElements)
             when (menuItem) {

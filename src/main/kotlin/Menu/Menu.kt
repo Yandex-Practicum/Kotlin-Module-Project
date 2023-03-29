@@ -3,6 +3,8 @@ package Menu
 import java.util.*
 
 abstract class Menu {
+    abstract val menuName: String
+
     fun handleExceptions(amountElements: Int): Int {
         while (true) {
             try {
@@ -17,4 +19,12 @@ abstract class Menu {
             }
         }
     }
+
+    fun <E: MenuItem> showMenu(itemsList: MutableList<E>) {
+        println(menuName)
+        for(i in 0..itemsList.size - 1) {
+            println("$i. ${itemsList.get(i).menuItem}")
+        }
+    }
+
 }
