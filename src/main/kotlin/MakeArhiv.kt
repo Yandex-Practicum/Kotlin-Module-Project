@@ -15,9 +15,9 @@ class inArhive : Empty<Any?>() {
         newarhiv[arhivVvod] = mutableMapOf()
         println("Архив создан")
         thisArhiv = arhivVvod
-        println("Выберете заметку или создайте новую в Архиве")
+        //println("Выберете заметку или создайте новую в Архиве")
 
-        makeZmtka()
+        makeArive()
 
     }
 }
@@ -34,22 +34,31 @@ class spisokArhiv : Empty<Any?>() {
             for ((index, archive) in newarhiv.keys.withIndex()) {
                 println("${index + 1}. $archive")
             }
-            println("Выберите архив или напишите 'Выход' для выхода в Меню архивов")
-            val vivArhi = Scanner(System.`in`).nextLine()
+            println("Выберите номер архива")
 
-            if (vivArhi.equals("Выход", ignoreCase = true)) makeArive()
-            else if (!newarhiv.containsKey(vivArhi)) {
-                println("Введите правильное название архива")
+
+            val dlina: Int = newarhiv.size
+
+            if (scanner.hasNextInt()) {
+                val vivArhi = scanner.nextInt()
+
+                if (vivArhi in 0..dlina) {
+                    thisArhiv = newarhiv.keys.elementAt(vivArhi - 1)
+                    makeZmtka() } else
+                    {
+                        println("Введите номер архива который хотите выбрать, вас вернет в список архивов")
+                        spisokArhiv().nachalo()
+                    }
+
+            }  else {
+            println("Введите номер архива который хотите выбрать, вас вернет в список архивов")
+                scanner.next()
                 spisokArhiv().nachalo()
             }
-            else {
-                thisArhiv = newarhiv.keys.elementAt(0)
-                makeZmtka()
-            }
-        }
     }
-
 }
+}
+
 
 
 fun makeArive(
