@@ -6,16 +6,21 @@ abstract class Menu {
     abstract val menuName: String
 
     fun handleExceptions(amountElements: Int): Int {
+        val errorMessage = "Введите число в рамках предложенных вариантов"
         while (true) {
             try {
                 val userInputMenuItem = Scanner(System.`in`).nextInt()
                 if (userInputMenuItem > amountElements) {
-                    println("Введите число в рамках предложенных вариантов")
+                    println(errorMessage)
+                    continue
+                }
+                if (userInputMenuItem < 0) {
+                    println(errorMessage)
                     continue
                 }
                 return userInputMenuItem
             } catch (e: java.util.InputMismatchException) {
-                println("Введите число в рамках предложенных вариантов")
+                println(errorMessage)
             }
         }
     }
