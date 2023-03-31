@@ -30,7 +30,11 @@ abstract class Tool {
 
     }
 
+    open fun chooseOne() {
+
+    }
 }
+
 
 
 

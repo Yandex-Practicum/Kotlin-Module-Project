@@ -1,8 +1,10 @@
 import java.util.Scanner
 
 class Archive(val name: String) : Tool() {
-    private val scanner3 = Scanner(System.`in`)// очень много сканнеров... Могу их убрать, но будут провалы в цикле.
-    private val scanner4 = Scanner(System.`in`)// он на следующей итерации думает, что нужно использовать то, что уже было введено до
+    private val scanner3 =
+        Scanner(System.`in`)// очень много сканнеров... Могу их убрать, но будут провалы в цикле.
+    private val scanner4 =
+        Scanner(System.`in`)// он на следующей итерации думает, что нужно использовать то, что уже было введено до
     private val notes = mutableListOf<Note>()
     override val phrase1 = "заметки"
     override val phrase2 = "заметку"
@@ -24,26 +26,7 @@ class Archive(val name: String) : Tool() {
             val input3 = beforeInput
             when (input3) {
                 1 -> {
-                    if (notes.isEmpty()) {
-                        println("К сожалению, $phrase1 отсутствуют! создайте новые!")
-                    } else {
-                        notes.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
-                        println("Выберите $phrase2 по номеру!")
-                        if (scanner3.hasNextInt()) {
-                            val input4 = scanner3.nextInt()
-                            when (input4) {
-                                in 1..notes.size -> {
-                                    notes[input4 - 1].showList()
-                                }
-                                else -> {
-                                    Error.errorOfScanner()
-                                }
-                            }
-                        } else {
-                            Error.errorOfScanner()
-                            return
-                        }
-                    }
+                    chooseOne()
                 }
                 2 -> {
                     createOne()
@@ -59,7 +42,25 @@ class Archive(val name: String) : Tool() {
         }
     }
 
+override fun chooseOne(){
+    if (notes.isEmpty()) {
+        println("К сожалению, $phrase1 отсутствуют! создайте новые!")
+    } else {
+        notes.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
+        println("Выберите $phrase2 по номеру!")
+        check(beforeInput)
+        val input4 = beforeInput
+        when (input4) {
+            in 1..notes.size -> {
+                notes[input4 - 1].showList()
+            }
+            else -> {
+                Error.errorOfScanner()
+            }
+        }
+    }
 
+}
 }
 
 

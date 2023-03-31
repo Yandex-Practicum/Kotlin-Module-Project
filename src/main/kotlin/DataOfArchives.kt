@@ -23,31 +23,13 @@ open class DataOfArchives : Tool() {
             val archs = getArchives()
             textOfMenu(phrase1, phrase2) /// сделал через абстракт класс логику тут
             check(beforeInput) // и тут
-            val input1 = scanner1.nextInt()
+            val input1 = beforeInput
             when (input1) {
-                1 -> { // этот блок не получается вынести, манался с ним часов 6, из-за разных типо листов не идет, если выношу
-                    if (archs.isEmpty()) { // в отдельный метод и пытаюсь ифнуть через инстанс того или другого листа, то данные проваливаются по итогу
-                        println("К сожалению, $phrase1 пуст, добавь новый архив!")// в общем получается какой-то ад, проще по новой переписать
-                    } else {
-                        archs.forEachIndexed { index, archive -> println("${index + 1}. ${archive.name}") }
-                        println("Выберите $phrase1 по номеру выше")
-                        if (scanner2.hasNextInt()) {
-                            val input2 = scanner2.nextInt()
-                            when (input2) {
-                                in 1..archs.size -> {
-                                    archs[input2 - 1].showList(scanner2)
-                                }
-                                else -> {
-                                    Error.errorOfScanner()
-                                }
-                            }
-                        } else {
-                            Error.errorOfScanner()
-                        }
-                    }
-                }
+                1 -> {
+                    chooseOne(archs) // смог вынести до такого уровня, общее меню не получается вынести так как функция в этом классе принимает параметр,
+                }                    //а в другом нет
                 2 -> {
-                    createOne() // также вынес в отдельный метод логику тут
+                    createOne()
                 }
                 0 -> {
                     println("Выходим...")
@@ -60,6 +42,22 @@ open class DataOfArchives : Tool() {
             }
         }
 
+    }
+
+     fun chooseOne(archs: List<Archive>) {
+        if (archs.isEmpty()) {
+            println("К сожалению, $phrase1 пуст, добавь новый архив!")
+        } else {
+            archs.forEachIndexed { index, archive -> println("${index + 1}. ${archive.name}") }
+            println("Выберите $phrase1 по номеру выше")
+            check(beforeInput)
+            val input2 = beforeInput
+            when (input2) {
+                in 1..archs.size -> {
+                    archs[input2 - 1].showList(scanner2)
+                }
+            }
+        }
     }
 }
 
