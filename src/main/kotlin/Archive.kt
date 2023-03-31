@@ -1,72 +1,65 @@
 import java.util.Scanner
 
-class Archive(val name: String) {
-    private val check1 = Check()
-    private val scanner3 = Scanner(System.`in`)// очень много сканнеров...
-    private val scanner4 = Scanner(System.`in`)
-    private val scanner5 = Scanner(System.`in`)
-
-
+class Archive(val name: String) : Tool() {
+    private val scanner3 = Scanner(System.`in`)// очень много сканнеров... Могу их убрать, но будут провалы в цикле.
+    private val scanner4 = Scanner(System.`in`)// он на следующей итерации думает, что нужно использовать то, что уже было введено до
     private val notes = mutableListOf<Note>()
-    private fun createNote() {
+    override val phrase1 = "заметки"
+    override val phrase2 = "заметку"
+    override var beforeInput: Int = 0
+
+    override fun createOne() {
         println("Введите название заметки!")
-        val nameOfNote = scanner5.nextLine()
+        val nameOfNote = scanner4.nextLine()
         println("Введите текст заметки")
-        val textOfNote = scanner5.nextLine()
+        val textOfNote = scanner4.nextLine()
         notes.add(Note(nameOfNote, textOfNote))
         println("Заметка с имененем $nameOfNote создана")
     }
 
-    fun showNotesMenu(scanner: Scanner) {
+    fun showList(scanner: Scanner) {
         while (true) {
-            println("Выберите следующее действие:")
-            println("1 - Посмотреть заметки")
-            println("2 - Создать заметку")
-            println("0 - Выход ")
-            if (scanner3.hasNextInt()) {
-                val input3 = scanner.nextInt()
-                when (input3) {
-                    1 -> {
-                        if (notes.isEmpty()) {
-                            println("К сожалению, заметки отсутствуют! создайте новые!")
-                            return
-                        } else {
-                            notes.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
-                            println("Выберите заметку по номеру!")
-                            if (scanner4.hasNextInt()) {
-                                val input4 = scanner.nextInt()
-                                when (input4) {
-                                    in 1..notes.size -> {
-                                        notes[input4 - 1].showNote()
-                                    }
-                                    else -> {
-                                        check1.errorOfScanner()
-                                    }
+            textOfMenu(phrase1, phrase2)
+            check(beforeInput)
+            val input3 = beforeInput
+            when (input3) {
+                1 -> {
+                    if (notes.isEmpty()) {
+                        println("К сожалению, $phrase1 отсутствуют! создайте новые!")
+                    } else {
+                        notes.forEachIndexed { index, note -> println("${index + 1}. ${note.name}") }
+                        println("Выберите $phrase2 по номеру!")
+                        if (scanner3.hasNextInt()) {
+                            val input4 = scanner3.nextInt()
+                            when (input4) {
+                                in 1..notes.size -> {
+                                    notes[input4 - 1].showList()
                                 }
-                            } else {
-                                check1.errorOfScanner()
-                                return
+                                else -> {
+                                    Error.errorOfScanner()
+                                }
                             }
+                        } else {
+                            Error.errorOfScanner()
+                            return
                         }
                     }
-                    2 -> {
-                        createNote()
-                    }
-                    0 -> {
-                        return
-                    }
-                    else -> {
-                        check1.errorOfScanner()
-                    }
-
                 }
-            } else {
-                check1.errorOfScanner()
-                return
+                2 -> {
+                    createOne()
+                }
+                0 -> {
+                    return
+                }
+                else -> {
+                    Error.errorOfScanner()
+                }
+
             }
-
-
         }
-
     }
+
+
 }
+
+

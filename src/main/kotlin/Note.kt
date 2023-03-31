@@ -1,10 +1,11 @@
-class Note(
+open class Note(
     val name: String,
-    val text: String
-){
-    fun showNote() {
+    val text: String,
+) {
+    fun showList() {
         println("Название заметки: $name")
         println("Текст в заметке: $text")
         println("")
     }
+
 }
