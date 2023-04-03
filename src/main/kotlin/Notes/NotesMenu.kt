@@ -6,32 +6,35 @@ import Menu
 
 import java.util.*
 
-class NotesMenu(){
+class NotesMenu() {
+    val scan = java.util.Scanner(System.`in`)
     val notesMenu: MutableList<Notes> = mutableListOf()
     fun add(notesMenu: MutableList<Notes>) {
         println("Введите название заметки")
-        val noteName = Scanner(System.`in`).nextLine()
+        val noteName = scan.nextLine()
         println("Введите текст заметки")
-        val noteText = Scanner(System.`in`).nextLine()
-        notesMenu.add(notesMenu.size - 1, Notes (noteName, noteText))
+        val noteText = scan.nextLine()
+        notesMenu.add(notesMenu.size - 1, Notes(noteName, noteText))
         println("Заметка создана")
     }
-    fun show(notesMenu: MutableList<Notes>){
+
+    fun show(notesMenu: MutableList<Notes>) {
         if (notesMenu.size == 0) {
             notesMenu.add(Notes("Создать заметку", ""))
             notesMenu.add(Notes("Выход", ""))
         }
         println("3AMETKИ")
-        for (i in 0 until  notesMenu.size) {
-            println("$i. ${notesMenu [i].name}")
+        for (i in 0 until notesMenu.size) {
+            println("$i. ${notesMenu[i].name}")
+        }
     }
-    }
+
     fun interact(notesMenu: MutableList<Notes>) {
         while (true) {
             try {
                 show(notesMenu)
-                val userInputMenuItem = Scanner(System.`in`).nextInt()
-                if ((userInputMenuItem > notesMenu.size - 1) or (userInputMenuItem < 0)) {
+                val userInputMenuItem = scan.nextInt()
+                if ((userInputMenuItem > notesMenu.size - 1) || (userInputMenuItem < 0)) {
                     println("Введите число в рамках предложенных вариантов")
                     continue
                 }

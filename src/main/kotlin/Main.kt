@@ -4,7 +4,8 @@ fun main() {
     val archiveMenu = ArchiveMenu()
     archiveMenu.interact()
 }
-interface Menu{
+
+interface Menu {
     fun show()
     fun add()
 }
