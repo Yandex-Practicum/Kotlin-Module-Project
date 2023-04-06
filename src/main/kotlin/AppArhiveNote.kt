@@ -17,10 +17,10 @@ class AppArhiveNote {
             }
         }
 
-            val notes = mutableListOf<Note>()
-            archives.add(Archive(userEnter, notes))
-            println("Архив создан")
-            return
+        val notes = mutableListOf<Note>()
+        archives.add(Archive(userEnter, notes))
+        println("Архив создан")
+        return
 
     }
 
@@ -33,7 +33,7 @@ class AppArhiveNote {
         } else {
             println("\nСписок архивов:")
             for ((index, archive) in archives.withIndex()) {
-                 println("${index + 1}. ${archive.name}")
+                println("${index + 1}. ${archive.name}")
 
             }
         }

@@ -25,7 +25,7 @@ class Menu {
     }
 
     fun showError() {
-         println("Выберете пункт меню")
+        println("Выберете пункт меню")
     }
 
     fun cycle(): Int {

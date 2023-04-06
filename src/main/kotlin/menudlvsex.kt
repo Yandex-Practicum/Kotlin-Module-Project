@@ -9,30 +9,30 @@ class Logika {
             when (choice) {
                 0 -> app.createArchive()
                 1 -> {
-                        if (app.showArchives() == null) {
+                    if (app.showArchives() == null) {
 
-                        } else {
-                            val archive = app.selectArchive()
-                            while (true) {
-                                val noteChoice = menu.notesMenu()
-                                when (noteChoice) {
-                                    0 -> app.createNoteInArchive(archive)
-                                    1 -> {
-                                        if (app.selectNoteInArchive(archive) == null) {
+                    } else {
+                        val archive = app.selectArchive()
+                        while (true) {
+                            val noteChoice = menu.notesMenu()
+                            when (noteChoice) {
+                                0 -> app.createNoteInArchive(archive)
+                                1 -> {
+                                    if (app.selectNoteInArchive(archive) == null) {
 
-                                            } else {
-                                            val note = app.showNotesInArchive(archive)
-                                            app.showNoteDetails(note)
-                                        }
+                                    } else {
+                                        val note = app.showNotesInArchive(archive)
+                                        app.showNoteDetails(note)
                                     }
-                                    2 -> break
-                                    else -> menu.showError()
                                 }
-
+                                2 -> break
+                                else -> menu.showError()
                             }
+
                         }
                     }
-                    2 -> {
+                }
+                2 -> {
                     println("До свидания!")
                     return
                 }
