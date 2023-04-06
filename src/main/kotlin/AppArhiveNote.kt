@@ -117,9 +117,9 @@ class AppArhiveNote {
     }
 
     fun showNoteDetails(notes: Note) {
-        println("NOTE")
-        println("Title: ${notes.name}")
-        println("Text: ${notes.notesList}")
+        println("Заметка")
+        println("Название:\n ${notes.name}")
+        println("Текст:\n ${notes.notesList}")
         println("Введите любой символ для выхода в Меню заметок")
         scanner.next()
     }
