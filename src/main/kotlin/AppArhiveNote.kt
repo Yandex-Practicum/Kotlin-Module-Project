@@ -33,11 +33,11 @@ class AppArhiveNote {
         } else {
             println("\nСписок архивов:")
             for ((index, archive) in archives.withIndex()) {
-                println("${index + 1}. ${archive.name}")
-                return println("")
+                 println("${index + 1}. ${archive.name}")
+
             }
         }
-        return null
+        return println("")
     }
 
     fun selectArchive(): Archive {
@@ -110,10 +110,10 @@ class AppArhiveNote {
             println("\nСписок заметок:")
             for ((index) in archives[inde].arhivsList.withIndex()) {
                 println("${index + 1}. ${archives[inde].arhivsList[index]}")
-                return println("")
+
             }
         }
-        return null
+        return println("")
     }
 
     fun showNoteDetails(notes: Note) {
