@@ -1,45 +1,43 @@
-import java.util.Scanner
-import kotlin.system.exitProcess
+class Logika {
 
+    fun logika() {
+        val menu = Menu()
+        val app = AppArhiveNote()
 
-val scanner = Scanner(System.`in`)
+        while (true) {
+            val choice = menu.showMenuArhive()
+            when (choice) {
+                0 -> app.createArchive()
+                1 -> {
+                        if (app.showArchives() == null) {
 
-fun Logika() {
+                        } else {
+                            val archive = app.selectArchive()
+                            while (true) {
+                                val noteChoice = menu.notesMenu()
+                                when (noteChoice) {
+                                    0 -> app.createNoteInArchive(archive)
+                                    1 -> {
+                                        if (app.selectNoteInArchive(archive) == null) {
 
-    val arhivAd = inArhive()
-    val sozdam = zametkaVvod()
+                                            } else {
+                                            val note = app.showNotesInArchive(archive)
+                                            app.showNoteDetails(note)
+                                        }
+                                    }
+                                    2 -> break
+                                    else -> menu.showError()
+                                }
 
-    while (true) {
-
-        if (scanner.hasNextInt()) {
-            val scan = scanner.nextInt()
-            if (scan in 0..2) {
-                when (scan) {
-                    0 -> arhivAd.nachalo() //создать архив
-                    1 -> spisokArhiv().nachalo() //список архивов
-                    2 -> exitProcess(130) //выход из программы
-
+                            }
+                        }
+                    }
+                    2 -> {
+                    println("До свидания!")
+                    return
                 }
-            } else if (scan in 3..5) {
-                when (scan) {
-
-                    3 -> sozdam.nachalo() //создать заметку
-                    4 -> spisokZamet().nachalo() //Выбор из списка заметок
-                    5 -> makeArive() //выход в меню 1
-                }
-            } else {
-                println("Введите пункт меню")
-                scanner.next()
+                else -> menu.showError()
             }
-        } else {
-            println("Введите номер пункта который хотите выбрать")
-            scanner.next()
         }
-
     }
 }
-
-
-
-
-

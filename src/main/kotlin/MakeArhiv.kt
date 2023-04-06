@@ -1,73 +1,49 @@
 import java.util.Scanner
 
+class Menu {
+    val scanner = Scanner(System.`in`)
+    fun showMenuArhive(): Int {
 
-class inArhive : Empty<Any?>() {
+        println("Меню архивов:")
+        println("0. Создать архив")
+        println("1. Уже созданный архив")
+        println("2. Выход из программы")
+        println("Выберите пункт меню")
 
-    override fun nachalo() {
-
-        println("Введите название Архива")
-        val arhivVvod = Scanner(System.`in`).nextLine()
-        if (newarhiv.containsKey(arhivVvod)) {
-            println("Архив с таким именем уже существует, возвращение в меню Архивов")
-            makeArive()
-        }
-
-        newarhiv[arhivVvod] = mutableMapOf()
-        println("Архив создан")
-        thisArhiv = arhivVvod
-        //println("Выберете заметку или создайте новую в Архиве")
-
-        makeArive()
+        return Menu().cycle()
 
     }
-}
 
-class spisokArhiv : Empty<Any?>() {
+    fun notesMenu(): Int {
+        println("Меню заметок:")
+        println("0. Создать заметку")
+        println("1. Уже созданная заметка")
+        println("2. Выход в меню Архивов")
+        println("Выберите пункт меню")
+        return Menu().cycle()
 
-    override fun nachalo() {
+    }
 
-        if (newarhiv.isEmpty()) {
-            println("Список архивов пустой, Вас вернет в предыдущее меню")
-            makeArive()
-        } else {
-            println("Список созданных архивов:")
-            for ((index, archive) in newarhiv.keys.withIndex()) {
-                println("${index + 1}. $archive")
-            }
-            println("Выберите номер архива")
+    fun showError() {
+         println("Выберете пункт меню")
+    }
 
+    fun cycle(): Int {
 
-            val dlina: Int = newarhiv.size
+        while (true) {
 
             if (scanner.hasNextInt()) {
-                val vivArhi = scanner.nextInt()
-
-                if (vivArhi in 0..dlina) {
-                    thisArhiv = newarhiv.keys.elementAt(vivArhi - 1)
-                    makeZmtka() } else
-                    {
-                        println("Введите номер архива который хотите выбрать, вас вернет в список архивов")
-                        spisokArhiv().nachalo()
-                    }
-
-            }  else {
-            println("Введите номер архива который хотите выбрать, вас вернет в список архивов")
-                scanner.next()
-                spisokArhiv().nachalo()
+                val scan = scanner.nextInt()
+                if (scan in 0..2) {
+                    return scan
+                } else {
+                    Menu().showError()
+                    scanner.nextLine()
+                }
+            } else {
+                Menu().showError()
+                scanner.nextLine()
             }
+        }
     }
-}
-}
-
-
-
-fun makeArive(
-
-) {
-    println("Меню архивов:")
-    println("0. Создать архив")
-    println("1. Уже созданный архив")
-    println("2. Выход из программы")
-    println("Выберите пункт меню")
-    Logika()
 }
