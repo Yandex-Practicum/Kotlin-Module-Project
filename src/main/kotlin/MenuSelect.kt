@@ -2,53 +2,125 @@ import java.util.*
 
 class MenuSelect (val level : MenuLevel) {
 
-    fun createMenu(level: MenuLevel, mapNotes: MapNotes, mapArhiv: MapArhiv) {
+    // Функция для создания разных уровней меню. Уровень меню опредлеяется параметром level
+    // Функция принимект на вход массив Map, содержащий заметки для построения их спика
+    // Функция возвращает количество созданных пунктов меню.
+    fun createMenu(level: MenuLevel, mapNotes: MapNotes, mapArhiv: MapArhiv) : Int {
 
-        println("Введите число соответствующее пункту меню: ") //
-        if (level == MenuLevel.MainMenu) {
-            println("1. Создать архив")
-            println("2. Открыть имеющийся архив")
-            println("3. Выход из программы")
-
-        } else if (level == MenuLevel.NoteMenu) {
-            val numPoints = mapNotes.mapNotes.size
-            println("1. ${level.menuPoint()}")
-            for (i in 2..numPoints + 1) {
-                val notes = mapNotes.mapNotes.keys.toList()[i - 2]
-                println("$i. $notes")
-            }
-            println("${numPoints + 2}. Возврат в предыдущее меню")
-
-        } else if (level == MenuLevel.ArhivMenu) {
-            val numPoints = mapArhiv.mapArhiv.size
-            println("1. ${level.menuPoint()}")
-            for (i in 2..numPoints + 1) {
-                val arhives = mapArhiv.mapArhiv.keys.toList()[i - 2]
+        println("Введите число соответствующее пункту меню: ")
+        return if (level == MenuLevel.ArhivMenu) {  // Уровень меню архивов
+            val numPoints = mapArhiv.mapArhiv.size      //размер архива
+            println("0. ${level.menuPoint()}")          //0 пункт. Создать
+            for (i in 1..numPoints) {              // 1... список Map в архиве
+                val arhives = mapArhiv.mapArhiv.keys.toList()[i - 1]
                 println("$i. $arhives")
             }
-            println("${numPoints + 2}. Возврат в предыдущее меню")
+            println("${numPoints + 1}. Выход из программы")
+            //return numPoints + 1
+            // далее вызываем считывание выбранного пункта:
+            val pointMenu = readMenu(numPoints + 1)
+            // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
+            return pointMenu
+
+
+
+        } else if (level == MenuLevel.NoteMenu) {    // Уровень меню заметок
+            val numPoints = mapNotes.mutableMapNotes.size
+            println("0. ${level.menuPoint()}")
+            for (i in 1..numPoints) {
+                val notes = mapNotes.mutableMapNotes.keys.toList()[i - 1]
+                println("$i. $notes")
+            }
+            println("${numPoints + 1}. Возврат в предыдущее меню")
+
+            // далее вызываем считывание выбранного пункта:
+            val pointMenu = readMenu(numPoints + 1)
+            // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
+            return pointMenu
+
+        } else {
+            return 0
         }
 
     }
 
+    fun makeMenu(level: MenuLevel, mapArhiv: MapArhiv, keyForMap: String) : Any? {
 
+        println("Введите число соответствующее пункту меню: ")
+        return if (level == MenuLevel.ArhivMenu) {                      // Уровень меню архивов
+            val numPoints = mapArhiv.mapArhiv.size                      //размер архива
+            println("0. ${level.menuPoint()}")                          //0 пункт. Создать
+            for (i in 1..numPoints) {                             // 1... список Map в архиве
+                val arhives = mapArhiv.mapArhiv.keys.toList()[i - 1]
+                println("$i. $arhives")
+            }
+            println("${numPoints + 1}. Выход из программы")             // печать последнего пункта. В режиме архивов - это выход из программы
+            //return numPoints + 1
+            // далее вызываем считывание выбранного пункта:
+            val pointMenu = readMenu(numPoints + 2)
+            // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
+            if (pointMenu == 0) {                                                   //если пользователь выбрал 0
+                mapArhiv.makeArhiv()                                                // создаем еще один архив
+                return 0                                                            // возврат 0
+            } else if (pointMenu == numPoints + 1) {                                // если пользовательвыбрал последний пункт
+                return "exitMenu"                                                   //возвращаем фразу "exitMenu"
+            } else {
+                return mapArhiv.mapArhiv.keys.toList()[pointMenu - 1]               // возвращаем название выбранного архива
+            }
+
+        } else if (level == MenuLevel.NoteMenu) {                                       // Уровень меню заметок
+                                                                                        println("!!Уровень меню заметок" )
+            val numPoints = mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.count()
+            println("0. ${level.menuPoint()}")
+            for (i in 1..numPoints!!) {
+                val notes = mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.keys?.toList()?.get(i - 1)
+                println("$i. $notes")
+            }
+            println("${numPoints + 1}. Возврат в предыдущее меню")
+
+            // далее вызываем считывание выбранного пункта:
+            val pointMenu = readMenu(numPoints + 1)
+            // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
+            if (pointMenu == 0) {
+                mapArhiv.mapArhiv[keyForMap]?.makeNote(mapNotes = mapArhiv.mapArhiv[keyForMap]!!)
+                                                                                    println("!!ДОБАВИЛИ ЗАМЕТКУ!!" )
+            } else if (pointMenu == numPoints + 1) {                                // если пользовательвыбрал последний пункт
+                return "exitMenu"                                                   //возвращаем фразу "exitMenu"
+                                                                                    println("!!ВОЗВРАТ exitMenu!!" )
+            } else {
+                return mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.keys?.toList()?.get(pointMenu - 1)         // возвращаем содержание выбранной заметки
+                                                                                    println("!!ВОЗВРАТ содержание выбранной заметки!!" )
+            }
+
+
+
+        } else {
+            return 0
+        }
+
+    }
+
+/*
+Функция readMenu(numPoints: Int): Int "читает" ввод пользователя и проверяет его правильность
+ */
     fun readMenu(numPoints: Int): Int {
         val input = Scanner(System.`in`)
 
         while (true) {
             if (input.hasNextInt()) {
                 val SelectPoint = (input.nextInt())
-                for (i in 1..numPoints) {
+
+                for (i in 0..numPoints-1) {
                     if (SelectPoint == i) {
-                        println("Запускаем пункт $i")
+                        println("Выбрали пункт $i")
                     }
                     return SelectPoint
                 }
-                if (SelectPoint == numPoints + 1) {
+                if (SelectPoint == numPoints +1) {
                     println("Возврат на предыдущее меню")
                     return SelectPoint
                 }
-                if (SelectPoint > numPoints + 1) {
+                if (SelectPoint > numPoints+1 ) {
                     println("Введите другое число")
                 }
             } else {
