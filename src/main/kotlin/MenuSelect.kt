@@ -48,7 +48,7 @@ class MenuSelect (val level : MenuLevel) {
 
     fun makeMenu(level: MenuLevel, mapArhiv: MapArhiv, keyForMap: String) : Any? {
 
-        println("Введите число соответствующее пункту меню: ")
+        println("Введите число, соответствующее пункту меню: ")
         return if (level == MenuLevel.ArhivMenu) {                      // Уровень меню архивов
             println("АРХИВЫ" )
             val numPointsInMap = mapArhiv.mapArhiv.size                      //размер архива
@@ -58,17 +58,17 @@ class MenuSelect (val level : MenuLevel) {
                 println("$i. $arhives")
             }
             println("${numPointsInMap + 1}. Выход из программы")             // печать последнего пункта. В режиме архивов - это выход из программы
-            //return numPoints + 1
+
             // далее вызываем считывание выбранного пункта:
             val pointMenu = readMenu(numPointsInMap + 1)
             // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
             if (pointMenu == 0) {                                                   //если пользователь выбрал 0
                 mapArhiv.makeArhiv()                                                // создаем еще один архив
-                return 0                                                            // возврат 0
+                return "archiveСreated"                                             // возврат "archiveСreated" что Архив создан
             } else if (pointMenu == numPointsInMap + 1) {                                // если пользовательвыбрал последний пункт
-                return "exitMenu"                                                   //возвращаем фразу "exitMenu"
+                return "exitApp"                                                   //возвращаем фразу "exitApp" для выхода из программы
             } else {
-                return mapArhiv.mapArhiv.keys.toList()[pointMenu - 1]               // возвращаем название выбранного архива
+                return mapArhiv.mapArhiv.keys.toList()[pointMenu - 1]               // возвращаем название выбранного архива для последующего его открытия
             }
 
         } else if (level == MenuLevel.NoteMenu) {                                       // Уровень меню заметок
@@ -85,22 +85,21 @@ class MenuSelect (val level : MenuLevel) {
             val pointMenu = readMenu(numOfNotes + 1)
             // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
             if (pointMenu == 0) {
-                mapArhiv.mapArhiv[keyForMap]?.makeNote(mapNotes = mapArhiv.mapArhiv[keyForMap]!!)
+                mapArhiv.mapArhiv[keyForMap]?.makeNote(mapNotes = mapArhiv.mapArhiv[keyForMap]!!)   // создать новую заметку в makeNote
+                return "noteCreated"
             } else if (pointMenu == numOfNotes + 1) {                                // если пользовательвыбрал последний пункт
                 return "exitMenu"                                                   //возвращаем фразу "exitMenu"
-            } else {
+            } else {                                                                // если пользователь выбрал конкретную заметку
                 return mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.keys?.toList()?.get(pointMenu - 1)         // возвращаем содержание выбранной заметки
             }
         } else {
             return 0
         }
-
     }
 
 /*
 Функция readMenu(numPoints: Int): Int "читает" ввод пользователя и проверяет его правильность
 Затем возвращает выбранный пункт
-
  */
     fun readMenu(numPoints: Int): Int {
         val input = Scanner(System.`in`)
@@ -123,7 +122,7 @@ class MenuSelect (val level : MenuLevel) {
     }
 }
 
-enum class MenuLevel (val level: String) // конструктор
+enum class MenuLevel (val level: String) // класс Enum будет хранить названия и свойства разных меню
 {
     MainMenu    ("Главное меню"),
     ArhivMenu   ("Архив"),
@@ -134,7 +133,7 @@ enum class MenuLevel (val level: String) // конструктор
         return when (this) {
             MainMenu    -> "Главное меню"
             ArhivMenu   -> "Создать архив"
-            NoteMenu -> "Создать заметку"
+            NoteMenu    -> "Создать заметку"
         }
     }
 }
