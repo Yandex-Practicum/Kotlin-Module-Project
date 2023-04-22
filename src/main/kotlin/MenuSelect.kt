@@ -44,13 +44,13 @@ class MenuSelect  {
             // далее вызываем считывание выбранного пункта:
             val pointMenu = readMenu(numOfNotes + 1)
             // АНАЛИЗИРУЕМ ВЫБОР ПОЛЬЗОВАТЕЛЯ:
-            if (pointMenu == 0) {
+            return if (pointMenu == 0) {
                 mapArhiv.mapArhiv[keyForMap]?.makeNote(mapNotes = mapArhiv.mapArhiv[keyForMap]!!)   // создать новую заметку в makeNote
-                return "noteCreated"
+                "noteCreated"
             } else if (pointMenu == numOfNotes + 1) {                               // если пользовательвыбрал последний пункт
-                return "exitMenu"                                                   //возвращаем фразу "exitMenu"
+                "exitMenu"                                                   //возвращаем фразу "exitMenu"
             } else {                                                                // если пользователь выбрал конкретную заметку
-                return mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.keys?.toList()?.get(pointMenu - 1)         // возвращаем название выбранной заметки
+                mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.keys?.toList()?.get(pointMenu - 1)         // возвращаем название выбранной заметки
             }
         } else {
             return 0
@@ -61,7 +61,7 @@ class MenuSelect  {
 Функция readMenu(numPoints: Int): Int "читает" ввод пользователя и проверяет его правильность
 Затем возвращает выбранный пункт
  */
-    fun readMenu(numPoints: Int): Int {
+private fun readMenu(numPoints: Int): Int {
         val input = Scanner(System.`in`)
 
         while (true) {
@@ -82,18 +82,3 @@ class MenuSelect  {
     }
 }
 
-enum class MenuLevel (val levelName: String) // класс Enum будет хранить названия и свойства разных меню
-{
-    MainMenu    ("Главное меню"),
-    ArhivMenu   ("АРХИВ"),
-    NoteMenu    ("ЗАМЕТКИ"),
-;
-    // метод класса
-    fun menuPoint(): String {
-        return when (this) {
-            MainMenu    -> "Главное меню"
-            ArhivMenu   -> "Создать архив"
-            NoteMenu    -> "Создать заметку"
-        }
-    }
-}
