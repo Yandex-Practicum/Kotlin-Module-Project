@@ -24,7 +24,7 @@ class MapNotes (val mutableMapNotes: MutableMap<String, String>) {
         addMapNotes(mapNotes, keyNote, note)
         println("Заметка добавлена")
         val countmapNotes = mapNotes.mutableMapNotes.size
-        println("Теперь заметок makeNote: $countmapNotes")
+        println("Теперь заметок: $countmapNotes")
     }
 
     fun addNote() {

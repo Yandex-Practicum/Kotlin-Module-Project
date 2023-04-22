@@ -20,6 +20,8 @@ fun main(args: Array<String>) {
 
              if (mapArhiv.mapArhiv.contains(keyReturned)) {   //проверка если есть такой архив
                  levelMenu = MenuLevel.NoteMenu                 // то открываем его, переключая уровень меню
+                 println ("================================")
+                 println("Выбран архив $keyReturned")
              }
           }
         val keyForMap = keyReturned.toString()                  // сохраним ключ только что переданного архива для его открытия
@@ -30,7 +32,7 @@ fun main(args: Array<String>) {
             var keyReturned = menu.makeMenu(levelMenu, mapArhiv, keyForMap)
             if (keyReturned=="exitMenu") {
                 levelMenu = MenuLevel.ArhivMenu                     // если вернет exitMenu -> перейти в меню Архивов
-            } else {
+            } else if (keyReturned!="noteCreated"){
                 print("Содержание заметки $keyReturned : ")
                 println(mapArhiv.mapArhiv[keyForMap]?.mutableMapNotes?.get(keyReturned)?.toString())
             }
