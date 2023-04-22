@@ -6,7 +6,7 @@ class MapNotes (val mutableMapNotes: MutableMap<String, String>) {
     //Создаем тестовые заметки и архивы
     // val mapNotes  = mutableMapOf("Заметка #1" to "Значение заметки #1",
     //     "Заметка #2" to "Значение заметки #2","Заметка #3" to "Значение заметки #3",)
-    fun addMapNotes(
+    private fun addMapNotes(
         mapNotes: MapNotes,
         keyNote: String,
         note: String
@@ -26,19 +26,6 @@ class MapNotes (val mutableMapNotes: MutableMap<String, String>) {
         val countmapNotes = mapNotes.mutableMapNotes.size
         println("Теперь заметок: $countmapNotes")
     }
-
-    fun addNote() {
-        val input = Scanner(System.`in`)
-        println("Введите название заметки")
-        val keyNote = (input.nextLine())
-        println("Введите содержание заметки")
-        val note = (input.nextLine())
-        mutableMapNotes.plusAssign(keyNote to note)
-        println("Заметка добавлена")
-        val countmapNotes = mutableMapNotes.size
-        println("Теперь заметок addNote(): $countmapNotes")
-
-    }
 }
 
 
@@ -47,8 +34,8 @@ class MapArhiv (val mapArhiv : MutableMap<String,MapNotes>) {
     //make arhive
 
 
-    fun addMapNoteToArhiv (keyArhiv:String) {
-        val mapNotesInArhiv = MapNotes( mutableMapOf<String, String>())
+    private fun addMapNoteToArhiv (keyArhiv:String) {
+        val mapNotesInArhiv = MapNotes( mutableMapOf())
         mapArhiv.plusAssign (keyArhiv to mapNotesInArhiv)
     }
 
@@ -56,9 +43,9 @@ class MapArhiv (val mapArhiv : MutableMap<String,MapNotes>) {
         val input = Scanner(System.`in`)
         println("Введите название архива")
         val keyArhiv = (input.nextLine())
-        val mapNotes: MutableMap<String, String> = mutableMapOf()
+        //val mapNotes: MutableMap<String, String> = mutableMapOf()
 
-        addMapNoteToArhiv (keyArhiv, )
+        addMapNoteToArhiv (keyArhiv)
         println("Архив создан")
         val countmapArhives = mapArhiv.size
         println("Теперь количество архивов стало $countmapArhives")

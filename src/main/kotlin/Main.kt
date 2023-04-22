@@ -1,14 +1,11 @@
 
-import java.util.*
-import kotlin.random.Random
-
-fun main(args: Array<String>) {
+fun main() {
     println("Приложение Заметки. Добрый день!") // поздоровайтесь с пользователем
     var levelMenu = MenuLevel.ArhivMenu     // Задаем уровень меню - уровни описаны в Enum class MenuLevel (val level: String)
 
-    val mapArhiv = MapArhiv(mutableMapOf<String, MapNotes>())           // создаем карту, содержащая список всех архивов
+    val mapArhiv = MapArhiv(mutableMapOf())           // создаем карту, содержащая список всех архивов
 
-    val menu = MenuSelect(levelMenu)                         // Создаем обьект класса MenuSelect
+    val menu = MenuSelect()                         // Создаем обьект класса MenuSelect
     var keyReturned : Any? = ""                              //переменная, в которой будет приниматься результат функций класса MenuSelect
 
     //Зацикливаем всю работу по вызову разных меню до момента выбора пункта меню Выход из программы в Главном меню
@@ -16,7 +13,7 @@ fun main(args: Array<String>) {
         println(" ")                                        // Это для красоты, отделить одно меню от другого
         if (levelMenu == MenuLevel.ArhivMenu){
             // 1. Создаем меню выбранного уровня. Функция makeMenu возвращает выбор пользователя в переменную keyReturned
-             keyReturned = menu.makeMenu(levelMenu, mapArhiv, "")
+             keyReturned = menu.makeMenu(levelMenu, mapArhiv)
 
              if (mapArhiv.mapArhiv.contains(keyReturned)) {   //проверка если есть такой архив
                  levelMenu = MenuLevel.NoteMenu                 // то открываем его, переключая уровень меню
@@ -27,9 +24,9 @@ fun main(args: Array<String>) {
         val keyForMap = keyReturned.toString()                  // сохраним ключ только что переданного архива для его открытия
 
         if (levelMenu == MenuLevel.NoteMenu){
-            // 1. Создаем меню ЗАМЕТОК. Функция makeMenu возвращает выбор пользователя в переменную keyReturned
+            // 2. Создаем меню ЗАМЕТОК. Функция makeMenu возвращает выбор пользователя в переменную keyReturned
 
-            var keyReturned = menu.makeMenu(levelMenu, mapArhiv, keyForMap)
+            val keyReturned = menu.makeMenu(levelMenu, mapArhiv, keyForMap) //  в данном случае вместе с mapArhiv передаем ключ выбранного архива
             if (keyReturned=="exitMenu") {
                 levelMenu = MenuLevel.ArhivMenu                     // если вернет exitMenu -> перейти в меню Архивов
             } else if (keyReturned!="noteCreated"){
