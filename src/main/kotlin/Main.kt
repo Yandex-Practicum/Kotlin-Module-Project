@@ -1,3 +1,4 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val logicApp = LogicApp("Меню выбора")
+    logicApp.showMenu("архив")
 }
