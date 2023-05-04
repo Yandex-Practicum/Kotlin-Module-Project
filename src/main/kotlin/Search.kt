@@ -36,7 +36,7 @@ fun searchCheck(title: String, filename: String, isNote1 : Boolean) : Boolean{
         if ((result2+"\\").length == count){
             check = false
         }
-        if (result == "Main.kt"||result=="Search.kt"||result==""){
+        if (result == "Main.kt"||result=="Search.kt"||result=="Class.kt"||result==""){
             check = false
         }
         var array2 = result.toCharArray()
@@ -121,7 +121,7 @@ fun searchIfEmpty(filename: String, isNote1: Boolean):Boolean{
         if ((result2+"\\").length == count){
             check = false
         }
-        if (result == "Main.kt"||result=="Search.kt"||result==""){
+        if (result == "Main.kt"||result=="Search.kt"||result=="Class.kt"||result==""){
             check = false
         }
         var array2 = result.toCharArray()
@@ -202,7 +202,7 @@ fun search(filename : String) {
         if ((result2+"\\").length == count){
             check = false
         }
-        if (result == "Main.kt"||result=="Search.kt"||result==""){
+        if (result == "Main.kt"||result=="Search.kt"||result=="Class.kt"||result==""){
             check = false
         }
         var array2 = result.toCharArray()
