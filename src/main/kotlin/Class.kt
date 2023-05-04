@@ -4,7 +4,7 @@ class Menu {
         if (filename1 == "/src/main/kotlin") {
             println("Вы находитесь в исходной директории")
         } else {
-            println("Вы находитесь в архиве${currentFolder(filename1)}")
+            println("Вы находитесь в архиве '${currentFolder(filename1)}'")
         }
         println("Выберите опцию:")
         println("1. Создать заметку")
@@ -37,22 +37,22 @@ class Menu {
         return true
     }
 
-    fun select(filename1: String, isNote: Boolean) {
+    private fun select(filename1: String, isNote: Boolean) {
         var line: String
         if (filename1 == "/src/main/kotlin") {
             println("Содержание исходной директории:")
         } else {
             println("Содержание архива '${currentFolder(filename1)}':")
         }
-        search(filename1)
+        search("NoMatter", filename1, true, "Search")
         if (isNote) {
-            if (searchIfEmpty(filename1, true)) {
+            if (search("NoMatter",filename1, true, "IfEmpty")) {
                 println("Пожалуйста, выберите одну из предоставленных опций. Впишите название заметки")
                 line = readln()
-                if (searchCheck(line, filename1, true)) {
+                if (search(line, filename1, true, "Check")) {
                     readTxt(line, filename1)
                 } else {
-                    while (!searchCheck(line, filename1, true)) {
+                    while (!search(line, filename1, true, "Check")) {
                         println("Название заметки не было введено корректно. Попробуйте снова")
                         line = readln()
                     }
@@ -63,19 +63,19 @@ class Menu {
                     println("В этой директории нет заметок. Проверьте архивы")
                     println()
                 } else {
-                    println("В архиве '${currentFolder(filename1)}'' отсутсвуют заметки. Чтобы их выбрать, их нужно сначала создать")
+                    println("В архиве '${currentFolder(filename1)}' отсутсвуют заметки. Чтобы их выбрать, их нужно сначала создать")
                     println()
                 }
             }
         } else {
-            if (searchIfEmpty(filename1, false)) {
+            if (search("NoMatter",filename1, false, "IfEmpty")) {
                 println("Пожалуйста, выберите одну из предоставленных опций. Впишите название архива")
                 line = readln()
-                if (searchCheck(line, filename1, false)) {
+                if (search(line, filename1, false, "Check")) {
                     val filename = selectArchive(line, filename1)
                     screen(filename)
                 } else {
-                    while (!searchCheck(line, filename1, false)) {
+                    while (!search(line, filename1, false, "Check")) {
                         println("Название архива не было введено корректно. Попробуйте снова")
                         line = readln()
                     }
@@ -94,7 +94,7 @@ class Menu {
         }
     }
 
-    fun create(filename1: String, isNote: Boolean) {
+    private fun create(filename1: String, isNote: Boolean) {
         var line: String
         if (isNote) {
             var title: String
@@ -106,8 +106,8 @@ class Menu {
                     println("Название заметки не может быть пустым, попробуйте снова")
                     title = readln()
                 }
-            } else if (searchCheck(title, filename1, true)) {
-                while (searchCheck(title, filename1, true)) {
+            } else if (search(title, filename1, true, "Check")) {
+                while (search(title, filename1, true, "Check")) {
                     println("Заметка с данным названием уже существует. Попробуйте снова.")
                     title = readln()
                 }
@@ -144,8 +144,8 @@ class Menu {
                     println("Название архива не может быть пустым, попробуйте снова")
                     line = readln()
                 }
-            } else if (searchCheck(line, filename1, false)) {
-                while (searchCheck(line, filename1, false)) {
+            } else if (search(line, filename1, false, "Check")) {
+                while (search(line, filename1, false, "Check")) {
                     println("Архив с данным названием уже существует. Попробуйте снова.")
                     line = readln()
                 }
