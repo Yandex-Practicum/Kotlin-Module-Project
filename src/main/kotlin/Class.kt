@@ -107,7 +107,7 @@ class Menu {
                     title = readln()
                 }
             } else if (search(title, filename1, true, "Check")) {
-                while (search(title, filename1, true, "Check")) {
+                while (search(title, filename1, true, "Check") || title == "") {
                     println("Заметка с данным названием уже существует. Попробуйте снова.")
                     title = readln()
                 }
@@ -145,7 +145,7 @@ class Menu {
                     line = readln()
                 }
             } else if (search(line, filename1, false, "Check")) {
-                while (search(line, filename1, false, "Check")) {
+                while (search(line, filename1, false, "Check")|| line == "") {
                     println("Архив с данным названием уже существует. Попробуйте снова.")
                     line = readln()
                 }
