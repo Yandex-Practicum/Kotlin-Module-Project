@@ -1,6 +1,5 @@
-fun main(args: Array<String>) {
+fun main() {
     var keepGoing = true
-// /src/main/kotlin
     val newMenu = Menu()
     while (keepGoing){
         keepGoing = newMenu.screen("/src/main/kotlin")
