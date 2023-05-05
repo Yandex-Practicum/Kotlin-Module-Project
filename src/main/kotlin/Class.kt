@@ -38,18 +38,18 @@ class Menu {
             "архива"
         }
         println("Содержание ${if (filename1 == "/src/main/kotlin") "исходной директории" else "архива '${currentFolder(filename1)}'"}:")
-        search("NoMatter", filename1, isNote, "Search")
-        if (search("NoMatter", filename1, isNote, "IfEmpty")) {
+        search("NoMatter", filename1, isNote, SearchType.SEARCH)
+        if (search("NoMatter", filename1, isNote, SearchType.IF_EMPTY)) {
             println("Пожалуйста, выберите одну из предоставленных опций. Впишите название $altPrint")
             line = readln()
-            if (search(line, filename1, isNote, "Check")) {
+            if (search(line, filename1, isNote, SearchType.CHECK)) {
                 if (isNote) {
                     readTxt(line, filename1)
                 } else {
                     screen(selectArchive(line, filename1))
                 }
             } else {
-                while (!search(line, filename1, isNote, "Check")) {
+                while (!search(line, filename1, isNote, SearchType.CHECK)) {
                     println("Название $altPrint не было введено корректно. Попробуйте снова")
                     line = readln()
                 }
@@ -87,8 +87,8 @@ class Menu {
                 println("Название $altPrint не может быть пустым, попробуйте снова")
                 title = readln()
             }
-        } else if (search(title, filename1, isNote, "Check")) {
-            while (search(title, filename1, isNote, "Check") || title == "") {
+        } else if (search(title, filename1, isNote, SearchType.CHECK)) {
+            while (search(title, filename1, isNote, SearchType.CHECK) || title == "") {
                 println("${if (isNote) "Заметка" else "Архив"} с данным названием уже существует. Попробуйте снова.")
                 title = readln()
             }

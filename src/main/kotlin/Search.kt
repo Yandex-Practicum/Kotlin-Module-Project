@@ -2,18 +2,23 @@ import java.io.File
 import java.lang.Exception
 import java.nio.file.Files
 import java.nio.file.Paths
+enum class SearchType{
+    CHECK,
+    IF_EMPTY,
+    SEARCH
+}
 
 val path: String = System.getProperty("user.dir")
-fun search(title: String, filename: String, isNote1: Boolean, type: String): Boolean {
+fun search(title: String, filename: String, isNote1: Boolean, type: SearchType): Boolean {
     val target = if (isNote1) ".txt" else ""
     File("$path$filename").walk().forEach { file ->
         var relativePath = file.toRelativeString(File("$path$filename"))
         val isNote = relativePath.endsWith(".txt")
-        if ((isNote != isNote1 && type != "Search") || relativePath.contains("\\") || (relativePath == "Main.kt" || relativePath == "Search.kt" || relativePath == "Class.kt" || relativePath == "")) return@forEach
+        if ((isNote != isNote1 && type != SearchType.SEARCH) || relativePath.contains("\\") || (relativePath == "Main.kt" || relativePath == "Search.kt" || relativePath == "Class.kt" || relativePath == "")) return@forEach
         when (type) {
-            "Check" -> if (relativePath == "$title$target") return true
-            "IfEmpty" -> return true
-            "Search" -> {
+            SearchType.CHECK -> if (relativePath == "$title$target") return true
+            SearchType.IF_EMPTY -> return true
+            SearchType.SEARCH -> {
                 if (isNote) {
                     relativePath = relativePath.substring(0, relativePath.length - 4)
                 }
