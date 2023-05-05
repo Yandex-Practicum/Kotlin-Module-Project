@@ -1,10 +1,6 @@
 class Menu {
     fun screen(filename1: String): Boolean {
-        if (filename1 == "/src/main/kotlin") {
-            println("Вы находитесь в исходной директории")
-        } else {
-            println("Вы находитесь в архиве '${currentFolder(filename1)}'")
-        }
+        println("Вы находитесь в ${if (filename1 == "/src/main/kotlin") "исходной директории" else "архиве '${currentFolder(filename1)}'"}")
         println("Выберите опцию:")
         println("1. Создать заметку")
         println("2. Создать архив")
