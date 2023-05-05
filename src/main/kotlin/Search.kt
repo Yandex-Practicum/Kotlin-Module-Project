@@ -8,7 +8,7 @@ fun search(title: String, filename: String, isNote1: Boolean, type: String): Boo
     val target = if (isNote1) ".txt" else ""
     var check: Boolean
     File("$path$filename").walk().forEach { file ->
-        val relativePath = file.toRelativeString(File("$path$filename"))
+        var relativePath = file.toRelativeString(File("$path$filename"))
         val isNote = relativePath.endsWith(".txt")
         check=true
         if (relativePath == "Main.kt"||relativePath=="Search.kt"||relativePath=="Class.kt"||relativePath==""){
@@ -18,7 +18,12 @@ fun search(title: String, filename: String, isNote1: Boolean, type: String): Boo
         when (type) {
                 "Check" -> if (relativePath == "$title$target") return true
                 "IfEmpty" -> return true
-                "Search" -> println("${if (isNote) "Заметка" else "Архив"}: $relativePath")
+                "Search" ->{
+                    if (isNote){
+                        relativePath = relativePath.substring(0, relativePath.length - 4)
+                    }
+                    println("${if (isNote) "Заметка" else "Архив"}: $relativePath")
+                }
         }
     }
     return false
