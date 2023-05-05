@@ -6,24 +6,19 @@ import java.nio.file.Paths
 val path: String = System.getProperty("user.dir")
 fun search(title: String, filename: String, isNote1: Boolean, type: String): Boolean {
     val target = if (isNote1) ".txt" else ""
-    var check: Boolean
     File("$path$filename").walk().forEach { file ->
         var relativePath = file.toRelativeString(File("$path$filename"))
         val isNote = relativePath.endsWith(".txt")
-        check=true
-        if (relativePath == "Main.kt"||relativePath=="Search.kt"||relativePath=="Class.kt"||relativePath==""){
-            check = false
-        }
-        if ((isNote != isNote1 && type!="Search") || relativePath.contains("\\")||!check) return@forEach
+        if ((isNote != isNote1 && type != "Search") || relativePath.contains("\\") || (relativePath == "Main.kt" || relativePath == "Search.kt" || relativePath == "Class.kt" || relativePath == "")) return@forEach
         when (type) {
-                "Check" -> if (relativePath == "$title$target") return true
-                "IfEmpty" -> return true
-                "Search" ->{
-                    if (isNote){
-                        relativePath = relativePath.substring(0, relativePath.length - 4)
-                    }
-                    println("${if (isNote) "Заметка" else "Архив"}: $relativePath")
+            "Check" -> if (relativePath == "$title$target") return true
+            "IfEmpty" -> return true
+            "Search" -> {
+                if (isNote) {
+                    relativePath = relativePath.substring(0, relativePath.length - 4)
                 }
+                println("${if (isNote) "Заметка" else "Архив"}: $relativePath")
+            }
         }
     }
     return false
