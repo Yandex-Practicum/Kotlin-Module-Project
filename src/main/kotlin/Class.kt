@@ -42,24 +42,16 @@ class Menu {
         if (search("NoMatter", filename1, isNote, SearchType.IF_EMPTY)) {
             println("Пожалуйста, выберите одну из предоставленных опций. Впишите название $altPrint")
             line = readln()
-            if (search(line, filename1, isNote, SearchType.CHECK)) {
-                if (isNote) {
-                    readTxt(line, filename1)
-                } else {
-                    screen(selectArchive(line, filename1))
-                }
-            } else {
-                while (!search(line, filename1, isNote, SearchType.CHECK)) {
-                    println("Название $altPrint не было введено корректно. Попробуйте снова")
-                    line = readln()
-                }
-                if (isNote) {
-                    readTxt(line, filename1)
-                } else {
-                    screen(selectArchive(line, filename1))
-                }
-
+            while (!search(line, filename1, isNote, SearchType.CHECK)) {
+                println("Название $altPrint не было введено корректно. Попробуйте снова")
+                line = readln()
             }
+            if (isNote) {
+                readTxt(line, filename1)
+            } else {
+                screen(selectArchive(line, filename1))
+            }
+
         } else {
             if (filename1 == "/src/main/kotlin") {
                 println("В этой директории нет ${if (isNote) "заметок. Проверьте архивы." else "архивов."}")
@@ -82,16 +74,13 @@ class Menu {
         var texxt: String
         println("Введите название $altPrint")
         title = readln()
-        if (title == "") {
-            while (title == "") {
+        while (search(title, filename1, isNote, SearchType.CHECK) || title == "") {
+            if (title == "") {
                 println("Название $altPrint не может быть пустым, попробуйте снова")
-                title = readln()
-            }
-        } else if (search(title, filename1, isNote, SearchType.CHECK)) {
-            while (search(title, filename1, isNote, SearchType.CHECK) || title == "") {
+            } else {
                 println("${if (isNote) "Заметка" else "Архив"} с данным названием уже существует. Попробуйте снова.")
-                title = readln()
             }
+            title = readln()
         }
         if (isNote) {
             altPrint = "Введите текст заметки"
