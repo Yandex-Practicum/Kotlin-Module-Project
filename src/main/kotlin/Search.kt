@@ -3,9 +3,9 @@ import java.lang.Exception
 import java.nio.file.Files
 import java.nio.file.Paths
 enum class SearchType{
-    CHECK,
-    IF_EMPTY,
-    SEARCH
+    CHECK, // проверяем, существует ли в архиве файл под названием 'title' 
+    IF_EMPTY, // проверяем содержит ли архив заметки или архивы 
+    SEARCH // отображает список заметок и архивов в архиве
 }
 
 val path: String = System.getProperty("user.dir")
