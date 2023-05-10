@@ -1,2 +1,1 @@
-class Command(val name: String, val action: (Int) -> Unit) {
-}
+class Command(val name: String, val action: (Int) -> Unit)
