@@ -1,5 +1,5 @@
 class MenuCreateNote (val key: Int) : CreateInterface {
-    override val title = "Введите заметку или 0 для выхода"
+    override val title = "Введите заметку или 1 для выхода"
     override var tempData = ""
     override val backToMenu: () -> Unit = {menu.showViewMenu(MenuViewArchive(key))}
 

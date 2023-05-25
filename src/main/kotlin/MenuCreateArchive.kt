@@ -1,7 +1,7 @@
 class MenuCreateArchive () : CreateInterface {
-    override val title = "Введите имя архива или 0 для выхода"
+    override val title = "Введите имя архива"
     override var tempData = ""
-    override val backToMenu = {menu.showViewMenu(MenuArchiveCollection())}
+    override val backToMenu = {menu.showViewMenu(MenuArchiveCollectionView())}
 
     override fun createFromInput() {
         println(title)

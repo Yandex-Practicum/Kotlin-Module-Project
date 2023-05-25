@@ -1,7 +1,7 @@
 val menu = MenuNavigation()
 
 fun main() {
-    menu.showViewMenu(MenuArchiveCollection())
+    menu.showViewMenu(MenuArchiveCollectionView())
 }
 
 

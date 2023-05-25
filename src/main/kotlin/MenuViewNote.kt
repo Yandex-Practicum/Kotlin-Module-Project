@@ -10,7 +10,7 @@ class MenuViewNote (val key: Int, val text: String) : CreateInterface {
             println("")
             println(title)
             tempData = menu.getUserInput()
-        } while (tempData != "0")
+        } while (tempData != "1")
         backToMenu.invoke()
     }
 
