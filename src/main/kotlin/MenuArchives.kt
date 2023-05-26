@@ -6,13 +6,13 @@ class MenuArchives : Menu() {
         val menuList: MutableMap<Int, MenuItem> = mutableMapOf()
         var i = 0
 
-        menuList[-1] = MenuItem("ВЫБОР АРХИВА") {}
-        menuList[i] = MenuItem("Создать архив") { currentChoice.numberListMenu = 1 }
-        val list = currentChoice.listArchives
-        list.forEach {
-            menuList[++i] = MenuItem("Архив '${it.archiveName}'") {
-                currentChoice.numberListMenu = 2
-                currentChoice.currentArchive = list.indexOf(it)
+        menuList[-1] = MenuItem("\nВЫБОР АРХИВА\n") {}
+        menuList[i] = MenuItem("Создать архив") { currentChoice.currentListMenu = ListMenu.CREATE_ARCHIVES }
+
+        currentChoice.listArchives.forEach { archive ->
+            menuList[++i] = MenuItem("Архив '${archive.archiveName}'") {
+                currentChoice.currentListMenu = ListMenu.NOTES
+                currentChoice.currentArchive = currentChoice.listArchives.indexOf(archive)
             }
         }
 

@@ -3,11 +3,7 @@ import java.util.Scanner
 class UserInput {
     private val input = Scanner(System.`in`)
 
-    fun getUserAnswerMenu(): Int? {
-        val answer: Int? = if (input.hasNextInt()) input.nextInt() else null
-        input.nextLine()
-        return answer
-    }
+    fun getUserAnswerMenu(): Int?  = input.nextLine().toIntOrNull()
 
     fun getUserAnswerStringName(): String {
         var answer: String

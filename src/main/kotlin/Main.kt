@@ -1,25 +1,32 @@
+enum class ListMenu {
+    ARCHIVES,
+    CREATE_ARCHIVES,
+    NOTES,
+    CREATE_NOTES,
+    CURRENT_NOTE
+}
+
 fun main() {
-   // var menuArchive: mut
-    println("МОИ ЗАМЕТКИ")
+
+    println("ПРОГРАММА МОИ ЗАМЕТКИ")
+
     val currentChoice = CurrentChoice(true)
-    var currentMenu: MutableMap<Int, MenuItem> = mutableMapOf()
-    val menuArchives = MenuArchives()
-    val menuCreteArchive = MenuCreateArchive()
-    val menuNotes = MenuNotes()
-    val menuCreateNote = MenuCreateNote()
-    val menuCurrentNote = MenuCurrentNote()
+    var currentMenu: MutableMap<Int, MenuItem>
+    val callMenu: Map<ListMenu, Menu> = mapOf(
+        ListMenu.ARCHIVES           to MenuArchives(),
+        ListMenu.CREATE_ARCHIVES    to MenuCreateArchive(),
+        ListMenu.NOTES              to MenuNotes(),
+        ListMenu.CREATE_NOTES       to MenuCreateNote(),
+        ListMenu.CURRENT_NOTE       to MenuCurrentNote()
+    )
+
     var userAnswer: Int?
     val userInput = UserInput()
 
     do {
         //создаем меню
-        when (currentChoice.numberListMenu) {
-            0 -> currentMenu = menuArchives.createMenu(currentChoice)
-            1 -> currentMenu = menuCreteArchive.createMenu(currentChoice)
-            2 -> currentMenu = menuNotes.createMenu(currentChoice)
-            3 -> currentMenu = menuCreateNote.createMenu(currentChoice)
-            4 -> currentMenu = menuCurrentNote.createMenu(currentChoice)
-        }
+        currentMenu = callMenu[currentChoice.currentListMenu]!!.createMenu(currentChoice)
+
         // показываем меню
         showMenu(currentMenu)
 

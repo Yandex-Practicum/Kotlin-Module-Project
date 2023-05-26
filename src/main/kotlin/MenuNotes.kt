@@ -5,18 +5,19 @@ class MenuNotes : Menu() {
     override fun createMenu(currentChoice: CurrentChoice): MutableMap<Int, MenuItem> {
         val menuList: MutableMap<Int, MenuItem> = mutableMapOf()
         var i = 0
+        val currentArchive = currentChoice.listArchives[currentChoice.currentArchive]
 
-        menuList[-1] =
-            MenuItem("ВЫБОР ЗАМЕТКИ (Выбран архив '${currentChoice.listArchives[currentChoice.currentArchive].archiveName}')") {}
-        menuList[i] = MenuItem("Создать заметку") { currentChoice.numberListMenu = 3 }
+        menuList[-1] = MenuItem("\nВЫБОР ЗАМЕТКИ (Выбран архив '${currentArchive.archiveName}')\n") {}
+        menuList[i] = MenuItem("Создать заметку") { currentChoice.currentListMenu = ListMenu.CREATE_NOTES }
 
-        val list = currentChoice.listArchives[currentChoice.currentArchive].notes
-        list.forEach {
-            menuList[++i] = MenuItem("Заметка '${it.noteName}'") { currentChoice.numberListMenu = 4 }
-            currentChoice.currentNote = list.indexOf(it)
+        currentArchive.notes.forEach { note ->
+            menuList[++i] = MenuItem("Заметка '${note.noteName}'") {
+                currentChoice.currentListMenu = ListMenu.CURRENT_NOTE
+            }
+            currentChoice.currentNote = currentArchive.notes.indexOf(note)
         }
 
-        menuList[++i] = MenuItem("Выход в предыдущее меню") { currentChoice.numberListMenu = 0 }
+        menuList[++i] = MenuItem("Выход в предыдущее меню") { currentChoice.currentListMenu = ListMenu.ARCHIVES }
 
         return menuList
     }
