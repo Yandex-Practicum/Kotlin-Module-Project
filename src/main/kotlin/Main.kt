@@ -1,3 +1,6 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import menu.FolderMenu
+
+fun main() {
+    val archive = FolderMenu()
+    archive.showMenu()
 }
