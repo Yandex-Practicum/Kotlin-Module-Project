@@ -5,11 +5,9 @@ import File
 import Lost
 import java.lang.StringBuilder
 
-class FileMenu : AbstractMenu() {
-    companion object {
-        internal var folderName = ""
-    }
+class FileMenu() : AbstractMenu() {
 
+    var folderName = FolderMenu.folderName
     private var listOfFiles = listOf<File>()
 
     override fun inputAndCheckCommand(): String {

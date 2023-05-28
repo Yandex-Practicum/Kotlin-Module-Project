@@ -7,6 +7,7 @@ class FolderMenu : AbstractMenu() {
 
     companion object {
         internal val archive: MutableList<Folder> = mutableListOf()
+        internal var folderName = ""
     }
 
     override fun inputAndCheckCommand(): String {
@@ -36,7 +37,7 @@ class FolderMenu : AbstractMenu() {
         for (i in archive.indices) {
             menuList["${i + 1}. ${archive[i].name}"] = {
                 Exit.status = Exit.FROM_FILE_MENU
-                FileMenu.folderName = archive[i].name
+                folderName = archive[i].name
                 FileMenu().showMenu()
             }
         }

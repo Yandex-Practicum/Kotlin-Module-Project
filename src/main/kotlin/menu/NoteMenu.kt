@@ -9,7 +9,7 @@ class NoteMenu {
     }
 
     fun showMenu() {
-        println("\nАрхив \"${FileMenu.folderName}\"\nЗаметка \"${file.name}\":")
+        println("\nАрхив \"${FileMenu().folderName}\"\nЗаметка \"${file.name}\":")
         println(file.note)
         println("\n0. Выход")
         inputAndCheckCommand()
