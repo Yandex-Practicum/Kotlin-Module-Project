@@ -2,7 +2,7 @@ package menu
 
 abstract class AbstractMenu {
 
-    abstract fun inputAndCheckCommand():Char
+    abstract fun inputAndCheckCommand(): String
 
     abstract fun createNewOne()
 

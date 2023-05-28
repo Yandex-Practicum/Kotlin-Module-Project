@@ -9,7 +9,7 @@ class FolderMenu : AbstractMenu() {
         internal val archive: MutableList<Folder> = mutableListOf()
     }
 
-    override fun inputAndCheckCommand(): Char {
+    override fun inputAndCheckCommand(): String {
         var input = ""
         var restriction = true
         while (restriction) {
@@ -19,7 +19,7 @@ class FolderMenu : AbstractMenu() {
                 println("Такого пункта нет\nВведите число от 0 до ${archive.lastIndex + 2}")
             } else restriction = false
         }
-        return input[0]
+        return input.trim()
     }
 
     override fun createNewOne() {
@@ -47,7 +47,8 @@ class FolderMenu : AbstractMenu() {
         menuList.forEach { println(it.key) }
         println("\nВведите число от 0 до ${archive.lastIndex + 2}")
         val input = inputAndCheckCommand()
-        menuList.forEach { if (it.key[0] == input) it.value.invoke() }
+        val selectedOption = menuList.keys.find { it.startsWith(input) }
+        menuList[selectedOption]?.invoke()
     }
 
     override fun checkName(): String {

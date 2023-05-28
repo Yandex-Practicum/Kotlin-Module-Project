@@ -12,7 +12,7 @@ class FileMenu : AbstractMenu() {
 
     private var listOfFiles = listOf<File>()
 
-    override fun inputAndCheckCommand(): Char {
+    override fun inputAndCheckCommand(): String {
         var input = ""
         var restriction = true
         while (restriction) {
@@ -22,7 +22,7 @@ class FileMenu : AbstractMenu() {
                 println("Такого пункта нет\nВведите число от 0 до ${listOfFiles.lastIndex + 2}")
             } else restriction = false
         }
-        return input[0]
+        return input.trim()
     }
 
     private fun inputNote(): String {
@@ -58,7 +58,7 @@ class FileMenu : AbstractMenu() {
     override fun showMenu() {
         FolderMenu.archive.forEach { if (it.name == folderName) listOfFiles = it.listOfFiles }
         println("\nАрхив \"$folderName\"\nСписок заметок :")
-        val menuList = mutableMapOf<String, () -> Unit>("0. Создать заметку" to { createNewOne() })
+        val menuList = mutableMapOf("0. Создать заметку" to { createNewOne() })
         for (i in listOfFiles.indices) {
             menuList["${i + 1}. ${listOfFiles[i].name}"] = {
                 Exit.status = Exit.FROM_NOTE_MENU
@@ -73,7 +73,8 @@ class FileMenu : AbstractMenu() {
         menuList.forEach { println(it.key) }
         println("\nВведите число от 0 до ${listOfFiles.lastIndex + 2}")
         val input = inputAndCheckCommand()
-        menuList.forEach { if (it.key[0] == input) it.value.invoke() }
+        val selectedOption = menuList.keys.find { it.startsWith(input) }
+        menuList[selectedOption]?.invoke()
     }
 
     override fun checkName(): String {
