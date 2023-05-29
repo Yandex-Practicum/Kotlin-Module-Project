@@ -5,9 +5,8 @@ import File
 import Lost
 import java.lang.StringBuilder
 
-class FileMenu() : AbstractMenu() {
+class FileMenu(var folderName: String = FolderMenu.folderName) : AbstractMenu() {
 
-    var folderName = FolderMenu.folderName
     private var listOfFiles = listOf<File>()
 
     override fun inputAndCheckCommand(): String {
@@ -60,8 +59,7 @@ class FileMenu() : AbstractMenu() {
         for (i in listOfFiles.indices) {
             menuList["${i + 1}. ${listOfFiles[i].name}"] = {
                 Exit.status = Exit.FROM_NOTE_MENU
-                NoteMenu.file = listOfFiles[i]
-                NoteMenu().showMenu()
+                NoteMenu(listOfFiles[i]).showMenu()
             }
         }
         menuList["${menuList.size}. Выход"] = {

@@ -3,10 +3,7 @@ package menu
 import Exit
 import File
 
-class NoteMenu {
-    companion object {
-        internal var file = File("", "")
-    }
+class NoteMenu(var file: File) {
 
     fun showMenu() {
         println("\nАрхив \"${FileMenu().folderName}\"\nЗаметка \"${file.name}\":")
