@@ -1,3 +1,7 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val operators = ArсhiveOperators()
+    while (true) {
+        operators.displayMenu()
+        operators.selectedMenu()
+    }
 }
