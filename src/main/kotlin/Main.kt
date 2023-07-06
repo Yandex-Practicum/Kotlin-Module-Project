@@ -1,3 +1,9 @@
+import data.Archives
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val archives = Archives("Список архивов")
+    archives.content = mutableListOf()
+    ArchivesScreen().show(archives)
 }
+
+
