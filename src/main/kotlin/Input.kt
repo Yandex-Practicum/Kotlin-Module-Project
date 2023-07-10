@@ -16,7 +16,7 @@ class Input {
     // 2. Вывод на экран результатов проверки ввода на ошибки
     fun navigate(
         menu: () -> Unit, // вывод на экран ошибки
-        choose: (n: Int) -> Unit, // или выполняем команду
+        choose: (n: Int) -> Unit, // или выполняем команду0
     ) {
         menu.invoke()
         when (val input = this.inputInt()) {
@@ -43,7 +43,7 @@ class Input {
     private fun inputStr(): String {
         var command2 = scanner.nextLine()
         while (command2.isEmpty()) {
-            println("Название не может быть пустым. Введите название заново!")
+            println("Ввод пустой строки запрещен. Введите заново!")
             command2 = scanner.nextLine()
         }
         return command2
