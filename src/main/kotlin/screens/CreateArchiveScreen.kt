@@ -8,6 +8,10 @@ class CreateArchiveScreen : CreateItemScreen<Archives, Archive>() {
     }
 
     override fun createContent(text: String) {
+        if (text.isEmpty()) {
+            ConsoleUtils.write("Имя архива не может быть пустым")
+            return
+        }
         item!!.content.add(Archive((text)))
         ConsoleUtils.write("Архив с именем $text создан")
     }

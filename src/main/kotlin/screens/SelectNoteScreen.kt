@@ -10,13 +10,17 @@ class SelectNoteScreen : SelectItemScreen<Archive, Note>() {
         ConsoleUtils.showMenu("0-выход \'Имя заметки\'-открытие заметки с именем")
     }
 
-    override fun select(text: String): Boolean {
+    override fun select(text: String) {
+        if (text.isEmpty()) {
+            ConsoleUtils.write("Имя выбранной заметки не должно быть пустым")
+            return
+        }
         currentItem = item!!.content.firstOrNull { it.name == text }
         if (currentItem == null) {
             ConsoleUtils.write("Такой заметки не существует")
-            return false
+            return
         }
         currentItem!!.showContent()
-        return true
+        return
     }
 }

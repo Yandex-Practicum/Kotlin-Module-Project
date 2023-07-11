@@ -32,5 +32,5 @@ abstract class SelectItemScreen<T : Item<C>, C> {
 
     abstract fun showMenu()
 
-    abstract fun select(text: String): Boolean
+    abstract fun select(text: String)
 }

@@ -7,7 +7,8 @@ class SelectArchiveScreen : SelectItemScreen<Archives, Archive>() {
 
     override fun show(item: Archives): Archives {
         super.show(item)
-        NotesScreen().show(currentItem!!)
+        if (currentItem !== null)
+            NotesScreen().show(currentItem!!)
         return item
     }
 
@@ -15,12 +16,16 @@ class SelectArchiveScreen : SelectItemScreen<Archives, Archive>() {
         ConsoleUtils.showMenu("0-выход \'Имя архива\'-открытие архива с именем")
     }
 
-    override fun select(text: String): Boolean {
+    override fun select(text: String) {
+        if (text.isEmpty()) {
+            ConsoleUtils.write("Имя выбранного архива не должно быть пустым")
+            return
+        }
         currentItem = item!!.content.firstOrNull { it.name == text }
         if (currentItem == null) {
             ConsoleUtils.write("Такого архива не существует")
-            return false
+            return
         }
-        return true
+        return
     }
 }
