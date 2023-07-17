@@ -6,10 +6,16 @@ class Archive {
     private val noteList = ArrayList<String>()
     private val scanner = Scanner(System.`in`)
 
-    fun createArchive() {
+    fun createArchive(): Boolean {
         println("\nВведите название архива:")
         name = scanner.nextLine()
-        println("Архив '$name' создан.")
+        return if (name.isNotBlank()) {
+            println("Архив '$name' создан.")
+            true
+        } else {
+            println("Имя архива не может быть пустым.")
+            false
+        }
     }
 
     fun openArchive() {
@@ -17,11 +23,11 @@ class Archive {
             println("\n1. Добавить заметку\n2. Просмотреть заметки\n3. Вернуться к списку архивов")
             val userInput = scanner.nextLine()
             when {
-                userInput.equals("1") -> addNote()
-                userInput.equals("2") -> {
+                userInput == "1" -> addNote()
+                userInput == "2" -> {
                     if (noteList.size > 0) viewNotes() else println("В архиве нет заметок.")
                 }
-                userInput.equals("3") -> return
+                userInput == "3" -> return
                 else -> println("Неверный ввод, попробуйте снова.")
             }
         }
@@ -30,17 +36,18 @@ class Archive {
     private fun addNote() {
         println("\nВведите текст заметки:")
         val note = scanner.nextLine()
-        noteList.add(note)
-        println("Заметка добавлена в архив '$name'.")
+        if (note.isNotBlank()) {
+            noteList.add(note)
+            println("Заметка добавлена в архив '$name'.")
+        } else {
+            println("Заметка не может быть пустой.")
+        }
     }
 
     private fun viewNotes() {
         println("\nЗаметки в архиве '$name':")
-        for (i in 0..noteList.size - 1) {
+        for (i in 0 until noteList.size) {
             println("${i + 1}. ${noteList[i]}")
         }
     }
 }
-
-
-
