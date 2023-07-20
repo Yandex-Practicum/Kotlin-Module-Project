@@ -1,47 +1,43 @@
-import jdk.nashorn.internal.objects.Global.println
 import java.util.Scanner
-import java.util.ArrayList
 
-class MenuManager {
+class MenuManager(private val scanner: Scanner) {
+    private val archiveList = ArrayList<Archive>()
+
     fun startMenu() {
-        val archiveList = ArrayList<Archive>()
-        val scanner = Scanner(System.`in`)
-
         while (true) {
             println("\n1. Создать новый архив\n2. Открыть существующий архив\n3. Выход")
-            val userInput = scanner.nextLine()
-            when {
-                userInput == "1" -> {
-                    val archive = Archive()
+            when (scanner.nextLine()) {
+                "1" -> {
+                    val archive = Archive(scanner)
                     if (archive.createArchive()) {
                         archiveList.add(archive)
                     }
                 }
-                userInput == "2" -> {
-                    if (archiveList.size > 0) chooseArchive(archiveList) else println("Список архивов пуст.")
+                "2" -> {
+                    if (archiveList.isNotEmpty()) selectArchive() else println("Список архивов пуст.")
                 }
-                userInput == "3" -> return
-                else -> println("Неверный ввод, попробуйте снова.")
+                "3" -> return
+                else -> println("Некорректный ввод, попробуйте снова.")
             }
         }
     }
 
-    private fun chooseArchive(archiveList: ArrayList<Archive>) {
+    private fun selectArchive() {
         println("\nВыберите архив:")
         for (i in 0 until archiveList.size) {
             println("${i + 1}. ${archiveList[i].name}")
         }
-        val userInput = Scanner(System.`in`).nextLine().toIntOrNull()
+        val userInput = scanner.nextLine().toIntOrNull()
         if (userInput != null && userInput in 1..archiveList.size) {
             archiveList[userInput - 1].openArchive()
         } else {
-            println("Архив с таким номером не найден, попробуйте снова.")
+            println("Архива с этим номером не найдено, пожалуйста, попробуйте снова.")
         }
     }
 }
 
 fun main() {
-    val menuManager = MenuManager()
+    val scanner = Scanner(System.`in`)
+    val menuManager = MenuManager(scanner)
     menuManager.startMenu()
 }
-
