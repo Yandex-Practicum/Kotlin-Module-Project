@@ -1,3 +1,5 @@
+import view.Screen
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    Screen.start()
 }
