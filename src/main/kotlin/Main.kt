@@ -1,3 +1,8 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import Screen
+fun main() {
+    Screen.mainScreen()
+    Input.inputInt()
+    println("Создаем архив")
+    Creation.createArchive("Мой архив")
+    println(Archive.howMuch())
 }
