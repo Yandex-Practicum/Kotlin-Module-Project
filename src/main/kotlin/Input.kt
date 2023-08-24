@@ -1,10 +1,10 @@
 import java.util.Scanner
 
-class Input {
+class InputAndChecking {
 
     companion object {
         private val scanner: Scanner = Scanner(System.`in`)
-        fun inputInt(): Int {                               //Цикл получающий Int, включая проверку и повторный ввод
+        fun inputInt(): Int {                               //Функция получающая Int, включая проверку и повторный ввод
             val input: String = scanner.nextLine()
             var outInt: Int = 0
             if (checkInt(input)) {
@@ -18,12 +18,12 @@ class Input {
         }
 
 
-        fun inputString(): String {
+        fun inputString(): String {                         //Ввод текста
             return scanner.nextLine()
         }
 
 
-        private fun checkInt(s: String): Boolean {                   //Проверяет введены ли цифры
+        fun checkInt(s: String): Boolean {                   //Проверяет введены ли цифры
             return try {
                 s.toInt()
                 true
@@ -31,5 +31,24 @@ class Input {
                 false
             }
         }
+
+        fun String.intOrString(): Any {
+            val v = toIntOrNull()
+            return when(v) {
+                null -> this
+                else -> v
+            }
+        }
+
+
+        fun isInt(i: String) : Boolean {
+            var result : Boolean
+            if(i.intOrString() is Int) {
+                result = true
+            } else {
+                result = false
+            }
+            return result
+        }
     }
-    }
+}

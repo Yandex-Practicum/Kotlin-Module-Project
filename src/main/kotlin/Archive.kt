@@ -1,10 +1,1 @@
-class Archive(val name: String)  {
-
-    val noteList: MutableList<Note> = mutableListOf()
-    companion object {
-
-
-    }
-
-
-}
+class Archive(val name: String)  { val noteList: MutableList<Note> = mutableListOf() }
