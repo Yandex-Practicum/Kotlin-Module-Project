@@ -18,6 +18,11 @@ class Input {
         }
 
 
+        fun inputString() : String {
+            return scanner.nextLine()
+        }
+
+
         private fun checkInt(s: String): Boolean {                   //Проверяет введены ли цифры
             return try {
                 s.toInt()

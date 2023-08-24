@@ -1,3 +1,1 @@
-class Note (val header : String, val text: String) {
-
-}
+ class Note (val header : String, val text: String) {}

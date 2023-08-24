@@ -1,16 +1,10 @@
 class Archive(val name: String)  {
 
+    val noteList: MutableList<Note> = mutableListOf()
     companion object {
-        var archives : MutableList<Archive> = mutableListOf()
 
-        fun howMuch() {
-            println("В списке ${archives.size} архивов")
-        }
+
     }
-    var notes : MutableList<Note> = mutableListOf()
-
-
-
 
 
 }
