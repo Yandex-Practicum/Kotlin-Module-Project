@@ -1,7 +1,8 @@
 class Creation {
     companion object {
         fun createArchive() {
-            println("Введите название архива")
+            println("=======================\nВведите название архива\n" +
+                    "=======================")
             val newArchive = Archive(Input.inputString())
             Archives.archives.add(newArchive)
             println("Архив '${newArchive.name}' создан")

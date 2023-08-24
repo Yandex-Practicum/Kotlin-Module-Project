@@ -18,7 +18,7 @@ class Input {
         }
 
 
-        fun inputString() : String {
+        fun inputString(): String {
             return scanner.nextLine()
         }
 
@@ -32,4 +32,4 @@ class Input {
             }
         }
     }
-}
+    }
