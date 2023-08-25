@@ -32,7 +32,7 @@ class InputAndChecking {
             }
         }
 
-        fun String.intOrString(): Any {
+        fun String.intOrString(): Any {                 //Функция проверяющая, состоит строка полностью из цифр или нет
             return when(val v = toIntOrNull()) {
                 null -> this
                 else -> v
@@ -40,7 +40,7 @@ class InputAndChecking {
         }
 
 
-        fun isInt(i: String) : Any {
+        fun isInt(i: String) : Any {                    //Функция возвращает строку в Int или String
             if(i.intOrString() is Int) {
                return  i.toInt()
             } else {

@@ -1,6 +1,6 @@
 class Creation {
     companion object {
-        fun createArchive() {
+        fun createArchive() {                     //Создаем Архив
             println("=======================\nВведите название архива\n" +
                     "=======================")
             val newArchive = Archive(InputAndChecking.inputString())
@@ -9,7 +9,7 @@ class Creation {
             Screen.menuInArchiveScreen(Archives.archives.lastIndex)
         }
 
-        fun createNote(): Note {
+        fun createNote(): Note {                  //Создаем заметку
             println("Введите название заметки")
             val nameNote = InputAndChecking.inputString()
             println("Текст заметки")

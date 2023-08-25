@@ -10,7 +10,9 @@ open class Screen {
             when (InputAndChecking.inputInt()) {
                 1 -> {Creation.createArchive()}
                 2 -> archivesScreen()
-                3 -> exitProcess(1)
+                3 -> { println("Программа завершила свою работу")
+                    exitProcess(1) }
+
                 else -> println("Введите правильную команду")
             }
         }
