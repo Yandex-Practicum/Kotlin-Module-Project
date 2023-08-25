@@ -15,14 +15,27 @@ open class Screen {
             }
         }
         private fun archivesScreen() {
-            println("Список архивов: ")
             Archives.viewArchivesList()
             println("\nВыберите архив или введите 'Выход' для перехода в предыдущее меню")
-            val inputInt = InputAndChecking.inputInt()
-            if (inputInt > Archives.archives.size) {
-                println("Неверный номер архива")
+            val input = InputAndChecking.isInt(inputString())
+            if (input is Int) {
+                if (input > Archives.archives.size) {
+                    println("=======================")
+                    println("Неверный номер архива")
+                    println("=======================")
+                    archivesScreen()
+                } else {
+                    menuInArchiveScreen(input)
+                }
             } else {
-                menuInArchiveScreen(inputInt)
+                if (input.toString().lowercase() == "выход") {
+                    mainScreen()
+                } else {
+                    println("=======================")
+                    println("Неправильный ввод")
+                    println("=======================")
+                    archivesScreen()
+                }
             }
         }
         private fun listNotesScreen(indexArchive: Int) {
@@ -31,19 +44,20 @@ open class Screen {
                 println("${i}.${Archives.archives[indexArchive].noteList[i].header}")
             }
             println("\nВыберите заметку или введите 'Выход' для выхода")
-            var inputInt = InputAndChecking.inputString()
-            var ll: Int = 0
-            if (InputAndChecking.isInt(inputInt)) {
-                ll - inputInt.toInt()
-                if (ll > Archives.archives[indexArchive].noteList.size) {
-                    println("Неверный номер архива")
+            var input = InputAndChecking.isInt(inputString())
+            if (input is Int) {
+                if (input > Archives.archives[indexArchive].noteList.size) {
+                    println("Неверный номер заметки")
                 } else {
-                    Note.viewNote(Archives.archives[indexArchive].noteList[ll], indexArchive)
+                    Note.viewNote(Archives.archives[indexArchive].noteList[input], indexArchive)
                 }
-            } else if(inputInt.lowercase() == "выход") {
-                archivesScreen()
             } else {
-                println("Ошибка ввода")
+                if(input.toString().lowercase() == "выход") {
+                    archivesScreen()
+                } else {
+                    println("Ошибка ввода")
+                    listNotesScreen(indexArchive)
+                }
             }
         }
         fun menuInArchiveScreen(indexArchive: Int) {

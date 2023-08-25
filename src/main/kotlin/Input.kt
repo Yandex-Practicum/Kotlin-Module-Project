@@ -33,22 +33,19 @@ class InputAndChecking {
         }
 
         fun String.intOrString(): Any {
-            val v = toIntOrNull()
-            return when(v) {
+            return when(val v = toIntOrNull()) {
                 null -> this
                 else -> v
             }
         }
 
 
-        fun isInt(i: String) : Boolean {
-            var result : Boolean
+        fun isInt(i: String) : Any {
             if(i.intOrString() is Int) {
-                result = true
+               return  i.toInt()
             } else {
-                result = false
+                return i
             }
-            return result
         }
     }
 }
