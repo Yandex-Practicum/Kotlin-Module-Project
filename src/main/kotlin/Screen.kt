@@ -4,7 +4,7 @@ import kotlin.system.exitProcess
 
 open class Screen {
     companion object {
-        fun mainScreen() {
+        fun mainScreen() {     // Основное меню после запуска программы
             println("=======================\nМеню: \n1.Создать архив \n2.Мои архивы \n3.Выход" +
                     "\n=======================")
             when (InputAndChecking.inputInt()) {
@@ -14,7 +14,7 @@ open class Screen {
                 else -> println("Введите правильную команду")
             }
         }
-        private fun archivesScreen() {
+        private fun archivesScreen() {  //Экран выбора архивов
             Archives.viewArchivesList()
             println("\nВыберите архив или введите 'Выход' для перехода в предыдущее меню")
             val input = InputAndChecking.isInt(inputString())
@@ -61,7 +61,7 @@ open class Screen {
             }
         }
         fun menuInArchiveScreen(indexArchive: Int) {
-            println("=======================\nМеню заметок архива " +
+            println("=======================\nМеню заметок архива: " +
                     "'${Archives.archives[indexArchive].name}'" +
                     " \n1.Создать заметку \n2.Посмотреть заметки " +
                     "\n3.Выход\n=======================\n")
