@@ -40,7 +40,7 @@ object NoteCreationScreen : Creatable {
             do {
                 text = Scanner(System.`in`).nextLine()
                 if (text == "") {
-                    println("Заметка не может не сожержать текста. Введите текст:")
+                    println("Заметка не может быть пустой. Введите текст:")
                     continue
                 }
                 return text
