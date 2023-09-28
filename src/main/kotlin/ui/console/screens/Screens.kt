@@ -22,8 +22,8 @@ sealed class  Screens {
             println("Введите название архива")
             val archiveName = Scanner(System.`in`)
                 .nextLineNotEmpty("Название архива не может быть пустым")
-            val archive = archiveService.Create(archiveName)
-            archiveService.Add(archive)
+            val archive = archiveService.create(archiveName)
+            archiveService.add(archive)
             println("Архив $archiveName создан")
         }
 
@@ -33,10 +33,10 @@ sealed class  Screens {
                 selectedArchiveId = it
                 onMoveNext()
             }
-            if(archiveService.List().isEmpty()){
+            if(archiveService.list().isEmpty()){
                 println("\t[Архивы отсутствуют]")
             }
-            archiveService.List().forEachIndexed{ idx, archive ->
+            archiveService.list().forEachIndexed{ idx, archive ->
                 actions[idx] = CommonAction(archive.title) { action(idx) }
                 if(dialogsStack.isNotEmpty()){
                     dialogsStack.push(Dialog(actions))
@@ -59,20 +59,24 @@ sealed class  Screens {
         }
 
         private fun createNoteHandler(){
-            val archive = archiveService.List()[selectedArchiveId]
+            val archive = archiveService.list()[selectedArchiveId]
+            println("Введите название заметки")
+            val noteTitle = Scanner(System.`in`)
+                .nextLineNotEmpty("Название заметки не может быть пустым")
             println("Введите текст заметки")
             val noteText = Scanner(System.`in`)
-                .nextLineNotEmpty("Название заметки не может быть пустым")
-            val note = Note(noteText)
-            archiveService.AddNote(archive, note)
+                .nextLineNotEmpty("текст заметки не может быть пустым")
+            val note = Note(noteTitle, noteText)
+            archiveService.addNote(archive, note)
         }
 
         private fun selectNoteHandler(){
-            val archive = archiveService.List()[selectedArchiveId]
-            archive.notes.forEachIndexed { idx, note -> println("$idx. ${note.text}") }
+            val archive = archiveService.list()[selectedArchiveId]
+            archive.notes.forEachIndexed { idx, note -> println("\t$idx. ${note.title}") }
             println("Введите номер заметки")
             val noteId = Scanner(System.`in`).nextInt()
-            selectedNoteId = noteId
+            val note = archiveService.getNote(selectedArchiveId, noteId)
+            selectedNote = note
             onMoveNext()
         }
     }
@@ -82,18 +86,25 @@ sealed class  Screens {
             val initialDialog = Dialog(mapOf(0 to CommonAction("Выход", onExit)))
             dialogsStack.push(initialDialog)
         }
+
         override fun show() {
-            val archive = archiveService.List()[selectedArchiveId]
-            val note = archive.notes[selectedNoteId]
-            println("Заметка")
-            println(note.text)
+            val renderLine = { count: Int, char: String ->
+                (0..count+1).forEach{ if(it <= count) print(char) else println()}}
+            val (title, text) = selectedNote
+            println("Заметка: ")
+            val count = if (title.count() > text.count()) title.count() else text.count()
+            renderLine(count, "=")
+            println(title)
+            renderLine(count, "-")
+            println(text)
+            renderLine(count, "=")
             super.show()
         }
     }
 
     companion object{
         private var selectedArchiveId: Int = -1
-        private var selectedNoteId: Int = -1
+        private var selectedNote: Note = Note("","")
     }
 }
 

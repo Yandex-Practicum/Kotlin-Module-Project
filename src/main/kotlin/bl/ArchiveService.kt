@@ -1,23 +1,40 @@
 package bl
 
+import ui.console.exceptions.ArchiveNotFountException
+import ui.console.exceptions.NodeNotFoundException
+
 object ArchiveService: IArchives {
     private val archives: MutableList<Archive> = mutableListOf()
-    override fun List(): MutableList<Archive> = archives
+    override fun list(): MutableList<Archive> = archives
 
-    override fun Add(archive: Archive) {
+    override fun add(archive: Archive) {
         archives.add(archive)
     }
 
-    override fun AddNote(archive: Archive, note: Note) {
+    override fun addNote(archive: Archive, note: Note) {
         val archLink = archives.first { it.title === archive.title }
         archLink.notes.add(note)
     }
 
-    override fun Get(title: String): Archive {
-        return archives.first { it.title === title }
+    override fun getArchive(archiveId: Int): Archive {
+        try{
+            return list()[archiveId]
+        }catch(ex: Exception){
+            throw ArchiveNotFountException(archiveId)
+        }
+
     }
 
-    override fun Create(title: String): Archive {
+    override fun create(title: String): Archive {
         return Archive(title, mutableListOf())
+    }
+
+    override fun getNote(archiveId: Int, noteId: Int): Note {
+        val archive = getArchive(archiveId)
+        try{
+            return archive.notes[noteId]
+        }catch(ex: Exception){
+            throw NodeNotFoundException(noteId)
+        }
     }
 }

@@ -1,9 +1,10 @@
 package bl
 
 interface IArchives {
-    fun List(): MutableList<Archive>
-    fun Add(archive: Archive)
-    fun AddNote(archive: Archive, note: Note)
-    fun Get(title: String): Archive
-    fun Create(title: String): Archive
+    fun list(): MutableList<Archive>
+    fun add(archive: Archive)
+    fun addNote(archive: Archive, note: Note)
+    fun getArchive(archiveId: Int): Archive
+    fun create(title: String): Archive
+    fun getNote(archiveId: Int, noteId: Int): Note
 }

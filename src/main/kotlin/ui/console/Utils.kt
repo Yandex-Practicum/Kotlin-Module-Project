@@ -19,12 +19,13 @@ fun Scanner.nextIntTry(repeatMessage: String): Int{
     var result: Int? = null
     while(result === null){
         try {
-            result = this.nextInt()
+            val input = readln()
+            result = Integer.parseInt(input)
         }catch (ex: Exception) {
             println(repeatMessage)
         }
     }
-    return result.toInt()
+    return result
 }
 infix fun Queue<IScreen>.move(to: Stack<IScreen>): IScreen {
     try{
