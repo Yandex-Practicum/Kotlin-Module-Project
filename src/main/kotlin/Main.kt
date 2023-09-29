@@ -1,3 +1,7 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    println("\n++-------------------++")
+    println("|| Программа ЗАМЕТКИ ||")
+    println("++-------------------++")
+
+    SelectionScreen.launch(ListOfArchives)
 }
