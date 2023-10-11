@@ -3,7 +3,7 @@ import kotlin.system.exitProcess
 
 
 abstract class Screen (var header:String="header", var text:String="content"){
-    val menu:ArrayList<MenuItem> = arrayListOf(MenuItem("вернуться", {this.close()}))
+    val menu:ArrayList<MenuItem> = arrayListOf(MenuItem("вернуться на предыдущий экран", {this.close()}))
     protected val scanner= Scanner(System.`in`)
     open fun show(){
         println(header)
@@ -30,6 +30,14 @@ abstract class Screen (var header:String="header", var text:String="content"){
                 }
             }
         }
+    }
+    protected fun getValidName(errorMessage:String):String{
+        var name: String = scanner.nextLine()
+        while (name==""){
+            println(errorMessage)
+            name = scanner.nextLine()
+        }
+        return name
     }
     private fun printMenu(){
         for (i in 0..menu.lastIndex){
@@ -80,17 +88,14 @@ object MainScreen:Screen("Архивы", "Пока не созданы"){
         exitProcess(-1)
     }
 }
-class CreateAnArchiveScreen:Screen("Создание архива",""){
-    init {
-        this.text="Чтобы создать архив введите название для него."
-    }
+class CreateAnArchiveScreen:Screen("Создание архива","Чтобы создать архив введите название для него."){
+
     override fun getCommand() {
         while(scanner.hasNext()){
             if(scanner.hasNextInt())super.getCommand()
             else {
-                val command: String = scanner.nextLine()
+                val command: String = super.getValidName("Пожалуйста, введите имя архива (не пустое)")
                 Vault.archives.add(Archive(command))
-                println("Архив $command создан")
                 this.close()
             }
         }
@@ -146,11 +151,10 @@ class CreateANoteScreen():Screen("Создание заметки","Чтобы �
         while(scanner.hasNext()){
             if(scanner.hasNextInt())super.getCommand()
             else {
-                val name: String = scanner.nextLine()
+                val name: String = super.getValidName("Пожалуйста, введите название заметки (не пустое)")
                 println("Пожалуйста, введите текст заметки")
-                val text:String=scanner.nextLine()
+                val text:String=super.getValidName("Пожалуйста, введите текст заметки (ну хоть что-нибудь)")
                 Vault.archives[MainScreen.currentArchiveIndex].notes.add(Note(name,text))
-                println("Заметка ${Vault.archives[MainScreen.currentArchiveIndex].notes.last().name } создана")
                 this.close()
             }
         }
@@ -169,7 +173,7 @@ class CreateANoteScreen():Screen("Создание заметки","Чтобы �
 }
 class ViewANoteScreen:Screen("Просмотр архива", ""),ListVeiwer{
     init {
-        this.menu.add(MenuItem("вернуться к экрану выбора заметок",{this.close()}))
+        this.menu[0].name="вернуться к экрану выбора заметок"
     }
     override fun getCurentItemIndex(previousScreen: Screen, index: Int) {
         MainScreen.currentNoteIndex=index
