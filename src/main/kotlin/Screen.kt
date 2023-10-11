@@ -46,19 +46,13 @@ abstract class Screen (var header:String="header", var text:String="content"){
     }
     abstract fun close()
 
-    protected fun <T:Menuable>fullfillMenuAndTextWithArrayItems(items:ArrayList<T>,sender:Screen,screenToGoForward:ListVeiwer,screenToGoBack:Screen) {//receiver for screen to go if you need it inside menu
-        if (items.isNotEmpty()) {
-            with(sender) {
-                this.text = ""
-                if (this.menu.size > 1) {
-                    this.menu.clear()
-                    this.menu.add(MenuItem("вернуться назад", { this.close() }))
-                }
-                for (i in 0..items.lastIndex) {
-                    this.text += "${i + 1}. ${items[i].name}" + '\n'
-                    this.menu.add(MenuItem("окрыть \"${items[i].name}\"", { screenToGoForward.getCurentItemIndex(screenToGoBack, i) }))
-                }
-            }
+    protected fun <T:Menuable>addMenuAndText(items:ArrayList<T> ,screenToGoForward:ItemViewer,myReturnMessege:String) {
+        menu.clear()
+        menu.add(MenuItem(myReturnMessege,{close()}))
+        text = ""
+        for (i in 0..items.lastIndex) {
+            text += "${i + 1}. ${items[i].name}" + '\n'
+            menu.add(MenuItem("окрыть \"${items[i].name}\"", { screenToGoForward.useCurrentItemIndex( index = i) }))
         }
     }
 }
@@ -107,14 +101,7 @@ class CreateAnArchiveScreen:Screen("Создание архива","Чтобы �
 }
 class ChooseAnArchiveScreen:Screen( "Введите номер архива для просмотра","",){
     override fun show() {
-        //super.fullfillMenuAndTextWithArrayItems(Vault.archives,this, MainScreen.viewAnArchiveScreen, this)
-        this.menu.clear()
-        this.menu.add(MenuItem("вернуться к основному экрану", {this.close() }))
-        this.text = ""
-        for (i in 0..Vault.archives.lastIndex) {
-            this.text += "${i + 1}. ${Vault.archives[i].name}" + '\n'
-            this.menu.add(MenuItem("окрыть \"${Vault.archives[i].name}\"", { MainScreen.viewAnArchiveScreen.getCurentItemIndex(MainScreen, index = i) }))
-        }
+        addMenuAndText(Vault.archives,screenToGoForward=MainScreen.viewAnArchiveScreen,myReturnMessege="вернуться к основному экрану")
         super.show()
     }
 
@@ -122,11 +109,11 @@ class ChooseAnArchiveScreen:Screen( "Введите номер архива дл
         MainScreen.show()
     }
 }
-class ViewAnArchiveScreen:Screen("Просмотр архива", ""),ListVeiwer{
+class ViewAnArchiveScreen:Screen("Просмотр архива", ""),ItemViewer{
     init {
         this.menu.add(MenuItem("cоздать заметку",{MainScreen.createANoteScreen.show()}))
     }
-    override fun getCurentItemIndex(previousScreen: Screen, index: Int) {
+    override fun useCurrentItemIndex(index: Int) {
         MainScreen.currentArchiveIndex=index
         this.show()
     }
@@ -171,11 +158,11 @@ class CreateANoteScreen():Screen("Создание заметки","Чтобы �
         MainScreen.viewAnArchiveScreen.show()
     }
 }
-class ViewANoteScreen:Screen("Просмотр архива", ""),ListVeiwer{
+class ViewANoteScreen:Screen("Просмотр архива", ""),ItemViewer{
     init {
         this.menu[0].name="вернуться к экрану выбора заметок"
     }
-    override fun getCurentItemIndex(previousScreen: Screen, index: Int) {
+    override fun useCurrentItemIndex(index: Int) {
         MainScreen.currentNoteIndex=index
         this.show()
     }
@@ -193,13 +180,7 @@ class ViewANoteScreen:Screen("Просмотр архива", ""),ListVeiwer{
 }
 class ChooseANoteScreen:Screen("Выбирите заметку для просмотра","Заметок в этом архиве пока нет"){
     override fun show() {
-        this.menu.clear()
-        this.menu.add(MenuItem("вернуться к просмотру архива \"${Vault.archives[MainScreen.currentArchiveIndex].name}\"", { this.close() }))
-        this.text = ""
-        for (i in 0..Vault.archives[MainScreen.currentArchiveIndex].notes.lastIndex) {
-            this.text += "${i + 1}. ${Vault.archives[MainScreen.currentArchiveIndex].notes[i].name}" + '\n'
-            this.menu.add(MenuItem("просмотреть \"${Vault.archives[MainScreen.currentArchiveIndex].notes[i].name}\"", {MainScreen.viewANoteScreen.getCurentItemIndex(MainScreen.chooseAnArchiveScreen, index = i) }))
-        }
+        addMenuAndText(Vault.archives[MainScreen.currentArchiveIndex].notes,screenToGoForward=MainScreen.viewANoteScreen,myReturnMessege="вернуться к просмотру архива")
         super.show()
     }
 
@@ -208,6 +189,6 @@ class ChooseANoteScreen:Screen("Выбирите заметку для прос�
     }
 }
 class MenuItem(var name:String="item",var onDo:() -> Unit={})
-interface ListVeiwer{//One who show some items
-fun getCurentItemIndex(previousScreen: Screen, index:Int=-1)
+interface ItemViewer{
+fun useCurrentItemIndex(index:Int=-1)
 }
