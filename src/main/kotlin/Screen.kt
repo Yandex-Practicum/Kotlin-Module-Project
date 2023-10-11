@@ -3,7 +3,7 @@ import kotlin.system.exitProcess
 
 
 abstract class Screen (var header:String="header", var text:String="content"){
-    val menu:ArrayList<MenuItem> = arrayListOf(MenuItem("вернуться на предыдущий экран", {this.close()}))
+    val menu:ArrayList<MenuItem> = arrayListOf(MenuItem("вернуться на предыдущий экран") { this.close() })
     protected val scanner= Scanner(System.`in`)
     open fun show(){
         println(header)
@@ -48,19 +48,19 @@ abstract class Screen (var header:String="header", var text:String="content"){
 
     protected fun <T:Menuable>addMenuAndText(items:ArrayList<T> ,screenToGoForward:ItemViewer,myReturnMessege:String) {
         menu.clear()
-        menu.add(MenuItem(myReturnMessege,{close()}))
+        menu.add(MenuItem(myReturnMessege) { close() })
         text = ""
         for (i in 0..items.lastIndex) {
             text += "${i + 1}. ${items[i].name}" + '\n'
-            menu.add(MenuItem("окрыть \"${items[i].name}\"", { screenToGoForward.useCurrentItemIndex( index = i) }))
+            menu.add(MenuItem("окрыть \"${items[i].name}\"") { screenToGoForward.useCurrentItemIndex(index = i) })
         }
     }
 }
 
 object MainScreen:Screen("Архивы", "Пока не созданы"){
     init {
-        this.menu[0]=MenuItem("завершить программу",{this.close() })
-        this.menu.add(MenuItem("cоздать архив",{createAnArchiveScreen.show()}))
+        this.menu[0]=MenuItem("завершить программу") { this.close() }
+        this.menu.add(MenuItem("cоздать архив") { createAnArchiveScreen.show() })
     }
     private val createAnArchiveScreen:CreateAnArchiveScreen=CreateAnArchiveScreen()
     val chooseAnArchiveScreen:ChooseAnArchiveScreen=ChooseAnArchiveScreen()
@@ -72,7 +72,7 @@ object MainScreen:Screen("Архивы", "Пока не созданы"){
     var currentNoteIndex=-1
     override fun show(){
         if (Vault.archives.isNotEmpty()){
-            if (menu.size<3)this.menu.add(MenuItem("открыть архив",{chooseAnArchiveScreen.show()}))
+            if (menu.size<3)this.menu.add(MenuItem("открыть архив") { chooseAnArchiveScreen.show() })
             text=""
             Vault.archives.forEach { text+=it.name+'\n' }
         }
@@ -111,7 +111,7 @@ class ChooseAnArchiveScreen:Screen( "Введите номер архива дл
 }
 class ViewAnArchiveScreen:Screen("Просмотр архива", ""),ItemViewer{
     init {
-        this.menu.add(MenuItem("cоздать заметку",{MainScreen.createANoteScreen.show()}))
+        this.menu.add(MenuItem("cоздать заметку") { MainScreen.createANoteScreen.show() })
     }
     override fun useCurrentItemIndex(index: Int) {
         MainScreen.currentArchiveIndex=index
@@ -124,7 +124,7 @@ class ViewAnArchiveScreen:Screen("Просмотр архива", ""),ItemViewer
         else {
             this.text=""
             Vault.archives[indexX].notes.forEach { this.text+=it.name+'\n' }
-            if (this.menu.size<3)this.menu.add(MenuItem("выбрать заметку",{MainScreen.chooseANoteScreen.show()}))
+            if (this.menu.size<3)this.menu.add(MenuItem("выбрать заметку") { MainScreen.chooseANoteScreen.show() })
         }
         super.show()
     }
@@ -132,7 +132,7 @@ class ViewAnArchiveScreen:Screen("Просмотр архива", ""),ItemViewer
         MainScreen.chooseAnArchiveScreen.show()
     }
 }
-class CreateANoteScreen():Screen("Создание заметки","Чтобы создать заметку введите название для неё."){
+class CreateANoteScreen:Screen("Создание заметки","Чтобы создать заметку введите название для неё."){
 
     override fun getCommand() {
         while(scanner.hasNext()){
@@ -150,7 +150,6 @@ class CreateANoteScreen():Screen("Создание заметки","Чтобы �
         val indexX=MainScreen.currentArchiveIndex
         val currentArchive=Vault.archives[indexX]
         this.header="Создаем заметку в архиве \"${currentArchive.name}\""
-        // super.fullfillMenuAndTextWithArrayItems(currentArchive.notes,this, MainScreen.createANoteScreen)
         super.show()
     }
 
