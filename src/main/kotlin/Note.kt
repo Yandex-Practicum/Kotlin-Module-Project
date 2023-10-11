@@ -4,12 +4,15 @@ class Note(
     name: String,
     private var content: String
 ) : Page(name) {
+    override fun toString(): String {
+        return name
+    }
     private fun read() {
         println(content)
         while (true) {
-            println("\"q\" для выхода")
-            val input = Scanner(System.`in`).nextLine()
-            if (input == "q") break
+            println("0. Выйти из просмотра")
+            val input = Scanner(System.`in`).nextInt()
+            if (input == 0) break
         }
     }
 
@@ -17,14 +20,13 @@ class Note(
         while (true) {
             println(
                 "$name \n" +
-                        "\"q\" вернуться в предыдущее меню \n" +
-                        "0. Посмотреть заметку"
+                        "0. Посмотреть заметку \n" +
+                        "1. Вернуться в предыдущее меню"
             )
 
-
-            val input = Scanner(System.`in`).nextLine()
-            if (input == "0") this.read()
-            else if (input == "q") break
+            val input = Scanner(System.`in`).nextInt()
+            if (input == 0) this.read()
+            else if (input == 1) break
         }
 
     }

@@ -2,13 +2,11 @@ import java.util.Scanner
 
 class Archive(name: String) : Page(name) {
     private val list: MutableList<Note> = mutableListOf()
-
+    override fun toString(): String {
+        return "заметку"
+    }
     override fun show() {
-        val message: String = "$name \n" +
-                "\"q\" вернуться в предыдущее меню \n" +
-                "0. Cоздать заметку"
-
-        navigate(message, list)
+        navigate(list)
     }
 
     override fun create() {
