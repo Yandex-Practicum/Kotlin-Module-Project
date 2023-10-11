@@ -1,8 +1,6 @@
-import javax.management.NotificationEmitter
-
 fun main() {
     val archiveList = mutableListOf<Archive>()
-val menu = Menu(archiveList)
+    val menu = Menu(archiveList)
 
     menu.runMenu()
 

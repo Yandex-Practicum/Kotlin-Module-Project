@@ -1,2 +1,1 @@
-data class Archive(override val name: String, val notes: MutableList<Note>): File{
-}
+data class Archive(override val name: String, val notes: MutableList<Note>) : File

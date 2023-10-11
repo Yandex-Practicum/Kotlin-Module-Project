@@ -71,7 +71,7 @@ class Menu(val list: MutableList<Archive>) {
 
             val selectedIndex = readIntInput(menu = Menu(list))
             when {
-                selectedIndex == 0 ->menuStatus = MenuStatus.CREATE
+                selectedIndex == 0 -> menuStatus = MenuStatus.CREATE
 
                 selectedIndex > 0 -> {
 
