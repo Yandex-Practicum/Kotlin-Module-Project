@@ -1,3 +1,19 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import javax.management.NotificationEmitter
+
+fun main() {
+    val archiveList = mutableListOf<Archive>()
+val menu = Menu(archiveList)
+
+    menu.runMenu()
+
 }
+
+
+
+
+
+
+
+
+
+
