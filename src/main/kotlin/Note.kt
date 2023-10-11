@@ -1,12 +1,12 @@
 import java.util.Scanner
 
 class Note(
-    val name: String,
+    name: String,
     private var content: String
-): Page(name) {
+) : Page(name) {
     private fun read() {
         println(content)
-        while(true){
+        while (true) {
             println("\"q\" для выхода")
             val input = Scanner(System.`in`).nextLine()
             if (input == "q") break

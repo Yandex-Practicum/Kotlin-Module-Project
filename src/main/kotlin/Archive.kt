@@ -1,28 +1,19 @@
 import java.util.Scanner
 
-class Archive(
-    val name: String
-) : Page(name) {
+class Archive(name: String) : Page(name) {
     private val list: MutableList<Note> = mutableListOf()
 
     fun show() {
-        while (true) {
-            println(
-                "$name \n" +
-                        "\"q\" вернуться в предыдущее меню \n" +
-                        "0. Cоздать заметку"
-            )
-            for (i in list)
-                println("${list.indexOf(i) + 1}. ${i.name}")
+        val message: String = "$name \n" +
+                "\"q\" вернуться в предыдущее меню \n" +
+                "0. Cоздать заметку"
 
-            var stop = false
-            navigate(
-                onCreate = {this.createNote() },
-                onClick = {value -> this.list[value].show()},
-                onExit = {stop = true}
-            )
-            if (stop) break
-        }
+        navigate(
+            message,
+            list,
+            onCreate = { this.createNote() },
+            onClick = { value -> this.list[value].show() },
+        )
     }
 
     private fun createNote() {
