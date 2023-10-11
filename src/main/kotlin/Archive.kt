@@ -8,14 +8,10 @@ class Archive(name: String) : Page(name) {
                 "\"q\" вернуться в предыдущее меню \n" +
                 "0. Cоздать заметку"
 
-        navigate(
-            message,
-            list,
-            onCreate = { this.create() },
-        )
+        navigate(message, list)
     }
 
-    private fun create() {
+    override fun create() {
         println("Введите название заметки:")
         val name = Scanner(System.`in`).nextLine()
         println("Введите содержание заметки:")

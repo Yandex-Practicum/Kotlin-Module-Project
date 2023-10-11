@@ -8,14 +8,10 @@ class MainPage(name: String) : Page(name) {
                 "\"q\" - выход из программы \n" +
                 "0. Создать новый архив"
 
-        navigate(
-            message,
-            list,
-            onCreate = { this.create() },
-        )
+        navigate(message, list)
     }
 
-    private fun create() {
+    override fun create() {
         println("Введите название нового архива:")
         val name = Scanner(System.`in`).nextLine()
         list.add(Archive(name))
