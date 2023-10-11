@@ -1,7 +1,7 @@
 import java.util.Scanner
 
-class MainPage {
-    private var list: MutableList<Archive> = mutableListOf()
+class MainPage: Page() {
+    private val list: MutableList<Archive> = mutableListOf()
 
     fun show() {
 
@@ -14,10 +14,13 @@ class MainPage {
             for (i in list) {
                 println("${list.indexOf(i) + 1}. ${i.name}")
             }
-            val input = Scanner(System.`in`).nextLine()
-            if (input == "q") break
-            else if (input == "0") this.createArchive()
-            else this.list[input.toInt() - 1].show()
+            var stop = false
+            navigate(
+                onCreate = {this.createArchive() },
+                onClick = {value -> this.list[value].show()},
+                onExit = {stop = true}
+            )
+            if (stop) break
         }
     }
 

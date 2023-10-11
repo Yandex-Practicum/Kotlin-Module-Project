@@ -2,8 +2,8 @@ import java.util.Scanner
 
 class Archive(
     val name: String
-) {
-    private var list: MutableList<Note> = mutableListOf()
+) : Page() {
+    private val list: MutableList<Note> = mutableListOf()
 
     fun show() {
         while (true) {
@@ -15,18 +15,21 @@ class Archive(
             for (i in list)
                 println("${list.indexOf(i) + 1}. ${i.name}")
 
-            val input = Scanner(System.`in`).nextLine()
-            if (input == "q") break
-            else if (input == "0") this.createNote()
-            else list[input.toInt() - 1].show()
+            var stop = false
+            navigate(
+                onCreate = {this.createNote() },
+                onClick = {value -> this.list[value].show()},
+                onExit = {stop = true}
+            )
+            if (stop) break
         }
     }
 
     private fun createNote() {
         println("Введите название заметки:")
-        val input = Scanner(System.`in`).nextLine()
+        val name = Scanner(System.`in`).nextLine()
         println("Введите содержание заметки:")
         val content = Scanner(System.`in`).nextLine()
-        list.add(Note(input, content))
+        list.add(Note(name, content))
     }
 }
