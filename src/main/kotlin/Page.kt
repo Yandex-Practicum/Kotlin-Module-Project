@@ -1,11 +1,13 @@
 import java.util.Scanner
 
 open class Page(open var name: String) {
+
+    open fun show(){}
+    //open fun create(){}
     fun navigate(
         message: String,
         list: MutableList<out Page>,
         onCreate: () -> Unit,
-        onClick: (value: Int) -> Unit
     ) {
         while (true) {
             println(message)
@@ -16,7 +18,7 @@ open class Page(open var name: String) {
             when (input) {
                 "q" -> break
                 "0" -> onCreate()
-                else -> onClick(input.toInt() - 1)
+                else -> list[input.toInt() - 1].show()
             }
         }
     }

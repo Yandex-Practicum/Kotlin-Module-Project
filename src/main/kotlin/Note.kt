@@ -13,7 +13,7 @@ class Note(
         }
     }
 
-    fun show() {
+    override fun show() {
         while (true) {
             println(
                 "$name \n" +

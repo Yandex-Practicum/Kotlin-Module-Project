@@ -3,7 +3,7 @@ import java.util.Scanner
 class MainPage(name: String) : Page(name) {
     private val list: MutableList<Archive> = mutableListOf()
 
-    fun show() {
+    override fun show() {
         val message = "Ввeдите пункт меню для действия \n" +
                 "\"q\" - выход из программы \n" +
                 "0. Создать новый архив"
@@ -11,12 +11,11 @@ class MainPage(name: String) : Page(name) {
         navigate(
             message,
             list,
-            onCreate = { this.createArchive() },
-            onClick = { value -> this.list[value].show() },
+            onCreate = { this.create() },
         )
     }
 
-    private fun createArchive() {
+    private fun create() {
         println("Введите название нового архива:")
         val name = Scanner(System.`in`).nextLine()
         list.add(Archive(name))
