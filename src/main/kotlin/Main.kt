@@ -1,4 +1,4 @@
 fun main() {
-    val mainPage = MainPage()
+    val mainPage = MainPage("Главное меню")
     mainPage.show()
 }

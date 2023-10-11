@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-open class Page {
+open class Page(name : String) {
     fun navigate(
         onCreate: () -> Unit,
         onClick: (value: Int) -> Unit,
@@ -8,8 +8,8 @@ open class Page {
     ) {
         val input = Scanner(System.`in`).nextLine()
         when (input) {
-            "q" -> onExit
-            "0" -> onCreate
+            "q" -> onExit()
+            "0" -> onCreate()
             else -> onClick(input.toInt() - 1)
         }
 

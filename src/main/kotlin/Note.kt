@@ -3,7 +3,7 @@ import java.util.Scanner
 class Note(
     val name: String,
     private var content: String
-) {
+): Page(name) {
     private fun read() {
         println(content)
         while(true){

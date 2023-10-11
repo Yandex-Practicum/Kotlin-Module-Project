@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-class MainPage: Page() {
+class MainPage(name: String): Page(name) {
     private val list: MutableList<Archive> = mutableListOf()
 
     fun show() {

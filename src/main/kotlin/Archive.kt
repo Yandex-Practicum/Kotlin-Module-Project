@@ -2,7 +2,7 @@ import java.util.Scanner
 
 class Archive(
     val name: String
-) : Page() {
+) : Page(name) {
     private val list: MutableList<Note> = mutableListOf()
 
     fun show() {
