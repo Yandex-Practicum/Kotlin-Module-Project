@@ -13,17 +13,11 @@ class Note(
             println("0. Выйти из просмотра")
             val input: Int
             val scanner = Scanner(System.`in`)
-            if (scanner.hasNextInt()) {
-                input = scanner.nextInt()
-                if (input == 0) break
-                else {
-                    println("Такого пункта нет в списке.")
-                    continue
-                }
-            }else{
-                println("Введите цифру согласно пунктам меню.")
-                continue
-            }
+            if (isDigit(scanner))
+            input = scanner.nextInt()
+            else continue
+            if (hasPoint(0, input)) break
+            else continue
         }
     }
 
@@ -35,9 +29,18 @@ class Note(
                         "1. Вернуться в предыдущее меню"
             )
 
-            val input = Scanner(System.`in`).nextInt()
-            if (input == 0) this.read()
-            else if (input == 1) break
+            val input: Int
+            val scanner = Scanner(System.`in`)
+            if (isDigit(scanner))
+                input = scanner.nextInt()
+            else continue
+            if (hasPoint(1, input)) {
+                when(input){
+                    0 -> read()
+                    1 -> break
+                }
+            }
+            else continue
         }
 
     }

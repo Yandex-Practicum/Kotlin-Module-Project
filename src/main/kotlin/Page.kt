@@ -4,6 +4,20 @@ open class Page(open var name: String) {
 
     open fun show() {}
     open fun create() {}
+    fun isDigit(scanner: Scanner):Boolean{
+        return if (scanner.hasNextInt()) true
+        else {
+            println("Введите цифру согласно пунктам меню.")
+            false
+        }
+    }
+    fun hasPoint(number: Int, input: Int):Boolean{
+        return if (input>number) {
+            println("Такого пункта нет в списке.")
+            false
+        }
+        else true
+    }
     private val toExit: String = if (this is MainPage) "Выйти из программы"
     else "В предыдущее меню"
 
