@@ -58,7 +58,7 @@ class Menu(val list: MutableList<Archive>) {
 
                     if (selectedNoteIndex >= 0) {
                         println("Содержание заметки ${list[selectedArchiveIndex].notes[selectedNoteIndex].name}:\n")
-                        println(list[selectedArchiveIndex].notes[selectedNoteIndex].text)
+                        println("${list[selectedArchiveIndex].notes[selectedNoteIndex].text}\n")
                     }
 
                     println("нажмите ENTER для выхода в предыдущее меню")
@@ -69,7 +69,7 @@ class Menu(val list: MutableList<Archive>) {
 
             }
 
-            val selectedIndex = readIntInput(menu = Menu(list))
+            val selectedIndex = readIntInput(menu = Menu(list), menuStatus, selectedArchiveIndex)
             when {
                 selectedIndex == 0 -> menuStatus = MenuStatus.CREATE
 
@@ -87,6 +87,8 @@ class Menu(val list: MutableList<Archive>) {
                         MenuStatus.NOTES -> {
                             if (selectedIndex == this.list[selectedArchiveIndex].notes.size + 1) {
                                 menuStatus = MenuStatus.ARCHIVE
+                                selectedArchiveIndex = -1
+
                             } else {
                                 selectedNoteIndex = selectedIndex - 1
                                 menuStatus = MenuStatus.VIEW
@@ -105,32 +107,42 @@ class Menu(val list: MutableList<Archive>) {
     }
 
 
-}
+    private fun readIntInput(menu: Menu, menuStatus: MenuStatus, selectedArchiveIndex: Int): Int {
+        var input = Scanner(System.`in`).nextLine()
+        val menuExitPoint: Int = when (menuStatus) {
+            MenuStatus.ARCHIVE -> menu.list.size + 1
+            MenuStatus.NOTES -> menu.list[selectedArchiveIndex].notes.size + 1
+            else -> 0
+        }
+        while (true) {
+            while (input.toIntOrNull() == null) {
+                println("введите число, соответствующее пункту меню")
+                input = Scanner(System.`in`).nextLine()
+            }
+            while (input.toInt() > menuExitPoint) {
+                println("введите число от 0 до $menuExitPoint, соответствующее пункту меню")
+                input = Scanner(System.`in`).nextLine()
+                while (input.toIntOrNull() == null) {
+                    println("введите число, соответствующее пункту меню")
+                    input = Scanner(System.`in`).nextLine()
+                }
+            }
+            return input.toInt()
+        }
+        }
 
 
-private fun readIntInput(menu: Menu): Int {
-    var input = Scanner(System.`in`).nextLine()
-    while (input.toIntOrNull() == null) {
-        println("введите число")
-        input = Scanner(System.`in`).nextLine()
-    }
-    if (input.toIntOrNull() != null) {
-
-        if (input.toInt() > menu.list.size + 1) {
-            println("введите число от 0 до ${menu.list.size + 1}, соответствующее пункту меню")
+    private fun readLineInput(): String {
+        var input = Scanner(System.`in`).nextLine()
+        while (input == "") {
+            println("Ввод не должен быть пустым. Введите текст")
             input = Scanner(System.`in`).nextLine()
         }
+        return input
     }
 
-    return input.toInt()
 }
 
-private fun readLineInput(): String {
-    var input = Scanner(System.`in`).nextLine()
-    while (input == "") {
-        println("Ввод не должен быть пустым. Введите текст")
-        input = Scanner(System.`in`).nextLine()
-    }
-    return input
-}
+
+
 
