@@ -8,11 +8,22 @@ class Note(
         return name
     }
     private fun read() {
-        println(content)
         while (true) {
+            println(content)
             println("0. Выйти из просмотра")
-            val input = Scanner(System.`in`).nextInt()
-            if (input == 0) break
+            val input: Int
+            val scanner = Scanner(System.`in`)
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt()
+                if (input == 0) break
+                else {
+                    println("Такого пункта нет в списке.")
+                    continue
+                }
+            }else{
+                println("Введите цифру согласно пунктам меню.")
+                continue
+            }
         }
     }
 

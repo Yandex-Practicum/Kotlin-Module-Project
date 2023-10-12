@@ -22,16 +22,16 @@ open class Page(open var name: String) {
 
             println("${list.lastIndex + 2}. $toExit")
 
-                var input = -1//начало обработки ошибок
+                var input: Int//начало обработки ошибок
                 val scanner = Scanner(System.`in`)
                 if (scanner.hasNextInt()) {
                     input = scanner.nextInt()
                         if (input > (list.lastIndex + 2)){
-                            println("Такого пункта нет в списке!")
+                            println("Такого пункта нет в списке.")
                             continue
                         }
                 } else {
-                    println("Введите цифру согласно пунктам меню!")
+                    println("Введите цифру согласно пунктам меню.")
                     continue
                 }//конец обработки ошибок
 
