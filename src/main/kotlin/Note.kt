@@ -4,20 +4,22 @@ class Note(
     name: String,
     private var content: String
 ) : Page(name) {
-    override fun toString(): String {
-        return name
-    }
     private fun read() {
         while (true) {
             println(content)
             println("0. Выйти из просмотра")
             val input: Int
             val scanner = Scanner(System.`in`)
-            if (isDigit(scanner))
-            input = scanner.nextInt()
-            else continue
-            if (hasPoint(0, input)) break
-            else continue
+            if (isDigit(scanner)) {
+                input = scanner.nextInt()
+            } else {
+                continue
+            }
+            if (hasPoint(0, input)) {
+                break
+            } else {
+                continue
+            }
         }
     }
 
@@ -31,16 +33,19 @@ class Note(
 
             val input: Int
             val scanner = Scanner(System.`in`)
-            if (isDigit(scanner))
+            if (isDigit(scanner)) {
                 input = scanner.nextInt()
-            else continue
+            } else {
+                continue
+            }
             if (hasPoint(1, input)) {
-                when(input){
+                when (input) {
                     0 -> read()
                     1 -> break
                 }
+            } else {
+                continue
             }
-            else continue
         }
 
     }
