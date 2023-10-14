@@ -2,9 +2,14 @@ import java.util.Scanner
 
 class Menu(val list: MutableList<Archive>) {
 
-    fun printMenu(list: MutableList<out File>, fileType: String) {
+    private var menuStatus = MenuStatus.ARCHIVE
+    var selectedArchiveIndex = -1
+    var selectedNoteIndex = -1
+    private fun printMenu(list: MutableList<out File>, menuStatus: MenuStatus) {
 
-        if (fileType == "Архив") println("Список архивов\n0.Создать архив") else println("Список заметок\n0.Создать Заметку")
+        if (menuStatus == MenuStatus.ARCHIVE) println("Список архивов\n0.Создать архив") else println(
+            "Список заметок\n0.Создать Заметку"
+        )
 
         for (item in list) {
             println("${list.indexOf(item) + 1}. ${item.name}  ")
@@ -15,55 +20,23 @@ class Menu(val list: MutableList<Archive>) {
 
 
     fun runMenu() {
-        var menuStatus = MenuStatus.ARCHIVE
-        var selectedArchiveIndex = -1
-        var selectedNoteIndex = -1
+
+
         while (true) {
             when (menuStatus) {
-                MenuStatus.ARCHIVE -> {
-                    printMenu(this.list, "Архив")
-
-                }
+                MenuStatus.ARCHIVE -> printMenu(list, MenuStatus.ARCHIVE)
 
                 MenuStatus.NOTES -> {
-
-                    printMenu(this.list[selectedArchiveIndex].notes, "Заметки")
-
+                    printMenu(list[selectedArchiveIndex].notes, MenuStatus.NOTES)
                 }
 
                 MenuStatus.CREATE -> {
-                    when {
-                        selectedArchiveIndex < 0 -> {
-                            println("Введите название архива")
-                            val name = readLineInput()
-                            list.add(Archive(name, mutableListOf()))
-                            //printMenu(list, "Архив")
-                            menuStatus = MenuStatus.ARCHIVE
-                            continue
-                        }
-
-                        selectedArchiveIndex >= 0 -> {
-                            println("Введите название заметки")
-                            val name = readLineInput()
-                            println("Введите текст заметки")
-                            val body = readLineInput()
-                            list[selectedArchiveIndex].notes.add(Note(name, body))
-                            menuStatus = MenuStatus.NOTES
-                            continue
-                        }
-                    }
+                    createObject(selectedArchiveIndex)
+                    continue
                 }
 
                 MenuStatus.VIEW -> {
-
-                    if (selectedNoteIndex >= 0) {
-                        println("Содержание заметки ${list[selectedArchiveIndex].notes[selectedNoteIndex].name}:\n")
-                        println("${list[selectedArchiveIndex].notes[selectedNoteIndex].text}\n")
-                    }
-
-                    println("нажмите ENTER для выхода в предыдущее меню")
-                    menuStatus = MenuStatus.NOTES
-                    Scanner(System.`in`).nextLine()
+                    viewNote(selectedArchiveIndex, selectedNoteIndex)
                     continue
                 }
 
@@ -71,37 +44,12 @@ class Menu(val list: MutableList<Archive>) {
 
             val selectedIndex = readIntInput(menu = Menu(list), menuStatus, selectedArchiveIndex)
             when {
+                selectedIndex == list.size + 1 -> if (menuStatus == MenuStatus.ARCHIVE) return else chooseMenuPoint(
+                    selectedIndex
+                )
+
                 selectedIndex == 0 -> menuStatus = MenuStatus.CREATE
-
-                selectedIndex > 0 -> {
-
-                    when (menuStatus) {
-                        MenuStatus.ARCHIVE -> {
-                            if (selectedIndex == this.list.size + 1) return
-                            selectedArchiveIndex = selectedIndex - 1
-                            selectedNoteIndex = selectedIndex - 1
-                            menuStatus = MenuStatus.NOTES
-
-                        }
-
-                        MenuStatus.NOTES -> {
-                            if (selectedIndex == this.list[selectedArchiveIndex].notes.size + 1) {
-                                menuStatus = MenuStatus.ARCHIVE
-                                selectedArchiveIndex = -1
-
-                            } else {
-                                selectedNoteIndex = selectedIndex - 1
-                                menuStatus = MenuStatus.VIEW
-                            }
-                        }
-
-                        else -> return
-                    }
-                }
-
-                else -> return
-
-
+                selectedIndex > 0 -> chooseMenuPoint(selectedIndex)
             }
         }
     }
@@ -114,23 +62,45 @@ class Menu(val list: MutableList<Archive>) {
             MenuStatus.NOTES -> menu.list[selectedArchiveIndex].notes.size + 1
             else -> 0
         }
-        while (true) {
-            while (input.toIntOrNull() == null) {
-                println("введите число, соответствующее пункту меню")
-                input = Scanner(System.`in`).nextLine()
-            }
-            while (input.toInt() > menuExitPoint) {
-                println("введите число от 0 до $menuExitPoint, соответствующее пункту меню")
-                input = Scanner(System.`in`).nextLine()
-                while (input.toIntOrNull() == null) {
-                    println("введите число, соответствующее пункту меню")
-                    input = Scanner(System.`in`).nextLine()
-                }
-            }
-            return input.toInt()
+        val listMenu: List<String> = (0..menuExitPoint).toList().map { it.toString() }
+        while (!listMenu.contains(input)) {
+            println("введите число, соответствующее пункту меню")
+            input = Scanner(System.`in`).nextLine()
         }
+        return input.toInt()
+    }
+
+
+    private fun createObject(selectedArchiveIndex: Int): Unit = when {
+        selectedArchiveIndex < 0 -> {
+            println("Введите название архива")
+            val name = readLineInput()
+            list.add(Archive(name, mutableListOf()))
+            menuStatus = MenuStatus.ARCHIVE
         }
 
+        selectedArchiveIndex >= 0 -> {
+            println("Введите название заметки")
+            val name = readLineInput()
+            println("Введите текст заметки")
+            val body = readLineInput()
+            list[selectedArchiveIndex].notes.add(Note(name, body))
+            menuStatus = MenuStatus.NOTES
+        }
+
+        else -> {}
+    }
+
+    private fun viewNote(selectedArchiveIndex: Int, selectedNoteIndex: Int) {
+        if (selectedNoteIndex >= 0) {
+            println("Содержание заметки ${list[selectedArchiveIndex].notes[selectedNoteIndex].name}:\n")
+            println("${list[selectedArchiveIndex].notes[selectedNoteIndex].text}\n")
+        }
+
+        println("нажмите ENTER для выхода в предыдущее меню")
+        menuStatus = MenuStatus.NOTES
+        Scanner(System.`in`).nextLine()
+    }
 
     private fun readLineInput(): String {
         var input = Scanner(System.`in`).nextLine()
@@ -141,8 +111,30 @@ class Menu(val list: MutableList<Archive>) {
         return input
     }
 
+    private fun chooseMenuPoint(selectedIndex: Int) {
+
+        when (menuStatus) {
+            MenuStatus.ARCHIVE -> {
+                selectedArchiveIndex = selectedIndex - 1
+                selectedNoteIndex = selectedIndex - 1
+                menuStatus = MenuStatus.NOTES
+            }
+
+            MenuStatus.NOTES -> {
+                if (selectedIndex == list[selectedArchiveIndex].notes.size + 1) {
+                    menuStatus = MenuStatus.ARCHIVE
+                    selectedArchiveIndex = -1
+
+                } else {
+                    selectedNoteIndex = selectedIndex - 1
+                    menuStatus = MenuStatus.VIEW
+                }
+            }
+
+            else -> return
+        }
+
+    }
 }
-
-
 
 
