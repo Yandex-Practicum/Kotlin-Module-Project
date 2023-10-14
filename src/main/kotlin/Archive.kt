@@ -10,10 +10,28 @@ class Archive(name: String) : Page(name) {
     }
 
     override fun create() {
-        println("Введите название заметки:")
-        val name = Scanner(System.`in`).nextLine()
-        println("Введите содержание заметки:")
-        val content = Scanner(System.`in`).nextLine()
-        list.add(Note(name, content))
+        var noteName : String
+        var content: String
+
+        while (true) {
+            println("Введите название заметки:")
+            noteName = Scanner(System.`in`).nextLine()
+            if (noteName.isEmpty()) {
+                println("Имя не может быть пустым.")
+                continue
+            } else break
+        }
+
+        while (true) {
+            println("Введите содержание заметки:")
+            content = Scanner(System.`in`).nextLine()
+            if (content.isEmpty()){
+                println("Содержание не может быть пустым.")
+                continue
+            } else break
+
+        }
+
+        list.add(Note(noteName, content))
     }
 }

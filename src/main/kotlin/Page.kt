@@ -12,7 +12,7 @@ open class Page(open var name: String) {
         }
     }
     fun hasPoint(number: Int, input: Int):Boolean{
-        return if (input>number) {
+        return if ((input > number) || (input < 0)) {
             println("Такого пункта нет в списке.")
             false
         }
@@ -24,8 +24,9 @@ open class Page(open var name: String) {
     fun navigate(
         list: MutableList<out Page>,
     ) {
-        while (true) {
 
+        while (true) {
+            val lastPointOfMenu = list.lastIndex + 2
             println(
                 "$name\n" +
                         "0. Создать $this"
@@ -34,13 +35,13 @@ open class Page(open var name: String) {
             for (i in list)
                 println("${list.indexOf(i) + 1}. ${i.name}")
 
-            println("${list.lastIndex + 2}. $toExit")
+            println("${lastPointOfMenu}. $toExit")
 
                 var input: Int//начало обработки ошибок
                 val scanner = Scanner(System.`in`)
                 if (scanner.hasNextInt()) {
                     input = scanner.nextInt()
-                        if (input > (list.lastIndex + 2)){
+                        if ((input > lastPointOfMenu) || (input < 0)){
                             println("Такого пункта нет в списке.")
                             continue
                         }
@@ -50,7 +51,7 @@ open class Page(open var name: String) {
                 }//конец обработки ошибок
 
                 when (input) {
-                    list.lastIndex + 2 -> break
+                    lastPointOfMenu -> break
                     0 -> this.create()
                     else -> list[input - 1].show()
                 }

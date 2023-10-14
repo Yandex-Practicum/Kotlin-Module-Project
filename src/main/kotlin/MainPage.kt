@@ -11,9 +11,16 @@ class MainPage(name: String) : Page(name) {
     }
 
     override fun create() {
+        var archiveName : String
+        while (true){
         println("Введите название нового архива:")
-        val name = Scanner(System.`in`).nextLine()
-        list.add(Archive(name))
+            archiveName = Scanner(System.`in`).nextLine()
+            if (archiveName.isEmpty()){
+                println("Название не может быть пустым.")
+                continue
+            } else break
+        }
+        list.add(Archive(archiveName))
     }
 
 }
