@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    val archiveList = mutableListOf<Archive>()
+    val menu = Menu(archiveList)
+    menu.runMenu()
 }
