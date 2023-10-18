@@ -1,0 +1,1 @@
+data class MenuItem (val title:String )

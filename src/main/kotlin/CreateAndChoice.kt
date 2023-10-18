@@ -1,37 +1,47 @@
+
+import java.util.Scanner
+
 class CreateAndChoice {
-    val archives = mutableListOf<Archives>()
-
-    fun showAllArchive() {
-        println("Введите номер архива, который хотите открыть")
-        if (archives.isEmpty()){
-            println("У вас нет еще ни одного архива.Вернитесь назад и создайте архив")
+    val scanner = Scanner(System.`in`)
+    val archivesList = mutableListOf<Archives>()
+    fun createArchive() {
+        println("Введите название архива")
+        val nameA = scanner.nextLine()
+        if (nameA.isEmpty()) {
+            println("Нельзя создать архив без имени")
+            createArchive()
+        } else {
+            archivesList.add(Archives(nameA, mutableListOf()))
+            println("Архив \"$nameA\" добавлен")
         }
-        for (i in archives.indices) {
-            var number=i+1
-            println("$number- ${archives.map { it.nameA }[i]}" )
+    }
+
+    fun addNoteToArchive(numberA: Int) {
+        println("Введите имя заметки")
+        val name1 = scanner.nextLine()
+        if (name1.isEmpty()) {
+            println("Нельзя создать заметку с пустым именем,повторите ввод")
+            addNoteToArchive(numberA)
         }
-        println("${archives.size+1}  Назад  ")
-     //   println("0- Назад")
+        while (true) {
+            println("Введите текст заметки")
+            val text = scanner.nextLine()
+            if (text.isEmpty()) {
+                println("Нельзя создать заметку без содержания,повторите ввод")
+            } else {
+                archivesList[numberA].notes.add(Note(name1, text))
+                println("Заметка $name1 создана")
+                break
+            }
+        }
     }
 
-    fun createArchive(nameA:String) {
-        archives.add(Archives(nameA, mutableListOf()))
-        println("Архив \"$nameA\" добавлен")
+    fun back() {
+        println("Введите любой символ для возврата назад")
+        scanner.nextLine()
     }
-    fun addNoteToArchive(numberA: Int, name: String, text: String) {
-        archives[numberA].notes.add(Note(name, text))
-    }
+}
 
-    fun getNoteList(numberA: Int):List<String>{
-         return archives[numberA].notes.map { it.nameN }
-    }
-
-       fun showText (numberA:Int, numberN: Int):String {
-        return archives[numberA].notes[numberN].text
-    }
-
-
-    }
 
 
 
