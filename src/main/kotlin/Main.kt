@@ -33,7 +33,7 @@ fun main() {
                                         "${notesArch.notesList.size + 1}. перейти назад"
                             )
 
-                            when (val inp = InputKey().inputInt((notesArch.notesList.size + 1))) {
+                            when (val inputKey = InputKey().inputInt((notesArch.notesList.size + 1))) {
                                 (notesArch.notesList.size) -> {
                                     println("Введите имя заметки:")
                                     val name = InputKey().inputStr()
@@ -44,7 +44,7 @@ fun main() {
 
                                 (notesArch.notesList.size + 1) -> break
                                 else -> {
-                                    val note = notesArch.notesList[inp]
+                                    val note = notesArch.notesList[inputKey]
                                     println("заметка ${note.name}\n${note.noteContent}")
                                     println("0. перейти назад")
                                     when(InputKey().inputInt(0)){

@@ -20,7 +20,15 @@ open class InputKey() {
     }
 
     fun inputStr(): String {
-        return readLine().toString()
+        var input :String
+        while(true){
+        input = readln().toString()
+            if (input.count()<1){
+            println("Введите текст:")
+        }else break
+
+        }
+        return input
     }
 
 
