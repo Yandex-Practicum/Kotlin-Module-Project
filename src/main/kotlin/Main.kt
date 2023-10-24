@@ -6,8 +6,7 @@ val menu: Menu = Menu()
 val scanner = Scanner(System.`in`)
 
 
-//Импорт компонентов
-
-fun main(args: Array<String>) { // Создать-Показать список меню
+fun main(args: Array<String>) {
     menu.showListMenu(ArchiveList())
+    scanner.close()
 }

@@ -2,11 +2,11 @@ class Notes(val id: Int, val name: String, val text: String, val archiveId: Int)
 
 }
 
-class NotesDetail(val noteId: Int) : ListInterface {  // ListInterface
+class NotesDetail(val noteId: Int) : ListInterface {
     override var title: String = ""
     override val itemList: MutableList<MenuItem> = mutableListOf()
 
-    init {  // Простотр заметок / Назад к списку...
+    init {
         val tempNote: Notes = notesData.filter { i -> i.id == noteId }[0]
         title = "Просмотр заметки ${tempNote.name}"
         itemList.add(MenuItem(tempNote.text, isActive = false, isExecute = false) { })
@@ -34,7 +34,7 @@ class NotesList(private val archiveId: Int) : ListInterface {
                 )
             })
         }
-        itemList.add(  // Возврат к списку
+        itemList.add(
             MenuItem(
                 "Назад к списку архивов", isActive = true, isExecute = false
             ) { menu.showListMenu(ArchiveList()) })
@@ -50,6 +50,11 @@ class NotesAdd(archiveId: Int) : ListInterface {
         itemList.add(MenuItem("", isActive = false, isExecute = true) {
             val name = scanner.nextLine()
             println("Введите текст заметки")
+            if (name.isEmpty()) {                        // Добавил пустой ввод
+                println("Название архива не должно быть пустым")
+                return@MenuItem
+
+            }
             val text = scanner.nextLine()
             this.addNote(name, text, archiveId)
             println("Заметка успешно добавлена")

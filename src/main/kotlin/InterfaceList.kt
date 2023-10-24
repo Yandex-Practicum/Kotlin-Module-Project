@@ -1,4 +1,4 @@
-interface ListInterface { //Создаем интерфейс
+interface ListInterface {
     val title: String
     val itemList: MutableList<MenuItem>
 }

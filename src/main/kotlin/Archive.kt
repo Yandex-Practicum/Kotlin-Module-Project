@@ -3,31 +3,38 @@ import kotlin.system.exitProcess
 class Archive(val id: Int, val name: String) {
 }
 
-class ArchiveAdd() : ListInterface {  // Добавляем архив
+
+class ArchiveAdd : ListInterface {
     override val title: String = "Добавляем архив"
     override val itemList: MutableList<MenuItem> = mutableListOf()
 
     init {
-        itemList.add(MenuItem("Введите название архива")) // Название архива
+        itemList.add(MenuItem("Введите название архива"))
         itemList.add(MenuItem("", isActive = false, isExecute = true) {
             val name = scanner.nextLine()
+            if (name.isEmpty()) {   // Добавил пустой ввод
+                println("Название архива не должно быть пустым")
+                return@MenuItem
+
+            }
             this.addArchive(name)
-            println("Архив добавлен")  // Добавили архив (показать процесс)
+            println("Архив добавлен")
+
         })
         itemList.add(
             MenuItem(
-                "Вернуться к списку архивов", //Вернуться назад к списку
+                "Вернуться к списку архивов",
                 isActive = true,
                 isExecute = false
             ) { menu.showListMenu(ArchiveList()) })
     }
 
-    fun addArchive(name: String) {
+    private fun addArchive(name: String) {
         archivesData.add(Archive(archivesData.size, name))
     }
 }
 
-class ArchiveList() : ListInterface {  // Создаем список архивов
+class ArchiveList : ListInterface {
     override val title = "Список архивов"
     override val itemList: MutableList<MenuItem> = mutableListOf()
 
