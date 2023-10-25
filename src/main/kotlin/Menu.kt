@@ -44,5 +44,8 @@ class Menu {
         }
     }
 
-    private fun isInteger(s: String): Boolean = s.toIntOrNull() != null
+    private fun isInteger(s: String): Boolean {
+        return s.toIntOrNull() != null
+    }
+
 }

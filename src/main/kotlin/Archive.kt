@@ -12,8 +12,8 @@ class ArchiveAdd : ListInterface {
         itemList.add(MenuItem("Введите название архива"))
         itemList.add(MenuItem("", isActive = false, isExecute = true) {
             val name = scanner.nextLine()
-            if (name.isEmpty()) {   // Добавил пустой ввод
-                println("Название архива не должно быть пустым")
+            if (name.isEmpty()) {
+                println("Название архива не должно быть пустым!")
                 return@MenuItem
 
             }

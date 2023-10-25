@@ -49,13 +49,21 @@ class NotesAdd(archiveId: Int) : ListInterface {
         itemList.add(MenuItem("Введите название Заметки"))
         itemList.add(MenuItem("", isActive = false, isExecute = true) {
             val name = scanner.nextLine()
-            println("Введите текст заметки")
-            if (name.isEmpty()) {                        // Добавил пустой ввод
-                println("Название архива не должно быть пустым")
+
+            if (name.isEmpty()) {
+                println("Название заметки не должно быть пустым!")
                 return@MenuItem
 
             }
+            println("Введите текст заметки")
+
+
             val text = scanner.nextLine()
+            if (text.isEmpty()) {
+                println("Текст заметки не должен быть пустым!")
+                return@MenuItem
+
+            }
             this.addNote(name, text, archiveId)
             println("Заметка успешно добавлена")
 

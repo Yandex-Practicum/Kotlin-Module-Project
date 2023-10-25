@@ -6,7 +6,7 @@ val menu: Menu = Menu()
 val scanner = Scanner(System.`in`)
 
 
-fun main(args: Array<String>) {
+fun main() {
     menu.showListMenu(ArchiveList())
     scanner.close()
 }
