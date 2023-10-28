@@ -3,7 +3,7 @@ import kotlin.system.exitProcess
 
 class Menu {
     val scanner = Scanner(System. `in`)
-    fun mainMenu(list: MutableList<Archive>) {
+    fun archiveMenu(list: MutableList<Archive>) {
         println("Список архивов:")
         if (!list.isEmpty()) {
             println("0 - Создать архив")

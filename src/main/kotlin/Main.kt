@@ -5,7 +5,7 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     val archiveList = mutableListOf<Archive>()
     val scanner = Scanner(System. `in`)
-    val menuStart = Menu()
+    val menu = Menu()
     fun numError() {
         println("Некорректное значение, попробуйте снова")
     }
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
     }
 
     while (true) {
-        menuStart.mainMenu(archiveList)
+        menu.archiveMenu(archiveList)
         val nextLine = scanner.nextLine()
         if (nextLine.toIntOrNull() == null) {
             println("Необходимо ввести цифру")

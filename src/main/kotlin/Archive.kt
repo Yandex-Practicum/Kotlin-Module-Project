@@ -2,7 +2,20 @@ import java.util.Scanner
 import kotlin.system.exitProcess
 
 class Archive(val name: String, val notes: MutableList <Note>) {
-    val menuStart1 = Menu()
+
+    fun addText(note: Note, archive: Archive, list: MutableList<Archive>){
+        println("Введите текст")
+        val scanner = Scanner(System.`in`)
+        while (true) {
+            val newText = scanner.nextLine()
+            if (newText.isNullOrEmpty()) {
+                println("Необходимо ввести текст")
+            } else {
+                note.text = note.text + "\n$newText"
+                return archive.showNotes(archive, list)
+            }
+        }
+    }
 
     fun showNote(note:Note, archive: Archive, list: MutableList<Archive>) {
             val scanner = Scanner(System.`in`)
@@ -18,9 +31,8 @@ class Archive(val name: String, val notes: MutableList <Note>) {
                 } else {
                     val command = nextLine.toInt()
                     when (command) {
-                        0 -> return
-                        1 -> return note.addText(note)
-                        // 0 -> archive.showNotes(archive, list)
+                        0 -> return archive.showNotes(archive, list)
+                        1 -> return archive.addText(note,archive,list)
                         else -> println("Некорректное значение, попробуйте снова")
                     }
                 }
@@ -32,21 +44,22 @@ class Archive(val name: String, val notes: MutableList <Note>) {
     fun createNote(archive: Archive, list: MutableList<Archive>) {
         println("Введите название заметки:")
         val scanner = Scanner(System.`in`)
-
         while (true) {
             val name = scanner.nextLine()
             if (name.isNullOrEmpty()) {
                 println("Необходимо ввести название заметки")
             } else {
                 println("Введите текст заметки:")
-                val text = scanner.nextLine()
-                if (text.isNullOrEmpty()) {
-                    println("Неоходимо ввести текст заметки") // Здесь дважды приходится вводить
-                // текст, ошибку признаю, пытаюсь исправить
-                } else {
-                    archive.notes.add(Note(name, text))
-                    println("Заметка успешно создана.")
-                    return archive.showNotes(archive, list)
+                while (true) {
+                    val text = scanner.nextLine()
+                    if (text.isNullOrEmpty()) {
+                        println("Неоходимо ввести текст заметки") // Здесь дважды приходится вводить
+                        // текст, ошибку признаю, пытаюсь исправить
+                    } else {
+                        archive.notes.add(Note(name, text))
+                        println("Заметка успешно создана.")
+                        return archive.showNotes(archive, list)
+                    }
                 }
             }
         }
@@ -83,18 +96,18 @@ class Archive(val name: String, val notes: MutableList <Note>) {
                     println("Необходимо ввести цифру")
                 } else {
                     val command = nextLine.toInt()
+                    val exitCommand = archive.notes.size + 1
                     when {
                         (command == 0) -> createNote(archive, archiveList)
-                        (command == archive.notes.size + 1) ->  return //В этом месте идёт возврат
-                        // в это же меню, и только со 2го раза работает корректно,не могу
-                        // понять в чём дело
+                        (command == exitCommand) ->  return
                         (command > 0 && command <= archive.notes.size) -> archive.showNote(archive.notes[command - 1], archive, archiveList)
                         else ->  println("Некорректное значение, попробуйте снова")
                     }
 
                 }
-            }
 
+            }
+            return
         }
     }
 }
