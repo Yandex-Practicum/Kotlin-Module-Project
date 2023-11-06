@@ -13,7 +13,4 @@ class MenuViewNote (val key: Int, val text: String) : CreateInterface {
         } while (tempData != "1")
         backToMenu.invoke()
     }
-
-
-
 }

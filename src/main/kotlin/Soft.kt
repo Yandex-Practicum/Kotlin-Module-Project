@@ -6,11 +6,9 @@ interface CreateInterface {
     fun createFromInput ()
 }
 
-
 interface ViewInterface {
     val title: String
     val mapOfMenu: MutableMap<String, () -> Unit>
-
     fun prepareToView ()
 }
 
@@ -21,7 +19,6 @@ object NoteArchiveCollection {
     fun addToCollection (name: String) {
         noteArchiveCollection[noteArchiveCollection.size] = NoteArchive(name)
     }
-
 }
 
 class NoteArchive(
@@ -31,11 +28,8 @@ class NoteArchive(
     fun addToNoteArchive (str: String) {
         noteArchive[(noteArchive.size + 1)] = Note(str)
     }
-
 }
 
 data class Note (
     val textOfNote: String
-) {
-
-}
+) {}

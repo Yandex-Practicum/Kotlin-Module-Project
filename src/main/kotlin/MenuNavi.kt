@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-class MenuNavigation {
+class MenuNavi {
 
     fun showViewMenu (menuPage: ViewInterface) {
         menuPage.prepareToView()
@@ -13,7 +13,6 @@ class MenuNavigation {
             count++
             tempMenu.put(count, element.key)
             println("$count. ${element.key}")
-
         }
 
         var userInput: String = getUserInput()
@@ -25,7 +24,6 @@ class MenuNavigation {
             }
             userInput = getUserInput()
         }
-
         menuPage.mapOfMenu[tempMenu[userInput.toInt()]]?.invoke()
     }
 
@@ -45,6 +43,4 @@ class MenuNavigation {
     fun getUserInput () : String {
         return Scanner(System.`in`).nextLine()
     }
-
-
 }
