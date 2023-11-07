@@ -1,4 +1,10 @@
-fun main(args: Array<String>) {
+fun main() {
 
-    archivesActivity()
+
+    ArchivesActivity().start()
+    println("Главное меню")
+
+}
+class MainMenuActivity {
+
 }

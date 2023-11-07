@@ -4,39 +4,53 @@ import java.util.Scanner
 По выводу пунктов меню;
 По чтению пользовательского ввода;
 По выполнению определённых операций на выбор пункта меню.*/
-class MenuManager (val items:List<Item> ){
+class MenuManager (private val items:MutableList<Item>){
     val scaner: Scanner = Scanner(System.`in`)
     var userInput: Int? = null
+    //val items:MutableList<Item> = items
 
-    fun userInputValidation(items:List<Item>) {
-        сreateOptionsMenu(items)
+    fun showMenu() {
+        println("Меню:")
+        for (element in items) {
+            println(" ${element.itemId}. ${element.title}")
+        }
+    }
+
+    fun getUserInput():Int {
+        //showMenu(items)
         do {
             while (!scaner.hasNextInt()) {
-                scaner.next()
-                println("вы ввели не цифру попробуйте ввести еще раз")
-                сreateOptionsMenu(items)
+                val input = scaner.next()
+                println("$input не является целым числом. Попробуйте снова.")
+                showMenu()
             }
             userInput = scaner.nextInt()
             if (userInput!! < 0) {
-                println("такой цифры нет попробуйте ввести еще раз")
-                сreateOptionsMenu(items)
+                println("Число должно быть неотрицательным. Попробуйте снова.")
+                showMenu()
             }
 
         }while (userInput!! <0)
 
-        scaner.close()
-
+        //scaner.close()
         for (count in items) {
             if ((count.itemId) == userInput) {
                 count.inten.invoke()
             }
         }
+        return userInput as Int
+    }
+    fun userInputValidationText(): String {
+        var title:String =""
+        do {
+            if (scaner.hasNextLine()) {
+                title = scaner.nextLine()
+            }
+        }while (title.equals(""))
+
+        return title
     }
 
 }
 //создание меню
-fun сreateOptionsMenu(items:List<Item>) {
-    for (element in items) {
-        println(" ${element.itemId}. ${element.title}")
-    }
-}
+
