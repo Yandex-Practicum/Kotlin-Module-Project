@@ -1,15 +1,15 @@
 import kotlin.system.exitProcess
 
-class MenuArchiveCollectionView () : ViewInterface {
+class MenuArchiveCollection () : ViewInterface {
     override val title: String = "меню имеющихся архивов"
-    override val mapOfMenu: MutableMap<String, () -> Unit> = mutableMapOf()
+    override val mapMenu: MutableMap<String, () -> Unit> = mutableMapOf()
 
     override fun prepareToView() {
-        mapOfMenu["Создать архив"] = {menu.showCreateMenu(MenuCreateArchive())}
+        mapMenu["Создать архив"] = {menu.showCreateMenu(CreateArchive())}
         for (key in NoteArchiveCollection.noteArchiveCollection.keys) {
-            mapOfMenu[NoteArchiveCollection.noteArchiveCollection[key]!!.name] = {menu.showViewMenu(MenuViewArchive(key))}
+            mapMenu[NoteArchiveCollection.noteArchiveCollection[key]!!.name] = {menu.showViewMenu(MenuArchive(key))}
         }
-        mapOfMenu["Выход"] = { exitProcess(0) }
+        mapMenu["Выход"] = { exitProcess(0) }
     }
 
 }

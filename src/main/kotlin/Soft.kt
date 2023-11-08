@@ -1,14 +1,14 @@
 interface CreateInterface {
     val title: String
-    var tempData: String
-    val backToMenu: () -> Unit
+    var nameArchive: String
+    val backMenu: () -> Unit
 
     fun createFromInput ()
 }
 
 interface ViewInterface {
     val title: String
-    val mapOfMenu: MutableMap<String, () -> Unit>
+    val mapMenu: MutableMap<String, () -> Unit>
     fun prepareToView ()
 }
 

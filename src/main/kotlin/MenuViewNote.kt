@@ -1,7 +1,7 @@
 class MenuViewNote (val key: Int, val text: String) : CreateInterface {
     override val title = "Введите 1 для выхода"
-    override var tempData = ""
-    override val backToMenu: () -> Unit = {menu.showViewMenu(MenuViewArchive(key))}
+    override var nameArchive = ""
+    override val backMenu: () -> Unit = {menu.showViewMenu(MenuArchive(key))}
 
     override fun createFromInput() {
         do {
@@ -9,8 +9,8 @@ class MenuViewNote (val key: Int, val text: String) : CreateInterface {
             println(text)
             println("")
             println(title)
-            tempData = menu.getUserInput()
-        } while (tempData != "1")
-        backToMenu.invoke()
+            nameArchive = menu.getUserInput()
+        } while (nameArchive != "1")
+        backMenu.invoke()
     }
 }

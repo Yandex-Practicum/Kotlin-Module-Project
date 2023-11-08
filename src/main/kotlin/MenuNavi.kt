@@ -4,27 +4,27 @@ class MenuNavi {
 
     fun showViewMenu (menuPage: ViewInterface) {
         menuPage.prepareToView()
-        println("Выберите пункт ")
+        println("Выберите опцию ")
         println(menuPage.title)
         var count = 0
-        val tempMenu = mutableMapOf<Int, String>()
+        val nameArchive = mutableMapOf<Int, String>()
 
-        for (element in menuPage.mapOfMenu) {
+        for (element in menuPage.mapMenu) {
             count++
-            tempMenu.put(count, element.key)
+            nameArchive.put(count, element.key)
             println("$count. ${element.key}")
         }
 
         var userInput: String = getUserInput()
 
         while (!checkUserInput(userInput, count)) {
-            println("Некорректный ввод! Введите цифру согласно пункту меню от 1 до $count")
-            for (key in tempMenu.keys) {
-                println("$key. ${tempMenu[key]}")
+            println("Ошибка! Введите цифру согласно пункту в меню от 1 до $count")
+            for (key in nameArchive.keys) {
+                println("$key. ${nameArchive[key]}")
             }
             userInput = getUserInput()
         }
-        menuPage.mapOfMenu[tempMenu[userInput.toInt()]]?.invoke()
+        menuPage.mapMenu[nameArchive[userInput.toInt()]]?.invoke()
     }
 
 
