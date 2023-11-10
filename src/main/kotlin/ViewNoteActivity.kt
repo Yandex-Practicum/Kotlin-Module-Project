@@ -6,7 +6,7 @@ class ViewNoteActivity {
         Item(0,"Выйти") { ArchiveDetailsActivity().start() }
     )
     private val menuManager = MenuManager(items)
-    val notes: MutableList<Note> = mutableListOf()
+    //val notes: MutableList<Note> = mutableListOf()
     fun start() {
         while (true) {
             menuManager.showMenu()

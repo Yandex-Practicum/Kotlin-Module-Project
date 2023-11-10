@@ -18,7 +18,7 @@ class ArchiveDetailsActivity {
             when(menuManager.getUserInput()) {
                 0 -> items[0].inten
                 1 -> items[1].inten
-                2 -> break
+                2 -> items[2].inten
             }
         }
     }

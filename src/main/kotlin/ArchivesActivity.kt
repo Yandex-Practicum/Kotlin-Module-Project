@@ -5,6 +5,7 @@
   - 2 = Кнопка "Выйти", возвращающая на "Главное меню"*/
 
 class ArchivesActivity {
+
     val items: MutableList<Item> = mutableListOf(
         Item(0,"Создать архив") { CreateArchiveActivity().start() },
         Item(1,"Выбранный архив") { ArchiveDetailsActivity().start() },
@@ -13,6 +14,7 @@ class ArchivesActivity {
     private val menuManager = MenuManager(items)
     val archives: MutableList<Archive> = mutableListOf()
     fun start() {
+        archivesShow()
         while (true) {
             menuManager.showMenu()
             when(menuManager.getUserInput()) {
@@ -22,8 +24,8 @@ class ArchivesActivity {
             }
         }
     }
-    fun archivesActivity() {
-        //val archives: MutableList<Archive> = mutableListOf()
+    fun archivesShow() {
+        println("Архивы -------------------------------------------------------")
         for (element in archives) {
             println("архив: ${element.title} - ${element.count} заметок")
         }
@@ -31,3 +33,7 @@ class ArchivesActivity {
     }
 
 }
+
+
+
+
