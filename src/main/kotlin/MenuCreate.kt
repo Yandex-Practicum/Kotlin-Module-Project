@@ -6,9 +6,11 @@ class MenuCreate (val key: Int) : CreateInterface {
     override fun createFromInput() {
         println(title)
         nameArchive = menu.getUserInput()
+        if (nameArchive.isEmpty()) {
+            println("Заметка не может быть пустой")
+            backMenu.invoke() }
         NoteArchiveCollection.noteArchiveCollection[key]!!.addToNoteArchive(nameArchive)
-        println("Создана заметка: ")
-        println(nameArchive)
+        println("Создана заметка: $nameArchive")
         backMenu.invoke()
     }
 }
