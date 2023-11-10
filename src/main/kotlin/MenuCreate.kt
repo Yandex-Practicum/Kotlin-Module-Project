@@ -7,7 +7,7 @@ class MenuCreate (val key: Int) : CreateInterface {
         println(title)
         nameArchive = menu.getUserInput()
         if (nameArchive.isEmpty()) {
-            println("Заметка не может быть пустой")
+            println("Ошибка! Заметка не может быть пустой")
             backMenu.invoke() }
         NoteArchiveCollection.noteArchiveCollection[key]!!.addToNoteArchive(nameArchive)
         println("Создана заметка: $nameArchive")

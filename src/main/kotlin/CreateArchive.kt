@@ -6,6 +6,9 @@ class CreateArchive () : CreateInterface {
     override fun createFromInput() {
         println(title)
         nameArchive = menu.getUserInput()
+        if (nameArchive.isEmpty()) {
+            println("Ошибка! Имя архива не может быть пустым")
+            backMenu.invoke() }
         NoteArchiveCollection.addToCollection(nameArchive)
         println("Создан архив с именем: $nameArchive")
         backMenu.invoke()
