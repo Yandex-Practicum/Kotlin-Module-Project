@@ -1,3 +1,6 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+val menu = MenuNavi()
+
+fun main() {
+    menu.showViewMenu(MenuArchiveCollection())
 }
+
