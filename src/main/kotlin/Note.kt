@@ -1,2 +1,2 @@
-data class Note(val title:String, var noteText:String ) {
+data class Note(val title:String, var text:String ) {
 }

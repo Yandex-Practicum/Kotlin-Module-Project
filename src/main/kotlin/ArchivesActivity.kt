@@ -4,32 +4,24 @@
   - 1 = Возможность выбора архива из списка для просмотра
   - 2 = Кнопка "Выйти", возвращающая на "Главное меню"*/
 
-class ArchivesActivity {
+class ArchivesActivity (private val menuManager: MenuManager ) {
+    private val archives = ArchiveManager.archives
 
-    val items: MutableList<Item> = mutableListOf(
-        Item(0,"Создать архив") { CreateArchiveActivity().start() },
-        Item(1,"Выбранный архив") { ArchiveDetailsActivity().start() },
-        Item(2,"Выйти") { main() }
-    )
-    private val menuManager = MenuManager(items)
-    val archives: MutableList<Archive> = mutableListOf()
     fun start() {
-        archivesShow()
-        while (true) {
-            menuManager.showMenu()
-            when(menuManager.getUserInput()) {
-                0 -> items[0].inten
-                1 -> items[1].inten
-                2 -> items[2].inten
-            }
+        val options = mutableListOf("Создать архив").apply {
+            addAll(archives.map { it.name })
+            //add("Создать архив")
+            add("Выйти")
         }
-    }
-    fun archivesShow() {
-        println("Архивы -------------------------------------------------------")
-        for (element in archives) {
-            println("архив: ${element.title} - ${element.count} заметок")
-        }
+        menuManager.showMenu(options)
+        val input = menuManager.getUserInput()
 
+        when (input) {
+            1 -> CreateArchiveActivity(archives, menuManager).start()
+            in 1..archives.size -> ArchiveDetailsActivity(archives[input - 1], menuManager).start()
+            archives.size + 2 -> MainMenuActivity(menuManager).start()
+            else -> println("Повторите свой выбор.")
+        }
     }
 
 }

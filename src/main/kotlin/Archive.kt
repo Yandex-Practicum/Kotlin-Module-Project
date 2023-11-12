@@ -1,3 +1,6 @@
-data class Archive(val notesList: List<Note>, val title: String) {
-    var count: Int = notesList.size
+data class Archive(val name: String){
+    val notes = mutableListOf<Note>()
+    fun addNote(note: Note) {
+        notes.add(note)
+    }
 }

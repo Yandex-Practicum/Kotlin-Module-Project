@@ -4,31 +4,38 @@
   - 0 = Кнопка "Сохранить архив", которая сохраняет архив в списке
   - 1 = Кнопка "Отмена", возвращающая на предыдущий экран без сохранения*/
 
-class CreateArchiveActivity {
-    val items: MutableList<Item> = mutableListOf(
-        Item(0,"Сохранить архив") { addArchive() },
-        Item(1,"Отмена") { ArchivesActivity().start() }
-    )
-    private var title:String = ""
-    private val menuManager = MenuManager(items)
+class CreateArchiveActivity (private val archives: MutableList<Archive>, private val menuManager: MenuManager){
     fun start() {
-        println("Введите название архива")
-        var title: String = menuManager.userInputValidationText()
-        
-        while (true) {
-            menuManager.showMenu()
-            when(menuManager.getUserInput()) {
-                0 -> items[0].inten
-                1 -> items[1].inten
-            }
+        val options = mutableListOf("Сохранить", "Отмена")
+        print("Введите название архива: ")
+        val name = if (menuManager.scanner.hasNextLine()){
+            menuManager.scanner.nextLine()
+        }  else ""
+        if (name.isEmpty()) {
+            println("Имя архива не может быть пустым.")
+            return
         }
+
+        menuManager.showMenu(options)
+        val input = menuManager.getUserInput()
+        when (input) {
+            1 -> saveArchive(name)
+            2 -> cancel()
+            else -> println("Выберите номер еще раз.")
+        }
+
+    }
+    private fun saveArchive(name: String) {
+        val newArchive = Archive(name)
+        ArchiveManager.addArchive(newArchive)
+        println("Архив '${newArchive.name}' создан.")
+        ArchivesActivity(menuManager).start()
     }
 
-    private fun addArchive() {
-
-        ArchivesActivity().archives.add(Archive(listOf(), title))
-        println("Архив $title сохранен")
-        ArchivesActivity().start()
+    private fun cancel() {
+        println("Архив не создан.")
+        ArchivesActivity(menuManager).start()
     }
-
 }
+
+

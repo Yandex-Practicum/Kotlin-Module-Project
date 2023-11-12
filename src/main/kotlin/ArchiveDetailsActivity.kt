@@ -4,23 +4,21 @@
   - 1 = Возможность выбрать заметку для просмотра
   - 2 = Кнопка "Выйти", возвращающая на экран "Архивы"*/
 
-class ArchiveDetailsActivity {
-    val items: MutableList<Item> = mutableListOf(
-        Item(0,"Создать заметку") { CreateNoteActivity().start() },
-        Item(1,"Выбрать заметку") { ViewNoteActivity().start() },
-        Item(2,"Выйти") { ArchivesActivity().start() }
-    )
-    private val menuManager = MenuManager(items)
-    val notes: MutableList<Note> = mutableListOf()
+class ArchiveDetailsActivity (private val archive: Archive, private val menuManager: MenuManager) {
     fun start() {
-        while (true) {
-            menuManager.showMenu()
-            when(menuManager.getUserInput()) {
-                0 -> items[0].inten
-                1 -> items[1].inten
-                2 -> items[2].inten
-            }
+        val options = archive.notes.map { it.title }.toMutableList().apply {
+            add("Создать заметку")
+            add("Выйти")
         }
+        menuManager.showMenu(options)
+        val input = menuManager.getUserInput()
+        when (input) {
+            in 1..archive.notes.size -> ViewNoteActivity(archive.notes[input - 1],archive, menuManager).start()
+            archive.notes.size + 1 -> CreateNoteActivity(archive, menuManager).start()
+            archive.notes.size + 2 -> ArchivesActivity(menuManager).start()
+            else -> println("Повторите свой выбор.")
+        }
+
     }
 
 }
