@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    println("Добро пожаловать в мои заметки (o˘◡˘o)")
+    val notes=Screen()
+    notes.navigation()
 }
