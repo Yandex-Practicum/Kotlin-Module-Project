@@ -11,9 +11,13 @@ class Archive(val name: String, val notes: MutableList<Note>) {
         } else {
             println("Введи текст заметки")
             val text = scanner.nextLine()
-            val note = Note(name, text)
-            archive.notes.add(note)
-            println("Заметка создана")
+            if (text.isNullOrEmpty()) {
+                println("Текст не может быть пустым")
+            } else {
+                val note = Note(name, text)
+                archive.notes.add(note)
+                println("Заметка создана")
+            }
         }
     }
 
@@ -69,38 +73,13 @@ class Archive(val name: String, val notes: MutableList<Note>) {
     fun editNote(note: Note, archive: Archive, archiveList: MutableList<Archive>) {
         println("Введите новый текст заметки:")
         val text = scanner.nextLine()
-        note.text = text
-        println("Заметка успешно изменена")
-    }
-}
-
-fun main(args: Array<String>) {
-    val archiveList = mutableListOf<Archive>()
-    val scanner = Scanner(System.`in`)
-    val menu = Menu()
-    while (true) {
-        menu.archiveMenu(archiveList)
-        val nextLine = scanner.nextLine()
-        if (nextLine.toIntOrNull() == null) {
-            println("Введите цифру")
+        if (text.isNullOrEmpty()) {
+            println("Текст не может быть пустым")
         } else {
-            val command = nextLine.toInt()
-            when {
-
-                (command > archiveList.size + 1 || command < 0) -> println("Некорректный ввод, попробуйте снова")
-                (command == archiveList.size + 1) -> exitProcess(0)
-                (command == 0) -> {
-                    println("Введите название архива")
-                    val name = scanner.nextLine()
-                    archiveList.add(Archive(name, mutableListOf()))
-                }
-
-                (command > 0 && command <= archiveList.size) -> archiveList[command - 1].showNotes(
-                    archiveList[command - 1],
-                    archiveList
-                )
-
-            }
+            note.text = text
+            println("Заметка успешно изменена")
         }
     }
 }
+
+
