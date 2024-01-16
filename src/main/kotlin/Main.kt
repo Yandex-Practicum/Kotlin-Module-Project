@@ -45,7 +45,7 @@ object NotesApp {
                 input == "0" -> {
                     createArchive()
                 }
-                input == "2" -> {
+                input == "${archives.size + 1}" -> {
                     println("Выход из программы.")
                     return
                 }
