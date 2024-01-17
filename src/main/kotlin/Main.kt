@@ -16,13 +16,16 @@ fun main(args: Array<String>) {
 }
 
 fun selectArch(){
-    println("1.Выбрать заметку\n2.Создать заметку")
 
     val scan = Scanner(System.`in`)
 
-    when(scan.nextLine().toInt()){
-        1 -> selectNote()
-        2 -> createNote()
+    while (true) {
+        println("1.Выбрать заметку\n2.Создать заметку\n3.Выйти в главное меню")
+        when (scan.nextLine().toInt()) {
+            1 -> selectNote()
+            2 -> createNote()
+            3 -> break
+        }
     }
 }
 
@@ -30,8 +33,14 @@ fun createArch(){
     println("Создать архив")
 }
 
-fun selectNote(){
-    println("Выбираем заметку")
+fun selectNote() {
+    val scan = Scanner(System.`in`)
+    println("Просматриваем содержимое заметки")
+    while (true) {
+        when (scan.nextLine().toInt()) {
+            1 -> break
+        }
+    }
 }
 
 fun createNote(){
