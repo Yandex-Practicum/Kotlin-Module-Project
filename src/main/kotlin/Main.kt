@@ -30,7 +30,7 @@ fun selectArch(){
 }
 
 fun createArch(){
-    println("Создать архив")
+    println("Создаем архив")
 }
 
 fun selectNote() {
