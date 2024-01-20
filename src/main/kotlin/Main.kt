@@ -1,6 +1,11 @@
+import Data.Archieve
+import Data.Note
 import java.util.Scanner
 
+val archievePage = ArchievePage()
+
 fun main(args: Array<String>) {
+
     val scan = Scanner(System.`in`)
 
     while (true){
@@ -30,7 +35,17 @@ fun selectArch(){
 }
 
 fun createArch(){
+
     println("Создаем архив")
+
+    val scan = Scanner(System.`in`)
+    println("Введите имя архива:")
+    val archName: String = scan.nextLine().toString()
+
+    val archieve = Archieve(archName)
+
+    archievePage.addArchieve(archieve)
+    archievePage.showAllArchieves()
 }
 
 fun selectNote() {
