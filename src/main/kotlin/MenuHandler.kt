@@ -1,43 +1,29 @@
-
-import TypeMenu.*
 import java.util.Scanner
+
 class MenuHandler {
-    val scanner = Scanner(System.`in`)
+    private val scanner = Scanner(System.`in`)
 
 
     fun getUserInput(): String {
-        val sca = scanner.nextLine()
-        return sca
+        return scanner.nextLine()
     }
 
-    fun isImputWrong(str: String): Boolean {
-        if (!str.isBlank()) {
-            return false
+    fun isInputWrong(str: String): Boolean {
+        return if (str.isNotBlank()) {
+            false
         } else {
             println("Содержимое не может быть пустым")
-            return true
+            true
         }
     }
 
 
     fun getUserInputInt(): Int? {
         val sc = scanner.nextLine()
-        if (isInt(sc)){
-            val inter = sc.toInt()
-            return inter
-        } else {
-            println("! Нужно указать цифру !")
-        return null}
-
-    }
-
-    fun isInt(s: String): Boolean {
-        try {
-            s.toInt()
-            return true
-        } catch (e: NumberFormatException) {
-            return false
+        sc.toIntOrNull()?.let {
+            return sc.toInt()
         }
-
+        println("! Нужно указать цифру !")
+        return null
     }
 }
