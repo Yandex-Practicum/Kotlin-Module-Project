@@ -5,6 +5,7 @@ class ArchievePage{
 
     fun addArchieve(note: Archieve){
         archieves.add(note)
+        println("Архив добавлен")
     }
 
     fun showAllArchieves(){
@@ -13,7 +14,7 @@ class ArchievePage{
         }
     }
 
-    fun chooseArchieve(archieveID: Int){
-        println(archieves[archieveID])
+    fun chooseArchieve(archieveID: Int) : Archieve{
+        return archieves[archieveID]
     }
 }

@@ -1,6 +1,6 @@
 package Data
 
-class Archieve (_name: String) {
+class Archieve (_name : String) {
     var notes: MutableList<Note> = mutableListOf()
     val name: String
 
@@ -18,7 +18,7 @@ class Archieve (_name: String) {
 
     fun showAllNotes(){
         for(note in notes){
-            println(note)
+            println(note.name)
         }
     }
 

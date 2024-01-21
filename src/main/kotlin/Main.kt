@@ -16,7 +16,6 @@ fun main(args: Array<String>) {
             2 -> createArch()
             3 -> break
         }
-
     }
 }
 
@@ -24,11 +23,15 @@ fun selectArch(){
 
     val scan = Scanner(System.`in`)
 
-    while (true) {
-        println("1.Выбрать заметку\n2.Создать заметку\n3.Выйти в главное меню")
-        when (scan.nextLine().toInt()) {
-            1 -> selectNote()
-            2 -> createNote()
+    println("Список архивов")
+    println(archievePage.showAllArchieves())
+    val value = scan.nextLine().toInt()
+    println(archievePage.chooseArchieve(value).name)
+
+    while (true){
+        when(scan.nextLine().toInt()){
+            1 -> selectNote(archievePage.chooseArchieve(value))
+            2 -> createNote(archievePage.chooseArchieve(value))
             3 -> break
         }
     }
@@ -45,12 +48,12 @@ fun createArch(){
     val archieve = Archieve(archName)
 
     archievePage.addArchieve(archieve)
-    archievePage.showAllArchieves()
 }
 
-fun selectNote() {
+fun selectNote(archieve: Archieve) {
     val scan = Scanner(System.`in`)
     println("Просматриваем содержимое заметки")
+    println(archieve.showAllNotes())
     while (true) {
         when (scan.nextLine().toInt()) {
             1 -> break
@@ -58,6 +61,13 @@ fun selectNote() {
     }
 }
 
-fun createNote(){
+fun createNote(archieve: Archieve){
     println("Создаем заметку")
+    val scan = Scanner(System.`in`)
+
+    val noteName = scan.nextLine().toString()
+    val noteDescription = scan.nextLine().toString()
+
+    archieve.addNote(Note(noteName, noteDescription))
+    println("Заметка добавлена")
 }
