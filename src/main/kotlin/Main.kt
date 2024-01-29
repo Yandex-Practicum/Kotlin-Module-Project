@@ -29,6 +29,7 @@ fun selectArch(){
     println(archievePage.chooseArchieve(value)?.name)
 
     while (true){
+        println("1.Выбрать заметку\n2.Создать заметку\n3.Выйти в меню Архивов")
         when(scan.nextLine().toInt()){
             1 -> archievePage.chooseArchieve(value)?.let { selectNote(it) }
             2 -> archievePage.chooseArchieve(value)?.let { createNote(it) }
