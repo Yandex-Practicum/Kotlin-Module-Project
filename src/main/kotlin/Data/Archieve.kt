@@ -1,7 +1,7 @@
 package Data
 
 class Archieve (_name : String) {
-    var notes: MutableList<Note> = mutableListOf()
+    var notes = HashMap<Int, Note>()
     val name: String
 
     init {
@@ -13,12 +13,12 @@ class Archieve (_name : String) {
     }
 
     fun addNote(note: Note){
-        notes.add(note)
+        notes[notes.size+1] = note
     }
 
     fun showAllNotes(){
         for(note in notes){
-            println(note.name)
+            println(note.value.name)
         }
     }
 

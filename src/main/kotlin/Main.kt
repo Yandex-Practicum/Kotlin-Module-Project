@@ -26,12 +26,12 @@ fun selectArch(){
     println("Список архивов")
     println(archievePage.showAllArchieves())
     val value = scan.nextLine().toInt()
-    println(archievePage.chooseArchieve(value).name)
+    println(archievePage.chooseArchieve(value)?.name)
 
     while (true){
         when(scan.nextLine().toInt()){
-            1 -> selectNote(archievePage.chooseArchieve(value))
-            2 -> createNote(archievePage.chooseArchieve(value))
+            1 -> archievePage.chooseArchieve(value)?.let { selectNote(it) }
+            2 -> archievePage.chooseArchieve(value)?.let { createNote(it) }
             3 -> break
         }
     }

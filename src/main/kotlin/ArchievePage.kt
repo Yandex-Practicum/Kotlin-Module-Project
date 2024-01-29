@@ -1,20 +1,23 @@
 import Data.Archieve
 
 class ArchievePage{
-    var archieves: MutableList<Archieve> = mutableListOf()
+    var archieves = HashMap<Int, Archieve>()
 
     fun addArchieve(note: Archieve){
-        archieves.add(note)
+        archieves[archieves.size+1] = note
         println("Архив добавлен")
     }
 
     fun showAllArchieves(){
+        var counter = 0
         for(archieve in archieves){
-            println(archieve.getArchName())
+            print(archieve.key)
+            print(". ")
+            println(archieve.value.name)
         }
     }
 
-    fun chooseArchieve(archieveID: Int) : Archieve{
+    fun chooseArchieve(archieveID: Int) : Archieve? {
         return archieves[archieveID]
     }
 }
