@@ -66,7 +66,10 @@ fun createNote(archieve: Archieve){
     println("Создаем заметку")
     val scan = Scanner(System.`in`)
 
+    println("Введите название заметки:")
     val noteName = scan.nextLine().toString()
+
+    println("Введите описание заметки:")
     val noteDescription = scan.nextLine().toString()
 
     archieve.addNote(Note(noteName, noteDescription))
