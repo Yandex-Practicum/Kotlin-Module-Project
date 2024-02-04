@@ -8,13 +8,13 @@ class ArchievePage{
         println("Архив добавлен")
     }
 
-    fun showAllArchieves(){
-        var counter = 0
-        for(archieve in archieves){
-            print(archieve.key)
-            print(". ")
-            println(archieve.value.name)
+    fun showAllArchieves() : String {
+        if(archieves.size > 0) {
+            for (archieve in archieves)
+                return archieve.key.toString() + ". " + archieve.value.name
         }
+        main()
+        return "Список пуст"
     }
 
     fun chooseArchieve(archieveID: Int) : Archieve? {

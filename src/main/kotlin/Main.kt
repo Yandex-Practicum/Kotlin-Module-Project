@@ -4,7 +4,7 @@ import java.util.Scanner
 
 val archievePage = ArchievePage()
 
-fun main(args: Array<String>) {
+fun main() {
 
     val scan = Scanner(System.`in`)
 
