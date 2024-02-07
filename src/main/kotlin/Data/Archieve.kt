@@ -16,14 +16,15 @@ class Archieve (_name : String) {
         notes[notes.size+1] = note
     }
 
-    fun showAllNotes(){
+    fun showAllNotes() : String{
         for(note in notes){
-            println(note.value.name)
+            println(note.key.toString() + ". " + note.value.name)
         }
+        return "Заметок нет"
     }
 
     fun chooseNote(noteID: Int){
-        println(notes[noteID])
+        println("Описание: " + notes[noteID]?.description)
     }
 
 }

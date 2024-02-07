@@ -5,16 +5,21 @@ import java.util.Scanner
 val archievePage = ArchievePage()
 
 fun main() {
-
-    val scan = Scanner(System.`in`)
-
     while (true){
         println("1.Выбрать архив\n2.Создать архив\n3.Выйти из программы")
 
-        when(scan.nextLine().toInt()){
-            1 -> selectArch()
-            2 -> createArch()
-            3 -> break
+        val scan = Scanner(System.`in`)
+        val value = scan.nextLine()
+        if(archievePage.isInputCorrect(value)){
+            when(value.toInt()){
+                1 -> selectArch()
+                2 -> createArch()
+                3 -> break
+            }
+        }
+        else {
+            println("Необходимо ввести число")
+            continue
         }
     }
 }
@@ -26,6 +31,7 @@ fun selectArch(){
     println("Список архивов")
     println(archievePage.showAllArchieves())
     val value = scan.nextLine().toInt()
+
     println(archievePage.chooseArchieve(value)?.name)
 
     while (true){
@@ -56,8 +62,10 @@ fun selectNote(archieve: Archieve) {
     println("Просматриваем содержимое заметки")
     println(archieve.showAllNotes())
     while (true) {
-        when (scan.nextLine().toInt()) {
-            1 -> break
+        var noteID = scan.nextLine().toInt()
+        when (noteID) {
+            0 -> break
+            else -> archieve.chooseNote(noteID)
         }
     }
 }
