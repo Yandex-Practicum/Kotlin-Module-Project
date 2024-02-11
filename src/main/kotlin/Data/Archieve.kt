@@ -16,11 +16,11 @@ class Archieve (_name : String) {
         notes[notes.size+1] = note
     }
 
-    fun showAllNotes() : String{
+    fun showAllNotes() : String?{
         for(note in notes){
-            println(note.key.toString() + ". " + note.value.name)
+            return note.key.toString() + ". " + note.value.name
         }
-        return "Заметок нет"
+        return null
     }
 
     fun chooseNote(noteID: Int){

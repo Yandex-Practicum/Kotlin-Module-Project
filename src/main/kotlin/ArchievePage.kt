@@ -12,18 +12,22 @@ class ArchievePage{
         }
     }
 
+    fun createNewElement(){
+
+    }
+
     fun addArchieve(note: Archieve){
         archieves[archieves.size+1] = note
         println("Архив добавлен")
     }
 
-    fun showAllArchieves() : String {
+    fun showAllArchieves() : String? {
         if(archieves.size > 0) {
             for (archieve in archieves){
-                println(archieve.key.toString() + ". " + archieve.value.name)
+                return archieve.key.toString() + ". " + archieve.value.name
             }
         }
-        return "Список пуст"
+        return null
     }
 
     fun chooseArchieve(archieveID: Int) : Archieve? {

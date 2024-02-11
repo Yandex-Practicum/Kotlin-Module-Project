@@ -29,9 +29,13 @@ fun selectArch(){
     val scan = Scanner(System.`in`)
 
     println("Список архивов")
+    if (archievePage.showAllArchieves() == null) {
+        println("Список архивов пустой")
+        main()
+    }
+
     println(archievePage.showAllArchieves())
     val value = scan.nextLine().toInt()
-
     println(archievePage.chooseArchieve(value)?.name)
 
     while (true){
@@ -59,7 +63,13 @@ fun createArch(){
 
 fun selectNote(archieve: Archieve) {
     val scan = Scanner(System.`in`)
-    println("Просматриваем содержимое заметки")
+    println("Просматриваем содержимое архива")
+
+    if (archieve.showAllNotes() == null) {
+        println("Список заметок пустой")
+        selectArch()
+    }
+
     println(archieve.showAllNotes())
     while (true) {
         var noteID = scan.nextLine().toInt()
