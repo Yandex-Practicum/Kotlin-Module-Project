@@ -1,6 +1,6 @@
 import Data.Archieve
 
-class ArchievePage{
+class PaigeLogic{
     var archieves = HashMap<Int, Archieve>()
 
     fun isInputCorrect(value: String) : Boolean {
