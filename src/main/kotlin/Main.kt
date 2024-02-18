@@ -1,3 +1,9 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val application = Application()
+    println("Привет! Это приложение «Заметки»")
+    application.start(true)
 }
+
+
+
+
