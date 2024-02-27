@@ -1,3 +1,6 @@
+import moduls.Archives
+import moduls.Menu
+import moduls.Notes
 import java.util.Scanner
 
 fun main() {
