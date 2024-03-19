@@ -27,7 +27,8 @@ fun main(args: Array<String>) {
                 2 -> { // уровень 2 (список заметок для выбранного архива)
                     io.outputNotesGroup( // отрисовка
                         db.getGroup(idGroup),
-                        db.getNotesGroup(idGroup)
+                        db.getNotesGroup(idGroup),
+                        db
                     )
                     number = db.getNotesGroup(idGroup).size + 1 // количество пунктов меню
                 }
@@ -62,8 +63,7 @@ fun main(args: Array<String>) {
         } else if (levelMenu == 2) { // уровень 2 (список заметок для выбранного архива)
             if (stepMenu < db.getNotesGroup(idGroup).size) { // просмотр определённой заметки
                 levelMenu = 3
-                val idBuf = db.getNotesGroup(idGroup)[stepMenu].id
-                if (idNote == -1 || idNote > idBuf) idNote = idBuf
+                idNote = db.maskToIdNote(stepMenu)
             } else if (stepMenu == db.getNotesGroup(idGroup).size) { // создание новой заметки
                 db.addNote(io.inputNote(db.getGroup(idGroup)))
             } else if (stepMenu == (db.getNotesGroup(idGroup).size + 1)) { // возврат к предыдущему меню

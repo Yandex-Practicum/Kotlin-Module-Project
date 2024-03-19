@@ -41,8 +41,8 @@ class UIView {
         print("$textBody\t\tМеню просмотра заметок архива: $reset$textData${group.name}\n$reset")
     }
 
-    fun UIGroupNotePartOne(id: Int, name: String, description: String, date: String) {
-        UIMessage("$textBody\t\t\t$id$reset$textData\t\t$name\t\t$description\t\t$date\n$reset")
+    fun UIGroupNotePartOne(id: Int, idNote: Int, name: String, description: String, date: String) {
+        UIMessage("$textBody\t\t\t$id$reset$textData\t\tID-$idNote\t\t$name\t\t$description\t\t$date\n$reset")
     }
 
     fun UIGroupNotePartTwo(number: Int) {

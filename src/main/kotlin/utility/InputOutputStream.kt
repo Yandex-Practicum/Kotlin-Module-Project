@@ -18,7 +18,10 @@ internal class InputOutputStream {
         while (flagInput) {
             if (scanner.hasNext()) {
                 flagInput = false
-                input = scanner.nextLine()
+                input = scanner.nextLine().trim()
+                if(input == "") {
+                    flagInput = true
+                }
             } else {
                 ui.UIError("Пустой ввод, заполните поле снова")
             }
@@ -70,11 +73,13 @@ internal class InputOutputStream {
     }
 
     // метод вывода списка заметок одной группы (архива) на экран
-    internal fun outputNotesGroup(group: Group, notes: MutableList<Note>) {
+    internal fun outputNotesGroup(group: Group, notes: MutableList<Note>, db: DataBaseHelper) {
         ui.UINotesGroupHeader(group)
         var number = 0
+        db.clearMaskNotes()
         for (note: Note in notes) {
-            ui.UIGroupNotePartOne(number, note.name, note.description, note.date)
+            db.addMaskNotes(number, note.id)
+            ui.UIGroupNotePartOne(number, note.id, note.name, note.description, note.date)
             number++
         }
         ui.UIGroupNotePartTwo(notes.size)
