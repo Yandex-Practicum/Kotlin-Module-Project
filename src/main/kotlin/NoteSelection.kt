@@ -1,7 +1,7 @@
 class NoteSelection() : MenuClass() {
     var noteCreate = MenuClass("--------------------\n" +
             "СОЗДАНИЕ ЗАМЕТКИ\n" +
-            "Введите содержимое заметки либо 0 - для выхода\n")
+            "Введите название заметки либо 0 - для выхода\n")
     var noteList = mutableListOf<Note>()
     var menuCommandMap = mutableMapOf<Int,()->Boolean>()
     init {
@@ -27,24 +27,44 @@ class NoteSelection() : MenuClass() {
         }
     }
     fun addNode(){
-        var command = ""
+        var commandName = ""
         var num = menuCommandMap.size // число пунктов меню
         while(true) {
             noteCreate.printMenu()
-            command = noteCreate.getUserCommand()
-            when (command) {
-                "O" -> break // when
+            commandName = noteCreate.getUserCommand()
+            when (commandName) {
+                "0" -> break // when
                 "" -> {
-                    println("Ошибка: сожержимое заметки не может быть пустым. Попробуйте еще раз!")
+                    println("Ошибка: название заметки не может быть пустым. Попробуйте еще раз!")
                     continue
                 }//""
                 else -> {
-                    var note = Note(command)
-                    noteList.add(note)
-                    menuCommandMap.put(num, {
-                        note.printContent()
-                        true
-                    })
+                    var noteContent = MenuClass("--------------------\n" +
+                           "Введите содержимое заметки либо 0 - для выхода\n")
+                    var commandContent =""
+                    while(true){
+                        noteContent.printMenu()
+                        commandContent = noteContent.getUserCommand()
+                        when(commandContent){
+                            "0" -> {
+                                println("Заметка не была создана!")
+                                break
+                            } // when
+                            "" -> {
+                                println("Ошибка: cодержимое заметки не может быть пустым. Попробуйте еще раз!")
+                                continue
+                            }//""
+                            else -> {
+                                var note = Note(commandName, commandContent)
+                                noteList.add(note)
+                                menuCommandMap.put(num, {
+                                    note.printContent()
+                                    true
+                                })
+                                break
+                            }
+                        }
+                    }
                     break
                 }
             }

@@ -1,6 +1,8 @@
 import java.util.Scanner
 open class MenuClass() {
     var menuText = ""
+    private var scanner = Scanner(System.`in`)
+
     constructor(menuText: String) : this() {
         this.menuText = menuText
     }
@@ -9,7 +11,7 @@ open class MenuClass() {
     }
     open fun getUserCommand(): String {
         val command : String
-        command = Scanner(System.`in`).nextLine()
+        command = scanner.nextLine()
         return command
     }
 }

@@ -1,17 +1,6 @@
-class Note (val content:String){
-    var name: String = ""
-
-    init {
-        if(content.length<=20) {
-          name = content
-        }
-        else{
-            name = content.substring(0,20)
-        }
-
-    }
+class Note (var name: String, val content:String){
     fun printContent(){
-        println("--------------------\n" + "СОДЕРЖИМОЕ ЗАМЕТКИ")
+        println("--------------------\n" + "СОДЕРЖИМОЕ ЗАМЕТКИ с названием \"${name}\":")
         println(content)
     }
 }

@@ -1,9 +1,8 @@
 class ArchiveSelection: MenuClass() {
     var archiveCreate = MenuClass("--------------------\n" +
             "СОЗДАНИЕ АРХИВА\n" +
-            "Введите название архива либо 0 - для выхода\n ")//ArchiveCreate()
+            "Введите название архива либо 0 - для выхода\n ")
     var archiveList = mutableListOf<Archive>()
- //   var menuText: String
     var menuCommandMap = mutableMapOf<Int,()->Boolean>()
     init {
         menuText = "--------------------\n" +
@@ -58,10 +57,11 @@ class ArchiveSelection: MenuClass() {
     } //fun addArchive
 
     private fun containsArchive(s: String): Boolean{
-        for(archive in archiveList){
+        /*for(archive in archiveList){
             if (archive.name == s)
                 return true
-        }
+        }*/
+        archiveList.find {it.name == s}
         return false
     }
 }
