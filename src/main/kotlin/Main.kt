@@ -1,3 +1,10 @@
+import java.util.Scanner
+
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    var archiveList = mutableListOf<Archive>()
+    val scanner: Scanner = Scanner(System.`in`)
+    val appNavi = AppNavigation()
+    appNavi.appNavi(scanner, archiveList)
 }
+
