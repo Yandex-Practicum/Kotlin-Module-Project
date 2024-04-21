@@ -1,0 +1,22 @@
+enum class MenuMessage(val message: String) {
+    MENU_HEADER("Меню:"),
+    MENU_EXIT_OPTION("q. Выход"),
+    INPUT_PROMPT("Выберите пункт меню: "),
+    INVALID_INPUT_MESSAGE("Введите номер пункта меню или 'q' для выхода."),
+    INVALID_ARCHIVE_MESSAGE("Такого архива нет."),
+    EMPTY_ARCHIVES_MESSAGE("Нет доступных архивов."),
+    ARCHIVE_LIST_HEADER("Список архивов:"),
+    ARCHIVE_BACK_OPTION("q. Назад"),
+    INVALID_NOTE_MESSAGE("Такой заметки нет."),
+    EMPTY_NOTES_MESSAGE("В архиве нет заметок."),
+    NOTE_LIST_HEADER("Список заметок:"),
+    NOTE_BACK_OPTION("q. Назад"),
+    CREATE_ARCHIVE_PROMPT("Введите название архива:"),
+    EMPTY_ARCHIVE_NAME_MESSAGE("Название архива не может быть пустым."),
+    ARCHIVE_CREATED_MESSAGE("Архив \"%s\" создан."),
+    CREATE_NOTE_TITLE_PROMPT("Введите заголовок заметки:"),
+    CREATE_NOTE_CONTENT_PROMPT("Введите содержание заметки:"),
+    EMPTY_NOTE_TITLE_MESSAGE("Заголовок заметки не может быть пустым."),
+    EMPTY_NOTE_CONTENT_MESSAGE("Содержание заметки не может быть пустым."),
+    NOTE_ADDED_MESSAGE("Заметка \"%s\" добавлена в архив.")
+}
