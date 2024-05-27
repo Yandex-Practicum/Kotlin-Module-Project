@@ -1,3 +1,5 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    startScreen(Screen.CHOOSE_ARCHIVE, 0)
+
 }
