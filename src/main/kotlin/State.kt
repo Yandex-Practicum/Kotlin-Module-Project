@@ -1,0 +1,9 @@
+
+enum class State {
+    ARCHIVE_CREATE,
+    ARCHIVE_OPEN,
+    ARCHIVE_CHOOSE,
+    NOTES_CREATE,
+    NOTES_OPEN,
+    EXIT
+}
