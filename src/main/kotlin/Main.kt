@@ -1,3 +1,14 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    println()
+    println("Приложение \"Заметки\"")
+    println()
+
+    val screenSelectionArchive = ScreenSelectionArchive()
+    screenSelectionArchive.start()
+
+    println()
+    println("Вы вышли из приложения \"Заметки\". До свидания!")
+
 }
+
