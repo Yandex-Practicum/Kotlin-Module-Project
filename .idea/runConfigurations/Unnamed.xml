@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unnamed" type="JetRunConfigurationType" editBeforeRun="true" nameIsGenerated="true">
+    <module name="Kotlin-Module-Project" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
