@@ -1,18 +1,21 @@
+
 class Navigator {
+    fun showMenu(name: String, listOfOptions: List<Pair<String, MenuExecutable>>) {
+        while (true) {
+            println("Добро пожаловать в меню $name")
+            listOfOptions.forEachIndexed { index, option ->
+                println("${index + 1}. ${option.first}")
+            }
+            println("0. Выход")
 
- fun navigateMenu(renderable: Renderable){
-
-    while (true) {
-        println("Выберите действие:")
-        for ((index, option) in renderable.listOfOptions.withIndex()) {
-            println("${index + 1}. $option")
-        }
-        val choice = getNumInput()
-        if (choice in 1..renderable.listOfOptions.size) {
-
+            val input = getNumInput()
+            if (input == 0) {
+                return
+            } else if (input in 1..listOfOptions.size) {
+                listOfOptions[input - 1].second.executeOption()
+            }
         }
     }
- }
 
 }
 

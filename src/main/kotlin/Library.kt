@@ -1,7 +1,7 @@
 import java.util.Scanner
 
-class Library(): Renderable {
-    val name:String = ""
+class Library() {
+    val name:String = "Хранилище"
     var archiveList = mutableListOf<Archive>()
 
 
@@ -21,7 +21,7 @@ class Library(): Renderable {
         archiveList.add(archive)
     }
 
-    override var listOfOptions: MutableList<String?> = mutableListOf("Создать архив", "Показать архивы", "Выход")
+    var listOfOptions: MutableList<String?> = mutableListOf("Создать архив", "Показать архивы")
 
 
 }

@@ -1,6 +1,4 @@
-class Note(noteName:String, noteContent:String) {
-    val noteName = ""
-    val noteContent = ""
+data class Note(val noteName:String, val noteContent:String) {
 
     fun getName(): String{
         return noteName

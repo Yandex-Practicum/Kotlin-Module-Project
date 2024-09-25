@@ -26,4 +26,5 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+.DS_Store!/src/main/kotlin/navigatorv2.kt
+!/src/main/kotlin/navigatorv2.kt

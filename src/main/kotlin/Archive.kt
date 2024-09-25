@@ -1,35 +1,22 @@
-class Archive(archiveName: String): Renderable {
+class Archive(archiveName: String) {
     var archiveName: String = ""
-    var noteList = mutableListOf<Note>()
+    var noteList = mutableMapOf<String, Note?>()
 
 
-
-
-    fun showNotes(){
-        if(noteList.isNotEmpty())
-        for(note in noteList) {
-            println(note.noteName)
+    fun showNotes(): Array<Note?> {
+        if(noteList.isNotEmpty()) {
+            return noteList.map { it.value }.toTypedArray()
         } else {
-            println("Заметок нет. Создайте заметку")
+            return (arrayOfNulls<Note?>(1))
         }
     }
 
-    fun addNote(){
-        println("Введите название заметки")
-        val noteName = getTextInput()
-        println("Введите содержание заметки")
-        val noteContent = getTextInput()
+    fun addNote(noteName: String, noteContent: String){
         val note = Note(noteName, noteContent)
-        noteList.add(note)
+        noteList.put(noteName, note)
     }
 
 
-    fun getName(): String {
-        return archiveName
-    }
-
-
-
-    override var listOfOptions: MutableList<String?> = mutableListOf("Создать заметку", "Показать заметки", "Назад")
+    var listOfOptions: MutableList<String?> = mutableListOf("Создать заметку", "Показать заметки")
 
 }

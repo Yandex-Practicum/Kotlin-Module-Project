@@ -1,0 +1,3 @@
+interface MenuExecutable {
+    fun executeOption()
+}

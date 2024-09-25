@@ -8,29 +8,29 @@ fun main() {
     var archive = Archive("")
 
     //navigation menu
-    navigator.navigateMenu(library)
-
+    navigator.showMenu("Главное меню", listOf())
 }
-
 fun getTextInput(): String {
-    var input = Scanner(System.`in`).nextLine()
+    val scanner = Scanner(System.`in`)
+    var input = scanner.nextLine()
     while (input.trim().isEmpty()) {
         println("Поле не может быть пустым")
-        var input = Scanner(System.`in`).nextLine()
+        input = scanner.nextLine()
     }
     return input
 }
 
-fun getNumInput(): Int {
-    val scanner = Scanner(System.`in`)
-    while (true) {
-        //println("Введите число: ")
-        try {
-
-            return scanner.nextInt()
-        } catch (e: InputMismatchException) {
-            println("Ошибка ввода. Пожалуйста, введите число.")
-            scanner.next()
+    fun getNumInput(): Int {
+        println("Введите число: ")
+        val scanner = Scanner(System.`in`)
+        while (true) {
+            try {
+                return scanner.nextInt()
+            } catch (e: InputMismatchException) {
+                println("Ошибка ввода. Пожалуйста, введите число.")
+                scanner.next()
+            }
         }
     }
-}
+
+
