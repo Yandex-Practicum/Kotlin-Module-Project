@@ -1,3 +1,7 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+package com.lesa
+
+fun main() {
+    val menuManager = MenuManager()
+
+    menuManager.run()
 }
