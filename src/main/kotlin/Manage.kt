@@ -29,9 +29,7 @@ class Manage {
             archive.notes.forEachIndexed { noteIndex, note ->
                 noteMenu.addOption(note.title) { viewNote(archive, note) }
             }
-            noteMenu.addOption("Назад") {
-                returnToMenu = true
-            }
+            noteMenu.addOption("Назад") { returnToMenu = true }
 
             noteMenu.show()
             noteMenu.handleInput()
@@ -46,62 +44,37 @@ class Manage {
     }
 
     private fun createArchive() {
-        var name: String
-        while (true) {
-            println("\nВведите название для нового архива (или введите НАЗАД для возврата):")
-            name = scanner.nextLine().trim()
+        val name = backInput("название для нового архива")
+        if (name == null) return
 
-            if (name.lowercase() == "назад") {
-                println("Возврат в главное меню.")
-                return
-            }
-
-            if (name.isNotEmpty()) {
-                archives.add(Archive(name))
-                println("Архив '$name' создан.")
-                break
-            } else {
-                println("Ошибка: пустое поле! Попробуйте снова.")
-            }
-        }
+        archives.add(Archive(name))
+        println("Архив '$name' создан.")
     }
 
     private fun createNoteInArchive(archive: Archive) {
-        var title: String
-        var content: String
+        val title = backInput("заголовок заметки")
+        if (title == null) return
 
-        while (true) {
-            println("\nВведите заголовок заметки (или введите НАЗАД для возврата):")
-            title = scanner.nextLine().trim()
+        val content = backInput("содержание заметки")
+        if (content == null) return
 
-            if (title.lowercase() == "назад") {
-                println("Возврат в меню архива.")
-                return
-            }
-
-            if (title.isNotEmpty()) {
-                break
-            } else {
-                println("Ошибка: пустое поле! Попробуйте снова.")
-            }
-        }
-
-        while (true) {
-            println("Введите содержание заметки (или введите НАЗАД для возврата):")
-            content = scanner.nextLine().trim()
-
-            if (content.lowercase() == "назад") {
-                println("Возврат в меню архива.")
-                return
-            }
-
-            if (content.isNotEmpty()) {
-                break
-            } else {
-                println("Ошибка: пустое поле! Попробуйте снова.")
-            }
-        }
         archive.notes.add(Note(title, content))
         println("Заметка '$title' добавлена в архив '${archive.name}'.")
+    }
+
+    private fun backInput(prompt: String, exitKeyword: String = "назад"): String? {
+        var input: String
+        while (true) {
+            println("\nВведите $prompt (или введите НАЗАД для возврата):")
+            input = scanner.nextLine().trim()
+            if (input.lowercase() == exitKeyword) {
+                return null
+            }
+            if (input.isNotEmpty()) {
+                return input
+            } else {
+                println("Ошибка: пустое поле! Попробуйте снова.")
+            }
+        }
     }
 }
