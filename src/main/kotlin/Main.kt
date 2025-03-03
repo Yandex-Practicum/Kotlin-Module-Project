@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+// Точка входа в программу
+fun main() {
+    println("Начало программы")
+    showMainMenu()
 }
