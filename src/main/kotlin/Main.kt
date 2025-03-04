@@ -1,3 +1,8 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    val screen = MainScreen()
+    do {
+        screen.showMenu()
+        if (screen.isExit) break
+    } while (true)
 }
