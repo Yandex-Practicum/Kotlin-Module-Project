@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    val noteManager = NoteManager()
+    val mainMenu = MainMenu(noteManager)
+    mainMenu.show()
 }
