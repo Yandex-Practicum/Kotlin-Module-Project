@@ -1,3 +1,6 @@
+import com.sun.source.tree.WhileLoopTree
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val screen: Screen = Screen()
+    screen.archiveScreen.display()
 }
