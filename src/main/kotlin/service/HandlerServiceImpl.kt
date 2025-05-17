@@ -24,7 +24,7 @@ class HandlerServiceImpl: HandlerService {
                 0 -> saveBaseModel()
                 in 1..baseModelList.size -> currentItem(index!!)
                 baseModelList.size+1 -> isExit = quit()
-                null -> println("Ошибка. Следует вводить цифру")
+                null -> println("Ошибка. Следует вводить только цифры")
                 else -> println("Ошибка. Число за пределами допустимого диапазона. Допустимый диапазон от 0 до ${baseModelList.size+1} включительно")
             }
         }
@@ -50,7 +50,7 @@ class HandlerServiceImpl: HandlerService {
                     do {
                         text = readln()
                     } while (!validationService.validationModel(text))
-                    baseModelList = nodeRepository.save(Node(name, text, currentItem)).toMutableList()
+                    baseModelList = nodeRepository.save(Node(name, text, currentItem as Archive)).toMutableList()
                     isValidation = true
                 }
             }
@@ -73,6 +73,7 @@ class HandlerServiceImpl: HandlerService {
     private fun quit(): Boolean {
         if (currentItem != null) {
             currentItem = null
+            baseModelList = archiveRepository.list().toMutableList()
             return false
         }
         return true

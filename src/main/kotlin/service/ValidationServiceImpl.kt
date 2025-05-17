@@ -9,7 +9,7 @@ class ValidationServiceImpl<T:BaseModel> :ValidationService<T> {
 
     override fun validationModel(name: String): Boolean {
         if (name.isEmpty()) {
-            println("Запрашиваемое значение не может быть пустым")
+            println("Значение не может быть пустым")
             println("Повторите ввод")
             return false
         }

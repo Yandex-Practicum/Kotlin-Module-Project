@@ -14,4 +14,9 @@ class NodeRepositoryImpl: AbstractCRUDRepository<Node>(DataBaseSingleton.nodes),
             .filter { it.archives == archive }
         return nodeList.getOrNull(id)
     }
+
+    override fun save(model: Node): List<Node> {
+        super.save(model)
+        return findByArchive(model.archives!!)
+    }
 }
