@@ -1,3 +1,7 @@
+import service.HandlerServiceImpl
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    println("Добро пожаловать в приложение \"Заметки\"")
+    HandlerServiceImpl().consoleHandler()
+    println("До свидания. Спасибо за использование приложение")
 }
