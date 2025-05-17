@@ -1,9 +1,10 @@
 package service
 
-import model.Archive
 import model.BaseModel
+import model.Node
 
 interface OutputService<T:BaseModel> {
-    fun consoleOutput(items: List<T>)
-//    fun consoleCreateOutput(currentArchive: Archive?)
+    fun consoleOutput(items: List<T>, currentItem: T?, isSaveMenu: Boolean)
+    fun consoleOutput(nameNode: String)
+    fun consoleOutput(currentNode: Node?)
 }

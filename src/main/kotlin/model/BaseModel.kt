@@ -1,4 +1,3 @@
 package model
 
-abstract class BaseModel(open val name: String) {
-}
+abstract class BaseModel(open val name: String)
