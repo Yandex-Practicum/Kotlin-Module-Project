@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-data class Note(val text: String)
+data class Note(val name: String, val text: String)
 data class Archive(val name: String, val notes: MutableList<Note> = mutableListOf())
 
 fun main() {
@@ -25,7 +25,8 @@ fun main() {
     fun viewNoteMenu(note: Note) {
         while (true) {
             println("\n--- Просмотр заметки ---")
-            println(note.text)
+            println("Название: ${note.name}")
+            println("Текст: ${note.text}")
             println("0. Назад")
 
             when (inputNumber(1)) {
@@ -35,10 +36,25 @@ fun main() {
     }
 
     fun createNoteMenu(archive: Archive) {
-        println("\nВведите текст новой заметки:")
-        val text = scanner.nextLine()
-        archive.notes.add(Note(text))
-        println("Заметка добавлена!")
+        while (true) {
+            println("\nВведите название новой заметки:")
+            val name = scanner.nextLine().trim()
+            if (name.isEmpty()) {
+                println("Ошибка: название заметки не может быть пустым!")
+                continue
+            }
+
+            println("Введите текст заметки:")
+            val text = scanner.nextLine().trim()
+            if (text.isEmpty()) {
+                println("Ошибка: текст заметки не может быть пустым!")
+                continue
+            }
+
+            archive.notes.add(Note(name, text))
+            println("Заметка добавлена!")
+            return
+        }
     }
 
     fun notesMenu(archive: Archive) {
@@ -46,7 +62,7 @@ fun main() {
             println("\n--- Архив: ${archive.name} ---")
             println("0. Создать заметку")
             archive.notes.forEachIndexed { i, note ->
-                println("${i + 1}. ${note.text.take(20)}...")
+                println("${i + 1}. ${note.name}")
             }
             println("${archive.notes.size + 1}. Назад")
 
@@ -60,10 +76,17 @@ fun main() {
     }
 
     fun createArchiveMenu() {
-        println("\nВведите название архива:")
-        val name = scanner.nextLine()
-        archives.add(Archive(name))
-        println("Архив добавлен!")
+        while (true) {
+            println("\nВведите название архива:")
+            val name = scanner.nextLine().trim()
+            if (name.isEmpty()) {
+                println("Ошибка: имя архива не может быть пустым!")
+            } else {
+                archives.add(Archive(name))
+                println("Архив добавлен!")
+                return
+            }
+        }
     }
 
     fun archivesMenu() {
