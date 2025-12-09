@@ -1,3 +1,7 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    val repo = Repository()
+    val input = InputReader()
+    val navigator = Navigator(repo,input)
+
+    navigator.start(ArchiveListScreen())
 }
