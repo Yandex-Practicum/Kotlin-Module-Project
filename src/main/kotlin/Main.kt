@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    val navigator = MenuNavigator()
+    val archiveMenu = ArchiveMenu(navigator)
+    archiveMenu.show()
 }
