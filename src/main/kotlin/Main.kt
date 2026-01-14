@@ -1,3 +1,5 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import screens.ArchiveListScreen
+
+fun main() {
+    ArchiveListScreen().show()
 }
