@@ -1,3 +1,12 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import models.Archive
+import ui.ArchiveMenu
+fun main() {
+    println("=== Приложение \"Заметки\" ===")
+
+    val archives = mutableListOf<Archive>()
+    val archiveMenu = ArchiveMenu(archives)
+
+    archiveMenu.show()
+
+    println("До свидания!")
 }
