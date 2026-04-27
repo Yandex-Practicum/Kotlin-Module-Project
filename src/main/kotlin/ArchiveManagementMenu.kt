@@ -10,22 +10,12 @@ class ArchiveManagementMenu(
         println("Введите название архива для управления:")
         val archiveName = scanner.nextLine()
 
-        // Проверка: имя архива не может быть пустым
-        if (archiveName.isNullOrEmpty()) {
-            println("Имя архива не может быть пустым. Пожалуйста, введите корректное имя.")
-            return
-        }
-
-        // Проверяем, существует ли архив
-        if (archiveName !in archiveManager.getArchiveNames()) {
-            println("Архив не найден. Возвращаемся в главное меню.")
-            return
-        }
+        if (!validateInput(archiveName, "Имя архива")) return
 
         this.archiveName = archiveName
 
         while (true) {
-            println("\nВыберите действие:")
+            println("Выберите действие:")
             println("1 — Добавить заметку")
             println("2 — Просмотреть заметки")
             println("3 — Выйти из меню архива")
@@ -48,18 +38,8 @@ class ArchiveManagementMenu(
         println("Введите текст заметки:")
         val text = scanner.nextLine()
 
-
-        if (title.isNullOrEmpty()) {
-            println("Заголовок заметки не может быть пустым.")
-            return
-        }
-
-
-        if (text.isNullOrEmpty()) {
-            println("Текст заметки не может быть пустым.")
-            return
-        }
-
+        if (!validateInput(title, "Заголовок заметки")) return
+        if (!validateInput(text, "Текст заметки")) return
 
         if (archiveManager.addNoteToArchive(archiveName, title, text)) {
             println("Заметка успешно добавлена!")
@@ -71,14 +51,22 @@ class ArchiveManagementMenu(
     private fun viewNotes() {
         val notes = archiveManager.getNotes(archiveName)
         if (notes.isEmpty()) {
-            println("Заметок нет.")
+            println("В этом архиве пока нет заметок. Хотите добавить новую?")
             return
         }
 
-        println("\nСписок заметок:")
+        println("Список заметок:")
         notes.forEach { note ->
             println("Заголовок: ${note.title}")
-            println("Текст: ${note.text}\n")
+            println("Текст: ${note.text}")
         }
+    }
+
+    private fun validateInput(input: String, description: String): Boolean {
+        if (input.isEmpty()) {
+            println("Ошибка: $description не может быть пустым.")
+            return false
+        }
+        return true
     }
 }

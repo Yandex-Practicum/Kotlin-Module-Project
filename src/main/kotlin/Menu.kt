@@ -1,11 +1,10 @@
 
 import java.util.Scanner
 
-
-
 class MainMenu(private val archiveManager: ArchiveManager, private val scanner: Scanner) {
     fun show() {
-        while (true) {
+        while (true
+        ) {
             println("\n=== Главное меню ===")
             println("1. Создать новый архив")
             println("2. Просмотреть архивы")
@@ -31,10 +30,25 @@ class MainMenu(private val archiveManager: ArchiveManager, private val scanner: 
     private fun createArchive() {
         print("Введите название архива: ")
         val name = scanner.nextLine()
+
+
+        if (name.isNullOrEmpty()) {
+            println("Ошибка: Имя не может быть пустым.")
+            return
+        }
+
+
+        if (name in archiveManager.getArchiveNames()) {
+            println("Такой архив уже существует.")
+            return
+        }
+
+
         if (archiveManager.createArchive(name)) {
             println("Архив создан успешно.")
         } else {
-            println("Ошибка: Имя не может быть пустым.")
+
+            println("Произошла ошибка при создании архива.")
         }
     }
 
