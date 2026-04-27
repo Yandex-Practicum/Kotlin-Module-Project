@@ -5,10 +5,18 @@ class ArchiveManagementMenu(
     private val scanner: Scanner
 ) {
     private var archiveName = ""
+
     fun show() {
         println("Введите название архива для управления:")
         val archiveName = scanner.nextLine()
 
+        // Проверка: имя архива не может быть пустым
+        if (archiveName.isNullOrEmpty()) {
+            println("Имя архива не может быть пустым. Пожалуйста, введите корректное имя.")
+            return
+        }
+
+        // Проверяем, существует ли архив
         if (archiveName !in archiveManager.getArchiveNames()) {
             println("Архив не найден. Возвращаемся в главное меню.")
             return
@@ -17,25 +25,21 @@ class ArchiveManagementMenu(
         this.archiveName = archiveName
 
         while (true) {
-            println("\n=== Управление архивом '$archiveName' ===")
-            println("1. Добавить заметку")
-            println("2. Просмотреть заметки")
-            println("3. Редактировать заметку")
-            println("4. Удалить заметку")
-            println("5. Вернуться в главное меню")
+            println("\nВыберите действие:")
+            println("1 — Добавить заметку")
+            println("2 — Просмотреть заметки")
+            println("3 — Выйти из меню архива")
 
             val choice = scanner.nextLine()
+
             when (choice) {
                 "1" -> addNote()
                 "2" -> viewNotes()
-                "3" -> editNote()
-                "4" -> deleteNote()
-                "5" -> return // Выход из цикла и возврат в главное меню
-                else -> println("Неправильный выбор. Попробуйте снова.")
+                "3" -> return
+                else -> println("Неверный выбор. Попробуйте снова.")
             }
         }
     }
-
 
     private fun addNote() {
         println("Введите заголовок заметки:")
@@ -44,13 +48,25 @@ class ArchiveManagementMenu(
         println("Введите текст заметки:")
         val text = scanner.nextLine()
 
+
+        if (title.isNullOrEmpty()) {
+            println("Заголовок заметки не может быть пустым.")
+            return
+        }
+
+
+        if (text.isNullOrEmpty()) {
+            println("Текст заметки не может быть пустым.")
+            return
+        }
+
+
         if (archiveManager.addNoteToArchive(archiveName, title, text)) {
             println("Заметка успешно добавлена!")
         } else {
             println("Не удалось добавить заметку.")
         }
     }
-
 
     private fun viewNotes() {
         val notes = archiveManager.getNotes(archiveName)
@@ -60,19 +76,9 @@ class ArchiveManagementMenu(
         }
 
         println("\nСписок заметок:")
-        notes.forEachIndexed { index, note ->
-            println("$index. Заголовок: ${note.title}")
-            println("  Текст: ${note.text}\n")
+        notes.forEach { note ->
+            println("Заголовок: ${note.title}")
+            println("Текст: ${note.text}\n")
         }
-    }
-
-
-    private fun editNote() {
-        println("Функция редактирования заметки пока не реализована.")
-    }
-
-
-    private fun deleteNote() {
-        println("Функция удаления заметки пока не реализована.")
     }
 }

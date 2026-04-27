@@ -23,27 +23,4 @@ class ArchiveManager {
 
     fun getNotes(archiveName: String): List<Note> = archives[archiveName] ?: emptyList()
 
-    fun editNote(archiveName: String, index: Int, newTitle: String?, newText: String?): Boolean {
-        val archive = archives[archiveName]
-        return if (archive != null && index in archive.indices) {
-            val note: Note = archive[index]
-            note.title = newTitle ?: note.title
-            note.text = newText ?: note.text
-            true
-        } else {
-            false
-        }
-    }
-
-    fun deleteNote(archiveName: String, index: Int): Boolean {
-        val archive = archives[archiveName]
-        return if (archive != null && index in archive.indices) {
-            archive.removeAt(index)
-            true
-        } else {
-            false
-        }
-    }
 }
-
-data class Note(var title: String, var text: String)
