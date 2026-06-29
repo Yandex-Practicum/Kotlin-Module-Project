@@ -1,3 +1,51 @@
+
+
+
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    var dataBaze = DataBaze()
+
+    dataBaze.toGeneralScreen(dataBaze)
+    //screen.waitPerson()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
