@@ -1,3 +1,4 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    val archivesList = mutableListOf<DataArchive>()
+    ArchiveScreen(archivesList).watch()
 }
